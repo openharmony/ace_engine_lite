@@ -17,7 +17,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#if (defined(_WIN32) || defined(_WIN64))
+#ifdef TARGET_SIMULATOR
 namespace OHOS {
 namespace ACELite {
 void PrintInfo(const char *format, va_list args)
@@ -72,4 +72,4 @@ void HILOG_DEBUG(HiLogModuleType mod, const char *msg, ...)
 }
 } // namespace ACELite
 } // namespace OHOS
-#endif
+#endif // TARGET_SIMULATOR

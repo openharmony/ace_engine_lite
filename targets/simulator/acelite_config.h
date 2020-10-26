@@ -22,12 +22,16 @@
  */
 #define OHOS_ACELITE_SIMULATOR_WIN // NOTE: DO NOT use this macro directly
 
+#ifndef JSFWK_TEST
 #define JSFWK_TEST
+#endif
 
 /**
  * The macro is used to distingush the real device and simulator.
  */
+#ifndef TARGET_SIMULATOR
 #define TARGET_SIMULATOR
+#endif
 
 /**
  * Compile all test entry for hmf
@@ -109,6 +113,11 @@
  */
 #define FEATURE_COMPONENT_CANVAS
 
+#ifdef _WIN32
 #define PROFILER_ENABLE_FLAG_FILE "..\\profiler_enable"
+#else
+// path format is different on linux or apple with windows
+#define PROFILER_ENABLE_FLAG_FILE "~/profiler_enable"
+#endif
 
 #endif // OHOS_ACELITE_CONFIG_H

@@ -20,9 +20,9 @@
 
 #if defined(FEATURE_ACELITE_HI_LOG_PRINTF) && defined(FEATURE_ACELITE_MC_LOG_PRINTF)
 #error Only one marco can be defined
-#elif defined(FEATURE_ACELITE_HI_LOG_PRINTF) && (defined(_WIN32) || defined(_WIN64))
+#elif defined(FEATURE_ACELITE_HI_LOG_PRINTF) && defined(TARGET_SIMULATOR)
 #error Only one marco can be defined
-#elif defined(FEATURE_ACELITE_MC_LOG_PRINTF) && (defined(_WIN32) || defined(_WIN64))
+#elif defined(FEATURE_ACELITE_MC_LOG_PRINTF) && defined(TARGET_SIMULATOR)
 #error Only one macro can be defined
 #endif
 
@@ -51,7 +51,7 @@
 #ifndef HILOG_RACE
 #define HILOG_RACE(mod, format, ...)
 #endif
-#elif (defined(_WIN32) || defined(_WIN64))
+#elif (defined(TARGET_SIMULATOR))
 namespace OHOS {
 namespace ACELite {
 typedef enum { HILOG_MODULE_ACE = 1 } HiLogModuleType;

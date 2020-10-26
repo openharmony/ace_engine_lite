@@ -1019,13 +1019,16 @@ bool JSI::DefineProperty(JSIValue object, JSIValue propName, JSPropertyDescripto
     jerry_property_descriptor_t jerryDesc;
     jerry_init_property_descriptor_fields(&jerryDesc);
 
-    jerryDesc.is_set_defined = true;
-    jerryDesc.setter =
-        (descriptor.setter == nullptr) ? jerry_create_undefined() : AS_JERRY_VALUE(CreateFunction(descriptor.setter));
-    jerryDesc.is_get_defined = true;
-    jerryDesc.getter =
-        (descriptor.getter == nullptr) ? jerry_create_undefined() : AS_JERRY_VALUE(CreateFunction(descriptor.getter));
-
+    jerryDesc.is_set_defined = false;
+    if (descriptor.setter != nullptr) {
+        jerryDesc.is_set_defined = true;
+        jerryDesc.setter = AS_JERRY_VALUE(CreateFunction(descriptor.setter));
+    }
+    jerryDesc.is_get_defined = false;
+    if (descriptor.getter != nullptr) {
+        jerryDesc.is_get_defined = true;
+        jerryDesc.getter = AS_JERRY_VALUE(CreateFunction(descriptor.getter));
+    }
     jerry_value_t retValue = jerry_define_own_property(AS_JERRY_VALUE(object), AS_JERRY_VALUE(propName), &jerryDesc);
     jerry_free_property_descriptor_fields(&jerryDesc);
 
@@ -1056,6 +1059,17 @@ bool JSI::DefineNamedProperty(JSIValue object, const char * const propNameStr, J
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:DefineNamedProperty has not been implemented in this js engine!");
     return false;
 #endif
+}
+
+bool JSI::DefineNamedProperty(JSIValue object,
+                              const char * const propNameStr,
+                              JSIFunctionHandler setter,
+                              JSIFunctionHandler getter)
+{
+    JSPropertyDescriptor desc;
+    desc.setter = setter;
+    desc.getter = getter;
+    return JSI::DefineNamedProperty(object, propNameStr, desc);
 }
 
 void JSI::FailCallback(const JSIValue thisVal, const JSIValue args, int32_t errCode, const char * const errDesc)

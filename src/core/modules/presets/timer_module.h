@@ -125,7 +125,7 @@ private:
                                     const jerry_value_t *args,
                                     const jerry_length_t argsNum);
 
-#if (!defined(_WIN32) && !defined(_WIN64))
+#ifndef TARGET_SIMULATOR
     static void Execute(void *data);
 #endif
     TimerList *timerList_;
