@@ -106,7 +106,8 @@ public:
         radio_ = radioButton;
     }
 
-    void SetValue(char* value) {
+    void SetValue(char* value)
+    {
         value_ = value;
     }
 

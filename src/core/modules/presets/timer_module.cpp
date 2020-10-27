@@ -15,9 +15,9 @@
 
 #include "timer_module.h"
 #ifdef FEATURE_TIMER_MODULE
-#if (!defined(_WIN32) && !defined(_WIN64))
+#ifndef TARGET_SIMULATOR
 #include "js_async_work.h"
-#endif
+#endif // TARGET_SIMULATOR
 #include "ace_log.h"
 #include "ace_mem_base.h"
 #include "js_fwk_common.h"
@@ -152,7 +152,7 @@ void TimerModule::Task(void *arguments)
     if (timerList == nullptr) {
         return;
     }
-#if (!defined _WIN32) && (!defined _WIN64)
+#ifndef TARGET_SIMULATOR
     uint8_t* index = static_cast<uint8_t*>(ace_malloc(sizeof(uint8_t)));
     bool check = true;
     if (index == nullptr) {
@@ -174,17 +174,17 @@ void TimerModule::Task(void *arguments)
 #endif
         timerList->DeleteTimer(arg->index);
     }
-#else
+#else // TARGET_SIMULATOR
     if (jerry_value_is_function(arg->func)) {
         CallJSFunctionAutoRelease(arg->func, arg->context, arg->args, arg->argsNum);
     }
     if (!arg->repeated) {
         timerList->DeleteTimer(arg->index);
     }
-#endif
+#endif // TARGET_SIMULATOR
 }
 
-#if (!defined(_WIN32) && !defined(_WIN64))
+#ifndef TARGET_SIMULATOR
 void TimerModule::Execute(void *data)
 {
     uint8_t* timerId = static_cast<uint8_t*>(data);
@@ -211,7 +211,7 @@ void TimerModule::Execute(void *data)
     }
     ACE_FREE(timerId);
 }
-#endif
+#endif // TARGET_SIMULATOR
 } // namespace ACELite
 } // namespace OHOS
 #endif // FEATURE_TIMER_MODULE

@@ -212,7 +212,11 @@ char *CJSONParser::FillPlaceholder(const char *format, jerry_value_t arg, jerry_
 }
 
 #ifdef LOCALIZATION_PLURAL
-uint8_t CJSONParser::FormatString(const char *format, jerry_value_t arg, ListNode *&values, bool isPlural, jerry_length_t num)
+uint8_t CJSONParser::FormatString(const char *format,
+                                  jerry_value_t arg,
+                                  ListNode *&values,
+                                  bool isPlural,
+                                  jerry_length_t num)
 #else
 uint8_t CJSONParser::FormatString(const char *format, jerry_value_t arg, ListNode *&values, jerry_length_t num)
 #endif
