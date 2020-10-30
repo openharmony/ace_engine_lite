@@ -102,6 +102,10 @@ void JsAppEnvironment::Cleanup()
 {
     Debugger::GetInstance().TearDownDebugger();
     FeaAbilityModule::Release();
+
+    // clean up engine, NOTE: all JS value must be released properly befor cleanup
+    jerry_cleanup();
+    // free the external JS context, only can be called after clean up engine
     Debugger::GetInstance().ReleaseJSContext();
 }
 

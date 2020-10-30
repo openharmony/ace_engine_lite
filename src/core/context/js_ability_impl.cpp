@@ -80,6 +80,9 @@ void JSAbilityImpl::InitEnvironment(const char * const abilityPath, const char *
 
 void JSAbilityImpl::CleanUp()
 {
+    if (!isEnvInit_) {
+        return;
+    }
     START_TRACING(APP_ON_DESTROY);
     // clean up user's js
     InvokeOnDestroy();
@@ -97,11 +100,7 @@ void JSAbilityImpl::CleanUp()
     }
     ModuleManager::GetInstance()->OnTerminate();
     JsAppEnvironment::GetInstance()->Cleanup();
-    // clean up engin
-    if (isEnvInit_) {
-        jerry_cleanup();
-        isEnvInit_ = false;
-    }
+    isEnvInit_ = false;
     OUTPUT_TRACE();
 }
 
