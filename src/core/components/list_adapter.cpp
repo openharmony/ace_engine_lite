@@ -189,7 +189,6 @@ int16_t ListAdapter::CalculateItemIndex(int16_t itemIndex) const
 UIView *ListAdapter::GetView(UIView *inView, int16_t index)
 {
     if (index < 0) {
-        HILOG_DEBUG(HILOG_MODULE_ACE, "List adapter: GetView function parameter index error!");
         return nullptr;
     }
 

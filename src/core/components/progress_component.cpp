@@ -185,16 +185,16 @@ void ProgressComponent::SetAngles()
     UICircleProgress *circleProgress = reinterpret_cast<UICircleProgress *>(progressView_);
 
     if (centerX_ == INT16_MAX) {
-        centerX_ = circleProgress->GetWidth() >> 1;
+        centerX_ = static_cast<uint16_t>(circleProgress->GetWidth()) >> 1;
     }
     if (centerY_ == INT16_MAX) {
-        centerY_ = circleProgress->GetHeight() >> 1;
+        centerY_ = static_cast<uint16_t>(circleProgress->GetHeight()) >> 1;
     }
     if (radius_ == INT16_MAX) {
         if (circleProgress->GetWidth() <= circleProgress->GetHeight()) {
-            radius_ = circleProgress->GetWidth() >> 1;
+            radius_ = static_cast<uint16_t>(circleProgress->GetWidth()) >> 1;
         } else {
-            radius_ = circleProgress->GetHeight() >> 1;
+            radius_ = static_cast<uint16_t>(circleProgress->GetHeight()) >> 1;
         }
     }
 

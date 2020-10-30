@@ -337,6 +337,10 @@ public:
 
     void EventExcute(const int16_t index, jerry_value_t bindScrollFunc) const
     {
+        if (IS_UNDEFINED(bindScrollFunc)) {
+            return;
+        }
+
         int8_t currentState = this->GetScrollState();
         jerry_value_t currentStateValue = jerry_create_number(currentState);
         jerry_value_t componentIndex = jerry_create_number(index);
