@@ -201,7 +201,9 @@ void TimerModule::Execute(void *data)
                 CallJSFunctionAutoRelease(funcArgs->func, funcArgs->context, funcArgs->args, funcArgs->argsNum);
             }
             // if timer is once, release the arguments
-            if (!funcArgs->repeated) {
+			// check the timer node is release or not
+			TimerList::TimerNode* currentTimer = timerList->GetTimer(*timerId);
+            if ((currentTimer != nullptr) && (!funcArgs->repeated)) {
 #if defined(__LITEOS__)
                 StopTimerTask(timer->timerId);
 #endif
