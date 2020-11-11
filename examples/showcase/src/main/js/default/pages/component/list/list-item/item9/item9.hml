@@ -35,10 +35,40 @@ limitations under the License.
     "
   >
     <list-item if="{{ status }}" style="width: 280px; height: 50px">
-      <text class="text"> item-if </text>
+      <text class="text"> item-if0 </text>
+    </list-item>
+    <list-item if="{{ status }}" style="width: 280px; height: 50px">
+      <text class="text"> item-if1 </text>
+    </list-item>
+    <list-item if="{{ status }}" style="width: 280px; height: 50px">
+      <text class="text"> item-if2 </text>
+    </list-item>
+    <list-item if="{{ status }}" style="width: 280px; height: 50px">
+      <text class="text"> item-if3 </text>
+    </list-item>
+    <list-item if="{{ status }}" style="width: 280px; height: 50px">
+      <text class="text"> item-if4 </text>
+    </list-item>
+    <list-item if="{{ status }}" style="width: 280px; height: 50px">
+      <text class="text"> item-if5 </text>
     </list-item>
     <list-item style="width: 280px; height: 50px">
-      <text class="text"> item-common </text>
+      <text class="text"> item-common0 </text>
+    </list-item>
+    <list-item style="width: 280px; height: 50px">
+      <text class="text"> item-common1 </text>
+    </list-item>
+    <list-item style="width: 280px; height: 50px">
+      <text class="text"> item-common2 </text>
+    </list-item>
+    <list-item style="width: 280px; height: 50px">
+      <text class="text"> item-common3 </text>
+    </list-item>
+    <list-item style="width: 280px; height: 50px">
+      <text class="text"> item-common4 </text>
+    </list-item>
+    <list-item style="width: 280px; height: 50px">
+      <text class="text"> item-common5 </text>
     </list-item>
   </list>
   <input
