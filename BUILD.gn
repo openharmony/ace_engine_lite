@@ -112,6 +112,7 @@ shared_library("ace_lite") {
     "src/core/base/ace_mem_base.cpp",
     "src/core/base/js_fwk_common.cpp",
     "src/core/base/key_parser.cpp",
+    "src/core/base/string_util.cpp",
     "src/core/base/time_util.cpp",
     "src/core/base/js_debugger_config.cpp",
     "src/core/base/memory_heap.cpp",

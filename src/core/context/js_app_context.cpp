@@ -29,11 +29,21 @@
 #include "fatal_handler.h"
 #include "js_profiler.h"
 #include "root_view.h"
+#include "string_util.h"
 #include "task_manager.h"
 #include "ui_view_group.h"
+#ifndef OHOS_ACELITE_PRODUCT_WATCH
+#include "ability_env.h"
+#endif
 
 namespace OHOS {
 namespace ACELite {
+constexpr char URI_PREFIX_DATA[] = "internal://app";
+constexpr uint8_t URI_PREFIX_DATA_LENGTH = 14;
+#ifdef OHOS_ACELITE_PRODUCT_WATCH
+constexpr char APP_DATA_DIR_PATH[] = "app/ace/data/";
+constexpr uint8_t APP_DATA_DIR_PATH_LENGTH = 13;
+#endif
 void JsAppContext::ClearContext()
 {
     // reset current ability path and uuid
@@ -253,6 +263,49 @@ void JsAppContext::ReleaseAbilityInfo()
         ace_free(currentJsPath_);
         currentJsPath_ = nullptr;
     }
+}
+char *JsAppContext::GetResourcePath(const char *uri) const
+{
+    if (uri == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "uri is null.");
+        return nullptr;
+    }
+    size_t size = strlen(uri);
+    if (size == 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "uri is empty.");
+        return nullptr;
+    }
+    if (StringUtil::StartsWith(uri, URI_PREFIX_DATA)) {
+        char *path = StringUtil::Slice(uri, URI_PREFIX_DATA_LENGTH);
+        if (path == nullptr) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "fail to get resource path.");
+            return nullptr;
+        }
+#ifdef OHOS_ACELITE_PRODUCT_WATCH
+        uint16_t dataPathSize = APP_DATA_DIR_PATH_LENGTH + strlen(currentBundleName_) + size - URI_PREFIX_DATA_LENGTH;
+        char *dataPath = StringUtil::Malloc(dataPathSize);
+        if (dataPath == nullptr) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "fail to get resource path.");
+            ACE_FREE(path);
+            return nullptr;
+        }
+        if (sprintf_s(dataPath, dataPathSize + 1, "%s%s%s", APP_DATA_DIR_PATH, currentBundleName_, path) < 0) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "fail to get resource path.");
+            ACE_FREE(path);
+            ACE_FREE(dataPath);
+            return nullptr;
+        }
+#else
+        const char *dataPath = GetDataPath();
+#endif
+        char *relocatedPath = RelocateResourceFilePath(dataPath, path);
+#ifdef OHOS_ACELITE_PRODUCT_WATCH
+        ACE_FREE(dataPath);
+#endif
+        ACE_FREE(path);
+        return relocatedPath;
+    }
+    return RelocateResourceFilePath(currentAbilityPath_, uri);
 }
 } // namespace ACELite
 } // namespace OHOS

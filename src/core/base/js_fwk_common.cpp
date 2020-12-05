@@ -1259,9 +1259,8 @@ const char *ParseImageSrc(jerry_value_t source)
         rawSrc = nullptr;
         return nullptr;
     }
-
-    const char * const rootPath = JsAppContext::GetInstance()->GetCurrentAbilityPath();
-    char *imageSrc = RelocateResourceFilePath(rootPath, rawSrc);
+    
+    char *imageSrc = JsAppContext::GetInstance()->GetResourcePath(rawSrc);
     ace_free(rawSrc);
     rawSrc = nullptr;
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
