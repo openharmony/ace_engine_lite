@@ -180,8 +180,7 @@ bool ClockHandComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t a
                     break;
                 }
 
-                const char * const rootPath = JsAppContext::GetInstance()->GetCurrentAbilityPath();
-                char *imagePath = RelocateResourceFilePath(rootPath, attrValueStr);
+                char *imagePath = JsAppContext::GetInstance()->GetResourcePath(attrValueStr);
                 if (imagePath != nullptr) {
                     image->SetSrc(imagePath);
                     ace_free(imagePath);

@@ -86,6 +86,7 @@ include_directories(
     ${JSFWK_SIMULATOR_PATH}/config
     ${UTILS_PATH}/timer_task/include
     ${AAFWK_PATH}/frameworks/abilitymgr_lite/include
+    ${AAFWK_PATH}/interfaces/kits/ability_lite
     ${THIRTY_PATH}/bounds_checking_function/include)
 
 # source files

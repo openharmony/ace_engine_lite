@@ -409,8 +409,7 @@ bool InputComponent::HandleButtonBackGroundImg(const AppStyleItem &styleItem)
         const char * const url = styleItem.GetStrValue();
         char *filePath = CreatePathStrFromUrl(url);
         if (filePath != nullptr) {
-            const char * const rootPath = JsAppContext::GetInstance()->GetCurrentAbilityPath();
-            char *imagePath = RelocateResourceFilePath(rootPath, filePath);
+            char *imagePath = JsAppContext::GetInstance()->GetResourcePath(filePath);
             if (imagePath == nullptr) {
                 ace_free(filePath);
                 filePath = nullptr;

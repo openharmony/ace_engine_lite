@@ -124,6 +124,8 @@ public:
      */
     void ClearContext();
 
+    char *GetResourcePath(const char *uri) const;
+
 private:
     /**
      * @brief: release the ability info saved
