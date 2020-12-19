@@ -35,6 +35,7 @@ char *StringUtil::Copy(const char *sequence)
     if (strncpy_s(buffer, size + 1, sequence, size) == 0) {
         return buffer;
     }
+    ace_free(buffer);
     return nullptr;
 }
 char *StringUtil::Malloc(const uint32_t size)
@@ -76,6 +77,7 @@ char *StringUtil::Slice(const char *sequence, const int32_t start, const int32_t
     if (strncpy_s(buffer, size + 1, sequence + startIdx, diffSize) == 0) {
         return buffer;
     }
+    ace_free(buffer);
     return nullptr;
 }
 bool StringUtil::StartsWith(const char *sequence, const char *subsequence)
