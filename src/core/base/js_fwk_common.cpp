@@ -1259,7 +1259,7 @@ const char *ParseImageSrc(jerry_value_t source)
         rawSrc = nullptr;
         return nullptr;
     }
-    
+
     char *imageSrc = JsAppContext::GetInstance()->GetResourcePath(rawSrc);
     ace_free(rawSrc);
     rawSrc = nullptr;
