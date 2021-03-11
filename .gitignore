@@ -5,4 +5,4 @@ x32
 
 target/
 node_modules/
-moduletest/
+frameworks/test/
