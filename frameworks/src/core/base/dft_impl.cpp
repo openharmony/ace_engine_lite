@@ -15,7 +15,7 @@
 
 #include "dft_impl.h"
 
-#if (defined(OHOS_ACELITE_PRODUCT_WATCH))||(defined(FEATURE_CUSTOM_ENTRY_PAGE)))
+#if (defined(OHOS_ACELITE_PRODUCT_WATCH)||(defined(FEATURE_CUSTOM_ENTRY_PAGE)))
 #include "ace_log.h"
 #include "js_app_context.h"
 

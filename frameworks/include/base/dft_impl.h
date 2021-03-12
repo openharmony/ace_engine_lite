@@ -18,7 +18,7 @@
 
 #include "acelite_config.h"
 
-#if (defined(OHOS_ACELITE_PRODUCT_WATCH)) || (defined(FEATURE_CUSTOM_ENTRY_PAGE))
+#if (defined(OHOS_ACELITE_PRODUCT_WATCH) || (defined(FEATURE_CUSTOM_ENTRY_PAGE)))
 #include "memory_heap.h"
 
 namespace OHOS {
