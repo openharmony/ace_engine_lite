@@ -713,6 +713,7 @@ void DfxTddTest::DfxTest005()
     const char *textId = "textid";
     if (jerry_value_is_error(ret)) {
         EXPECT_STREQ(keyName, textId);
+        ACE_FREE(keyName);
         jerry_release_value(domId);
         jerry_release_value(ret);
         DestroyPage(page);
@@ -720,6 +721,7 @@ void DfxTddTest::DfxTest005()
         return;
     }
     EXPECT_STREQ(keyName, textId);
+    ACE_FREE(keyName);
     jerry_release_value(domId);
     jerry_release_value(ret);
     DestroyPage(page);
@@ -737,6 +739,7 @@ void DfxTddTest::DfxTest006()
     const char *result = "success";
     if (jerry_value_is_error(ret)) {
         EXPECT_STREQ(msgStr, result);
+        ACE_FREE(msgStr);
         jerry_release_value(msg);
         jerry_release_value(ret);
         DestroyPage(page);
@@ -744,6 +747,7 @@ void DfxTddTest::DfxTest006()
         return;
     }
     EXPECT_STREQ(msgStr, result);
+    ACE_FREE(msgStr);
     jerry_release_value(msg);
     jerry_release_value(ret);
     DestroyPage(page);
@@ -761,6 +765,7 @@ void DfxTddTest::DfxTest007()
     const char *result = "success";
     if (jerry_value_is_error(ret)) {
         EXPECT_STREQ(msgStr, result);
+        ACE_FREE(msgStr);
         jerry_release_value(msg);
         jerry_release_value(ret);
         DestroyPage(page);
@@ -768,6 +773,7 @@ void DfxTddTest::DfxTest007()
         return;
     }
     EXPECT_STREQ(msgStr, result);
+    ACE_FREE(msgStr);
     jerry_release_value(msg);
     jerry_release_value(ret);
     DestroyPage(page);
