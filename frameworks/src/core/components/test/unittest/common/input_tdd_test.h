@@ -15,64 +15,41 @@
 
 #ifndef OHOS_ACELITE_TEST_INPUT_H
 #define OHOS_ACELITE_TEST_INPUT_H
-
-#ifdef TDD_ASSERTIONS
-#include <climits>
-#include <gtest/gtest.h>
-#else
-#include <typeinfo.h>
-#endif
-
-#include "component_factory.h"
-#include "root_component_mock.h"
+#include "base_test.h"
 #include "test_common.h"
+#include "ui_checkbox.h"
+#include "ui_label_button.h"
+#include "ui_radio_button.h"
 
 namespace OHOS {
 namespace ACELite {
-#ifdef TDD_ASSERTIONS
-using namespace std;
-using namespace testing::ext;
-class InputTddTest : public testing::Test {
-#else
-class InputTddTest {
-#endif
+class InputTddTest : public BaseTest {
 public:
-    InputTddTest();
-    ~InputTddTest(){};
-    void SetUp();
-    void TearDown();
+    InputTddTest() {}
+    ~InputTddTest(){}
     void ComponentInputAttributeTest01();
     void ComponentInputAttributeTest02();
-    void ComponentInputAttributeTest06();
-    void ComponentInputAttributeTest07();
-    void ComponentInputAttributeTest10();
-    void ComponentInputAttributeTest13();
-    void ComponentInputAttributeTest14();
-    void ComponentInputAttributeTest15();
+    void ComponentInputStyleTest03();
     void ComponentInputStyleTest04();
-    void ComponentInputStyleTest05();
+    void ComponentInputAttributeTest05();
+    void ComponentInputAttributeTest06();
+    void ComponentInputStyleTest07();
+    void ComponentInputStyleTest07Extra();
     void ComponentInputStyleTest08();
-    void ComponentInputStyleTest08Extra(int16_t right, int16_t top, int16_t bottom);
     void ComponentInputStyleTest09();
+    void ComponentInputStyleTest10();
     void ComponentInputStyleTest11();
     void ComponentInputStyleTest12();
+    void ComponentInputAttributeTest13();
+    void ComponentInputAttributeTest14();
     void ComponentRadioAttributeTest01();
     void ComponentRadioStyleTest03();
     void ComponentRadioStyleTest04();
-    UIRadioButton *ConvertView(const char *name) const;
-    UIView *GetComponent() const;
     bool CompareColor(ColorType color, uint32_t colorIntValue) const;
     void AddBoolProperty(jerry_value_t object, const char *name, bool value) const;
-    void AddNumberProperty(jerry_value_t object, const char *name, const double value) const;
-    void AddStringProperty(jerry_value_t object, const char *name, const char *value) const;
+#ifndef TDD_ASSERTIONS
     void RunTests();
-
-    jerry_value_t globalObject_;
-    jerry_value_t attrsObject_;
-    jerry_value_t valueStaticStyle_;
-
-private:
-    RootComponentMock rootComponentMock_;
+#endif
 };
 } // namespace ACELite
 } // namespace OHOS
