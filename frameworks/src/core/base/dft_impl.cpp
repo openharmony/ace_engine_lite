@@ -15,7 +15,7 @@
 
 #include "dft_impl.h"
 
-#if (defined(OHOS_ACELITE_PRODUCT_WATCH))||(defined(CHANGE_START_PAGE))
+#if (defined(OHOS_ACELITE_PRODUCT_WATCH))||(defined(FEATURE_CUSTOM_ENTRY_PAGE)))
 #include "ace_log.h"
 #include "js_app_context.h"
 
@@ -69,12 +69,24 @@ void DftImpl::CallbackPageReplaced(int state, const char *param)
         pageReplacedCallback_(currentPath, state);
         ACE_FREE(currentPath);
     }
-    if ((pageInfoFunc_ != nullptr) && (param != nullptr)) {
-        Param value;
-        value.routerParam = param;
-        value.path = JsAppContext::GetInstance()->GetCurrentJsPath();
-        pageInfoFunc_(value);
+    if (pageInfoFunc_ == nullptr) {
+        return;
     }
+    Param value;
+    char *paramValue = nullptr;
+    jerry_value_t global = jerry_get_global_object();
+    if (jerryx_has_property_str(global, ROUTER_PAGE)) {
+        jerry_value_t param = jerryx_get_property_str(global, ROUTER_PAGE);
+        jerry_value_t paramJson = jerry_json_stringify(param);
+        paramValue = MallocStringOf(paramJson);
+        ReleaseJerryValue(paramJson, param, VA_ARG_END_FLAG);
+    }
+    jerry_release_value(global);
+    value.routerParam = paramValue;
+    value.path = JsAppContext::GetInstance()->GetCurrentJsPath();
+    value.routerPath = DftImpl::GetPagePath();
+    pageInfoFunc_(value);
+    ACE_FREE(paramValue);
 }
 } // namespace ACELite
 } // namespace OHOS

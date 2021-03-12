@@ -92,7 +92,7 @@
  */
 #define FEATURE_LOCALIZATION_MODULE
 
-#define CHANGE_START_PAGE
+#define FEATURE_CUSTOM_ENTRY_PAGE
 
 /**
  * module require test
