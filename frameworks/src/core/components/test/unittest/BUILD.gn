@@ -22,6 +22,7 @@ group("components_unittest") {
     "common:js_frameworks_test_jsbundle",
     "common:js_frameworks_test_list",
     "common:js_frameworks_test_marquee",
+    "common:js_frameworks_test_marquee_event",
     "common:js_frameworks_test_opacity",
     "common:js_frameworks_test_percent",
     "common:js_frameworks_test_pickerview",
