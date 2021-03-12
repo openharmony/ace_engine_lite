@@ -26,6 +26,9 @@
 #include "js_fwk_common.h"
 #include "ui_screenshot.h"
 #endif
+#ifdef __LITEOS_A__
+#include "window/window.h"
+#endif
 
 namespace OHOS {
 namespace ACELite {
@@ -57,6 +60,20 @@ bool DfxModule::IsEventInjectorRegistered(EventDataType type)
         HILOG_ERROR(HILOG_MODULE_ACE, "register event error");
         return false;
     }
+#ifdef __LITEOS_A__
+#if ENABLE_WINDOW
+    if (RootView::GetInstance() == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "get root view error");
+        return false;
+    }
+    Window *window = RootView::GetInstance()->GetBoundWindow();
+    if (window == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "set window id error");
+        return false;
+    }
+    EventInjector::GetInstance()->SetWindowId(window->GetWindowId());
+#endif
+#endif
     return true;
 }
 
