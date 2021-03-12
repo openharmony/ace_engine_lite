@@ -109,6 +109,17 @@ unittest("js_frameworks_test_marquee") {
   deps = ace_test_deps
 }
 
+unittest("js_frameworks_test_marquee_event") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "marquee_event_tdd_test.cpp",
+  ]
+  deps = ace_test_deps
+}
+
 unittest("js_frameworks_test_opacity") {
   output_extension = "bin"
   output_dir = test_output_root
