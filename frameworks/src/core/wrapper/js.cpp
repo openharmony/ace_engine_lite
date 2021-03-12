@@ -214,6 +214,11 @@ bool JSObject::Is(JSValue target)
     return jerry_value_is_object(target);
 }
 
+bool JSObject::Has(JSValue target, const char *name)
+{
+    return jerryx_has_property_str(target, name);
+}
+
 JSValue JSGlobal::Get()
 {
     return jerry_get_global_object();
