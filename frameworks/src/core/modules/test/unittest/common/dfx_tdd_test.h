@@ -29,13 +29,21 @@ public:
     void DfxTest002();
     void DfxTest003();
     void DfxTest004();
+    void DfxTest005();
+    void DfxTest006();
+    void DfxTest007();
     void RunTests();
 private:
     static const char * const BUNDLE1;
     static const char * const BUNDLE2;
     static const char * const BUNDLE3;
     static const char * const BUNDLE4;
+    static const char * const BUNDLE5;
+    static const char * const BUNDLE6;
+    static const char * const BUNDLE7;
     static const char * const FUNC_NAME;
+    static const char * const DOM_NODE_FUNC_NAME;
+    static const char * const DOM_TREE_FUNC_NAME;
 };
 } // namespace ACELite
 } // namespace OHOS

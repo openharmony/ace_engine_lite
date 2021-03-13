@@ -326,7 +326,229 @@ const char * const DfxTddTest::BUNDLE4
                           " });"
                           "})();";
 
+const char * const DfxTddTest::BUNDLE5
+                        = "(function () {"
+                          "  return new ViewModel( {"
+                          "    render: function (vm) {"
+                          "      var _vm = vm || this;"
+                          "        return _c('stack', {"
+                          "          staticStyle : {"
+                          "            width : 444,"
+                          "            height : 444,"
+                          "            marginTop : 20,"
+                          "            marginRight : 20,"
+                          "            marginBottom : 20,"
+                          "            marginLeft : 20,"
+                          "            borderTopWidth : 5,"
+                          "            borderRightWidth : 5,"
+                          "            borderBottomWidth : 5,"
+                          "            borderLeftWidth : 5,"
+                          "            borderTopColor : 65280,"
+                          "            borderRightColor : 65280,"
+                          "            borderBottomColor : 65280,"
+                          "            borderLeftColor : 65280,"
+                          "            borderRadius : 10"
+                          "          },"
+                          "        },"
+                          "        [_c('text',{"
+                          "          attrs : {id : 'textid', value : 'get dom node'},"
+                          "          staticStyle : {left : 70,top : 20,width : 400,height : 50},"
+                          "          onBubbleEvents : {'click' : function (evt) {_vm.getDomNode}}}),"
+                          "         _c('div', {"
+                          "          staticClass : ['commonStyle']} ),"
+                          "         _c('text', {"
+                          "          attrs : {value : function () {return 'domId: ' + (_vm.domId)}},"
+                          "          staticStyle : {left : 70,top : 320,width : 400,height : 40}})"
+                          "        ])"
+                          "      },"
+                          "      styleSheet:{"
+                          "        classSelectors: {"
+                          "          commonStyle: {"
+                          "            left:95,"
+                          "            top:75,"
+                          "            width:200,"
+                          "            height:150,"
+                          "            marginTop:10,"
+                          "            marginRight:10,"
+                          "            marginBottom:10,"
+                          "            marginLeft:10,"
+                          "            paddingTop:30,"
+                          "            paddingRight:30,"
+                          "            paddingBottom:30,"
+                          "            paddingLeft:30,"
+                          "            borderTopWidth:1,"
+                          "            borderRightWidth:1,"
+                          "            borderBottomWidth:1,"
+                          "            borderLeftWidth:1,"
+                          "            borderRadius:10,"
+                          "            backgroundColor:16711680"
+                          "          }"
+                          "        }"
+                          "      },"
+                          "      data :{domId: ''},"
+                          "      getDomNode: function getDomNode() {"
+                          "        var dfx = requireNative('system.dfx');"
+                          "        var info = dfx.dumpDomNode('textid');"
+                          "        if (info == undefined) {"
+                          "          console.log('dump dom node error');"
+                          "          this.domId = 'error';"
+                          "        } else {"
+                          "          var jsonInfo = JSON.parse(info);"
+                          "          this.domId = jsonInfo.id;"
+                          "        }"
+                          "      }"
+                          "  })"
+                          "})()";
+
+const char * const DfxTddTest::BUNDLE6
+                        = "(function () {"
+                          "  return new ViewModel( {"
+                          "    render: function (vm) {"
+                          "      var _vm = vm || this;"
+                          "        return _c('stack', {"
+                          "          staticStyle : {"
+                          "            width : 444,"
+                          "            height : 444,"
+                          "            marginTop : 20,"
+                          "            marginRight : 20,"
+                          "            marginBottom : 20,"
+                          "            marginLeft : 20,"
+                          "            borderTopWidth : 5,"
+                          "            borderRightWidth : 5,"
+                          "            borderBottomWidth : 5,"
+                          "            borderLeftWidth : 5,"
+                          "            borderTopColor : 65280,"
+                          "            borderRightColor : 65280,"
+                          "            borderBottomColor : 65280,"
+                          "            borderLeftColor : 65280,"
+                          "            borderRadius : 10"
+                          "          },"
+                          "        },"
+                          "        [_c('text',{"
+                          "          attrs : {id : 'textid', value : 'get dom tree default'},"
+                          "          staticStyle : {left : 50,top : 20,width : 400,height : 50},"
+                          "          onBubbleEvents : {'click' : function (evt) {_vm.getDomTree}}}),"
+                          "         _c('div', {"
+                          "          staticClass : ['commonStyle']} ),"
+                          "         _c('text', {"
+                          "          attrs : {value : function () {return _vm.msg}},"
+                          "          staticStyle : {left : 70,top : 320,width : 400,height : 40}})"
+                          "        ])"
+                          "      },"
+                          "      styleSheet:{"
+                          "        classSelectors: {"
+                          "          commonStyle: {"
+                          "            left:95,"
+                          "            top:75,"
+                          "            width:200,"
+                          "            height:150,"
+                          "            marginTop:10,"
+                          "            marginRight:10,"
+                          "            marginBottom:10,"
+                          "            marginLeft:10,"
+                          "            paddingTop:30,"
+                          "            paddingRight:30,"
+                          "            paddingBottom:30,"
+                          "            paddingLeft:30,"
+                          "            borderTopWidth:1,"
+                          "            borderRightWidth:1,"
+                          "            borderBottomWidth:1,"
+                          "            borderLeftWidth:1,"
+                          "            borderRadius:10,"
+                          "            backgroundColor:16711680"
+                          "          }"
+                          "        }"
+                          "      },"
+                          "      data :{msg: ''},"
+                          "      getDomTree: function getDomTree() {"
+                          "        var dfx = requireNative('system.dfx');"
+                          "        if (dfx.dumpDomTree()) {"
+                          "          this.msg = 'success';"
+                          "        } else {"
+                          "          this.msg = 'fail';"
+                          "        }"
+                          "      }"
+                          "  })"
+                          "})()";
+
+const char * const DfxTddTest::BUNDLE7
+                        = "(function () {"
+                          "  return new ViewModel( {"
+                          "    render: function (vm) {"
+                          "      var _vm = vm || this;"
+                          "        return _c('stack', {"
+                          "          staticStyle : {"
+                          "            width : 444,"
+                          "            height : 444,"
+                          "            marginTop : 20,"
+                          "            marginRight : 20,"
+                          "            marginBottom : 20,"
+                          "            marginLeft : 20,"
+                          "            borderTopWidth : 5,"
+                          "            borderRightWidth : 5,"
+                          "            borderBottomWidth : 5,"
+                          "            borderLeftWidth : 5,"
+                          "            borderTopColor : 65280,"
+                          "            borderRightColor : 65280,"
+                          "            borderBottomColor : 65280,"
+                          "            borderLeftColor : 65280,"
+                          "            borderRadius : 10"
+                          "          },"
+                          "        },"
+                          "        [_c('text',{"
+                          "          attrs : {id : 'textid', value : 'get dom tree default'},"
+                          "          staticStyle : {left : 50,top : 20,width : 400,height : 50},"
+                          "          onBubbleEvents : {'click' : function (evt) {_vm.getDomTree}}}),"
+                          "         _c('div', {"
+                          "          staticClass : ['commonStyle']} ),"
+                          "         _c('text', {"
+                          "          attrs : {value : function () {return _vm.msg}},"
+                          "          staticStyle : {left : 70,top : 320,width : 400,height : 40}})"
+                          "        ])"
+                          "      },"
+                          "      styleSheet:{"
+                          "        classSelectors: {"
+                          "          commonStyle: {"
+                          "            left:95,"
+                          "            top:75,"
+                          "            width:200,"
+                          "            height:150,"
+                          "            marginTop:10,"
+                          "            marginRight:10,"
+                          "            marginBottom:10,"
+                          "            marginLeft:10,"
+                          "            paddingTop:30,"
+                          "            paddingRight:30,"
+                          "            paddingBottom:30,"
+                          "            paddingLeft:30,"
+                          "            borderTopWidth:1,"
+                          "            borderRightWidth:1,"
+                          "            borderBottomWidth:1,"
+                          "            borderLeftWidth:1,"
+                          "            borderRadius:10,"
+                          "            backgroundColor:16711680"
+                          "          }"
+                          "        }"
+                          "      },"
+                          "      data :{msg: ''},"
+                          "      getDomTree: function getDomTree() {"
+                          "        var dfx = requireNative('system.dfx');"
+                          "        var treeid = 'textid';"
+                          "        if (dfx.dumpDomTree(treeid)) {"
+                          "          this.msg = 'success';"
+                          "        } else {"
+                          "          this.msg = 'fail';"
+                          "        }"
+                          "      }"
+                          "  })"
+                          "})()";
+
+
 const char * const DfxTddTest::FUNC_NAME = "click1";
+
+const char * const DfxTddTest::DOM_NODE_FUNC_NAME = "getDomNode";
+
+const char * const DfxTddTest::DOM_TREE_FUNC_NAME = "getDomTree";
 
 void DfxTddTest::DfxTest001()
 {
@@ -334,8 +556,8 @@ void DfxTddTest::DfxTest001()
     JSValue page = CreatePage(BUNDLE1, strlen(BUNDLE1));
     JSValue ret = JSObject::Call(page, FUNC_NAME);
     if (!jerry_value_is_error(ret)) {
-        TDD_CASE_END();
         DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -347,8 +569,8 @@ void DfxTddTest::DfxTest001()
     jerry_char_t *errStrBuffer = static_cast<jerry_char_t *>(ace_malloc(sizeof(jerry_char_t) * (errStrSize + 1)));
     if (errStrBuffer == nullptr) {
         jerry_release_value(errStrVal);
-        TDD_CASE_END();
         DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
     jerry_size_t stringEnd = jerry_string_to_utf8_char_buffer(errStrVal, errStrBuffer, errStrSize);
@@ -366,8 +588,8 @@ void DfxTddTest::DfxTest001()
         valueStr = nullptr;
     }
     jerry_release_value(value);
-    TDD_CASE_END();
     DestroyPage(page);
+    TDD_CASE_END();
 }
 
 void DfxTddTest::DfxTest002()
@@ -376,8 +598,8 @@ void DfxTddTest::DfxTest002()
     JSValue page = CreatePage(BUNDLE2, strlen(BUNDLE2));
     JSValue errorValue = JSObject::Call(page, FUNC_NAME);
     if (!jerry_value_is_error(errorValue)) {
-        TDD_CASE_END();
         DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
     const uint16_t stackMsgMaxLength = 256;
@@ -388,9 +610,9 @@ void DfxTddTest::DfxTest002()
     jerry_value_t backtraceVal = jerry_get_property(errorVal, stackStr);
     ReleaseJerryValue(stackStr, errorVal, VA_ARG_END_FLAG);
     if (jerry_value_is_error(backtraceVal) || !(jerry_value_is_array(backtraceVal))) {
-        TDD_CASE_END();
-        DestroyPage(page);
         jerry_release_value(backtraceVal);
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
     uint32_t length = jerry_get_array_length(backtraceVal);
@@ -398,8 +620,8 @@ void DfxTddTest::DfxTest002()
     jerry_char_t *errStrBuffer = static_cast<jerry_char_t *>(ace_malloc(sizeof(jerry_char_t) * (stackMsgMaxLength)));
     if (errStrBuffer == nullptr) {
         jerry_release_value(backtraceVal);
-        TDD_CASE_END();
         DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
     jerry_value_t itemVal = jerry_get_property_by_index(backtraceVal, 0);
@@ -420,8 +642,8 @@ void DfxTddTest::DfxTest002()
         valueStr = nullptr;
     }
     ReleaseJerryValue(itemVal, backtraceVal, value, VA_ARG_END_FLAG);
-    TDD_CASE_END();
     DestroyPage(page);
+    TDD_CASE_END();
 }
 
 void DfxTddTest::DfxTest003()
@@ -430,8 +652,8 @@ void DfxTddTest::DfxTest003()
     JSValue page = CreatePage(BUNDLE3, strlen(BUNDLE3));
     JSValue ret = JSObject::Call(page, FUNC_NAME);
     if (jerry_value_is_error(ret)) {
-        TDD_CASE_END();
         DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
     JSValue value = JSObject::Get(page, "textValue");
@@ -442,8 +664,8 @@ void DfxTddTest::DfxTest003()
         valueStr = nullptr;
     }
     jerry_release_value(value);
-    TDD_CASE_END();
     DestroyPage(page);
+    TDD_CASE_END();
 }
 
 void DfxTddTest::DfxTest004()
@@ -452,8 +674,8 @@ void DfxTddTest::DfxTest004()
     JSValue page = CreatePage(BUNDLE4, strlen(BUNDLE4));
     JSValue ret = JSObject::Call(page, FUNC_NAME);
     if (jerry_value_is_error(ret)) {
-        TDD_CASE_END();
         DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
     const uint8_t exceptLength = 32;
@@ -467,19 +689,96 @@ void DfxTddTest::DfxTest004()
     jerry_release_value(errorVal);
 
     if (jerry_value_is_error(backtraceVal) || !(jerry_value_is_array(backtraceVal))) {
-        TDD_CASE_END();
-        DestroyPage(page);
         jerry_release_value(backtraceVal);
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
     uint32_t length = jerry_get_array_length(backtraceVal);
     EXPECT_EQ(length, exceptLength);
-    TDD_CASE_END();
     jerry_release_value(backtraceVal);
     DestroyPage(page);
+    TDD_CASE_END();
 }
 
+void DfxTddTest::DfxTest005()
+{
+    TDD_CASE_BEGIN();
+    JSValue page = CreatePage(BUNDLE5, strlen(BUNDLE5));
+    JSValue ret = JSObject::Call(page, DOM_NODE_FUNC_NAME);
+    JSValue domId = JSObject::Get(page, "domId");
+    uint16_t keyLength = 0;
+    char *keyName = MallocStringOf(domId, &keyLength);
+    const char *textId = "textid";
+    if (jerry_value_is_error(ret)) {
+        EXPECT_STREQ(keyName, textId);
+        ACE_FREE(keyName);
+        jerry_release_value(domId);
+        jerry_release_value(ret);
+        DestroyPage(page);
+        TDD_CASE_END();
+        return;
+    }
+    EXPECT_STREQ(keyName, textId);
+    ACE_FREE(keyName);
+    jerry_release_value(domId);
+    jerry_release_value(ret);
+    DestroyPage(page);
+    TDD_CASE_END();
+}
+
+void DfxTddTest::DfxTest006()
+{
+    TDD_CASE_BEGIN();
+    JSValue page = CreatePage(BUNDLE6, strlen(BUNDLE6));
+    JSValue ret = JSObject::Call(page, DOM_TREE_FUNC_NAME);
+    JSValue msg = JSObject::Get(page, "msg");
+    uint16_t len = 0;
+    char *msgStr = MallocStringOf(msg, &len);
+    const char *result = "success";
+    if (jerry_value_is_error(ret)) {
+        EXPECT_STREQ(msgStr, result);
+        ACE_FREE(msgStr);
+        jerry_release_value(msg);
+        jerry_release_value(ret);
+        DestroyPage(page);
+        TDD_CASE_END();
+        return;
+    }
+    EXPECT_STREQ(msgStr, result);
+    ACE_FREE(msgStr);
+    jerry_release_value(msg);
+    jerry_release_value(ret);
+    DestroyPage(page);
+    TDD_CASE_END();
+}
+
+void DfxTddTest::DfxTest007()
+{
+    TDD_CASE_BEGIN();
+    JSValue page = CreatePage(BUNDLE7, strlen(BUNDLE7));
+    JSValue ret = JSObject::Call(page, DOM_TREE_FUNC_NAME);
+    JSValue msg = JSObject::Get(page, "msg");
+    uint16_t len = 0;
+    char *msgStr = MallocStringOf(msg, &len);
+    const char *result = "success";
+    if (jerry_value_is_error(ret)) {
+        EXPECT_STREQ(msgStr, result);
+        ACE_FREE(msgStr);
+        jerry_release_value(msg);
+        jerry_release_value(ret);
+        DestroyPage(page);
+        TDD_CASE_END();
+        return;
+    }
+    EXPECT_STREQ(msgStr, result);
+    ACE_FREE(msgStr);
+    jerry_release_value(msg);
+    jerry_release_value(ret);
+    DestroyPage(page);
+    TDD_CASE_END();
+}
 
 void DfxTddTest::RunTests()
 {
@@ -487,6 +786,9 @@ void DfxTddTest::RunTests()
     DfxTest002();
     DfxTest003();
     DfxTest004();
+    DfxTest005();
+    DfxTest006();
+    DfxTest007();
 }
 
 #ifdef TDD_ASSERTIONS
@@ -528,6 +830,36 @@ HWTEST_F(DfxTddTest, DfxTest003, TestSize.Level1)
 HWTEST_F(DfxTddTest, DfxTest004, TestSize.Level1)
 {
     DfxTddTest::DfxTest004();
+}
+
+/* *
+ * @tc.name: DfxTest005
+ * @tc.desc: Verify dump dom id.
+ * @tc.require: AR000F3PDP
+ */
+HWTEST_F(DfxTddTest, DfxTest005, TestSize.Level1)
+{
+    DfxTddTest::DfxTest005();
+}
+
+/* *
+ * @tc.name: DfxTest006
+ * @tc.desc: Verify dump default dom tree.
+ * @tc.require: AR000F3PDP
+ */
+HWTEST_F(DfxTddTest, DfxTest006, TestSize.Level1)
+{
+    DfxTddTest::DfxTest006();
+}
+
+/* *
+ * @tc.name: DfxTest007
+ * @tc.desc: Verify dump dom tree by id.
+ * @tc.require: AR000F3PDP
+ */
+HWTEST_F(DfxTddTest, DfxTest007, TestSize.Level1)
+{
+    DfxTddTest::DfxTest007();
 }
 #endif // TDD_ASSERTIONS
 }
