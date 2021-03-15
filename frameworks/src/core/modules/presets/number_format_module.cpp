@@ -107,18 +107,18 @@ jerry_value_t NumberFormatModule::Format(const jerry_value_t func,
         HILOG_ERROR(HILOG_MODULE_ACE, "get the object number formatter failed");
         return UNDEFINED;
     }
-    const char *result = nullptr;
+    std::string result;
     int status = 0;
     if (numModule->isUsingGroup_) {
-        result = numModule->formatter_->Format(number, numModule->formatType_, status).data();
+        result = numModule->formatter_->Format(number, numModule->formatType_, status);
     } else {
-        result = numModule->formatter_->FormatNoGroup(number, numModule->formatType_, status).data();
+        result = numModule->formatter_->FormatNoGroup(number, numModule->formatType_, status);
     }
     if (status == I18nStatus::IERROR) {
         HILOG_ERROR(HILOG_MODULE_ACE, "format number failed");
         return UNDEFINED;
     }
-    if (result != nullptr) {
+    if (!result.empty()) {
         return jerry_create_string(reinterpret_cast<const jerry_char_t*>(result));
     }
     return UNDEFINED;

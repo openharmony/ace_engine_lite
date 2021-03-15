@@ -86,8 +86,13 @@ bool DateTimeFormatModule::InitNumArray(LocaleInfo info)
     // get the number value 0-9 in specified locale info
     for (uint8_t i = 0; i < MAX_NUM_LEN; i++) {
         int numStatus = 0;
-        char *result = const_cast<char *>(numFormat.Format(i, numStatus).data());
-        numArray_[i] = StringUtil::Copy(result);
+        std::string result = numFormat.Format(i, numStatus);
+        if ((numStatus == I18nStatus::IERROR) || (result.empty())) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "init array %d failed", i);
+            ReleaseNumArray();
+            return false;
+        }
+        numArray_[i] = StringUtil::Copy(result.data());
     }
     return true;
 }
@@ -196,8 +201,8 @@ jerry_value_t DateTimeFormatModule::Format(const jerry_value_t func,
     if (formatter->weekStyle_ != StyleState::UNKNOWN) {
         int8_t weekIndex = formatter->GetTimeVal(args[0], "getDay");
         DateTimeDataType type = (formatter->weekStyle_ == StyleState::LONG) ? FORMAT_WIDE : FORMAT_ABBR;
-        return jerry_create_string(reinterpret_cast<const jerry_char_t *>
-                                   (formatter->dateFormat_->GetWeekName(weekIndex, type).data()));
+        std::string weekName = formatter->dateFormat_->GetWeekName(weekIndex, type);
+        return jerry_create_string(reinterpret_cast<const jerry_char_t *>(weekName.data()));
     } else if (formatter->monthStyle_ != StyleState::UNKNOWN) {
         return formatter->GetMonthVal(args[0]);
     }
@@ -217,8 +222,8 @@ jerry_value_t DateTimeFormatModule::GetMonthVal(jerry_value_t time) const
     // format the long style ans short month style
     if ((monthStyle_ == StyleState::LONG) || (monthStyle_ == StyleState::SHORT)) {
         DateTimeDataType type = (monthStyle_ == StyleState::LONG) ? FORMAT_WIDE : FORMAT_ABBR;
-        return jerry_create_string(reinterpret_cast<const jerry_char_t *>
-                                   (dateFormat_->GetMonthName(month, type).data()));
+        std::string monthName = dateFormat_->GetMonthName(month, type);
+        return jerry_create_string(reinterpret_cast<const jerry_char_t *>(monthName.data()));
     }
     const uint8_t monthIndex = 1;
     const uint8_t maxMonthLen = 20;
@@ -228,10 +233,10 @@ jerry_value_t DateTimeFormatModule::GetMonthVal(jerry_value_t time) const
         HILOG_ERROR(HILOG_MODULE_ACE, "malloc month str failed");
         return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>("memory is not enough"));
     }
-    const char *date = dateFormat_->GetMonthName(month, DateTimeDataType::STANDALONE_ABBR).data();
+    std::string date = dateFormat_->GetMonthName(month, DateTimeDataType::STANDALONE_ABBR);
     // format the number month to 2-digit or not through the month digit flag
     jerry_value_t resultProp = UNDEFINED;
-    if (FormatDigit(date, result, maxMonthLen, start, digitArray_[monthIndex]) > 0) {
+    if (FormatDigit(date.data(), result, maxMonthLen, start, digitArray_[monthIndex]) > 0) {
         resultProp = jerry_create_string(reinterpret_cast<jerry_char_t *>(result));
     }
     ace_free(result);
