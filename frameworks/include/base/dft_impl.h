@@ -18,7 +18,7 @@
 
 #include "acelite_config.h"
 
-#if (defined(OHOS_ACELITE_PRODUCT_WATCH)) || (defined(CHANGE_START_PAGE))
+#if (defined(OHOS_ACELITE_PRODUCT_WATCH) || (defined(FEATURE_CUSTOM_ENTRY_PAGE)))
 #include "memory_heap.h"
 
 namespace OHOS {
@@ -26,6 +26,7 @@ namespace ACELite {
 typedef void (*PageReplacedCallback)(const char *path, int state);
 
 struct Param {
+    const char *routerPath = nullptr;
     const char *routerParam = nullptr;
     const char *path = nullptr;
 };
