@@ -119,7 +119,7 @@ jerry_value_t NumberFormatModule::Format(const jerry_value_t func,
         return UNDEFINED;
     }
     if (!result.empty()) {
-        return jerry_create_string(reinterpret_cast<const jerry_char_t*>(result));
+        return jerry_create_string(reinterpret_cast<const jerry_char_t*>(result.data()));
     }
     return UNDEFINED;
 }
