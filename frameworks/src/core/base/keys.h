@@ -235,6 +235,7 @@ enum {
     KEYWORD(SLIDER, slider) // tag name
     KEYWORD(SPACE_AROUND, space-around) // layout style
     KEYWORD(SPACE_BETWEEN, space-between) // layout style
+    KEYWORD(SPACE_EVENLY, space-evenly) // layout style
     KEYWORD(SRC, src) // common attributes, use for image view, video compnent
     KEYWORD(STACK, stack) // tag name
     KEYWORD(STANDARD, standard) // text font size type

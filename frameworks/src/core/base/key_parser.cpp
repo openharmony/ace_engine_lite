@@ -590,6 +590,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "pace-between")) {
                 return K_SPACE_BETWEEN;
             }
+            if (!strcmp(s, "pace-evenly")) {
+                return K_SPACE_EVENLY;
+            }
             if (!strcmp(s, "rc")) {
                 return K_SRC;
             }
