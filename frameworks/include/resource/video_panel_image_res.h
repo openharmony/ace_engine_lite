@@ -18,7 +18,7 @@
 #include "acelite_config.h"
 #ifdef FEATURE_COMPONENT_VIDEO
 
-#include "image_info.h"
+#include "gfx_utils/image_info.h"
 namespace OHOS {
 namespace ACELite {
 ImageInfo* GetVideoMutedImageOnInfo();
