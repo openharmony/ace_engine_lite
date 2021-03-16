@@ -18,7 +18,7 @@
 
 #include "acelite_config.h"
 #ifdef FEATURE_NUMBER_FORMAT
-#include "list.h"
+#include "gfx_utils/list.h"
 #include "js_fwk_common.h"
 #include "number_format.h"
 #include "types.h"

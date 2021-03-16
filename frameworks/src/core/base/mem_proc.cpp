@@ -19,7 +19,7 @@
 #include <windows.h>
 #include <psapi.h>
 #include "ace_log.h"
-#include "file.h"
+#include "gfx_utils/file.h"
 #include "jerryscript-core.h"
 #include "jerryscript.h"
 #include "js_fwk_common.h"

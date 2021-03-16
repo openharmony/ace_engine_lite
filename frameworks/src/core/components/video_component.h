@@ -22,7 +22,7 @@
 #include <unistd.h>
 #endif // FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
 #include "component.h"
-#include "list.h"
+#include "gfx_utils/list.h"
 #include "panel_view.h"
 #include "video_state_callback.h"
 #include "video_view.h"
