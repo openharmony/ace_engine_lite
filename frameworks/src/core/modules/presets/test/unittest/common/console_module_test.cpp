@@ -24,28 +24,30 @@
 
 namespace OHOS {
 namespace ACELite {
+namespace {
 // keep sync with the defination in console_log_impl.cpp
 #ifdef CONSOLE_LOG_LINE_MAX_LENGTH
 static const int16_t LOG_BUFFER_SIZE = CONSOLE_LOG_LINE_MAX_LENGTH;
 #else
 static const int16_t LOG_BUFFER_SIZE = 256; // use 256 as default if it's not config
 #endif // CONSOLE_LOG_LINE_MAX_LENGTH
-
 // the verifing buffer length is bigger than the max
 static const size_t VERIFY_BUFFER_LENGTH = 2 * LOG_BUFFER_SIZE;
+} // namespace
+
 // used for holding verifing
-static char *g_verifyBuffer_ = nullptr;
+static char *g_verifyBuffer = nullptr;
 static size_t g_logContentLength = 0;
 static size_t g_logRound = 0;
 // this is the extra handler to get output string and fill into one buffer for following verifing buffer
 static void VerifyBufferFillHanlder(OHOS::ACELite::LogLevel level, const char *logContent, size_t length)
 {
     UNUSED(level);
-    if (g_verifyBuffer_ == nullptr || logContent == nullptr || length == 0 || length >= VERIFY_BUFFER_LENGTH) {
+    if (g_verifyBuffer == nullptr || logContent == nullptr || length == 0 || length >= VERIFY_BUFFER_LENGTH) {
         return;
     }
 
-    if (EOK != strcpy_s(g_verifyBuffer_, VERIFY_BUFFER_LENGTH, logContent)) {
+    if (EOK != strcpy_s(g_verifyBuffer, VERIFY_BUFFER_LENGTH, logContent)) {
         return;
     }
     g_logContentLength = length;
@@ -61,11 +63,11 @@ void ConsoleModuleTest::SetUp()
     }
     env->InitJsFramework();
     // initialize the verifing buffer
-    g_verifyBuffer_ = static_cast<char *>(ace_malloc(VERIFY_BUFFER_LENGTH));
-    if (g_verifyBuffer_ == nullptr) {
+    g_verifyBuffer = static_cast<char *>(ace_malloc(VERIFY_BUFFER_LENGTH));
+    if (g_verifyBuffer == nullptr) {
         return;
     }
-    if (EOK != memset_s(g_verifyBuffer_, VERIFY_BUFFER_LENGTH, 0, VERIFY_BUFFER_LENGTH)) {
+    if (EOK != memset_s(g_verifyBuffer, VERIFY_BUFFER_LENGTH, 0, VERIFY_BUFFER_LENGTH)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "prepare verify buffer failed");
     }
     RegisterJSLogOutputHandler(VerifyBufferFillHanlder);
@@ -83,7 +85,7 @@ void ConsoleModuleTest::TearDown()
     }
     context->ReleaseStyles();
     env->Cleanup();
-    ACE_FREE(g_verifyBuffer_);
+    ACE_FREE(g_verifyBuffer);
     RegisterJSLogOutputHandler(nullptr);
     g_logContentLength = 0;
     g_logRound = 0;
@@ -98,7 +100,7 @@ void ConsoleModuleTest::EvalAndVerify(TestObjectWrapper object)
     jerry_value_t evalResult =
         jerry_eval(reinterpret_cast<const jerry_char_t *>(object.code), object.codeLength, JERRY_PARSE_NO_OPTS);
     jerry_release_value(evalResult);
-    int res = (g_verifyBuffer_ == nullptr) ? -1 : strcmp(object.targetLogContent, g_verifyBuffer_);
+    int res = (g_verifyBuffer == nullptr) ? -1 : strcmp(object.targetLogContent, g_verifyBuffer);
     EXPECT_EQ(res, 0);
     EXPECT_EQ(g_logContentLength, object.targetLogLen);
     EXPECT_EQ(g_logRound, object.targetLogRound);
