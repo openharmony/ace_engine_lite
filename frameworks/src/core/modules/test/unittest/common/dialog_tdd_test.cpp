@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #include "dialog_tdd_test.h"
+#include <unistd.h>
 #include "event_injector.h"
 #include "js_fwk_common.h"
-#include "window/window.h"
 #include "wrapper/js.h"
-#include <unistd.h>
 
 namespace OHOS {
 namespace ACELite {
@@ -258,7 +258,7 @@ const char * const DialogTddTest::METHOD = "showDialog";
 
 const char * const DialogTddTest::CONFIRM = "confirm";
 
-const char * const DialogTddTest::CANCEL= "cancel";
+const char * const DialogTddTest::CANCEL = "cancel";
 
 const char * const DialogTddTest::COMPLETE = "complete";
 
@@ -507,7 +507,7 @@ void DialogTddTest::DialogTest005()
 {
     TDD_CASE_BEGIN();
     JSValue page = CreatePage(BUNDLE5, strlen(BUNDLE5));
-    
+
     // step1: get default value and compare
     char *val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, DEFAULT);
@@ -521,10 +521,11 @@ void DialogTddTest::DialogTest005()
     }
 
     // step2: set dialog window id and click
+    const int16_t position = 10;
     constexpr char *dismissiontVal = "HelloAce";
     Window *window = RootView::GetInstance()->GetBoundWindow();
     EventInjector::GetInstance()->SetWindowId(window->GetWindowId() + 1);
-    Click(10, 10);
+    Click(position, position);
 
     // step3: get dismisson value and compare
     val = JSObject::GetString(page, MSG);
