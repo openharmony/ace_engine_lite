@@ -18,7 +18,7 @@
 
 #include "component.h"
 #include "js_ability.h"
-#include "list.h"
+#include "gfx_utils/list.h"
 #include "non_copyable.h"
 #include "ui_view.h"
 
