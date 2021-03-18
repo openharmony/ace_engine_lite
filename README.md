@@ -58,7 +58,7 @@ For details about the APIs, see the  [JS Application Development](https://device
 
 For details, go to the  **readme**  repository:
 
-[https://gitee.com/openharmony/docs/blob/master/docs-en/readme/js-application-framework.md](https://gitee.com/openharmony/docs/blob/master/docs-en/readme/js-application-framework.md)
+[https://gitee.com/openharmony/docs/blob/master/en/readme/js-application-framework.md](https://gitee.com/openharmony/docs/blob/master/en/readme/js-application-framework.md)
 
 ## Repositories Involved<a name="section11683135113011"></a>
 
