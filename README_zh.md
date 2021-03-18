@@ -57,7 +57,7 @@ API介绍请参考[《OpenHarmony Device开发API参考》](https://device.harmo
 
 详见：
 
-[https://gitee.com/openharmony/docs/blob/master/readme/JS应用开发框架README.md](https://gitee.com/openharmony/docs/blob/master/readme/JS应用开发框架README.md)
+[https://gitee.com/openharmony/docs/blob/master/zh-cn/readme/JS应用开发框架.md](https://gitee.com/openharmony/docs/blob/master/zh-cn/readme/JS应用开发框架.md)
 
 ## 相关仓<a name="section11683135113011"></a>
 
