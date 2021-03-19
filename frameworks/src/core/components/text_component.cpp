@@ -76,7 +76,7 @@ bool TextComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrVa
 	        break;
 	    }
 	    const uint8_t rate = 85;
-            uint16_t speed = scrollAmount * thousand / 85;
+            uint16_t speed = scrollAmount * thousand / rate;
             uiLabel_.SetRollSpeed(speed);
             break;
         }
