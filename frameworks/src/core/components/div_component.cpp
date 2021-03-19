@@ -89,6 +89,9 @@ bool DivComponent::ApplyPrivateStyle(const AppStyleItem* style)
                     nativeView_.SetMajorAxisAlign(OHOS::ALIGN_BETWEEN);
                     break;
                 case K_SPACE_AROUND:
+                    nativeView_.SetMajorAxisAlign(OHOS::ALIGN_AROUND);
+                    break;
+                case K_SPACE_EVENLY:
                     nativeView_.SetMajorAxisAlign(OHOS::ALIGN_EVENLY);
                     break;
                 default:
