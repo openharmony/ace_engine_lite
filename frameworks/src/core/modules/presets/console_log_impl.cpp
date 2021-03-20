@@ -231,6 +231,15 @@ static void OutputToHiLog(const LogLevel logLevel, const char * const str)
 }
 #endif
 
+#ifdef TDD_ASSERTIONS
+static JSLogOutputExtraHandler g_logOutputExtraHandler = nullptr;
+// add extra hanlder for TDD test cases
+void RegisterJSLogOutputHandler(JSLogOutputExtraHandler extraHandler)
+{
+    g_logOutputExtraHandler = extraHandler;
+}
+#endif // TDD_ASSERTIONS
+
 void Output(const LogLevel logLevel, const char * const str, const uint8_t length)
 {
     if (str == nullptr) {
@@ -241,6 +250,12 @@ void Output(const LogLevel logLevel, const char * const str, const uint8_t lengt
 #if defined(FEATURE_ACELITE_HI_LOG_PRINTF) || defined(FEATURE_USER_MC_LOG_PRINTF)
     OutputToHiLog(logLevel, str);
 #endif
+#ifdef TDD_ASSERTIONS
+    // output to extra handler if it was set by test cases
+    if (g_logOutputExtraHandler != nullptr) {
+        g_logOutputExtraHandler(logLevel, str, length);
+    }
+#endif // TDD_ASSERTIONS
 }
 
 void FlushOutput()

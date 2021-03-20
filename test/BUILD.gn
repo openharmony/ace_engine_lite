@@ -33,6 +33,13 @@ config("test_common_config") {
   defines = ace_test_defines
 }
 
+# this is the config for compiling all ace source code with test code together
+config("test_whole_archive_config") {
+  include_dirs = all_external_includes
+  configs = ace_test_configs
+  defines = all_defines
+}
+
 group("unittest") {
   deps = [
     "$cache_manager_unittest_root:cache_manager_unittest",

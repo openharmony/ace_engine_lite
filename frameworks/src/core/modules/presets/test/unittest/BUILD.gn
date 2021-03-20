@@ -40,3 +40,12 @@ unittest("js_frameworks_test_timer") {
   ]
   deps = ace_test_deps
 }
+
+unittest("js_frameworks_test_console") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_whole_archive_config" ]
+  sources = all_acelite_source_files
+  sources += [ "common/console_module_test.cpp" ]
+  deps = all_external_deps
+}

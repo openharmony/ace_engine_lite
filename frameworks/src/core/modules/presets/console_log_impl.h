@@ -38,6 +38,12 @@ enum LogLevel : uint8_t {
     LOG_LEVEL_TRACE = 6,   // console.trace
 };
 
+#ifdef TDD_ASSERTIONS
+// add extra hanlder for TDD test cases
+typedef void (*JSLogOutputExtraHandler)(OHOS::ACELite::LogLevel level, const char *logContent, size_t length);
+void RegisterJSLogOutputHandler(JSLogOutputExtraHandler extraHandler);
+#endif // TDD_ASSERTIONS
+
 /**
  * @brief: the str to print out.
  *
