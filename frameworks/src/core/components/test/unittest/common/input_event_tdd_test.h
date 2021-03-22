@@ -19,9 +19,9 @@ namespace OHOS {
 namespace ACELite {
 class InputEventTddTest : public BasicTddTest {
 public:
-    void ClickPosition(const double xRate, const double yRate);
+    void ClickPosition(const double xRate, const double yRate) const;
     void LongPressPosition(const double xRate, const double yRate) const;
-    UIView *GetComponent(JSValue page, const char *name);
+    UIView *GetComponent(JSValue page, const char *name) const;
     void InputBindingTest001();
     void InputEventTest002();
     void ChangeEventTest003();
