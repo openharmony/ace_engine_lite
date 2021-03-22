@@ -32,5 +32,6 @@ group("components_unittest") {
     "common:js_frameworks_test_switch",
     "common:js_frameworks_test_text",
     "common:js_frameworks_test_text_exception",
+    "common:js_frameworks_test_input_event",
   ]
 }
