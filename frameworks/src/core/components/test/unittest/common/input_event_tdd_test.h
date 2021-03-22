@@ -20,7 +20,7 @@ namespace ACELite {
 class InputEventTddTest : public BasicTddTest {
 public:
     void ClickPosition(const double xRate, const double yRate);
-    void LongPressPosition(const double xRate, const double yRate);
+    void LongPressPosition(const double xRate, const double yRate) const;
     UIView *GetComponent(JSValue page, const char *name);
     void InputBindingTest001();
     void InputEventTest002();

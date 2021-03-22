@@ -15,7 +15,6 @@
 
 #include "input_event_tdd_test.h"
 #include "ui_label_button.h"
-#include "root_view.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -173,7 +172,8 @@ const char BUNDLE3[] =
 "      render: function (vm) {\n"
 "        var _vm = vm || this;\n"
 "        return _c('stack', {staticClass: ['stack']}, [\n"
-"          _c('input', {'attrs': {'type': 'checkbox', 'ref': 'checkbox', 'checked': function() {return _vm.checked;}},\n"
+"          _c('input', {'attrs': {'type': 'checkbox', 'ref': 'checkbox',\n"
+"                       'checked': function() {return _vm.checked;}},\n"
 "                       'staticClass': ['checkbox'],\n"
 "                       'staticStyle': {'left': '30%',\n"
 "                                       'top': '20%'},\n"
@@ -233,7 +233,8 @@ const char BUNDLE4[] =
     "      _c('input', {'attrs': {'type': 'checkbox', 'checked': function() {return _vm.checked;}, 'ref':'checkbox'},\n"
     "                   'staticClass': ['checkbox'],\n"
     "                   'staticStyle': {'left': '40%', 'top': '10%'},\n"
-    "                   'onBubbleEvents': {'change': _vm.changeEvent, 'click': _vm.clickEvent, 'longpress': _vm.pressEvent}\n"
+    "                   'onBubbleEvents': {'change': _vm.changeEvent, 'click': _vm.clickEvent,\n"
+    "                                      'longpress': _vm.pressEvent}\n"
     "         }),\n"
     "      _c('text', {'attrs': {'value': function() { return _vm.click; }},\n"
     "                  'staticClass': ['text'],\n"
@@ -443,13 +444,15 @@ const char BUNDLE7[] =
     "    var _vm = vm || this;\n"
     "    return _c('div', {'staticClass' : ['container']} ,[\n"
     "            _c('input', {\n"
-    "                'attrs' : {'type' : 'button','value' : 'ifStatus', 'show': function() {return _vm.buttonStatus;}, 'ref':'button'},\n"
+    "                'attrs' : {'type' : 'button','value' : 'ifStatus',\n"
+    "                'show': function() {return _vm.buttonStatus;}, 'ref':'button'},\n"
     "                'staticClass' : ['button']\n"
     "              }),\n"
     "            _c('input', {'attrs' : {'type' : 'button','value' : 'changeShow'},\n"
     "                'onBubbleEvents' : {'click' : _vm.changeButtonShow},\n"
     "                'staticClass' : ['button']}),\n"
-    "            _c('input', {'attrs' : {'type' : 'checkbox', 'show': function() { return _vm.checkboxStatus; }, 'ref': 'checkbox'},\n"
+    "            _c('input', {'attrs' : {'type' : 'checkbox', 'show': function() { return _vm.checkboxStatus; },\n"
+    "                         'ref': 'checkbox'},\n"
     "                'staticClass' : ['checkbox']}),\n"
     "            _c('input', {'attrs' : {'type' : 'button', 'value': 'show'},\n"
     "                'onBubbleEvents' : {'click' : _vm.changeCheckboxShow},\n"
@@ -651,7 +654,8 @@ const char BUNDLE10[] =
     "      _c('text', {'attrs': {'value': function() {return 'Hello ' + _vm.value;}},\n"
     "                  'staticClass': ['text']\n"
     "         }),\n"
-    "      _c('input', {'attrs': {'type': 'button', 'name': 'input1', 'value': 'button', 'checked': true, 'ref':'button'},\n"
+    "      _c('input', {'attrs': {'type': 'button', 'name': 'input1', 'value': 'button',\n"
+    "                             'checked': true, 'ref':'button'},\n"
     "                  'staticClass': ['button'],\n"
     "                  'staticStyle': {'left': '30%', 'top': '40%'},\n"
     "                  'onBubbleEvents': {'click': _vm.clickEvent, 'longpress': _vm.pressEvent}\n"
@@ -723,7 +727,7 @@ void InputEventTddTest::ClickPosition(const double xRate, const double yRate)
     Click(x, y);
 }
 
-void InputEventTddTest::LongPressPosition(const double xRate, const double yRate)
+void InputEventTddTest::LongPressPosition(const double xRate, const double yRate) const
 {
     // compute the position
     const uint8_t offset = 10;
