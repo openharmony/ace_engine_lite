@@ -18,7 +18,7 @@
 #include "ace_log.h"
 #include "acelite_config.h"
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
-#include "cmsis_os.h"
+#include "cmsis_os2.h"
 #endif
 
 namespace OHOS {
