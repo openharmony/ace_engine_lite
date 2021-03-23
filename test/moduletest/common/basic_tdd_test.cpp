@@ -191,7 +191,7 @@ void BasicTddTest::LongPressByRef(JSValue page, const char *ref, uint8_t sleepTi
     return LongPress(GetViewByRef(page, ref), sleepTicks);
 }
 
-void BasicTddTest::Click(const UIView *view, uint8_t sleepTicks)
+void BasicTddTest::Click(const UIView *view, uint8_t sleepTicks) const
 {
     if (view == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::Click]: Failed to click because view is nullptr");
@@ -203,7 +203,7 @@ void BasicTddTest::Click(const UIView *view, uint8_t sleepTicks)
     return Click(x, y, sleepTicks);
 }
 
-void BasicTddTest::LongPress(const UIView *view, uint8_t sleepTicks)
+void BasicTddTest::LongPress(const UIView *view, uint8_t sleepTicks) const
 {
     if (view == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::LongPress]: Failed to long press because view is nullptr");
