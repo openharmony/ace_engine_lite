@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 #include "basic_tdd_test.h"
-#include <cstring>
-#include <sys/prctl.h>
 #include "common/graphic_startup.h"
 #include "common/task_manager.h"
 #include "component_utils.h"
@@ -24,6 +22,8 @@
 #include "js_app_context.h"
 #include "js_app_environment.h"
 #include "root_view.h"
+#include <cstring>
+#include <sys/prctl.h>
 
 namespace OHOS {
 namespace ACELite {
@@ -160,7 +160,60 @@ void BasicTddTest::DestroyPage(JSValue page)
     JSRelease(page);
 }
 
-void BasicTddTest::Click(int16_t x, int16_t y) const
+UIView *BasicTddTest::GetViewByRef(JSValue page, const char *ref)
+{
+    JSValue refs = JSObject::Get(page, "$refs");
+    if (JSUndefined::Is(refs)) {
+        JSRelease(refs);
+        return nullptr;
+    }
+    JSValue dom = JSObject::Get(refs, ref);
+    if (JSUndefined::Is(dom)) {
+        JSRelease(refs);
+        JSRelease(dom);
+        return nullptr;
+    }
+    UIView *view = ComponentUtils::GetViewFromBindingObject(dom);
+    JSRelease(refs);
+    JSRelease(dom);
+    return view;
+}
+
+void BasicTddTest::ClickByRef(JSValue page, const char *ref, uint8_t sleepTicks)
+{
+    return Click(GetViewByRef(page, ref), sleepTicks);
+}
+
+void BasicTddTest::LongPressByRef(JSValue page, const char *ref, uint8_t sleepTicks)
+{
+    return LongPress(GetViewByRef(page, ref), sleepTicks);
+}
+
+void BasicTddTest::Click(UIView *view, uint8_t sleepTicks)
+{
+    if (view == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::Click]: Failed to click because view is nullptr");
+        return;
+    }
+    Rect rect = view->GetRect();
+    int16_t x = rect.GetLeft() + rect.GetWidth() / 2;
+    int16_t y = rect.GetTop() + rect.GetHeight() / 2;
+    return Click(x, y, sleepTicks);
+}
+
+void BasicTddTest::LongPress(UIView *view, uint8_t sleepTicks)
+{
+    if (view == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::LongPress]: Failed to long press because view is nullptr");
+        return;
+    }
+    Rect rect = view->GetRect();
+    int16_t x = rect.GetLeft() + rect.GetWidth() / 2;
+    int16_t y = rect.GetTop() + rect.GetHeight() / 2;
+    return LongPress(x, y, sleepTicks);
+}
+
+void BasicTddTest::Click(int16_t x, int16_t y, uint8_t sleepTicks) const
 {
     Point point = {x, y};
     EventInjector *injector = EventInjector::GetInstance();
@@ -170,11 +223,10 @@ void BasicTddTest::Click(int16_t x, int16_t y) const
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::Click]: Failed to inject CLICK event on (%d, %d)\n", x, y);
     }
     // Waiting for tick breath.
-    const uint8_t count = 50;
-    usleep(count * TICK);
+    usleep(sleepTicks * TICK);
 }
 
-void BasicTddTest::LongPress(int16_t x, int16_t y) const
+void BasicTddTest::LongPress(int16_t x, int16_t y, uint8_t sleepTicks) const
 {
     Point point = {x, y};
     EventInjector *injector = EventInjector::GetInstance();
@@ -186,11 +238,10 @@ void BasicTddTest::LongPress(int16_t x, int16_t y) const
                     y);
     }
     // Waiting for tick breath.
-    const uint8_t count = 200;
-    usleep(count * TICK);
+    usleep(sleepTicks * TICK);
 }
 
-void BasicTddTest::Swipe(int16_t startX, int16_t startY, int16_t endX, int16_t endY) const
+void BasicTddTest::Swipe(int16_t startX, int16_t startY, int16_t endX, int16_t endY, uint8_t sleepTicks) const
 {
     Point startPoint = {startX, startY};
     Point endPoint = {endX, endY};
@@ -205,8 +256,7 @@ void BasicTddTest::Swipe(int16_t startX, int16_t startY, int16_t endX, int16_t e
     }
 
     // Waiting for tick breath.
-    const uint8_t count = 150;
-    usleep(count * TICK);
+    usleep(sleepTicks * TICK);
 }
 
 void *BasicTddTest::TickHandler(void *args)
