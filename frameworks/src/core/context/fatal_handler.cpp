@@ -17,7 +17,7 @@
 #include "ace_event_error_code.h"
 #include "ace_log.h"
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
-#include "cmsis_os.h"
+#include "cmsis_os2.h"
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "jerryscript-port-default.h"
 #include "js_fwk_common.h"
