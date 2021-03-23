@@ -69,7 +69,14 @@ bool TextComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrVa
             break;
         }
         case K_SCROLLAMOUNT: {
-            int16_t speed = IntegerOf(attrValue);
+            const uint16_t scrollAmount = IntegerOf(attrValue);
+            const uint16_t thousand = 1000;
+            if (scrollAmount > (UINT16_MAX / thousand)) {
+                HILOG_ERROR(HILOG_MODULE_ACE, "marquee speed is overflow");
+                break;
+            }
+            const uint8_t rate = 85;
+            uint16_t speed = scrollAmount * thousand / rate;
             uiLabel_.SetRollSpeed(speed);
             break;
         }
