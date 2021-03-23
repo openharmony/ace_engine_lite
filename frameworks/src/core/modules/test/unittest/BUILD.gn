@@ -28,9 +28,21 @@ unittest("js_frameworks_test_dfx") {
   deps = ace_test_deps
 }
 
+unittest("js_frameworks_test_dialog") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "common/dialog_tdd_test.cpp",
+  ]
+  deps = ace_test_deps
+}
+
 group("modules_unittest") {
   deps = [
     ":js_frameworks_test_dfx",
+    ":js_frameworks_test_dialog",
     "$presets_unittest_root:js_frameworks_test_date_time",
     "$presets_unittest_root:js_frameworks_test_number_format",
   ]
