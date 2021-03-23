@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 #include "basic_tdd_test.h"
+#include <cstring>
+#include <sys/prctl.h>
 #include "common/graphic_startup.h"
 #include "common/task_manager.h"
 #include "component_utils.h"
@@ -22,8 +24,6 @@
 #include "js_app_context.h"
 #include "js_app_environment.h"
 #include "root_view.h"
-#include <cstring>
-#include <sys/prctl.h>
 
 namespace OHOS {
 namespace ACELite {
@@ -38,6 +38,8 @@ bool BasicTddTest::isTickTaskRunning_ = false;
 // 10ms a tick
 constexpr uint16_t TICK = 10000;
 constexpr uint32_t SWIPE_TIME = 100;
+
+constexpr uint8_t NUMBER_TWO = 2;
 
 void BasicTddTest::SetUpTestCase(void)
 {
@@ -160,7 +162,7 @@ void BasicTddTest::DestroyPage(JSValue page)
     JSRelease(page);
 }
 
-UIView *BasicTddTest::GetViewByRef(JSValue page, const char *ref)
+UIView *BasicTddTest::GetViewByRef(JSValue page, const char *ref) const
 {
     JSValue refs = JSObject::Get(page, "$refs");
     if (JSUndefined::Is(refs)) {
@@ -179,37 +181,37 @@ UIView *BasicTddTest::GetViewByRef(JSValue page, const char *ref)
     return view;
 }
 
-void BasicTddTest::ClickByRef(JSValue page, const char *ref, uint8_t sleepTicks)
+void BasicTddTest::ClickByRef(JSValue page, const char *ref, uint8_t sleepTicks) const
 {
     return Click(GetViewByRef(page, ref), sleepTicks);
 }
 
-void BasicTddTest::LongPressByRef(JSValue page, const char *ref, uint8_t sleepTicks)
+void BasicTddTest::LongPressByRef(JSValue page, const char *ref, uint8_t sleepTicks) const
 {
     return LongPress(GetViewByRef(page, ref), sleepTicks);
 }
 
-void BasicTddTest::Click(UIView *view, uint8_t sleepTicks)
+void BasicTddTest::Click(const UIView *view, uint8_t sleepTicks)
 {
     if (view == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::Click]: Failed to click because view is nullptr");
         return;
     }
     Rect rect = view->GetRect();
-    int16_t x = rect.GetLeft() + rect.GetWidth() / 2;
-    int16_t y = rect.GetTop() + rect.GetHeight() / 2;
+    int16_t x = rect.GetLeft() + rect.GetWidth() / NUMBER_TWO;
+    int16_t y = rect.GetTop() + rect.GetHeight() / NUMBER_TWO;
     return Click(x, y, sleepTicks);
 }
 
-void BasicTddTest::LongPress(UIView *view, uint8_t sleepTicks)
+void BasicTddTest::LongPress(const UIView *view, uint8_t sleepTicks)
 {
     if (view == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::LongPress]: Failed to long press because view is nullptr");
         return;
     }
     Rect rect = view->GetRect();
-    int16_t x = rect.GetLeft() + rect.GetWidth() / 2;
-    int16_t y = rect.GetTop() + rect.GetHeight() / 2;
+    int16_t x = rect.GetLeft() + rect.GetWidth() / NUMBER_TWO;
+    int16_t y = rect.GetTop() + rect.GetHeight() / NUMBER_TWO;
     return LongPress(x, y, sleepTicks);
 }
 

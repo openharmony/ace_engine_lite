@@ -215,17 +215,13 @@ HWTEST_F(DataBindingTddTest, StyleBindingTest002, TestSize.Level1)
     JSValue page = CreatePage(BUNDLE_OF_STYLE_BINDING, strlen(BUNDLE_OF_STYLE_BINDING));
     UILabel *label = reinterpret_cast<UILabel *>(GetViewByRef(page, "text"));
     EXPECT_TRUE(label != nullptr);
-    constexpr int64_t COLOR_FULL_BLACK = 0xff000000;
-    constexpr int64_t COLOR_FULL_RED = 0xffff0000;
-    constexpr int64_t COLOR_FULL_GREEN = 0xff00ff00;
-    constexpr int64_t COLOR_FULL_BLUE = 0xff0000ff;
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), COLOR_FULL_BLACK);
+    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff000000);
     ClickByRef(page, "redBgColorBtn");
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), COLOR_FULL_RED);
+    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xffff0000);
     ClickByRef(page, "greenBgColorBtn");
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), COLOR_FULL_GREEN);
+    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff00ff00);
     ClickByRef(page, "blueBgColorBtn");
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), COLOR_FULL_BLUE);
+    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff0000ff);
     DestroyPage(page);
     TDD_CASE_END();
 }

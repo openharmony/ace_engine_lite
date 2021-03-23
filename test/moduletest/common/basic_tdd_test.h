@@ -49,11 +49,11 @@ protected:
     JSValue RunJS(const char *bundle, const uint32_t size) const;
     JSValue CreatePage(const char *bundle, const uint32_t size);
     void DestroyPage(JSValue page);
-    UIView *GetViewByRef(JSValue page, const char *ref);
-    void ClickByRef(JSValue page, const char *ref, uint8_t sleepTicks = 50);
-    void LongPressByRef(JSValue page, const char *ref, uint8_t sleepTicks = 200);
-    void Click(UIView *view, uint8_t sleepTicks = 50);
-    void LongPress(UIView *view, uint8_t sleepTicks = 200);
+    UIView *GetViewByRef(JSValue page, const char *ref) const;
+    void ClickByRef(JSValue page, const char *ref, uint8_t sleepTicks = 50) const;
+    void LongPressByRef(JSValue page, const char *ref, uint8_t sleepTicks = 200) const;
+    void Click(const UIView *view, uint8_t sleepTicks = 50) const;
+    void LongPress(const UIView *view, uint8_t sleepTicks = 200) const;
     void Click(int16_t x, int16_t y, uint8_t sleepTicks = 50) const;
     void LongPress(int16_t x, int16_t y, uint8_t sleepTicks = 200) const;
     void Swipe(int16_t startX, int16_t startY, int16_t endX, int16_t endY, uint8_t sleepTicks = 150) const;
