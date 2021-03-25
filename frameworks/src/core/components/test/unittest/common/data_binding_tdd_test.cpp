@@ -186,11 +186,7 @@ void DataBindingTddTest::RunTests()
     StyleBindingTest002();
 }
 
-/**
- * @tc.name: AttrBindingTest001
- * @tc.desc: test the attribute data binding
- */
-HWTEST_F(DataBindingTddTest, AttrBindingTest001, TestSize.Level1)
+void DataBindingTddTest::AttrBindingTest001()
 {
     TDD_CASE_BEGIN();
     JSValue page = CreatePage(BUNDLE_OF_ATTR_BINDING, strlen(BUNDLE_OF_ATTR_BINDING));
@@ -205,11 +201,7 @@ HWTEST_F(DataBindingTddTest, AttrBindingTest001, TestSize.Level1)
     TDD_CASE_END();
 }
 
-/**
- * @tc.name: StyleBindingTest002
- * @tc.desc: test the style data binding
- */
-HWTEST_F(DataBindingTddTest, StyleBindingTest002, TestSize.Level1)
+void DataBindingTddTest::StyleBindingTest002()
 {
     TDD_CASE_BEGIN();
     JSValue page = CreatePage(BUNDLE_OF_STYLE_BINDING, strlen(BUNDLE_OF_STYLE_BINDING));
@@ -225,5 +217,25 @@ HWTEST_F(DataBindingTddTest, StyleBindingTest002, TestSize.Level1)
     DestroyPage(page);
     TDD_CASE_END();
 }
+
+#ifdef TDD_ASSERTIONS
+/**
+ * @tc.name: AttrBindingTest001
+ * @tc.desc: test the attribute data binding
+ */
+HWTEST_F(DataBindingTddTest, AttrBindingTest001, TestSize.Level1)
+{
+    DataBindingTddTest::AttrBindingTest001();
+}
+
+/**
+ * @tc.name: StyleBindingTest002
+ * @tc.desc: test the style data binding
+ */
+HWTEST_F(DataBindingTddTest, StyleBindingTest002, TestSize.Level1)
+{
+    DataBindingTddTest::StyleBindingTest002();
+}
+#endif
 } // namespace ACELite
 } // namespace OHOS
