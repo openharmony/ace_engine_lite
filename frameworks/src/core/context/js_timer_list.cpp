@@ -22,7 +22,7 @@
 
 namespace OHOS {
 namespace ACELite {
-jerry_value_t TimerList::AddTimer(timerHandle_t timerId, Arguments *&args)
+jerry_value_t TimerList::AddTimer(timerHandle_t timerId, Arguments *&arg)
 {
     TimerNode *timer = static_cast<TimerNode *>(ace_malloc(sizeof(TimerNode)));
     if (timer == nullptr) {
