@@ -63,7 +63,7 @@ public:
         struct TimerNode *next;
     };
 
-    jerry_value_t AddTimer(timerHandle_t timerId, Arguments *&arguments);
+    jerry_value_t AddTimer(timerHandle_t timerId, Arguments *&arg);
 
     TimerNode* GetTimer(uint8_t id);
 
