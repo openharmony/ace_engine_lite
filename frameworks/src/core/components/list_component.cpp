@@ -136,6 +136,7 @@ void ListComponent::OnViewAttached()
     ConstrainedParameter listParameter;
     GetConstrainedParam(listParameter);
     adapter_.UpdateContentAlignParam(listParameter);
+    adapter_.SetDirection(list_.GetDirection());
     // Step4. add children to list dynamically.
     list_.SetAdapter(&adapter_);
 }

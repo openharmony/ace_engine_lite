@@ -200,6 +200,18 @@ public:
      */
     const Dimension &GetDimension(uint16_t keyNameId) const;
 
+    void SetWidth(const int16_t width)
+    {
+        width_.type = DimensionType::TYPE_PIXEL;
+        width_.value.pixel = width;
+    }
+
+    void SetHeight(const int16_t height)
+    {
+        height_.type = DimensionType::TYPE_PIXEL;
+        height_.value.pixel = height;
+    }
+
 protected:
     void SetComponentName(uint16_t name)
     {
