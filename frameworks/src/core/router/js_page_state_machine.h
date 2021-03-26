@@ -60,10 +60,10 @@ public:
     ACE_DISALLOW_COPY_AND_MOVE(StateMachine);
     StateMachine();
     ~StateMachine();
-    bool Init(jerry_value_t object, jerry_value_t &msg);
+    bool Init(jerry_value_t object, jerry_value_t &jsRes);
     void ChangeState(int newState);
     void BindParameters();
-    bool BindUri(jerry_value_t &msg);
+    bool BindUri(jerry_value_t &jsRes);
     int8_t GetCurrentState() const
     {
         return currentState_;
