@@ -16,7 +16,7 @@
 #ifdef FEATURE_COMPONENT_VIDEO
 
 #include "video_panel_image_res.h"
-#include "graphic_types.h"
+#include "gfx_utils/graphic_types.h"
 namespace OHOS {
 namespace ACELite {
 const uint8_t VIDEO_MUTED_IMAGE_ON_MAP[] = {
