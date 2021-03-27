@@ -446,7 +446,7 @@ void FeatureAbilityModule::AsyncFailCallback(void *data)
 
     FailCallbackParams *params = static_cast<FailCallbackParams *>(data);
     jerry_value_t args[ARG_LENGTH_FAIL];
-    if (params->data == nullptr || params->dataLength <= 0) {
+    if (params->data == nullptr || params->dataLength == 0) {
         args[0] = jerry_create_string(reinterpret_cast<const jerry_char_t *>(""));
     } else {
         args[0] = jerry_create_string_sz_from_utf8(static_cast<const jerry_char_t *>(params->data), params->dataLength);

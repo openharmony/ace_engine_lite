@@ -92,7 +92,7 @@ private:
     /**
      * @brief start timer task
      */
-    static jerry_value_t StartTask(TimerList::Arguments *argument, jerry_value_t time, bool repeated);
+    static jerry_value_t StartTask(TimerList::Arguments *arguments, jerry_value_t time, bool repeated);
 
     /**
      * @brief set the repeated timer

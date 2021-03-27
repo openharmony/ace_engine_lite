@@ -170,7 +170,7 @@ public:
 
     void FormatTime(uint32_t inSeconds, char* outBuffer, uint8_t bufferLength);
     void UpdatePanelTimeText(bool currentTime = true);
-    void SetCurrentPlayTimeText(int32_t progress);
+    void SetCurrentPlayTimeText(int32_t inSeconds);
     void CallJSFunctionWithOnePara(const jerry_value_t &callBackFunc, const int64_t inputValue);
 private:
     void SetVideoPanel();

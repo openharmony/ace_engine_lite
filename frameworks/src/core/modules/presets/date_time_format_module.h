@@ -112,12 +112,12 @@ private:
 
     /**
      * @brief format the time to date through locale info
-     * @param date: the time need to format
+     * @param time: the time need to format
      *        res : store the format date string
      *        resSize : the size of format result
      *        start: the start storage position in res
      */
-    void FormatDate(time_t date, char *res, const uint8_t resSize, uint8_t &start);
+    void FormatDate(time_t time, char *res, const uint8_t resSize, uint8_t &start);
 
     /**
      * @brief get the time zone, and convert local time to GMT time
@@ -154,11 +154,11 @@ private:
      * @param time the string need to format to 2-digit or remain
      *        res the string to store the format result
      *        start the start position to store format result
-     *        isDigit2 if true, format the first number to 2-digit
+     *        is2Digit if true, format the first number to 2-digit
      *                 if false remain the first digit
      * @return the next number index
      */
-    int16_t FormatDigit(const char *time, char *res, const uint8_t resSize, uint8_t &start, bool isDigit2) const;
+    int16_t FormatDigit(const char *time, char *res, const uint8_t resSize, uint8_t &start, bool is2Digit) const;
 
     void ReleaseNumArray();
 
