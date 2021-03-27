@@ -55,7 +55,7 @@ AsyncTaskManager::AsyncTaskManager()
 #endif
       uniqueTaskID_(0),
       front_(false),
-      initialized_(true)
+      initialized_(false)
 {
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
     pthread_mutex_init(&lock_, nullptr);
