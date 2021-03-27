@@ -270,9 +270,6 @@ jerry_value_t AppStyle::ConcatJerryString(jerry_value_t strA, jerry_value_t strB
             return jerry_create_null();
         }
         newStr[0] = '\0';
-    }
-
-    if (result) {
         result = MergeAnimationString(newStr, size, strtokA, strtokB);
     }
 

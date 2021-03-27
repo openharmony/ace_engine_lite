@@ -26,10 +26,9 @@
 namespace OHOS {
 namespace ACELite {
 QrcodeComponent::QrcodeComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *manager)
-    : Component(options, children, manager), qrcodeValue_(nullptr)
+    : Component(options, children, manager), qrcodeValue_(nullptr), qrcodeColor_(Color::Black()),
+      qrcodeBackGroundColor_(Color::White())
 {
-    qrcodeColor_ = Color::Black();
-    qrcodeBackGroundColor_ = Color::White();
     SetComponentName(K_QRCODE);
 }
 

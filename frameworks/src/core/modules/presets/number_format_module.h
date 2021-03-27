@@ -70,7 +70,7 @@ private:
 
     static const char *SetStyle(NumberFormatModule &numModel,
                          const jerry_value_t key,
-                         const jerry_value_t styleValue);
+                         const jerry_value_t style);
 
     void SetUsingGroup(jerry_value_t styleValue);
 

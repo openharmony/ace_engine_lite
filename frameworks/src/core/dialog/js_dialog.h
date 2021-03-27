@@ -61,8 +61,8 @@ private:
     char *title_;
     char *message_;
 
-    bool ParseButton(JSDialog *dialog,
-                     JSIValue object,
+    bool ParseButton(JSDialog *jsDialog,
+                     JSIValue buttonArrayObject,
                      JSIValue successFuncObject,
                      JSIValue completeFuncObject,
                      JSIValue context);

@@ -468,6 +468,7 @@ bool CJSONParser::PutNumOrStrValue(const char *key, cJSON item)
     if (item.type == cJSON_Number) {
         node->isNumber = true;
         node->valueIndex = item.valuedouble;
+        return true;
     }
     node->valueIndex = usedOffset_;
     return CacheStrValue(item.valuestring);
