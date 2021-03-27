@@ -86,7 +86,7 @@ void AsyncTaskManager::Init()
         return;
     }
     Task::Init();
-    initialized_ = false;
+    initialized_ = true;
 }
 
 void AsyncTaskManager::Callback()
