@@ -286,6 +286,11 @@ void ListAdapter::BuildItemViewTree(const JSValue element) const
         return;
     }
     ConstrainedParameter parentParam = uiListContentParam_;
+    if (direction_ == UIList::VERTICAL) {
+        component->SetWidth(uiListContentParam_.maxWidth);
+    } else {
+        component->SetHeight(uiListContentParam_.maxHeight);
+    }
     Component::BuildViewTree(component, nullptr, parentParam);
     component->OnViewAttached();
 }
