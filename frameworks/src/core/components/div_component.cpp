@@ -24,7 +24,7 @@ DivComponent::DivComponent(jerry_value_t options,
                            jerry_value_t children,
                            AppStyleManager* styleManager)
     : Component(options, children, styleManager),
-      isSecondaryAxisAlignSet_(false)
+      isSecondaryAxisAlignSet_(false), isVerticalLayout_(false)
 {
     SetComponentName(K_DIV);
     nativeView_.SetStyle(STYLE_BACKGROUND_OPA, 0);
@@ -38,10 +38,6 @@ inline UIView *DivComponent::GetComponentRootView() const
 
 bool DivComponent::ApplyPrivateStyle(const AppStyleItem* style)
 {
-    // Set default value
-    if (!isSecondaryAxisAlignSet_) {
-        nativeView_.SetSecondaryAxisAlign(OHOS::ALIGN_START);
-    }
     uint16_t stylePropNameId = GetStylePropNameId(style);
     if (!KeyParser::IsKeyValid(stylePropNameId)) {
         return false;
@@ -58,6 +54,7 @@ bool DivComponent::ApplyPrivateStyle(const AppStyleItem* style)
             switch (valueId) {
                 case K_COLUMN:
                     nativeView_.SetLayoutDirection(LAYOUT_VER);
+                    isVerticalLayout_ = true;
                     break;
                 case K_ROW:
                     nativeView_.SetLayoutDirection(LAYOUT_HOR);
@@ -152,6 +149,31 @@ void DivComponent::AttachView(const Component *child)
 {
     if (child == nullptr) {
         return;
+    }
+    if (!isSecondaryAxisAlignSet_) {
+        ConstrainedParameter param;
+        child->GetConstrainedParam(param);
+        DimensionType type;
+        Component *component = const_cast<Component *>(child);
+        if (isVerticalLayout_) {
+            type = child->GetDimension(K_WIDTH).type;
+            if (type == DimensionType::TYPE_UNKNOWN) {
+                const int16_t width = this->GetWidth();
+                component->SetWidth(width);
+                param.maxWidth = width;
+                component->AlignDimensions(param);
+                child->AdaptBoxSizing();
+            }
+        } else {
+            type = child->GetDimension(K_HEIGHT).type;
+            if (type == DimensionType::TYPE_UNKNOWN) {
+                const int16_t height = this->GetHeight();
+                component->SetHeight(height);
+                param.maxHeight = height;
+                component->AlignDimensions(param);
+                child->AdaptBoxSizing();
+            }
+        }
     }
     nativeView_.Add(child->GetComponentRootView());
 }

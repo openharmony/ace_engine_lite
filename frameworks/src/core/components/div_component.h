@@ -39,6 +39,7 @@ protected:
 
 private:
     bool isSecondaryAxisAlignSet_;
+    bool isVerticalLayout_;
     FlexLayout nativeView_;
 };
 } // namespace ACELite
