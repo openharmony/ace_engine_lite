@@ -109,8 +109,6 @@ bool SliderComponent::ApplyPrivateStyle(const AppStyleItem *style)
             if (!GetStyleColorValue(style, color, alpha)) {
                 return false;
             }
-            sliderView_.SetKnobStyle(STYLE_BACKGROUND_COLOR, GetRGBColor(color).full);
-            sliderView_.SetKnobStyle(STYLE_BACKGROUND_OPA, alpha);
             break;
         }
         case K_LEFT: {
@@ -146,17 +144,7 @@ void SliderComponent::PostUpdate(uint16_t attrKeyId)
             break;
         case K_HEIGHT:
         case K_WIDTH: {
-            int16_t visibleHeight = GetHeight();
-            int16_t visibleWidth = GetWidth();
-            sliderView_.SetHeight(visibleHeight);
-            sliderView_.SetWidth(visibleWidth);
-            if (direction_ == UISlider::Direction::DIR_BOTTOM_TO_TOP) {
-                sliderView_.SetValidWidth(SLIDER_WIDTH);
-                sliderView_.SetValidHeight(visibleHeight - KNOB_WIDTH);
-            } else {
-                sliderView_.SetValidHeight(SLIDER_WIDTH);
-                sliderView_.SetValidWidth(visibleWidth - KNOB_WIDTH);
-            }
+            SetWidthAndHeight();
             sliderView_.Invalidate();
             break;
         }
@@ -182,24 +170,11 @@ void SliderComponent::OnViewAttached()
     sliderView_.SetDirection(direction_);
     sliderView_.SetPosition(startPosition_.x, startPosition_.y);
     sliderView_.SetRange(maxValue_, minValue_);
-    int16_t visibleHeight = GetHeight();
-    int16_t visibleWidth = GetWidth();
-    sliderView_.SetHeight(visibleHeight);
-    sliderView_.SetWidth(visibleWidth);
-    if (direction_ == UISlider::Direction::DIR_BOTTOM_TO_TOP) {
-        sliderView_.SetValidWidth(SLIDER_WIDTH);
-        sliderView_.SetValidHeight(visibleHeight - KNOB_WIDTH);
-    } else {
-        sliderView_.SetValidHeight(SLIDER_WIDTH);
-        sliderView_.SetValidWidth(visibleWidth - KNOB_WIDTH);
-    }
-    sliderView_.SetKnobWidth(KNOB_WIDTH);
-    sliderView_.SetSliderRadius(DEFAULT_BORDER_RADIUS, DEFAULT_BORDER_RADIUS, KNOB_RADIUS);
+    SetWidthAndHeight();
     sliderView_.SetBackgroundStyle(STYLE_LINE_CAP, CapType::CAP_ROUND);
     sliderView_.SetForegroundStyle(STYLE_LINE_CAP, CapType::CAP_ROUND);
     sliderView_.SetBackgroundStyle(STYLE_BORDER_WIDTH, 0);
     sliderView_.SetForegroundStyle(STYLE_BORDER_WIDTH, 0);
-    sliderView_.SetKnobStyle(STYLE_BORDER_WIDTH, 0);
     sliderView_.SetValue(value_);
 }
 
@@ -212,6 +187,21 @@ void SliderComponent::SetDirection(const char * const directionValue)
     const char * const sliderDirectionColumn = "column";
     direction_ = (!strcmp(directionValue, sliderDirectionColumn)) ? UISlider::Direction::DIR_BOTTOM_TO_TOP
                                                                   : UISlider::Direction::DIR_LEFT_TO_RIGHT;
+}
+
+void SliderComponent::SetWidthAndHeight()
+{
+    int16_t visibleHeight = GetHeight();
+    int16_t visibleWidth = GetWidth();
+    sliderView_.SetHeight(visibleHeight);
+    sliderView_.SetWidth(visibleWidth);
+    if (direction_ == UISlider::Direction::DIR_BOTTOM_TO_TOP) {
+        sliderView_.SetValidWidth(SLIDER_WIDTH);
+        sliderView_.SetValidHeight(visibleHeight - DEFAULT_PADDING);
+    } else {
+        sliderView_.SetValidHeight(SLIDER_WIDTH);
+        sliderView_.SetValidWidth(visibleWidth - DEFAULT_PADDING);
+    }
 }
 } // namespace ACELite
 } // namespace OHOS
