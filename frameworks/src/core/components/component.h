@@ -211,6 +211,12 @@ public:
         height_.type = DimensionType::TYPE_PIXEL;
         height_.value.pixel = height;
     }
+    void GetConstrainedParam(ConstrainedParameter &param) const;
+    /**
+     * @brief This function will be called after the ApplyCommonStyle, make padding style work.
+     */
+    bool AdaptBoxSizing() const;
+    void AlignDimensions(const ConstrainedParameter &param);
 
 protected:
     void SetComponentName(uint16_t name)
@@ -436,10 +442,6 @@ protected:
     void SetBorderRadius(UIView &view, const AppStyleItem& styleItem) const;
     void SetBackgroundColor(UIView &view, const AppStyleItem& styleItem) const;
     void SetOpacity(UIView &view, const AppStyleItem &styleItem) const;
-    /**
-     * @brief GetConstrainedParam return the align parameter the children can be refer to
-     */
-    void GetConstrainedParam(ConstrainedParameter &param) const;
     void SetLeftMargin(UIView &view) const;
     void SetTopMargin(UIView &view) const;
     void SetRightMargin(UIView &view) const;
@@ -511,10 +513,6 @@ private:
      * @brief Apply combined styles into native view.
      */
     void ApplyStyles(const jerry_value_t options, Component& currentComponent) const;
-    /**
-     * @brief This function will be called after the ApplyCommonStyle, make padding style work.
-     */
-    bool AdaptBoxSizing() const;
     void ApplyAlignedPosition(UIView &uiView) const;
     void AdapteBoxRectArea(UIView &uiView) const;
     void SetVisible(UIView& view, const AppStyleItem *styleItem) const;
@@ -546,7 +544,6 @@ private:
 
     void GetDimensionFromStyle(Dimension &dimension, const AppStyleItem &styleItem) const;
     void CalculateDimensionPixel(Dimension &dimension, int16_t base) const;
-    void AlignDimensions(const ConstrainedParameter &param);
     virtual void OnDimensionsAligned() {}
 
     /**
