@@ -590,7 +590,7 @@ static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = fa
     char fullPath[PATH_MAX + 1] = {0};
 #if ((defined(__WIN32)) || (defined(__WIN64)))
     if (!PathCanonicalize(fullPath, orgFullPath)) {
-     return -1;
+        return -1;
     }
 #else
     if (realpath(orgFullPath, fullPath) == nullptr) {
