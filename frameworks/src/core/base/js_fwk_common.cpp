@@ -585,20 +585,22 @@ int32_t GetFileSize(const char * const filePath)
 static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = false)
 {
     const char *path = orgFullPath;
-// #ifndef __LITEOS_M__ // no path canonicalization on M core
-//     char fullPath[PATH_MAX + 1] = {0};
-// #if ((defined(__WIN32)) || (defined(__WIN64)))
-//     if (!PathCanonicalize(fullPath, orgFullPath)) {
-//         return -1;
-//     }
-// #else
-//     if (realpath(orgFullPath, fullPath) == nullptr) {
-//         HILOG_ERROR(HILOG_MODULE_ACE, "realpath handle failed, [%s]", orgFullPath);
-//         return -1;
-//     }
-// #endif
-//     path = fullPath;
-// #endif
+#ifndef QT_SIMULATOR
+#ifndef __LITEOS_M__ // no path canonicalization on M core
+    char fullPath[PATH_MAX + 1] = {0};
+#if ((defined(__WIN32)) || (defined(__WIN64)))
+    if (!PathCanonicalize(fullPath, orgFullPath)) {
+     return -1;
+    }
+#else
+    if (realpath(orgFullPath, fullPath) == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "realpath handle failed, [%s]", orgFullPath);
+        return -1;
+    }
+#endif
+    path = fullPath;
+#endif
+#endif
     return open(path, O_RDONLY);
 }
 

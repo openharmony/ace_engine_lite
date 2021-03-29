@@ -42,57 +42,60 @@
 #define FEATURE_TEST_IMPLEMENTATION
 #endif
 
+#ifndef QT_SIMULATOR
 /**
  * enable FeatureAbility API
  */
-//#define FEATURE_FEATURE_ABILITY_MODULE
+#define FEATURE_FEATURE_ABILITY_MODULE
 
 /**
  * support device API for JS
  */
-//#define FEATURE_MODULE_DEVICE
+#define FEATURE_MODULE_DEVICE
 
 /**
  * support geo location API for JS
  */
-//#define FEATURE_MODULE_GEO
+#define FEATURE_MODULE_GEO
 
 /**
  * support sensor API for JS
  */
-//#define FEATURE_MODULE_SENSOR
+#define FEATURE_MODULE_SENSOR
 
 /**
  * support brightness API for JS
  */
-//#define FEATURE_MODULE_BRIGHTNESS
+#define FEATURE_MODULE_BRIGHTNESS
 
 /**
  * support battery API for JS
  */
-//#define FEATURE_MODULE_BATTERY
+#define FEATURE_MODULE_BATTERY
 
 /**
  * support configuration API for JS
  */
-//#define FEATURE_MODULE_CONFIGURATION
+#define FEATURE_MODULE_CONFIGURATION
 
 /**
  * timer module
  */
-//#define FEATURE_TIMER_MODULE
+#define FEATURE_TIMER_MODULE
 
 /**
  * support storage API for JS
  */
-//#define FEATURE_MODULE_STORAGE
+#define FEATURE_MODULE_STORAGE
+
 
 /**
  * localization module
  */
-//#define FEATURE_LOCALIZATION_MODULE
+#define FEATURE_LOCALIZATION_MODULE
+#endif
 
-#define CHANGE_START_PAGE
+#define FEATURE_CUSTOM_ENTRY_PAGE
 
 /**
  * module require test
@@ -123,8 +126,11 @@
 
 #ifdef _WIN32
 // support memory analysis, only on win
-//#define SIMULATOR_MEMORY_ANALYSIS
+#ifndef QT_SIMULATOR
+#define SIMULATOR_MEMORY_ANALYSIS
 #endif
+#endif
+
 
 #ifdef _WIN32
 #define PROFILER_ENABLE_FLAG_FILE "..\\profiler_enable"

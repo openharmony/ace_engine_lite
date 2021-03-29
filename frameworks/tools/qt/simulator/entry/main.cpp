@@ -19,7 +19,8 @@ int main(int argc, char* argv[])
     jsDebuggerConfig.snapshotMode = false;
     jsDebuggerConfig.heapSize = 64*1024;
     OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
-    jsAbility.Launch("D:\\app\\default","MyApplication",0);
+    jsAbility.Launch("D:\\app\\div","MyApplication",0);
+    jsAbility.Show();
     OHOS::MainWidget mainWidget;
     mainWidget.resize(OHOS::HORIZONTAL_RESOLUTION, OHOS::VERTICAL_RESOLUTION);
     mainWidget.show();
