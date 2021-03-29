@@ -40,12 +40,11 @@ protected:
 
 private:
     static const int16_t DEFAULT_VALUE = 100;
-    static const int8_t SLIDER_WIDTH = 5;          // default slider width
-    static const int8_t KNOB_WIDTH = 18;           // default knob width
-    static const int8_t KNOB_RADIUS = 10;          // default knob radius
-    static const int8_t DEFAULT_BORDER_RADIUS = 0; // default border radius
+    static const int8_t SLIDER_WIDTH = 104;          // default slider visible width
+    static const int8_t DEFAULT_PADDING = 32;           // default padding
     void SetKnobValue(jerry_value_t attrValue);
     void SetDirection(const char * const directionValue);
+    void SetWidthAndHeight();
     int16_t minValue_;
     int16_t maxValue_;
     int16_t value_;
