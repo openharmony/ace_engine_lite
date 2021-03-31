@@ -22,7 +22,7 @@
 #include "js_app_context.h"
 #include "js_app_environment.h"
 #include "js_fwk_common.h"
-#include "style.h"
+#include "gfx_utils/style.h"
 #include "ui_label_button.h"
 #include "ui_view.h"
 
