@@ -58,14 +58,14 @@ public:
      *
      * @brief Call this function to active the application UI
      */
-    void Show() const;
+    void Show();
 
     /**
      * @fn JSAbility::Hide()
      *
      * @brief Call this function to move the current JS application to background
      */
-    void Hide() const;
+    void Hide();
 
     /**
      * @fn JSAbility::TransferToDestroy()
@@ -96,6 +96,13 @@ public:
     void ForceDestroy();
 
     /**
+     * @fn JSAbility::IsRecycled()
+     *
+     * @brief Used for checking if the current ability is already teardown
+     */
+    bool IsRecycled();
+
+    /**
      * @fn JSAbility::HandleRenderTick()
      *
      * @brief Call the render tick if it's set
@@ -111,7 +118,8 @@ public:
 
 private:
     // the holder of JS runtime and user' JS related environment
-    void *jsAbilityImpl_;
+    void *jsAbilityImpl_ = nullptr;
+    bool isActived_ = false;
 }; // class JSAbility
 } // namespace ACELite
 } // namespace OHOS
