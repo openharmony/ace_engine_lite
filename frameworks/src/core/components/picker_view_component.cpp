@@ -149,6 +149,7 @@ bool PickerViewComponent::CreateTextPicker()
         HILOG_ERROR(HILOG_MODULE_ACE, "PickerViewComponent: create text picker failed!");
         return false;
     }
+    uiPicker->SetLoopState(true);
     textPickerListener_ = new TextPickerListener();
     if (textPickerListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "PickerViewComponent: create text picker listener failed!");
@@ -168,6 +169,9 @@ bool PickerViewComponent::CreateTimePicker()
         HILOG_ERROR(HILOG_MODULE_ACE, "PickerViewComponent: create time picker failed");
         return false;
     }
+    uiTimePicker->SetLoopState(uiTimePicker->PICKER_HOUR, true);
+    uiTimePicker->SetLoopState(uiTimePicker->PICKER_MIN, true);
+    uiTimePicker->SetLoopState(uiTimePicker->PICKER_SEC, true);
     timePickerListener_ = new TimePickerListener();
     if (timePickerListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "PickerViewComponent: create time picker listener failed");
