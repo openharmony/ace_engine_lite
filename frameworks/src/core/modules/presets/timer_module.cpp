@@ -206,7 +206,6 @@ void TimerModule::Task(void *arguments)
 #ifndef TARGET_SIMULATOR
 void TimerModule::Execute(void *data)
 {
-    printf("-------start sync timer work----------\n");
     uint8_t* timerId = static_cast<uint8_t*>(data);
     if (timerId == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "timer index is invalid");
