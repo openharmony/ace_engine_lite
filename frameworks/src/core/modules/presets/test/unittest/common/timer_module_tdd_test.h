@@ -18,7 +18,6 @@
 #include "basic_tdd_test.h"
 #include "test_common.h"
 
-#ifdef FEATURE_TIMER_MODULE_TDD_TEST
 namespace OHOS {
 namespace ACELite {
 class TimerModuleTddTest : public BasicTddTest {
@@ -51,5 +50,4 @@ public:
 };
 }
 }
-#endif
 #endif

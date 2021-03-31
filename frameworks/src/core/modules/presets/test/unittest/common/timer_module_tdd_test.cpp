@@ -16,7 +16,6 @@
 #include "timer_module_tdd_test.h"
 #include "js_fwk_common.h"
 
-#ifdef FEATURE_TIMER_MODULE_TDD_TEST
 namespace OHOS {
 namespace ACELite {
 const char SET_TIMEOUT_001[] =
@@ -629,7 +628,7 @@ char *TimerModuleTddTest::TriggerTimer(const double xRate,
     const uint16_t centerX = GetHorizontalResolution() * xRate + offset;
     const uint16_t centerY = GetVerticalResolution() * yRate + offset;
     Click(centerX, centerY);
-    sleep(sleepTime);
+    sleep(sleepSeconds);
     if (!JSObject::Has(page, "value")) {
         return nullptr;
     }
@@ -1030,4 +1029,3 @@ void TimerModuleTddTest::RunTests()
 #endif
 }
 }
-#endif
