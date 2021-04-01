@@ -195,9 +195,18 @@ void JSAbility::HandleRenderTick()
     if (!isActived_) {
         // skip the TE tick if we are not forground
         ProductAdapter::NotifyRenderEnd();
-        HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not actived");
+        errorTickCount_++;
+        if (errorTickCount_ %  ERR_TICK_COUNT_TRACE_CTRL == 1) {
+            HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not actived, count[%d]", errorTickCount_);
+        }
+        if (errorTickCount_ == UINT32_MAX) {
+            errorTickCount_ = 0;
+        }
         return;
     }
+
+    // reset error tick tracing count
+    errorTickCount_ = 0;
 
 #if defined(TARGET_SIMULATOR) && defined(FEATURE_LAZY_LOADING_MODULE)
     LazyLoadHandleRenderTick(nullptr);
