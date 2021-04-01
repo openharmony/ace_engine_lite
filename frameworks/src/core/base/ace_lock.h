@@ -48,11 +48,12 @@ private:
 // Usage: declare LockType lock inadvance, and declare AutoLockGuard(lock) in the target locking scope.
 class AutoLockGuard final : public MemoryHeap {
 public:
-    AutoLockGuard(LockType &lock);
+    ACE_DISALLOW_COPY_AND_MOVE(AutoLockGuard);
+    explicit AutoLockGuard(LockType &lock);
     ~AutoLockGuard();
 
 private:
-    LockType *lock_ = nullptr;
+    LockType &lock_;
 };
 } // namespace ACELite
 } // namespace OHOS

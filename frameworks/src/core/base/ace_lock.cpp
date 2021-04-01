@@ -53,13 +53,11 @@ void LockType::Unlock()
 #endif
 }
 
-AutoLockGuard::AutoLockGuard(LockType &lock)
+AutoLockGuard::AutoLockGuard(LockType &lock) : lock_(lock)
 {
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
-    lock_ = &lock;
-    lock_->Lock();
+    lock_.Lock();
 #elif (defined(__LITEOS_M__) || defined(OHOS_ACELITE_PRODUCT_WATCH))
-    (void)(lock);
     LOS_TaskLock();
 #endif
 }
@@ -67,7 +65,7 @@ AutoLockGuard::AutoLockGuard(LockType &lock)
 AutoLockGuard::~AutoLockGuard()
 {
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
-    lock_->Unlock();
+    lock_.Unlock();
 #elif (defined(__LITEOS_M__) || defined(OHOS_ACELITE_PRODUCT_WATCH))
     LOS_TaskUnlock();
 #endif
