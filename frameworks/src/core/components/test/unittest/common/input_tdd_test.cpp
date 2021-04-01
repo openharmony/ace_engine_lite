@@ -433,7 +433,7 @@ void InputTddTest::ComponentInputStyleTest07Extra()
      * @tc.steps:step4.set the attribute marginButtom 10
      * @tc.expected:step4.the attribute of marginButton 10
      */
-     const uint8_t marginValue = 10;
+    const uint8_t marginValue = 10;
     JerrySetNumberProperty(styleObj_, "marginButtom", marginValue);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
@@ -622,8 +622,10 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest10, TestSize.Level1)
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
     UICheckBox *checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
-    EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetStyle(STYLE_MARGIN_LEFT) == marginValue) && (checkbox->GetStyle(STYLE_MARGIN_RIGHT) == marginValue) &&
-                (checkbox->GetStyle(STYLE_MARGIN_TOP) == marginValue) && (checkbox->GetStyle(STYLE_MARGIN_BOTTOM) == marginValue));
+    EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetStyle(STYLE_MARGIN_LEFT) == marginValue) &&
+                (checkbox->GetStyle(STYLE_MARGIN_RIGHT) == marginValue) &&
+                (checkbox->GetStyle(STYLE_MARGIN_TOP) == marginValue) &&
+                (checkbox->GetStyle(STYLE_MARGIN_BOTTOM) == marginValue));
     component->Release();
     delete component;
     component = nullptr;
