@@ -20,12 +20,16 @@
 
 namespace OHOS {
 namespace ACELite {
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+LockType::LockType() : mutext_(PTHREAD_MUTEX_INITIALIZER), mutexInited_(0)
+{
+    mutexInited_ = pthread_mutex_init(&mutex_, nullptr);
+}
+#else
 LockType::LockType() : mutexInited_(0)
 {
-#if (defined(__LINUX__) || defined(__LITEOS_A__))
-    mutexInited_ = pthread_mutex_init(&mutex_, nullptr);
-#endif
 }
+#endif
 
 LockType::~LockType()
 {

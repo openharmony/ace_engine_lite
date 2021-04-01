@@ -41,7 +41,7 @@ private:
     pthread_mutex_t mutex_;
 #endif
     // the mutex initialization result, 0 means success
-    int mutexInited_ = 0;
+    int mutexInited_;
 };
 
 // The automatic lock and unlock wrapper binding with the scope.
