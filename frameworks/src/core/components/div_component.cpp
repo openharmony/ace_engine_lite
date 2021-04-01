@@ -38,6 +38,10 @@ inline UIView *DivComponent::GetComponentRootView() const
 
 bool DivComponent::ApplyPrivateStyle(const AppStyleItem* style)
 {
+    // Set default value
+    if (!isSecondaryAxisAlignSet_) {
+        nativeView_.SetSecondaryAxisAlign(OHOS::ALIGN_START);
+    }
     uint16_t stylePropNameId = GetStylePropNameId(style);
     if (!KeyParser::IsKeyValid(stylePropNameId)) {
         return false;
