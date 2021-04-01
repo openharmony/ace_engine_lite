@@ -87,7 +87,6 @@
  */
 #define FEATURE_MODULE_STORAGE
 
-
 /**
  * localization module
  */
@@ -126,7 +125,6 @@
 // support memory analysis, only on win
 #define SIMULATOR_MEMORY_ANALYSIS
 #endif
-
 
 #ifdef _WIN32
 #define PROFILER_ENABLE_FLAG_FILE "..\\profiler_enable"
