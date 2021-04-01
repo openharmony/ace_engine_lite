@@ -128,13 +128,13 @@ SOURCES += \
         ../../../../src/core/wrapper/js.cpp \
         ../../../../targets/platform_adapter.cpp \
         #../../../../src/core/modules/presets/feature_ability_module.cpp \
-    ../../../../targets/simulator/mock/AsyncWorkManager.cpp \
-    ../../../../targets/simulator/mock/HalSysParam.cpp \
-    ../../../../targets/simulator/mock/JsAsyncWork.cpp
+        targets/simulator/mock/async_work_manager.cpp \
+        targets/simulator/mock/hal_sys_param.cpp \
+        targets/simulator/mock/js_async_work.cpp
 
 HEADERS += \
         ../../../../../../../../foundation/graphic/ui/interfaces/kits/components/ui_view.h \
-    ../../../../targets/simulator/mock/AsyncWorkManager.h
+        targets/simulator/mock/async_work_manager.h
 
 
 INCLUDEPATH += \
@@ -185,8 +185,8 @@ INCLUDEPATH += \
             ../../../../src/core/stylemgr \
             ../../../../src/core/wrapper \
             ../../../../targets \
-            ../../../../targets/simulator \
-            ../../../../targets/simulator/mock \
+            targets/simulator \
+            targets/simulator/mock \
             ../../../../../../../../kernel/liteos_a/kernel/include/ \
             ../../../../../../../../kernel/liteos_a/kernel/common \
             ../../../../../../../../third_party/jerryscript/jerry-core/include \

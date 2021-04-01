@@ -42,6 +42,7 @@
 #define FEATURE_TEST_IMPLEMENTATION
 #endif
 
+#ifndef QT_SIMULATOR
 /**
  * enable FeatureAbility API
  */
@@ -92,6 +93,7 @@
  * localization module
  */
 #define FEATURE_LOCALIZATION_MODULE
+#endif
 
 #define FEATURE_CUSTOM_ENTRY_PAGE
 
@@ -124,7 +126,9 @@
 
 #ifdef _WIN32
 // support memory analysis, only on win
+#ifndef QT_SIMULATOR
 #define SIMULATOR_MEMORY_ANALYSIS
+#endif
 #endif
 
 
