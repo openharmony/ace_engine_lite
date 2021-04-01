@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
 #ifndef OHOS_ACELITE_CONFIG_H
 #define OHOS_ACELITE_CONFIG_H
 

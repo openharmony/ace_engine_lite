@@ -16,7 +16,6 @@
 #include "js_async_work.h"
 #include "async_work_manager.h"
 
-
 using namespace OHOS::ACELite;
 
 bool JsAsyncWork::DispatchAsyncWork(AsyncWorkHandler workHandler, void *data)

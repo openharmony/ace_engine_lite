@@ -8,7 +8,7 @@
 
 2、打开工程
 
-​    打开QT Creator，依次点击 文件----打开文件和项目，在弹出的文件选择框中选择工程项目（工程项目路径：\foundation\ace\ace_engine_lite\frameworks\tools\qt\simulator\simulator.pro）。第一次打开项目时，需要在Configure Project界面的kits列表中勾选minGW，然后点击configure project按钮加载工程。
+​    打开QT Creator，依次点击 文件----打开文件和项目，在弹出的文件选择框中选择工程项目（工程项目路径：\foundation\ace\ace_engine_lite\frameworks\tools\qt\simulator\simulator.pro）。第一次打开项目时，需要在Configure Project界面的kits列表中勾选minGW（仅勾选minGW），然后点击configure project按钮加载工程。
 
 3、设置JS bundle路径
 
