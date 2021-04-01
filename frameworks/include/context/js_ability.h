@@ -119,6 +119,10 @@ public:
 private:
     // the holder of JS runtime and user' JS related environment
     void *jsAbilityImpl_ = nullptr;
+    // tracking the error render tick count
+    uint32_t errorTickCount_ = 0;
+    // to avoid tracing too frequently, output every 5 ticks
+    static constexpr uint8_t ERR_TICK_COUNT_TRACE_CTRL = 5;
     bool isActived_ = false;
 }; // class JSAbility
 } // namespace ACELite
