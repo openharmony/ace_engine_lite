@@ -27,8 +27,7 @@ void AsyncWorkManager::ExecAllAsyncWork()
     auto tempList = workList;
     workList.clear();
     mutex.unlock();
-
-    for(auto work : tempList) {
+    for(auto work:tempList) {
         work.first(work.second);
     }
 }
@@ -43,6 +42,6 @@ void AsyncWorkManager::ClearAllAsyncWork()
 void AsyncWorkManager::AppendAsyncWork(OHOS::ACELite::AsyncWorkHandler work, void *arg)
 {
     mutex.lock();
-    workList.push_back(std::make_pair(work,arg));
+    workList.push_back(std::make_pair(work, arg));
     mutex.unlock();
 }

@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-#include <QApplication>
-#include <iostream>
 #include "graphic_startup.h"
-#include "monitor.h"
+#include <iostream>
 #include "js_ability.h"
 #include "js_debugger_config.h"
 #include "main_widget.h"
+#include "monitor.h"
+#include <QApplication>
 
 int main(int argc, char* argv[])
 {
@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
     OHOS::ACELite::DebuggerConfig jsDebuggerConfig;
     jsDebuggerConfig.startDebuggerServer = false;
     jsDebuggerConfig.snapshotMode = false;
-    jsDebuggerConfig.heapSize = 64*1024;
+    jsDebuggerConfig.heapSize = 65536; //64*1024,64kB
     OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
-    jsAbility.Launch("D:\\app\\div","MyApplication",0);
+    jsAbility.Launch("D:\\app\\div", "MyApplication", 0);
     jsAbility.Show();
     OHOS::MainWidget mainWidget;
     mainWidget.resize(OHOS::HORIZONTAL_RESOLUTION, OHOS::VERTICAL_RESOLUTION);
