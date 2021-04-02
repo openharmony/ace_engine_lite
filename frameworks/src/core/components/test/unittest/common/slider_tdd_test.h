@@ -28,7 +28,6 @@ public:
     void ComponentSliderAttributeValueTest003();
     void ComponentSliderStyleSetColorTest004();
     void ComponentSliderStyleSetSelectColorTest005();
-    void ComponentSliderStyleSetBlockColorTest006();
     void RunTests();
 };
 } // namespace ACELite
