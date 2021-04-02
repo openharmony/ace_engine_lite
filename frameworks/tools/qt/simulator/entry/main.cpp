@@ -13,13 +13,15 @@
  * limitations under the License.
  */
 
-#include "graphic_startup.h"
 #include <iostream>
+#include <QApplication>
+#include "graphic_startup.h"
 #include "js_ability.h"
 #include "js_debugger_config.h"
 #include "main_widget.h"
 #include "monitor.h"
-#include <QApplication>
+
+
 
 int main(int argc, char* argv[])
 {
