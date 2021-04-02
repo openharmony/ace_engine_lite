@@ -17,8 +17,8 @@
 #define OHOS_ACELITE_FATAL_HANDLER_H
 
 #include "component.h"
-#include "js_ability.h"
 #include "gfx_utils/list.h"
+#include "js_ability.h"
 #include "non_copyable.h"
 #include "ui_view.h"
 
