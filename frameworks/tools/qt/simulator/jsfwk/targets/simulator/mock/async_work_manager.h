@@ -16,10 +16,10 @@
 #ifndef OHOS_ACELITE_ASYNCWORK_H
 #define OHOS_ACELITE_ASYNCWORK_H
 
-#include "js_async_work.h"
 #include <list>
 #include <mutex>
 #include <utility>
+#include "js_async_work.h"
 
 class AsyncWorkManager {
 public:

@@ -27,7 +27,7 @@ void AsyncWorkManager::ExecAllAsyncWork()
     auto tempList = workList;
     workList.clear();
     mutex.unlock();
-    for(auto work:tempList) {
+    for (auto work:tempList) {
         work.first(work.second);
     }
 }

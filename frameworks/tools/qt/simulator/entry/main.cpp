@@ -21,10 +21,9 @@
 #include "main_widget.h"
 #include "monitor.h"
 
-
-
 int main(int argc, char* argv[])
 {
+    const int32_t defaultHeapSize = 65536; // 64*1024,64kB
     QApplication app(argc, argv);
     OHOS::GraphicStartUp::Init();
     OHOS::Monitor::GetInstance()->InitHal();
@@ -34,7 +33,7 @@ int main(int argc, char* argv[])
     OHOS::ACELite::DebuggerConfig jsDebuggerConfig;
     jsDebuggerConfig.startDebuggerServer = false;
     jsDebuggerConfig.snapshotMode = false;
-    jsDebuggerConfig.heapSize = 65536; //64*1024,64kB
+    jsDebuggerConfig.heapSize = defaultHeapSize;
     OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
     jsAbility.Launch("D:\\app\\div", "MyApplication", 0);
     jsAbility.Show();

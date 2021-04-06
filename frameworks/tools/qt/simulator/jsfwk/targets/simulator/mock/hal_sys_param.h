@@ -13,3 +13,7 @@
  * limitations under the License.
  */
 
+#ifndef OHOS_ACELITE_HALSYSPARAM_H
+#define OHOS_ACELITE_HALSYSPARAM_H
+#endif
+
