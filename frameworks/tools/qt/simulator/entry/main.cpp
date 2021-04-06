@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <QApplication>
+
 #include "graphic_startup.h"
 #include "js_ability.h"
 #include "js_debugger_config.h"
