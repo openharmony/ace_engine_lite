@@ -4,16 +4,15 @@ QT += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-DEFINES  -= UNICODE
-DEFINES  += QT_COMPILER
-DEFINES  += Q_OBJECT
+DEFINES -= UNICODE
+DEFINES += QT_COMPILER
+DEFINES += Q_OBJECT
 DEFINES += QT_DEPRECATED_WARNINGS
 
 JSDESTDIR = ../libs
 
 LIBS += -L$$JSDESTDIR \
         -ljsfwk \
-        #-lcjson \
         -ljerryScript
 
 # Default rules for deployment.
