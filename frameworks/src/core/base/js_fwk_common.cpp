@@ -614,6 +614,15 @@ static bool CheckFileLength(const char * const fullPath, int32_t &outFileSize)
         return false;
     }
     if (fileSize > FILE_CONTENT_LENGTH_MAX) {
+        LogString(LogLevel::LOG_LEVEL_ERR, "[JS Exception]: file ");
+        LogString(LogLevel::LOG_LEVEL_ERR, fullPath);
+        LogString(LogLevel::LOG_LEVEL_ERR, " is bigger than ");
+        const uint8_t len = 10;
+        char markdata[len];
+        const uint32_t num = 30; // calculate thresold by file type
+        if (sprintf_s(markdata, len, "%d kb.\n", num) < 0) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "init error message failed");
+        }
         ACE_ERROR_CODE_PRINT(EXCE_ACE_ROUTER_REPLACE_FAILED, EXCE_ACE_PAGE_FILE_TOO_HUGE);
         return false;
     }
