@@ -67,6 +67,7 @@ private:
 #endif
     uint16_t uniqueTaskID_;
     bool front_;
+    bool initialized_;
 };
 } // namespace ACELite
 } // namespace OHOS
