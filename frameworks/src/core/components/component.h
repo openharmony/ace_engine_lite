@@ -536,7 +536,7 @@ private:
     void CalculateDimensionPixel(Dimension &dimension, int16_t base) const;
     void AlignDimensions(const ConstrainedParameter &param);
     virtual void OnDimensionsAligned() {}
-    bool IsAttached();
+    bool IsAttached() const;
 
     /**
      * @brief SetParent assign parent node

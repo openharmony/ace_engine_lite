@@ -1723,7 +1723,7 @@ void Component::CreateDirectiveWatcher(jerry_value_t descriptor)
     }
 }
 
-bool Component::IsAttached()
+bool Component::IsAttached() const
 {
     UIView *nativeView = GetComponentRootView();
     if (nativeView == nullptr) {
