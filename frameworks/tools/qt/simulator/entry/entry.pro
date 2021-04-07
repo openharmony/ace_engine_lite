@@ -21,7 +21,11 @@ qnx: target.path =/tmp/$${TARGET}/bin
 else: unix:!android: target.path =/opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-UIDESTDIR = ../../../../../../../../foundation/graphic/ui/tools/qt/simulator
+ROOT_PATH = ../../../../../../../..
+FOUNDATION_PATH = ../../../../../../..
+ACELITE_PATH = ../../../../..
+ACELITE_FRAMEWORK_PATH = ../../../..
+UIDESTDIR = $${ROOT_PATH}/foundation/graphic/ui/tools/qt/simulator
 
 LIBS += -L$$UIDESTDIR/libs \
         -llibui \
@@ -34,41 +38,42 @@ LIBS += -L$$UIDESTDIR/libs \
         -lqrcodegen
 
 INCLUDEPATH += \
-    ../../../../../interfaces/innerkits/builtin/async \
-    ../../../../../interfaces/innerkits/builtin/base \
-    ../../../../../interfaces/innerkits/builtin/jsi \
-    ../../../../include/base \
-    ../../../../../../../graphic/utils/interfaces/innerkits \
-    ../../../../../../../graphic/utils/interfaces/kits \
-    ../../../../../../../../third_party/freetype/include \
-    ../../../../../../../graphic/ui/interfaces/innerkits \
-    ../../../../../../../graphic/ui/frameworks \
-    ../../../../../../../graphic/ui/interfaces/kits \
-    ../../../../../../../graphic/ui/interfaces/innerkits/common \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers \
-    ../../../../../../../graphic/ui/tools/qt/simulator/uitest \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/indev \
-    ../../../../targets/simulator \
-    ../../../../include/context/
+    $${ACELITE_PATH}/interfaces/innerkits/builtin/async \
+    $${ACELITE_PATH}/interfaces/innerkits/builtin/base \
+    $${ACELITE_PATH}/interfaces/innerkits/builtin/jsi \
+    $${ACELITE_FRAMEWORK_PATH}/include/base \
+    $${FOUNDATION_PATH}/graphic/utils/interfaces/innerkits \
+    $${FOUNDATION_PATH}/graphic/utils/interfaces/kits \
+    $${FOUNDATION_PATH}/../third_party/freetype/include \
+    $${FOUNDATION_PATH}/graphic/ui/interfaces/innerkits \
+    $${FOUNDATION_PATH}/graphic/ui/frameworks \
+    $${FOUNDATION_PATH}/graphic/ui/interfaces/kits \
+    $${FOUNDATION_PATH}/graphic/ui/interfaces/innerkits/common \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev \
+    $${ACELITE_FRAMEWORK_PATH}/targets/simulator \
+    $${ACELITE_FRAMEWORK_PATH}/include/context/
 
 HEADERS += \
-    ../../../../../../../graphic/ui/interfaces/innerkits/font/ui_font_vector.h \
-          ../../../../../../../graphic/ui/tools/qt/simulator/drivers/config.h \
-          ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display/gui_thread.h \
-          ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display/monitor.h \
-          ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display/task_thread.h \
-          ../../../../../../../graphic/ui/tools/qt/simulator/drivers/indev/mouse_input.h \
-          ../../../../../../../graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.h \
-    ../../../../../../../graphic/ui/tools/qt/simulator/uitest/main_widget.h \
-    ../../../../../../../graphic/ui/tools/qt/simulator/uitest/ui_mainwidget.h \
-           ../../../../include/context/js_ability.h
+    $${FOUNDATION_PATH}/graphic/ui/interfaces/innerkits/font/ui_font_vector.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/config.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/monitor.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/task_thread.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/gui_thread.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mouse_input.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.h \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/ui_mainwidget.h \
+    $${ACELITE_FRAMEWORK_PATH}/include/context/js_ability.h
 
 SOURCES += \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display/gui_thread.cpp \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display/monitor.cpp \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/display/task_thread.cpp \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/indev/mouse_input.cpp \
-    ../../../../../../../graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.cpp \
-    main.cpp \
-    ../../../../../../../graphic/ui/tools/qt/simulator/uitest/main_widget.cpp
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/gui_thread.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/monitor.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/task_thread.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mouse_input.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.cpp \
+    main.cpp
+    

@@ -6,6 +6,8 @@ CONFIG -= qt
 
 DESTDIR = ../libs
 
-HEADERS = ../../../../../../../../third_party/cJSON/cJSON.h
+ROOT_PATH = ../../../../../../../..
+
+HEADERS = $${ROOT_PATH}/third_party/cJSON/cJSON.h
 SOURCES += \
-        ../../../../../../../../third_party/cJSON/cJSON.c
+        $${ROOT_PATH}/third_party/cJSON/cJSON.c

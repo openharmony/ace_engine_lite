@@ -600,7 +600,7 @@ static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = fa
 #endif
     path = fullPath;
 #endif
-#endif
+#endif // QT_SIMULATOR
     return open(path, O_RDONLY);
 }
 
