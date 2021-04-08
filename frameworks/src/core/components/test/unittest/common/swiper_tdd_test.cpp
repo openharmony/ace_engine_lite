@@ -110,16 +110,13 @@ void SwiperTddTest::ComponentSwiperAttributeSetTest001()
         printf("ComponentSwiperAttributeSetTest001 fail\n");
     }
     EXPECT_EQ(swiperView->GetCurrentPage(), pageIndex);
-    component->Release();
     ReleaseJerryValue(indexVal, ret1, VA_ARG_END_FLAG);
 
     /**
      * @tc.steps: step3. set index = '2'; get index = 2
      */
     indexVal = jerry_create_string((const jerry_char_t *)"2");
-    ret1 = jerry_set_property(attrsObj_, indexKey, indexVal);
-    component = ComponentFactory::CreateComponent(componentKeyId_, optionsObj_, childrenObj_);
-    rootComponentMock_.RenderComponent(*component);
+    component->UpdateView(KeyParser::ParseKeyId("index"), indexVal);
     view = component->GetComponentRootView();
     swiperView = reinterpret_cast<UISwipeView *>(view);
     if (swiperView->GetCurrentPage() == pageIndex) {
