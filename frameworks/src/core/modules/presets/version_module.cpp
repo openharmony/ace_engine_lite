@@ -23,12 +23,9 @@ namespace OHOS {
 namespace ACELite {
 void VersionModule::Init()
 {
-    constexpr char FUNC_GET_VERSION[] = "getAceVersion";
-    constexpr char FUNC_GET_COMMIT[] = "getAceCommit";
-    constexpr char FUNC_GET_STAMP[] = "getAceStamp";
-    CreateNamedFunction(FUNC_GET_VERSION, GetACEVersion);
-    CreateNamedFunction(FUNC_GET_COMMIT, GetACECommit);
-    CreateNamedFunction(FUNC_GET_STAMP, GetACEBuildStamp);
+    CreateNamedFunction("getAceVersion", GetACEVersion);
+    CreateNamedFunction("getAceCommit", GetACECommit);
+    CreateNamedFunction("getAceStamp", GetACEBuildStamp);
     PrintVersionTrace();
 }
 
