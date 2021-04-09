@@ -585,6 +585,7 @@ int32_t GetFileSize(const char * const filePath)
 static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = false)
 {
     const char *path = orgFullPath;
+#ifndef QT_SIMULATOR
 #ifndef __LITEOS_M__ // no path canonicalization on M core
     char fullPath[PATH_MAX + 1] = {0};
 #if ((defined(__WIN32)) || (defined(__WIN64)))
@@ -599,6 +600,7 @@ static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = fa
 #endif
     path = fullPath;
 #endif
+#endif // QT_SIMULATOR
     return open(path, O_RDONLY);
 }
 
