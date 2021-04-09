@@ -50,6 +50,10 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest01, TestSize.Level1)
     JerrySetStringProperty(attrsObj_, "type", "checkbox");
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UICheckBox *checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
     EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetState() == UICheckBox::UNSELECTED));
     component->Release();
@@ -118,6 +122,10 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest02, TestSize.Level1)
     JerrySetStringProperty(attrsObj_, "value", "aaa");
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UILabelButton *button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
     EXPECT_TRUE((button != nullptr) && (button->GetText(), "aaa"));
     component->Release();
@@ -164,6 +172,10 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest03, TestSize.Level1)
     EXPECT_FALSE(component == nullptr);
     UILabelButton *button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
     EXPECT_FALSE(button == nullptr);
+    if (button == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     ColorType tempColor;
     tempColor.full = button->GetLabelStyle(STYLE_TEXT_COLOR);
     EXPECT_TRUE(CompareColor(tempColor, redValue));
@@ -225,6 +237,10 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest04, TestSize.Level1)
     JerrySetStringProperty(styleObj_, "textAlign", "center");
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UILabelButton *button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
     EXPECT_TRUE((button != nullptr) && (button->GetAlign() == UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER));
     component->Release();
@@ -291,6 +307,10 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest05, TestSize.Level1)
     AddBoolProperty(attrsObj_, checked, true);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UICheckBox *checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
     EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetState() == UICheckBox::SELECTED));
     component->Release();
@@ -416,8 +436,16 @@ void InputTddTest::ComponentInputStyleTest07()
     JerrySetNumberProperty(styleObj_, "marginLeft", marginLeftValue);
     component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
     EXPECT_FALSE(button == nullptr);
+    if (button == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     left = button->GetStyle(STYLE_MARGIN_LEFT);
     EXPECT_TRUE(left == marginLeftValue);
     component->Release();
@@ -433,10 +461,14 @@ void InputTddTest::ComponentInputStyleTest07Extra()
      * @tc.steps:step4.set the attribute marginButtom 10
      * @tc.expected:step4.the attribute of marginButton 10
      */
-     const uint8_t marginValue = 10;
+    const uint8_t marginValue = 10;
     JerrySetNumberProperty(styleObj_, "marginButtom", marginValue);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UILabelButton *button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
     EXPECT_TRUE((button != nullptr) && (button->GetStyle(STYLE_MARGIN_BOTTOM) == marginValue));
     component->Release();
@@ -490,8 +522,12 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest08, TestSize.Level1)
     JerrySetNumberProperty(styleObj_, "borderWidth", borderWidthValue);
     Component * component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UILabelButton *button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
-    EXPECT_TRUE((component != nullptr) && (button->GetStyle(STYLE_BORDER_WIDTH) == borderWidthValue));
+    EXPECT_TRUE((button != nullptr) && (button->GetStyle(STYLE_BORDER_WIDTH) == borderWidthValue));
     component->Release();
     delete component;
     component = nullptr;
@@ -565,6 +601,10 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest09, TestSize.Level1)
     JerrySetNumberProperty(styleObj_, "width", widthValue);
     Component * component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UICheckBox *checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
     EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetWidth() == widthValue));
     component->Release();
@@ -621,9 +661,15 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest10, TestSize.Level1)
     JerrySetNumberProperty(styleObj_, "margin", marginValue);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UICheckBox *checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
-    EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetStyle(STYLE_MARGIN_LEFT) == marginValue) && (checkbox->GetStyle(STYLE_MARGIN_RIGHT) == marginValue) &&
-                (checkbox->GetStyle(STYLE_MARGIN_TOP) == marginValue) && (checkbox->GetStyle(STYLE_MARGIN_BOTTOM) == marginValue));
+    EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetStyle(STYLE_MARGIN_LEFT) == marginValue) &&
+                (checkbox->GetStyle(STYLE_MARGIN_RIGHT) == marginValue) &&
+                (checkbox->GetStyle(STYLE_MARGIN_TOP) == marginValue) &&
+                (checkbox->GetStyle(STYLE_MARGIN_BOTTOM) == marginValue));
     component->Release();
     delete component;
     component = nullptr;
@@ -703,6 +749,10 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest11, TestSize.Level1)
     JerrySetNumberProperty(styleObj_, "borderWidth", borderWidthValue);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UICheckBox *checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
     EXPECT_TRUE((checkbox != nullptr) && (checkbox->GetStyle(STYLE_BORDER_WIDTH) == borderWidthValue));
     component->Release();
@@ -790,6 +840,10 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest12, TestSize.Level1)
     JerrySetStringProperty(attrsObj_, "name", "test");
     component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     button = reinterpret_cast<UILabelButton *>(component->GetComponentRootView());
     EXPECT_FALSE(button == nullptr);
     component->Release();
@@ -839,6 +893,10 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest13, TestSize.Level1)
     JerrySetStringProperty(attrsObj_, "name", "test");
     component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     checkbox = reinterpret_cast<UICheckBox *>(component->GetComponentRootView());
     EXPECT_FALSE(checkbox == nullptr);
     component->Release();
@@ -924,9 +982,13 @@ HWTEST_F(InputTddTest, ComponentRadioAttributeTest01, TestSize.Level1)
     AddBoolProperty(attrsObj_, "checked", true);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UIRadioButton *radio = reinterpret_cast<UIRadioButton *>(component->GetComponentRootView());
-    EXPECT_FALSE((radio == nullptr) && (radio->GetState() == UICheckBox::UICheckBoxState::SELECTED));
-component->Release();
+    EXPECT_TRUE((radio != nullptr) && (radio->GetState() == UICheckBox::UICheckBoxState::SELECTED));
+    component->Release();
     delete component;
     component = nullptr;
 
@@ -937,8 +999,12 @@ component->Release();
     AddBoolProperty(attrsObj_, "checked", false);
     component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     radio = reinterpret_cast<UIRadioButton *>(component->GetComponentRootView());
-    EXPECT_FALSE((radio == nullptr) && (radio->GetState() == UICheckBox::UICheckBoxState::UNSELECTED));
+    EXPECT_TRUE((radio != nullptr) && (radio->GetState() == UICheckBox::UICheckBoxState::UNSELECTED));
     component->Release();
     delete component;
     component = nullptr;
@@ -1039,6 +1105,10 @@ HWTEST_F(InputTddTest, ComponentRadioStyleTest04, TestSize.Level1)
     JerrySetNumberProperty(styleObj_, "width", widthVal);
     Component *component = GetRenderedComponent(K_INPUT);
     EXPECT_FALSE(component == nullptr);
+    if (component == nullptr) {
+        TDD_CASE_END();
+        return;
+    }
     UIRadioButton *radioButton = reinterpret_cast<UIRadioButton *>(component->GetComponentRootView());
     EXPECT_TRUE((radioButton != nullptr) && (radioButton->GetWidth() == widthVal));
     component->Release();
