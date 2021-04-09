@@ -15,11 +15,6 @@ LIBS += -L$$JSDESTDIR \
         -ljsfwk \
         -ljerryScript
 
-# Default rules for deployment.
-qnx: target.path =/tmp/$${TARGET}/bin
-else: unix:!android: target.path =/opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
 ROOT_PATH = ../../../../../../../..
 FOUNDATION_PATH = ../../../../../../..
 ACELITE_PATH = ../../../../..
