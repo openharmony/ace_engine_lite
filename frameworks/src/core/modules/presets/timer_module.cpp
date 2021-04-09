@@ -19,6 +19,9 @@
 #include <string.h>
 #include "ace_log.h"
 #include "ace_mem_base.h"
+#ifdef TDD_ASSERTIONS
+#include "async_task_manager.h"
+#endif
 #ifndef TARGET_SIMULATOR
 #include "js_async_work.h"
 #endif // TARGET_SIMULATOR
@@ -172,7 +175,11 @@ void TimerModule::Task(void *arguments)
         HILOG_ERROR(HILOG_MODULE_ACE, "copy timer id failed\n");
     } else {
         *index = arg->index;
+#ifdef TDD_ASSERTIONS
+        if (DISPATCH_FAILURE == AsyncTaskManager::GetInstance().Dispatch(TimerModule::Execute, index)) {
+#else
         if (!JsAsyncWork::DispatchAsyncWork(TimerModule::Execute, index)) {
+#endif
             ACE_FREE(index);
             check = false;
         }
