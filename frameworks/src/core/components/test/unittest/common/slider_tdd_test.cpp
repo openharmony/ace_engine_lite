@@ -287,67 +287,6 @@ void SliderTddTest::ComponentSliderStyleSetSelectColorTest005()
     TDD_CASE_END();
 }
 
-void SliderTddTest::ComponentSliderStyleSetBlockColorTest006()
-{
-    TDD_CASE_BEGIN();
-    /**
-     * @tc.steps: step1. set slider blockcolor value = 16711680
-     */
-    const int expectColorValue = 16711680;
-    const char* blockColorStr = "blockColor";
-    jerry_value_t blockColorKey = jerry_create_string((const jerry_char_t*)blockColorStr);
-    jerry_value_t blockColorValue = jerry_create_number(expectColorValue);
-    jerry_set_property(styleObj_, blockColorKey, blockColorValue);
-    Component* sliderComponent = reinterpret_cast<SliderComponent  *>(GetRenderedComponent(componentNameId_));
-    UISlider* uiSliderView = reinterpret_cast<UISlider *>(sliderComponent->GetComponentRootView());
-    jerry_release_value(blockColorKey);
-    jerry_release_value(blockColorValue);
-
-    /**
-     * @tc.expected: step2. check uikit sliderView blockcolor = 16711680 (red color)
-     */
-    if (uiSliderView->GetKnobStyle(STYLE_BACKGROUND_COLOR) == GetRGBColor(expectColorValue).full) {
-        printf("%s pass\n", __FUNCTION__);
-    } else {
-        printf("%s fail\n", __FUNCTION__);
-    }
-    EXPECT_EQ(uiSliderView->GetKnobStyle(STYLE_BACKGROUND_COLOR), GetRGBColor(expectColorValue).full);
-
-    /**
-     * @tc.expected: step3. update blockColor = expectColorValue2, check uikit sliderView color == expectColorValue2
-     */
-    const int32_t expectColorValue2 = 16777215;
-    UpdateNumAttributeOrStyleValue(sliderComponent, blockColorStr, expectColorValue2, false);
-    if (uiSliderView->GetKnobStyle(STYLE_BACKGROUND_COLOR) == GetRGBColor(expectColorValue2).full) {
-        printf("%s update blockColor pass\n", __FUNCTION__);
-    } else {
-        printf("%s update blockColor fail\n", __FUNCTION__);
-    }
-    EXPECT_EQ(uiSliderView->GetKnobStyle(STYLE_BACKGROUND_COLOR), GetRGBColor(expectColorValue2).full);
-
-    /**
-     * @tc.expected: step4. update blockcolor whit overflow expectColorValue3,
-     * check uikit sliderView color == expectColorValue3,
-     */
-    const int32_t expectColorValue3 = 16777216;
-    UpdateNumAttributeOrStyleValue(sliderComponent, blockColorStr, expectColorValue3, false);
-    if (uiSliderView->GetKnobStyle(STYLE_BACKGROUND_COLOR) == GetRGBColor(expectColorValue3).full) {
-        printf("%s update overflow blockColor pass\n", __FUNCTION__);
-    } else {
-        printf("%s update overflow blockColor fail\n", __FUNCTION__);
-    }
-    EXPECT_EQ(uiSliderView->GetKnobStyle(STYLE_BACKGROUND_COLOR), GetRGBColor(expectColorValue3).full);
-
-    /**
-     * @tc.expected: step5. set exceptionColorStrValue with exception value  "helloWorld",
-     *  program keep going
-     */
-    const char* expectColorStrValue = "helloWorld";
-    UpdateCharAttributeOrStyleValue(sliderComponent, blockColorStr, expectColorStrValue, false);
-
-    TDD_CASE_END();
-}
-
 void SliderTddTest::RunTests()
 {
     ComponentSliderAttributeMinTest001();
@@ -355,7 +294,6 @@ void SliderTddTest::RunTests()
     ComponentSliderAttributeValueTest003();
     ComponentSliderStyleSetColorTest004();
     ComponentSliderStyleSetSelectColorTest005();
-    ComponentSliderStyleSetBlockColorTest006();
 }
 
 #ifdef TDD_ASSERTIONS
@@ -409,15 +347,6 @@ HWTEST_F(SliderTddTest, SliderStyle005, TestSize.Level1)
     SliderTddTest::ComponentSliderStyleSetSelectColorTest005();
 }
 
-/**
- * @tc.name:ComponentSliderStyleSetBlockColorTest006
- * @tc.desc: Verify slider color value.
- * @tc.require: AR000DSEFF
- */
-HWTEST_F(SliderTddTest, SliderStyle006, TestSize.Level1)
-{
-    SliderTddTest::ComponentSliderStyleSetBlockColorTest006();
-}
 #endif
 } // namespace ACELite
 } // namespace OHOS

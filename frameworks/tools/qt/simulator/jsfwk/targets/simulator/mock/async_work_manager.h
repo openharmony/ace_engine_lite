@@ -12,25 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef OHOS_ACELITE_TEST_SLIDER_H
-#define OHOS_ACELITE_TEST_SLIDER_H
 
-#include "base_test.h"
+#ifndef OHOS_ACELITE_ASYNCWORK_H
+#define OHOS_ACELITE_ASYNCWORK_H
 
-namespace OHOS {
-namespace ACELite {
-class SliderTddTest : public BaseTest {
+#include <list>
+#include <mutex>
+#include <utility>
+#include "js_async_work.h"
+
+class AsyncWorkManager {
 public:
-    SliderTddTest();
-    ~SliderTddTest() override {};
-    void ComponentSliderAttributeMinTest001();
-    void ComponentSliderAttributeMaxTest002();
-    void ComponentSliderAttributeValueTest003();
-    void ComponentSliderStyleSetColorTest004();
-    void ComponentSliderStyleSetSelectColorTest005();
-    void RunTests();
-};
-} // namespace ACELite
-} // namespace OHOS
+    static AsyncWorkManager& GetInstance();
+    void AppendAsyncWork(OHOS::ACELite::AsyncWorkHandler work, void* arg);
+    void ExecAllAsyncWork();
+    void ClearAllAsyncWork();
 
-#endif // OHOS_ACELITE_TEST_SLIDER_H
+private:
+    AsyncWorkManager(){};
+    ~AsyncWorkManager(){};
+    std::mutex mutex;
+    std::list<std::pair<OHOS::ACELite::AsyncWorkHandler, void*>> workList;
+};
+#endif

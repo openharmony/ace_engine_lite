@@ -1723,6 +1723,15 @@ void Component::CreateDirectiveWatcher(jerry_value_t descriptor)
     }
 }
 
+bool Component::IsAttached() const
+{
+    UIView *nativeView = GetComponentRootView();
+    if (nativeView == nullptr) {
+        return false;
+    }
+    return (nativeView->GetParent() != nullptr);
+}
+
 void Component::BuildViewTree(Component *currComponent, Component *parent, ConstrainedParameter &parentParameter)
 {
     if (currComponent == nullptr) {
@@ -1733,8 +1742,8 @@ void Component::BuildViewTree(Component *currComponent, Component *parent, Const
     currComponent->AlignDimensions(parentParameter);
     // refresh rect (border box sizing -> content box sizing)
     currComponent->AdaptBoxSizing();
-    // attach to parent
-    if (parent != nullptr) {
+    // attach to parent, and avoid attaching repeatly
+    if (parent != nullptr && !currComponent->IsAttached()) {
         parent->AttachView(currComponent);
         // notify view has been attached to tree, it means the parent's size is already calculated out
         currComponent->OnViewAttached();

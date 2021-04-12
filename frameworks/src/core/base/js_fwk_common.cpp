@@ -585,6 +585,7 @@ int32_t GetFileSize(const char * const filePath)
 static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = false)
 {
     const char *path = orgFullPath;
+#ifndef QT_SIMULATOR
 #ifndef __LITEOS_M__ // no path canonicalization on M core
     char fullPath[PATH_MAX + 1] = {0};
 #if ((defined(__WIN32)) || (defined(__WIN64)))
@@ -599,6 +600,7 @@ static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = fa
 #endif
     path = fullPath;
 #endif
+#endif // QT_SIMULATOR
     return open(path, O_RDONLY);
 }
 
@@ -614,6 +616,15 @@ static bool CheckFileLength(const char * const fullPath, int32_t &outFileSize)
         return false;
     }
     if (fileSize > FILE_CONTENT_LENGTH_MAX) {
+        LogString(LogLevel::LOG_LEVEL_ERR, "[JS Exception]: file ");
+        LogString(LogLevel::LOG_LEVEL_ERR, fullPath);
+        LogString(LogLevel::LOG_LEVEL_ERR, " is bigger than ");
+        const uint8_t len = 10;
+        char markdata[len];
+        const uint32_t num = 30; // calculate thresold by file type
+        if (sprintf_s(markdata, len, "%d kb.\n", num) < 0) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "init error message failed");
+        }
         ACE_ERROR_CODE_PRINT(EXCE_ACE_ROUTER_REPLACE_FAILED, EXCE_ACE_PAGE_FILE_TOO_HUGE);
         return false;
     }

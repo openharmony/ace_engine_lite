@@ -15,6 +15,7 @@
 #include "basic_tdd_test.h"
 #include <cstring>
 #include <sys/prctl.h>
+#include "async_task_manager.h"
 #include "common/graphic_startup.h"
 #include "common/task_manager.h"
 #include "component_utils.h"
@@ -89,6 +90,7 @@ void BasicTddTest::SetUp()
         injector->RegisterEventInjector(EventDataType::POINT_TYPE);
     }
     injector->SetWindowId(window_->GetWindowId());
+    AsyncTaskManager::GetInstance().SetFront(true);
 }
 
 void BasicTddTest::TearDown()
@@ -99,6 +101,7 @@ void BasicTddTest::TearDown()
     if (injector->IsEventInjectorRegistered(EventDataType::POINT_TYPE)) {
         injector->UnregisterEventInjector(EventDataType::POINT_TYPE);
     }
+    AsyncTaskManager::GetInstance().SetFront(false);
 }
 
 JSValue BasicTddTest::RunJS(const char *bundle, const uint32_t size) const

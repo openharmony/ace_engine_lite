@@ -12,25 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef OHOS_ACELITE_TEST_SLIDER_H
-#define OHOS_ACELITE_TEST_SLIDER_H
 
-#include "base_test.h"
+#ifndef OHOS_ACELITE_HALSYSPARAM_H
+#define OHOS_ACELITE_HALSYSPARAM_H
+#endif
 
-namespace OHOS {
-namespace ACELite {
-class SliderTddTest : public BaseTest {
-public:
-    SliderTddTest();
-    ~SliderTddTest() override {};
-    void ComponentSliderAttributeMinTest001();
-    void ComponentSliderAttributeMaxTest002();
-    void ComponentSliderAttributeValueTest003();
-    void ComponentSliderStyleSetColorTest004();
-    void ComponentSliderStyleSetSelectColorTest005();
-    void RunTests();
-};
-} // namespace ACELite
-} // namespace OHOS
-
-#endif // OHOS_ACELITE_TEST_SLIDER_H

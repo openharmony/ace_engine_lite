@@ -545,6 +545,7 @@ private:
     void GetDimensionFromStyle(Dimension &dimension, const AppStyleItem &styleItem) const;
     void CalculateDimensionPixel(Dimension &dimension, int16_t base) const;
     virtual void OnDimensionsAligned() {}
+    bool IsAttached() const;
 
     /**
      * @brief SetParent assign parent node
