@@ -24,5 +24,5 @@ python js_profiler.py --source D:\workspace\hmf\ace\lite\ace_profiler_582.log  -
 
 #### 参数说明
 
-* `--source` 带转换的文件，例如 `D:\workspace\hmf\ace\lite\ace_profiler_582.log`
+* `--source` 待转换的文件，例如 `D:\workspace\hmf\ace\lite\ace_profiler_582.log`
 * `--destination` 生成的文件，例如 `D:\workspace\hmf\ace\lite\ace_profiler_582_real.log`

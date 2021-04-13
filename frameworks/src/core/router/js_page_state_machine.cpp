@@ -53,7 +53,7 @@ StateMachine::StateMachine()
 StateMachine::~StateMachine()
 {
     // release this page's all resource
-    // if error hapens, statemachie must force to jump to destroy state for releasing resource.
+    // if error happens, statemachine must force to jump to destroy state for releasing resource.
     if ((currentState_ >= INIT_STATE) || FatalHandler::GetInstance().IsFatalErrorHitted()) {
         ChangeState(BACKGROUND_STATE);
         ChangeState(DESTROY_STATE);
@@ -93,7 +93,7 @@ int StateMachine::GenerateJsPagePath(const char * const uri)
         return ERROR_INPUT_PARAMETER;
     }
     size_t len = uriLen;
-    // if path is "/", load defaut page of app.(appRootPath/index/index.js)
+    // if path is "/", load default page of app.(appRootPath/index/index.js)
 #if JS_PAGE_SPECIFIC
     if (jsPageSpecific.jsIndexFilePath == nullptr) {
         jsPageSpecific.jsIndexFilePath = const_cast<char *>(JS_INDEX_FILE_PATH);
