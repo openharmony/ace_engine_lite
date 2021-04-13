@@ -141,10 +141,6 @@ public:
     ~TransitionImpl()
     {
         if (animator_ != nullptr) {
-            AnimatorManager *am = AnimatorManager::GetInstance();
-            if (am != nullptr) {
-                AnimatorManager::GetInstance()->Remove(animator_);
-            }
             delete (animator_);
             animator_ = nullptr;
         }
