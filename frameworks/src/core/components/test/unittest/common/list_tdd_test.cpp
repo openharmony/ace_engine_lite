@@ -261,7 +261,7 @@ HWTEST_F(ListTddTest, ListTest003, TestSize.Level1)
  * @tc.desc: Verify list component support restore the default flex-direction=column if not setting it.
  * @tc.require: AR000DSEFB
  */
-HWTEST_F(ListTddTest, ListTest004, TestSize.Level1)
+HWTEST_F(ListTddTest, ListTest004, TestSize.Level0)
 {
     ListTddTest::ListTest004();
 }

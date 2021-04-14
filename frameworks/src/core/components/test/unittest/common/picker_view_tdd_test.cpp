@@ -431,7 +431,7 @@ HWTEST_F(PickerViewTddTest, PickerviewAttr001, TestSize.Level1)
  * @tc.desc: Verify text picker-view valid attributes.
  * @tc.require: AR000DSEFD
  */
-HWTEST_F(PickerViewTddTest, PickerviewAttr002, TestSize.Level1)
+HWTEST_F(PickerViewTddTest, PickerviewAttr002, TestSize.Level0)
 {
     PickerViewTddTest::ComponentPickerviewAttributeSetTest002();
 }

@@ -417,7 +417,7 @@ HWTEST_F(TextTddTest, textStyle002, TestSize.Level1)
  * @tc.desc: Verify text color value.
  * @tc.require: AR000DSEFN
  */
-HWTEST_F(TextTddTest, textStyle003, TestSize.Level1)
+HWTEST_F(TextTddTest, textStyle003, TestSize.Level0)
 {
     TextTddTest::ComponentTextStyleSetOverflowTest003();
 }

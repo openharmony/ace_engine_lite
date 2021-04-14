@@ -979,7 +979,7 @@ HWTEST_F(StyleMgrTddTest, InlineStyle004, TestSize.Level1)
  * @tc.desc: Verify the style sheet initialization.
  * @tc.require: AR000DSEEQ
  */
-HWTEST_F(StyleMgrTddTest, InlineStyle005, TestSize.Level1)
+HWTEST_F(StyleMgrTddTest, InlineStyle005, TestSize.Level0)
 {
     StyleMgrTddTest::ACELiteStyleManagerInlineStyle005();
 }
@@ -1029,7 +1029,7 @@ HWTEST_F(StyleMgrTddTest, IDSelector004, TestSize.Level1)
  * @tc.desc: Verify the style sheet initialization.
  * @tc.require: AR000DSEER
  */
-HWTEST_F(StyleMgrTddTest, IDSelector005, TestSize.Level1)
+HWTEST_F(StyleMgrTddTest, IDSelector005, TestSize.Level0)
 {
     StyleMgrTddTest::ACELiteStyleManagerIDSelector005();
 }
@@ -1069,7 +1069,7 @@ HWTEST_F(StyleMgrTddTest, ClassSelector003, TestSize.Level1)
  * @tc.desc: Verify the style sheet initialization.
  * @tc.require: AR000E2TCI
  */
-HWTEST_F(StyleMgrTddTest, CSSPesudo001, TestSize.Level1)
+HWTEST_F(StyleMgrTddTest, CSSPesudo001, TestSize.Level0)
 {
     StyleMgrTddTest::ACELiteStyleManagerCSSPesudo001();
 }
