@@ -33,7 +33,6 @@ void TransitionImpl::Init()
         HILOG_ERROR(HILOG_MODULE_ACE, "animator create failed");
         return;
     }
-    AnimatorManager::GetInstance()->Add(animator_);
 }
 
 void TransitionImpl::Callback(UIView* view)
