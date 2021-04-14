@@ -1103,7 +1103,7 @@ HWTEST_F(JsiInterfaceTddTest, test020, TestSize.Level1)
  * @tc.desc: Verify JSI interface GetObjectKeys.
  * @tc.require: AR000DSEHC
  */
-HWTEST_F(JsiInterfaceTddTest, test021, TestSize.Level1)
+HWTEST_F(JsiInterfaceTddTest, test021, TestSize.Level0)
 {
     JsiInterfaceTddTest::JSIInterfaceTest021();
 }
@@ -1113,7 +1113,7 @@ HWTEST_F(JsiInterfaceTddTest, test021, TestSize.Level1)
  * @tc.desc: Verify JSI interfaces related to OnDestroy callback.
  * @tc.require: AR000DSEHC
  */
-HWTEST_F(JsiInterfaceTddTest, test022, TestSize.Level1)
+HWTEST_F(JsiInterfaceTddTest, test022, TestSize.Level0)
 {
     JsiInterfaceTddTest::JSIInterfaceTest022();
 }
@@ -1123,7 +1123,7 @@ HWTEST_F(JsiInterfaceTddTest, test022, TestSize.Level1)
  * @tc.desc: Verify JSI interfaces related to OnTerminate callback.
  * @tc.require: AR000DSEHC
  */
-HWTEST_F(JsiInterfaceTddTest, test023, TestSize.Level1)
+HWTEST_F(JsiInterfaceTddTest, test023, TestSize.Level0)
 {
     JsiInterfaceTddTest::JSIInterfaceTest023();
 }

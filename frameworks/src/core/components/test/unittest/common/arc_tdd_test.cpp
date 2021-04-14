@@ -1051,7 +1051,7 @@ void ArcTddTest::RunTests()
 * @tc.desc: Verify circleprogress percent attribute can set normally.
 * @tc.require: AR000DSEFE
 */
-HWTEST_F(ArcTddTest, arcAttr001, TestSize.Level1)
+HWTEST_F(ArcTddTest, arcAttr001, TestSize.Level0)
 {
     ArcTddTest::ComponentProgressAttributeSetTest001();
 }

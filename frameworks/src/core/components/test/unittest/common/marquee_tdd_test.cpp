@@ -411,7 +411,7 @@ void MarqueeTddTest::RunTests()
  * @tc.desc: Verify Marquee style color set boundary value.
  * @tc.require: AR000DSEFH
  */
-HWTEST_F(MarqueeTddTest, marStyle006, TestSize.Level1)
+HWTEST_F(MarqueeTddTest, marStyle006, TestSize.Level0)
 {
     MarqueeTddTest::ComponentMarqueeStyleSetTest006();
 }

@@ -181,7 +181,7 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute004, TestSize.Level1)
  * @tc.desc: Verify the cache distribution process and overflow checking
  * @tc.require: AR000F8FOG
  */
-HWTEST_F(CacheManagerTddTest, CacheDistribute005, TestSize.Level1)
+HWTEST_F(CacheManagerTddTest, CacheDistribute005, TestSize.Level0)
 {
     /**
      * @tc.steps: step1. prepare cache buffer

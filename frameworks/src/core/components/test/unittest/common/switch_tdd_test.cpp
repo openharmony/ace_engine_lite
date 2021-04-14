@@ -226,7 +226,7 @@ HWTEST_F(SwitchTddTest, SwitchAttr002, TestSize.Level1)
  * @tc.desc: Verify attribute id, show.
  * @tc.require: AR000DSEFI
  */
-HWTEST_F(SwitchTddTest, SwitchAttr003, TestSize.Level1)
+HWTEST_F(SwitchTddTest, SwitchAttr003, TestSize.Level0)
 {
     SwitchTddTest::ComponentSwitchAttributeSetTest003();
 }

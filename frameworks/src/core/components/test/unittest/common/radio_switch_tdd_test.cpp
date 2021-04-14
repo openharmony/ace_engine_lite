@@ -471,7 +471,7 @@ HWTEST_F(RadioSwitchTddTest, radioWidthTest002, TestSize.Level1)
  * @tc.desc: test the switch width in different range
  * @tc.require: AR000F3PDH
  */
-HWTEST_F(RadioSwitchTddTest, widthSwitchTest003, TestSize.Level1)
+HWTEST_F(RadioSwitchTddTest, widthSwitchTest003, TestSize.Level0)
 {
     WidthSwitchValueTest003();
 }

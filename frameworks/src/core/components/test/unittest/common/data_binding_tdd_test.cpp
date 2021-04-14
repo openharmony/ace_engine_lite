@@ -232,7 +232,7 @@ HWTEST_F(DataBindingTddTest, AttrBindingTest001, TestSize.Level1)
  * @tc.name: StyleBindingTest002
  * @tc.desc: test the style data binding
  */
-HWTEST_F(DataBindingTddTest, StyleBindingTest002, TestSize.Level1)
+HWTEST_F(DataBindingTddTest, StyleBindingTest002, TestSize.Level0)
 {
     DataBindingTddTest::StyleBindingTest002();
 }

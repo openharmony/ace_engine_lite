@@ -424,7 +424,7 @@ HWTEST_F(PercentTddTest, PercentSupport001, TestSize.Level1)
  * @tc.desc: Verify the percent processing on component.
  * @tc.require: AR000F5LM1
  */
-HWTEST_F(PercentTddTest, PercentSupport002, TestSize.Level1)
+HWTEST_F(PercentTddTest, PercentSupport002, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
     /**
@@ -476,7 +476,7 @@ HWTEST_F(PercentTddTest, PercentSupport002, TestSize.Level1)
  * @tc.desc: Verify the percent processing on component.
  * @tc.require: SR000F3PDC
  */
-HWTEST_F(PercentTddTest, PercentSupport003, TestSize.Level1)
+HWTEST_F(PercentTddTest, PercentSupport003, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
     /**

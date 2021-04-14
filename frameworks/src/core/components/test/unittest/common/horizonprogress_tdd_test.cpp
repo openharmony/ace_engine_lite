@@ -720,7 +720,7 @@ HWTEST_F(HorizonProgressTddTest, horizon004, TestSize.Level1)
  * @tc.desc: Verify progress component setting normal attribute: percent=100 successfully.
  * @tc.require: AR000DSEFE
  */
-HWTEST_F(HorizonProgressTddTest, horizon005, TestSize.Level1)
+HWTEST_F(HorizonProgressTddTest, horizon005, TestSize.Level0)
 {
     HorizonProgressTddTest::HorizonProgressTest005();
 }
@@ -770,7 +770,7 @@ HWTEST_F(HorizonProgressTddTest, horizon009, TestSize.Level1)
  * @tc.desc: Verify progress component will restore the default color=0x6B9AC7(7051975) if setting error value.
  * @tc.require: AR000DSEFE
  */
-HWTEST_F(HorizonProgressTddTest, horizon013, TestSize.Level1)
+HWTEST_F(HorizonProgressTddTest, horizon013, TestSize.Level0)
 {
     HorizonProgressTddTest::HorizonProgressTest013();
 }
@@ -790,7 +790,7 @@ HWTEST_F(HorizonProgressTddTest, horizon014, TestSize.Level1)
  * @tc.desc: Verify progress component setting normal progress style: strokeWidth=32767 successfully.
  * @tc.require: AR000DSEFE
  */
-HWTEST_F(HorizonProgressTddTest, horizon015, TestSize.Level1)
+HWTEST_F(HorizonProgressTddTest, horizon015, TestSize.Level0)
 {
     HorizonProgressTddTest::HorizonProgressTest015();
 }

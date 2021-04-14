@@ -797,7 +797,7 @@ void DfxTddTest::RunTests()
  * @tc.desc: Verify error code.
  * @tc.require: AR000F3PDP
  */
-HWTEST_F(DfxTddTest, DfxTest001, TestSize.Level1)
+HWTEST_F(DfxTddTest, DfxTest001, TestSize.Level0)
 {
     DfxTddTest::DfxTest001();
 }
@@ -807,7 +807,7 @@ HWTEST_F(DfxTddTest, DfxTest001, TestSize.Level1)
  * @tc.desc: Verify error message.
  * @tc.require: AR000F3PDP
  */
-HWTEST_F(DfxTddTest, DfxTest002, TestSize.Level1)
+HWTEST_F(DfxTddTest, DfxTest002, TestSize.Level0)
 {
     DfxTddTest::DfxTest002();
 }

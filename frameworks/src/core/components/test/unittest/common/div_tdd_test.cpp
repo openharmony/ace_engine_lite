@@ -990,7 +990,7 @@ HWTEST_F(DivTddTest, divAttr015, TestSize.Level1)
  * @tc.desc: Verify width style can set nomally.
  * @tc.require: AR000DSEF9
  */
-HWTEST_F(DivTddTest, div008, TestSize.Level1)
+HWTEST_F(DivTddTest, div008, TestSize.Level0)
 {
     DivTddTest::ComponentDivStyleSetTest008();
 }

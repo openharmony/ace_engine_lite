@@ -279,10 +279,10 @@ void DialogTddTest::DialogTest001()
     if (jerry_value_is_error(ret)) {
         jerry_release_value(ret);
         DestroyPage(page);
-        TDD_CASE_END();                                                                                                                                                                                                                                 
+        TDD_CASE_END();
         return;
     }
-    
+
     // step2: set dialog window id and click
     const int16_t positionX1 = 470;
     const int16_t positionY1 = 250;
@@ -327,8 +327,8 @@ void DialogTddTest::DialogTest002()
     val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, CONFIRM);
     ACE_FREE(val);
-    
-    // step4: release previous result and call dialog method again 
+
+    // step4: release previous result and call dialog method again
     jerry_release_value(ret);
     ret = JSObject::Call(page, METHOD);
     if (jerry_value_is_error(ret)) {
@@ -382,7 +382,7 @@ void DialogTddTest::DialogTest003()
     EXPECT_STREQ(val, CONFIRM);
     ACE_FREE(val);
 
-    // step4: release previous result and call dialog method again 
+    // step4: release previous result and call dialog method again
     jerry_release_value(ret);
     ret = JSObject::Call(page, METHOD);
     if (jerry_value_is_error(ret)) {
@@ -403,7 +403,7 @@ void DialogTddTest::DialogTest003()
     EXPECT_STREQ(val, CANCEL);
     ACE_FREE(val);
 
-    // step7: release previous result and call dialog method again 
+    // step7: release previous result and call dialog method again
     jerry_release_value(ret);
     ret = JSObject::Call(page, METHOD);
     if (jerry_value_is_error(ret)) {
@@ -466,7 +466,7 @@ void DialogTddTest::DialogTest004()
         TDD_CASE_END();
         return;
     }
-    
+
     // step5: set dialog window id and click
     const int16_t positionX2 = 470;
     const int16_t positionY2 = 270;
@@ -478,7 +478,7 @@ void DialogTddTest::DialogTest004()
     EXPECT_STREQ(val, CANCEL);
     ACE_FREE(val);
 
-    // step7: release previous result and call dialog method again 
+    // step7: release previous result and call dialog method again
     jerry_release_value(ret);
     ret = JSObject::Call(page, METHOD);
     if (jerry_value_is_error(ret)) {
@@ -561,7 +561,7 @@ HWTEST_F(DialogTddTest, DialogTest003, TestSize.Level1)
     DialogTddTest::DialogTest003();
 }
 
-HWTEST_F(DialogTddTest, DialogTest004, TestSize.Level1)
+HWTEST_F(DialogTddTest, DialogTest004, TestSize.Level0)
 {
     DialogTddTest::DialogTest004();
 }
