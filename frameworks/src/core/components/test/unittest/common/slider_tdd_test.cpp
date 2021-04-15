@@ -322,7 +322,7 @@ HWTEST_F(SliderTddTest, SliderAttr002, TestSize.Level1)
  * @tc.desc: Verify Slider value value can set normally.
  * @tc.require: AR000DSEFF
  */
-HWTEST_F(SliderTddTest, SliderAttr003, TestSize.Level1)
+HWTEST_F(SliderTddTest, SliderAttr003, TestSize.Level0)
 {
     SliderTddTest::ComponentSliderAttributeValueTest003();
 }

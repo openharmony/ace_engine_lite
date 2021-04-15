@@ -135,7 +135,7 @@ void MarqueeEventTddTest::RunTests()
  * @tc.desc: Verify Marquee scrollamount.
  * @tc.require: AR000DSEFH
  */
-HWTEST_F(MarqueeEventTddTest, MarqueeEvent001, TestSize.Level1)
+HWTEST_F(MarqueeEventTddTest, MarqueeEvent001, TestSize.Level0)
 {
     MarqueeEventTddTest::MarqueeEvent001();
 }

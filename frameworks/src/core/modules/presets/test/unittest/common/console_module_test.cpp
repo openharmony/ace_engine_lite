@@ -203,7 +203,7 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog004, TestSize.Level1)
  * @tc.desc: Verify the Console module API output
  * @tc.require: AR000DSEHD
  */
-HWTEST_F(ConsoleModuleTest, ConsoleLog005, TestSize.Level1)
+HWTEST_F(ConsoleModuleTest, ConsoleLog005, TestSize.Level0)
 {
     /**
      * @tc.steps: step1. prepare data
@@ -226,7 +226,7 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog005, TestSize.Level1)
  * @tc.desc: Verify the Console module API output
  * @tc.require: AR000DSEHD
  */
-HWTEST_F(ConsoleModuleTest, ConsoleLog006, TestSize.Level1)
+HWTEST_F(ConsoleModuleTest, ConsoleLog006, TestSize.Level0)
 {
     /**
      * @tc.steps: step1. prepare data

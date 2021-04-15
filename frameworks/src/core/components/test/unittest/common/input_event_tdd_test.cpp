@@ -756,7 +756,7 @@ UIView *InputEventTddTest::GetComponent(JSValue page, const char *name) const
  * @tc.name:InputBindingTest001
  * @tc.desc:test the input binding data
  */
-HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level1)
+HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
     /**
@@ -1004,7 +1004,7 @@ HWTEST_F(InputEventTddTest, ChangeEventTest005, TestSize.Level1)
  * @tc.name: InputIfTest006
  * @tc.expected: test the if attribute
  */
-HWTEST_F(InputEventTddTest, InputIfTest006, TestSize.Level1)
+HWTEST_F(InputEventTddTest, InputIfTest006, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
 
@@ -1152,7 +1152,7 @@ HWTEST_F(InputEventTddTest, InputShowTest007, TestSize.Level1)
  * @tc.name: InputForTest008
  * @tc.desc: test the for attribute in input
  */
-HWTEST_F(InputEventTddTest, InputForTest008, TestSize.Level1)
+HWTEST_F(InputEventTddTest, InputForTest008, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
 
