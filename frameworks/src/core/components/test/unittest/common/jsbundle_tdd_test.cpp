@@ -397,7 +397,7 @@ HWTEST_F(JsbundleTddTest, attrlen003, TestSize.Level1)
  * @tc.desc: Verify the _c function support analysising complex UIViewGroup attribute.
  * @tc.require: AR000DT0D4
  */
-HWTEST_F(JsbundleTddTest, attrlen004, TestSize.Level1)
+HWTEST_F(JsbundleTddTest, attrlen004, TestSize.Level0)
 {
     JsbundleTddTest::CreateElementAttributeLength004();
 }
@@ -447,7 +447,7 @@ HWTEST_F(JsbundleTddTest, attrVali008, TestSize.Level1)
  * @tc.desc: Verify the _c function support handling legal parameter('text', { attrs: { value: 'Hello world' } }).
  * @tc.require: AR000DT0D4
  */
-HWTEST_F(JsbundleTddTest, attrVali009, TestSize.Level1)
+HWTEST_F(JsbundleTddTest, attrVali009, TestSize.Level0)
 {
     JsbundleTddTest::CreateElement2ndAttributeValidation009();
 }

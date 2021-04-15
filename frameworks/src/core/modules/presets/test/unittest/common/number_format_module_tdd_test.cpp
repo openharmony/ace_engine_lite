@@ -75,7 +75,7 @@ char* NumberFormatModuleTddTest::FormatNumber(const jerry_value_t numberFormat,
  * @tc.desc: test the locale info support
  * @tc.require: AR000EVHAT
  */
-HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Locale_Test001, TestSize.Level1)
+HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Locale_Test001, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
     GLOBAL_ConfigLanguage("zh-CN");
@@ -134,7 +134,7 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Locale_Test001, TestSize.Level1
  * @tc.desc: test the enum style value
  * @tc.require: AR000EVHAT
  */
-HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test002, TestSize.Level1)
+HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test002, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
 
@@ -236,7 +236,7 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test003, TestSize.Level1)
  * @tc.desc: test the enum value in useGroup
  * @tc.require: AR000EVHAT
  */
-HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test004, TestSize.Level1)
+HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test004, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
 
@@ -428,7 +428,7 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test007, TestSize.Level1)
  * @tc.desc: test the correct value of minimumFeactionDigits
  * @tc.require: AR000EVHAT
  */
-HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test008, TestSize.Level1)
+HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test008, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
 

@@ -1346,7 +1346,7 @@ void EventBubbleTddTest::RunTests()
  * @tc.desc: Verify event bubble.
  * @tc.require: AR000F3PDN
  */
-HWTEST_F(EventBubbleTddTest, EventBubbleTest001, TestSize.Level1)
+HWTEST_F(EventBubbleTddTest, EventBubbleTest001, TestSize.Level0)
 {
     EventBubbleTddTest::EventBubbleTest001();
 }
@@ -1356,7 +1356,7 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest001, TestSize.Level1)
  * @tc.desc: Verify event bubble.
  * @tc.require: AR000F3PDN
  */
-HWTEST_F(EventBubbleTddTest, EventBubbleTest002, TestSize.Level1)
+HWTEST_F(EventBubbleTddTest, EventBubbleTest002, TestSize.Level0)
 {
     EventBubbleTddTest::EventBubbleTest002();
 }

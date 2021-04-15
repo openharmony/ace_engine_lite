@@ -310,7 +310,7 @@ HWTEST_F(OpacityTddTest, textOpacity002, TestSize.Level1)
  * @tc.type FUNC
  * @tc.require: AR000F3PDF
  */
-HWTEST_F(OpacityTddTest, textOpacity003, TestSize.Level1)
+HWTEST_F(OpacityTddTest, textOpacity003, TestSize.Level0)
 {
     OpacityTddTest::SetOpacityTest003();
 }
@@ -354,7 +354,7 @@ HWTEST_F(OpacityTddTest, textOpacity006, TestSize.Level1)
  * @tc.type FUNC
  * @tc.require: AR000F3PDF
  */
-HWTEST_F(OpacityTddTest, textOpacity007, TestSize.Level1)
+HWTEST_F(OpacityTddTest, textOpacity007, TestSize.Level0)
 {
     OpacityTddTest::SetOpacityTest007();
 }

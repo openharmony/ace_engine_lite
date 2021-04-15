@@ -68,7 +68,7 @@ char* DateTimeModuleTddTest::FormatDate(const jerry_value_t dateTime,
  * @tc.desc: Test the effective value of locale
  * @tc.require: AR000EUO7G
  */
-HWTEST_F(DateTimeModuleTddTest, DateTime_Locale_Test001, TestSize.Level1)
+HWTEST_F(DateTimeModuleTddTest, DateTime_Locale_Test001, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
     GLOBAL_ConfigLanguage("en-US");
@@ -2214,7 +2214,7 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test030, TestSize.Level1)
  * @tc.desc: Test different date and time group test
  * @tc.require: SR000ERCD4
  */
-HWTEST_F(DateTimeModuleTddTest, Date_Time_Pattern_Test031, TestSize.Level1)
+HWTEST_F(DateTimeModuleTddTest, Date_Time_Pattern_Test031, TestSize.Level0)
 {
     TDD_CASE_BEGIN();
 
