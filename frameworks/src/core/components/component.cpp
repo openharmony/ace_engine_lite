@@ -1185,7 +1185,6 @@ void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, boo
     view.SetOnDragListener(onSwipeListener_);
     view.SetDraggable(true);
     view.SetTouchable(true);
-    view.SetIntercept(false);
 }
 
 // default implementation

@@ -224,6 +224,7 @@ public:
     }
 
     bool OnDragStart(UIView& view, const DragEvent& event) override;
+    bool OnDrag(UIView& view, const DragEvent& event) override;
     bool OnDragEnd(UIView& view, const DragEvent &event) override;
 
 private:
