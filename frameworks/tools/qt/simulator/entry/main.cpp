@@ -29,58 +29,61 @@
 #include "main_widget.h"
 #include "monitor.h"
 
-void InitUIkit()
-{
-    OHOS::GraphicStartUp::Init();
-    OHOS::Monitor::GetInstance()->InitHal();
-    OHOS::Monitor::GetInstance()->InitFontEngine();
-    OHOS::Monitor::GetInstance()->InitImageDecodeAbility();
-}
+namespace  {
 
-void SetJSDebuggerConfig(int32_t defaultHeapSize)
-{
-    const int16_t bytes = 1024;
-    OHOS::ACELite::DebuggerConfig jsDebuggerConfig;
-    jsDebuggerConfig.startDebuggerServer = false;
-    jsDebuggerConfig.snapshotMode = false;
-    jsDebuggerConfig.heapSize = defaultHeapSize * bytes;
-    OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
-}
-
-void InitPage(OHOS::MainWidget *mainWidget, int16_t jsWindowHeight, int16_t jsWindowWidth, int16_t childPageHeight)
-{
-    int32_t defaultHeapSize = 64; // KB
-    const int16_t minJSHeapSize = 48; // KB
-    const int16_t maxJSHeapSize = 512; // KB
-    QString workingDirectory = QDir::currentPath();
-    QString iniFilePath = workingDirectory + "/qt.ini";
-    QSettings settings(iniFilePath, QSettings::IniFormat);
-    QString jsBundlePath = settings.value("JSBundlePath").toString();
-    if (jsBundlePath.isNull() || jsBundlePath.isEmpty()) {
-        jsBundlePath = "";
-    } else {
-        QFileInfo *file = new QFileInfo(jsBundlePath);
-        if (file->exists() == false) {
-            jsBundlePath = "";
-        }
+    void InitUIkit()
+    {
+        OHOS::GraphicStartUp::Init();
+        OHOS::Monitor::GetInstance()->InitHal();
+        OHOS::Monitor::GetInstance()->InitFontEngine();
+        OHOS::Monitor::GetInstance()->InitImageDecodeAbility();
     }
-    QString jsHeapSizeStr = settings.value("JSHeapSize").toString();
-    if (!jsHeapSizeStr.isNull() && !jsHeapSizeStr.isEmpty()) {
-        int tempSize = jsHeapSizeStr.toInt();
-        if (tempSize >= minJSHeapSize && tempSize <= maxJSHeapSize) {
-            defaultHeapSize = tempSize;
+
+    void SetJSDebuggerConfig(int32_t defaultHeapSize)
+    {
+        const int16_t bytes = 1024;
+        OHOS::ACELite::DebuggerConfig jsDebuggerConfig;
+        jsDebuggerConfig.startDebuggerServer = false;
+        jsDebuggerConfig.snapshotMode = false;
+        jsDebuggerConfig.heapSize = defaultHeapSize * bytes;
+        OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
+    }
+
+    void InitPage(OHOS::MainWidget *mainWidget, int16_t jsWindowHeight, int16_t jsWindowWidth, int16_t childPageHeight)
+    {
+        int32_t defaultHeapSize = 64; // KB
+        const int16_t minJSHeapSize = 48; // KB
+        const int16_t maxJSHeapSize = 512; // KB
+        QString workingDirectory = QDir::currentPath();
+        QString iniFilePath = workingDirectory + "/qt.ini";
+        QSettings settings(iniFilePath, QSettings::IniFormat);
+        QString jsBundlePath = settings.value("JSBundlePath").toString();
+        if (jsBundlePath.isNull() || jsBundlePath.isEmpty()) {
+            jsBundlePath = "";
+        } else {
+            QFileInfo *file = new QFileInfo(jsBundlePath);
+            if (file->exists() == false) {
+                jsBundlePath = "";
+            }
+        }
+        QString jsHeapSizeStr = settings.value("JSHeapSize").toString();
+        if (!jsHeapSizeStr.isNull() && !jsHeapSizeStr.isEmpty()) {
+            int tempSize = jsHeapSizeStr.toInt();
+            if (tempSize >= minJSHeapSize && tempSize <= maxJSHeapSize) {
+                defaultHeapSize = tempSize;
+            } else {
+                jsHeapSizeStr = "64";
+            }
         } else {
             jsHeapSizeStr = "64";
         }
-    } else {
-        jsHeapSizeStr = "64";
+        ChildWidget *childWidget = new ChildWidget(mainWidget, jsBundlePath, jsHeapSizeStr);
+        childWidget->setGeometry(QRect(0, jsWindowHeight, jsWindowWidth, childPageHeight));
+        OHOS::ACELite::JSAbility jsAbility;
+        SetJSDebuggerConfig(defaultHeapSize);
+        jsAbility.Launch(jsBundlePath.toStdString().c_str(), "MyApplication", 0);
+        jsAbility.Show();
     }
-    ChildWidget *childWidget = new ChildWidget(mainWidget, jsBundlePath, jsHeapSizeStr);
-    childWidget->setGeometry(QRect(0, jsWindowHeight, jsWindowWidth, childPageHeight));
-    OHOS::ACELite::JSAbility jsAbility;
-    SetJSDebuggerConfig(defaultHeapSize);
-    jsAbility.Launch(jsBundlePath.toStdString().c_str(), "MyApplication", 0);
-    jsAbility.Show();
 }
 
 int main(int argc, char* argv[])
