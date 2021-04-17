@@ -36,7 +36,7 @@ ChildWidget::ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSi
 
 void ChildWidget::InitPage(QString jsBundlePath, QString jsHeapSize)
 {
-    QVBoxLayout *vLayout=new QVBoxLayout(this);
+    QVBoxLayout *vLayout = new QVBoxLayout(this);
     vLayout->setAlignment(Qt::AlignTop);
     QHBoxLayout *hLayout1 = new QHBoxLayout();
     hLayout1->setAlignment(Qt::AlignLeft);
@@ -74,21 +74,21 @@ void ChildWidget::InitPage(QString jsBundlePath, QString jsHeapSize)
     vLayout->addLayout(hLayout2);
 }
 
-void ChildWidget::InitSignalSlots()
+void ChildWidget::InitSignalSlots() const
 {
     connect(selectFolderBtn, SIGNAL(clicked()), this, SLOT(OpenFolderDialog()));
     connect(configBtn, SIGNAL(clicked()), this, SLOT(RestartApp()));
 }
 
-void ChildWidget::OpenFolderDialog()
+void ChildWidget::OpenFolderDialog() const
 {
     QString dirpath = QFileDialog::getExistingDirectory(nullptr, "选择目录", "./", QFileDialog::ShowDirsOnly);
-    if(!dirpath.isNull() && !dirpath.isEmpty()) {
+    if (!dirpath.isNull() && !dirpath.isEmpty()) {
         jsBundleText->setText(dirpath);
     }
 }
 
-void ChildWidget::RestartApp()
+void ChildWidget::RestartApp() const
 {
     QString workingDirectory = QDir::currentPath();
     QString iniFilePath = workingDirectory + "/qt.ini";

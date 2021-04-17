@@ -23,18 +23,20 @@
 
 class ChildWidget : public QWidget {
     Q_OBJECT
-private:
-    void InitPage(QString jsBundlePath, QString jsHeapSize);
-    void InitSignalSlots();
-    QLineEdit *jsBundleText;
-    QLineEdit *jsHeapText;
-    QPushButton *selectFolderBtn;
-    QPushButton *configBtn;
-public slots:
-    void OpenFolderDialog();
-    void RestartApp();
 public:
     ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSize);
+
+public slots:
+    void OpenFolderDialog() const;
+    void RestartApp() const;
+
+private:
+    void InitPage(QString jsBundlePath, QString jsHeapSize);
+    void InitSignalSlots() const;
+    QLineEdit *jsBundleText;
+    QLineEdit *jsHeapText;
+    QPushButton *configBtn;
+    QPushButton *selectFolderBtn;
 };
 
 #endif // CHILD_WIDGET_H
