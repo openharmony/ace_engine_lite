@@ -13,29 +13,28 @@
  * limitations under the License.
  */
 
-#ifndef CHILDWIDGET_H
-#define CHILDWIDGET_H
+#ifndef CHILD_WIDGET_H
+#define CHILD_WIDGET_H
 
 #include <QLineEdit>
 #include <QObject>
 #include <QPushButton>
 #include <QWidget>
 
-class ChildWidget : public QWidget
-{
+class ChildWidget : public QWidget {
     Q_OBJECT
 private:
-    void initPage(QString jsBundlePath, QString jsHeapSize);
-    void initSignalSlots();
+    void InitPage(QString jsBundlePath, QString jsHeapSize);
+    void InitSignalSlots();
     QLineEdit *jsBundleText;
     QLineEdit *jsHeapText;
     QPushButton *selectFolderBtn;
     QPushButton *configBtn;
 public slots:
-    void openFolderDialog();
-    void restartApp();
+    void OpenFolderDialog();
+    void RestartApp();
 public:
     ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSize);
 };
 
-#endif // CHILDWIDGET_H
+#endif // CHILD_WIDGET_H
