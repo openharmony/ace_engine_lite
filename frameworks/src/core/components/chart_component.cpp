@@ -684,19 +684,19 @@ bool ChartComponent::SetOptionsAxisDataRange(uint16_t minValue, uint16_t maxValu
             xOrY, maxValue, supportMinValue, supportedMaxValue, defaultMaxValue);
         maxValue = defaultMaxValue;
     }
-    if (minValue <= maxValue) {
-        if (isXaxis) {
-            xAxis_->SetDataRange(0, maxValue - minValue);
-            xMaxValue_ = maxValue - minValue;
-            xMinValue_ = minValue;
-        } else {
-            yAxis_->SetDataRange(minValue, maxValue);
-            yMinValue_ = minValue;
-            yMaxValue_ = maxValue;
-        }
+    if (minValue > maxValue) {
+        HILOG_WARN(HILOG_MODULE_ACE, "%s min value is larger than max value, we will use default value", xOrY);
+        maxValue = defaultMaxValue;
+        minValue = defaultMinValue;
+    }
+    if (isXaxis) {
+        xAxis_->SetDataRange(0, maxValue - minValue);
+        xMaxValue_ = maxValue - minValue;
+        xMinValue_ = minValue;
     } else {
-        HILOG_ERROR(HILOG_MODULE_ACE, "%s min value is larger than max value", xOrY);
-        isSetOk = false;
+        yAxis_->SetDataRange(minValue, maxValue);
+        yMinValue_ = minValue;
+        yMaxValue_ = maxValue;
     }
     return isSetOk;
 }
