@@ -122,7 +122,8 @@ bool ViewOnSwipeListener::OnDragStart(UIView& view, const DragEvent &event)
     return isStopPropagation_;
 }
 
-bool ViewOnSwipeListener::OnDrag(UIView& view, const DragEvent& event) {
+bool ViewOnSwipeListener::OnDrag(UIView& view, const DragEvent& event)
+{
     UNUSED(event);
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDrag received");
     return isStopPropagation_;
