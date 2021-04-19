@@ -54,7 +54,7 @@ namespace  {
         int16_t defaultHeapSize = 64; // KB
         const int16_t minJSHeapSize = 48; // KB
         const int16_t maxJSHeapSize = 512; // KB
-        QString jsBundlePath = SimulatorConfig::GetInstance().GetConfigValue("JSBundlePath");
+        QString jsBundlePath = SimulatorConfig::GetInstance().GetConfigValue(CONFIG_KEY_JSBUNDLE_PATH);
         if (jsBundlePath.isNull() || jsBundlePath.isEmpty()) {
             jsBundlePath = "";
         } else {
@@ -63,7 +63,7 @@ namespace  {
                 jsBundlePath = "";
             }
         }
-        QString jsHeapSize = SimulatorConfig::GetInstance().GetConfigValue("JSHeapSize");
+        QString jsHeapSize = SimulatorConfig::GetInstance().GetConfigValue(CONFIG_KEY_JSHEAP_SIZE);
         if (!jsHeapSize.isNull() && !jsHeapSize.isEmpty()) {
             int tempSize = jsHeapSize.toInt();
             if (tempSize >= minJSHeapSize && tempSize <= maxJSHeapSize) {

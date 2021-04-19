@@ -20,6 +20,10 @@
 #include <QSettings>
 #include <QString>
 
+const QString CONFIG_FILE_PATH = QDir::currentPath() + "/qt.ini";
+const QString CONFIG_KEY_JSBUNDLE_PATH = "JSBundlePath";
+const QString CONFIG_KEY_JSHEAP_SIZE = "JSHeapSize";
+
 class SimulatorConfig {
 public:
     static SimulatorConfig& GetInstance();

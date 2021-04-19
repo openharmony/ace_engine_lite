@@ -19,7 +19,7 @@
 #include <QSettings>
 #include <QString>
 
-const QString CONFIG_FILE_PATH = QDir::currentPath() + "/qt.ini";
+
 
 SimulatorConfig& SimulatorConfig::GetInstance()
 {

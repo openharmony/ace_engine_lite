@@ -88,8 +88,8 @@ void ChildWidget::OpenFolderDialog()
 
 void ChildWidget::RestartApp() const
 {
-    SimulatorConfig::GetInstance().SetConfigValue("JSBundlePath", jsBundleText.text());
-    SimulatorConfig::GetInstance().SetConfigValue("JSHeapSize", jsHeapText.text());
+    SimulatorConfig::GetInstance().SetConfigValue(CONFIG_KEY_JSBUNDLE_PATH, jsBundleText.text());
+    SimulatorConfig::GetInstance().SetConfigValue(CONFIG_KEY_JSHEAP_SIZE, jsHeapText.text());
     QString program = QApplication::applicationFilePath();
     QStringList arguments = QApplication::arguments();
     QProcess::startDetached(program, arguments, QDir::currentPath());
