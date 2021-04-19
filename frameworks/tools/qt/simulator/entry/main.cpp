@@ -28,9 +28,9 @@
 #include "js_debugger_config.h"
 #include "main_widget.h"
 #include "monitor.h"
+#include "simulator_config.h"
 
 namespace  {
-
     void InitUIkit()
     {
         OHOS::GraphicStartUp::Init();
@@ -51,13 +51,10 @@ namespace  {
 
     void InitPage(OHOS::MainWidget *mainWidget, int16_t jsWindowHeight, int16_t jsWindowWidth, int16_t childPageHeight)
     {
-        int32_t defaultHeapSize = 64; // KB
+        int16_t defaultHeapSize = 64; // KB
         const int16_t minJSHeapSize = 48; // KB
         const int16_t maxJSHeapSize = 512; // KB
-        QString workingDirectory = QDir::currentPath();
-        QString iniFilePath = workingDirectory + "/qt.ini";
-        QSettings settings(iniFilePath, QSettings::IniFormat);
-        QString jsBundlePath = settings.value("JSBundlePath").toString();
+        QString jsBundlePath = SimulatorConfig::GetInstance().GetConfigValue("JSBundlePath");
         if (jsBundlePath.isNull() || jsBundlePath.isEmpty()) {
             jsBundlePath = "";
         } else {
@@ -66,18 +63,14 @@ namespace  {
                 jsBundlePath = "";
             }
         }
-        QString jsHeapSizeStr = settings.value("JSHeapSize").toString();
-        if (!jsHeapSizeStr.isNull() && !jsHeapSizeStr.isEmpty()) {
-            int tempSize = jsHeapSizeStr.toInt();
+        QString jsHeapSize = SimulatorConfig::GetInstance().GetConfigValue("JSHeapSize");
+        if (!jsHeapSize.isNull() && !jsHeapSize.isEmpty()) {
+            int tempSize = jsHeapSize.toInt();
             if (tempSize >= minJSHeapSize && tempSize <= maxJSHeapSize) {
                 defaultHeapSize = tempSize;
-            } else {
-                jsHeapSizeStr = "64";
             }
-        } else {
-            jsHeapSizeStr = "64";
         }
-        ChildWidget *childWidget = new ChildWidget(mainWidget, jsBundlePath, jsHeapSizeStr);
+        ChildWidget *childWidget = new ChildWidget(mainWidget, jsBundlePath, QString::number(defaultHeapSize));
         childWidget->setGeometry(QRect(0, jsWindowHeight, jsWindowWidth, childPageHeight));
         OHOS::ACELite::JSAbility jsAbility;
         SetJSDebuggerConfig(defaultHeapSize);

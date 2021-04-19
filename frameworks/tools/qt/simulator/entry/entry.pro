@@ -61,7 +61,8 @@ HEADERS += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.h \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/ui_mainwidget.h \
     $${ACELITE_FRAMEWORK_PATH}/include/context/js_ability.h \
-    child_widget.h
+    child_widget.h \
+    simulator_config.h
 
 SOURCES += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/gui_thread.cpp \
@@ -71,5 +72,6 @@ SOURCES += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.cpp \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.cpp \
     child_widget.cpp \
-    main.cpp
+    main.cpp \
+    simulator_config.cpp
     

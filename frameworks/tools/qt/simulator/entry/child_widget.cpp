@@ -28,6 +28,8 @@
 #include <QString>
 #include <Qt>
 
+#include "simulator_config.h"
+
 ChildWidget::ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSize): QWidget(parent)
 {
     InitPage(jsBundlePath, jsHeapSize);
@@ -44,14 +46,12 @@ void ChildWidget::InitPage(QString jsBundlePath, QString jsHeapSize)
     jsBundleLabel->setFixedSize(110, 25);
     jsBundleLabel->setText("JS Bundle:");
     hLayout1->addWidget(jsBundleLabel);
-    jsBundleText = new QLineEdit();
-    jsBundleText->setFixedSize(300, 25);
-    jsBundleText->setText(jsBundlePath);
-    hLayout1->addWidget(jsBundleText);
-    selectFolderBtn = new QPushButton();
-    selectFolderBtn->setFixedSize(70, 25);
-    selectFolderBtn->setText("...");
-    hLayout1->addWidget(selectFolderBtn);
+    jsBundleText.setFixedSize(300, 25);
+    jsBundleText.setText(jsBundlePath);
+    hLayout1->addWidget(&jsBundleText);
+    selectFolderBtn.setFixedSize(70, 25);
+    selectFolderBtn.setText("...");
+    hLayout1->addWidget(&selectFolderBtn);
     vLayout->addLayout(hLayout1);
     QHBoxLayout *hLayout2 = new QHBoxLayout();
     hLayout2->setAlignment(Qt::AlignLeft);
@@ -59,44 +59,39 @@ void ChildWidget::InitPage(QString jsBundlePath, QString jsHeapSize)
     jsHeapLabel->setFixedSize(110, 25);
     jsHeapLabel->setText("Heap Size:");
     hLayout2->addWidget(jsHeapLabel);
-    jsHeapText = new QLineEdit();
-    jsHeapText->setFixedSize(100, 25);
-    jsHeapText->setText(jsHeapSize);
-    hLayout2->addWidget(jsHeapText);
+    jsHeapText.setFixedSize(100, 25);
+    jsHeapText.setText(jsHeapSize);
+    hLayout2->addWidget(&jsHeapText);
     QLabel *heapSizeLable = new QLabel();
     heapSizeLable->setFixedSize(190, 25);
-    heapSizeLable->setText("设置范围：48~512 KB");
+    heapSizeLable->setText("Range：48~512 KB");
     hLayout2->addWidget(heapSizeLable);
-    configBtn = new QPushButton();
-    configBtn->setFixedSize(70, 25);
-    configBtn->setText("启动");
-    hLayout2->addWidget(configBtn);
+    configBtn.setFixedSize(70, 25);
+    configBtn.setText("Start");
+    hLayout2->addWidget(&configBtn);
     vLayout->addLayout(hLayout2);
 }
 
 void ChildWidget::InitSignalSlots() const
 {
-    connect(selectFolderBtn, SIGNAL(clicked()), this, SLOT(OpenFolderDialog()));
-    connect(configBtn, SIGNAL(clicked()), this, SLOT(RestartApp()));
+    connect(&selectFolderBtn, SIGNAL(clicked()), this, SLOT(OpenFolderDialog()));
+    connect(&configBtn, SIGNAL(clicked()), this, SLOT(RestartApp()));
 }
 
-void ChildWidget::OpenFolderDialog() const
+void ChildWidget::OpenFolderDialog()
 {
-    QString dirpath = QFileDialog::getExistingDirectory(nullptr, "选择目录", "./", QFileDialog::ShowDirsOnly);
+    QString dirpath = QFileDialog::getExistingDirectory(nullptr, "Select Folder", "./", QFileDialog::ShowDirsOnly);
     if (!dirpath.isNull() && !dirpath.isEmpty()) {
-        jsBundleText->setText(dirpath);
+        jsBundleText.setText(dirpath);
     }
 }
 
 void ChildWidget::RestartApp() const
 {
-    QString workingDirectory = QDir::currentPath();
-    QString iniFilePath = workingDirectory + "/qt.ini";
-    QSettings settings(iniFilePath, QSettings::IniFormat);
-    settings.setValue("JSBundlePath", jsBundleText->text());
-    settings.setValue("JSHeapSize", jsHeapText->text());
+    SimulatorConfig::GetInstance().SetConfigValue("JSBundlePath", jsBundleText.text());
+    SimulatorConfig::GetInstance().SetConfigValue("JSHeapSize", jsHeapText.text());
     QString program = QApplication::applicationFilePath();
     QStringList arguments = QApplication::arguments();
-    QProcess::startDetached(program, arguments, workingDirectory);
+    QProcess::startDetached(program, arguments, QDir::currentPath());
     QApplication::exit();
 }

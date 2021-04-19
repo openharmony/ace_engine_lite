@@ -13,30 +13,21 @@
  * limitations under the License.
  */
 
-#ifndef CHILD_WIDGET_H
-#define CHILD_WIDGET_H
+#ifndef SIMULATOR_CONFIG_H
+#define SIMULATOR_CONFIG_H
 
-#include <QLineEdit>
-#include <QObject>
-#include <QPushButton>
-#include <QWidget>
+#include <QDir>
+#include <QSettings>
+#include <QString>
 
-class ChildWidget : public QWidget {
-    Q_OBJECT
+class SimulatorConfig {
 public:
-    ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSize);
-
-public slots:
-    void OpenFolderDialog();
-    void RestartApp() const;
+    static SimulatorConfig& GetInstance();
+    QString GetConfigValue(QString key);
+    void SetConfigValue(QString key, QString value);
 
 private:
-    void InitPage(QString jsBundlePath, QString jsHeapSize);
-    void InitSignalSlots() const;
-    QLineEdit jsBundleText;
-    QLineEdit jsHeapText;
-    QPushButton configBtn;
-    QPushButton selectFolderBtn;
+    SimulatorConfig();
 };
 
-#endif // CHILD_WIDGET_H
+#endif // SIMULATOR_CONFIG_H
