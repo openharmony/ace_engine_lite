@@ -23,6 +23,12 @@
 const QString CONFIG_FILE_PATH = QDir::currentPath() + "/qt.ini";
 const QString CONFIG_KEY_JSBUNDLE_PATH = "JSBundlePath";
 const QString CONFIG_KEY_JSHEAP_SIZE = "JSHeapSize";
+const int16_t DEFAULT_JSHEAP_SIZE = 64; // KB
+const int16_t MIN_JSHEAP_SIZE = 48; // KB
+const int16_t MAX_JSHEAP_SIZE = 512; // KB
+const int16_t DEFAULT_JSWINDOW_WIDTH = 960; // pixel
+const int16_t DEFAULT_JSWINDOW_HEIGHT = 480; // pixel
+const int16_t CHILD_PAGE_HEIGHT = 100; // pixel
 
 class SimulatorConfig {
 public:

@@ -19,8 +19,6 @@
 #include <QSettings>
 #include <QString>
 
-
-
 SimulatorConfig& SimulatorConfig::GetInstance()
 {
     static SimulatorConfig instance;

@@ -51,9 +51,6 @@ namespace  {
 
     void InitPage(OHOS::MainWidget *mainWidget, int16_t jsWindowHeight, int16_t jsWindowWidth, int16_t childPageHeight)
     {
-        int16_t defaultHeapSize = 64; // KB
-        const int16_t minJSHeapSize = 48; // KB
-        const int16_t maxJSHeapSize = 512; // KB
         QString jsBundlePath = SimulatorConfig::GetInstance().GetConfigValue(CONFIG_KEY_JSBUNDLE_PATH);
         if (jsBundlePath.isNull() || jsBundlePath.isEmpty()) {
             jsBundlePath = "";
@@ -63,10 +60,11 @@ namespace  {
                 jsBundlePath = "";
             }
         }
+        int16_t defaultHeapSize = DEFAULT_JSHEAP_SIZE; // KB
         QString jsHeapSize = SimulatorConfig::GetInstance().GetConfigValue(CONFIG_KEY_JSHEAP_SIZE);
         if (!jsHeapSize.isNull() && !jsHeapSize.isEmpty()) {
             int tempSize = jsHeapSize.toInt();
-            if (tempSize >= minJSHeapSize && tempSize <= maxJSHeapSize) {
+            if (tempSize >= MIN_JSHEAP_SIZE && tempSize <= MAX_JSHEAP_SIZE) {
                 defaultHeapSize = tempSize;
             }
         }
@@ -81,15 +79,13 @@ namespace  {
 
 int main(int argc, char* argv[])
 {
-    const int16_t childPageHeight = 100; // pixel
-    const int16_t defaultJSWindowWidth = 960; // pixel
-    const int16_t defaultJSWindowHeight = 480; // pixel
+
     QApplication app(argc, argv);
     InitUIkit();
     OHOS::MainWidget mainWidget;
     mainWidget.setWindowTitle("ACE Simulator");
-    mainWidget.setFixedSize(defaultJSWindowWidth, defaultJSWindowHeight + childPageHeight);
-    InitPage(&mainWidget, defaultJSWindowHeight, defaultJSWindowWidth, childPageHeight);
+    mainWidget.setFixedSize(DEFAULT_JSWINDOW_WIDTH, DEFAULT_JSWINDOW_HEIGHT + CHILD_PAGE_HEIGHT);
+    InitPage(&mainWidget, DEFAULT_JSWINDOW_HEIGHT, DEFAULT_JSWINDOW_WIDTH, CHILD_PAGE_HEIGHT);
     mainWidget.show();
     return app.exec();
 }
