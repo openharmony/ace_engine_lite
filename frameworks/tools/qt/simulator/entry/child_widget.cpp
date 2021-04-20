@@ -17,9 +17,9 @@
 
 #include <QApplication>
 #include <QDir>
-#include <QHBoxLayout>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QProcess>
@@ -43,30 +43,36 @@ void ChildWidget::InitPage(QString jsBundlePath, QString jsHeapSize)
     QHBoxLayout *hLayout1 = new QHBoxLayout();
     hLayout1->setAlignment(Qt::AlignLeft);
     QLabel *jsBundleLabel = new QLabel();
-    jsBundleLabel->setFixedSize(110, 25);
+    uint16_t jsBundleLabelWidth = 110;
+    uint16_t height = 25;
+    jsBundleLabel->setFixedSize(jsBundleLabelWidth, height);
     jsBundleLabel->setText("JS Bundle:");
     hLayout1->addWidget(jsBundleLabel);
-    jsBundleText.setFixedSize(300, 25);
+    uint16_t jsBundleTextWidth = 300;
+    jsBundleText.setFixedSize(jsBundleTextWidth, height);
     jsBundleText.setText(jsBundlePath);
     hLayout1->addWidget(&jsBundleText);
-    selectFolderBtn.setFixedSize(70, 25);
+    uint16_t selectFolderBtnWidth = 70;
+    selectFolderBtn.setFixedSize(selectFolderBtnWidth, height);
     selectFolderBtn.setText("...");
     hLayout1->addWidget(&selectFolderBtn);
     vLayout->addLayout(hLayout1);
     QHBoxLayout *hLayout2 = new QHBoxLayout();
     hLayout2->setAlignment(Qt::AlignLeft);
     QLabel *jsHeapLabel = new QLabel();
-    jsHeapLabel->setFixedSize(110, 25);
+    jsHeapLabel->setFixedSize(jsBundleLabelWidth, height);
     jsHeapLabel->setText("Heap Size:");
     hLayout2->addWidget(jsHeapLabel);
-    jsHeapText.setFixedSize(100, 25);
+    uint16_t jsHeapTextWidth = 100;
+    jsHeapText.setFixedSize(jsHeapTextWidth, height);
     jsHeapText.setText(jsHeapSize);
     hLayout2->addWidget(&jsHeapText);
     QLabel *heapSizeLable = new QLabel();
-    heapSizeLable->setFixedSize(190, 25);
+    uint16_t jsHeapLabelWidth = 190;
+    heapSizeLable->setFixedSize(jsHeapLabelWidth, height);
     heapSizeLable->setText("Range：48~512 KB");
     hLayout2->addWidget(heapSizeLable);
-    configBtn.setFixedSize(70, 25);
+    configBtn.setFixedSize(selectFolderBtnWidth, height);
     configBtn.setText("Start");
     hLayout2->addWidget(&configBtn);
     vLayout->addLayout(hLayout2);

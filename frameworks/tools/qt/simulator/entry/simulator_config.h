@@ -33,8 +33,8 @@ const int16_t CHILD_PAGE_HEIGHT = 100; // pixel
 class SimulatorConfig {
 public:
     static SimulatorConfig& GetInstance();
-    QString GetConfigValue(QString key);
-    void SetConfigValue(QString key, QString value);
+    QString GetConfigValue(QString key) const;
+    void SetConfigValue(QString key, QString value) const;
 
 private:
     SimulatorConfig();

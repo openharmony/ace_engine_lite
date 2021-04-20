@@ -29,13 +29,13 @@ SimulatorConfig::SimulatorConfig()
 {
 }
 
-QString SimulatorConfig::GetConfigValue(QString key)
+QString SimulatorConfig::GetConfigValue(QString key) const
 {
     QSettings settings(CONFIG_FILE_PATH, QSettings::IniFormat);
     return settings.value(key).toString();
 }
 
-void SimulatorConfig::SetConfigValue(QString key, QString value)
+void SimulatorConfig::SetConfigValue(QString key, QString value) const
 {
     QSettings settings(CONFIG_FILE_PATH, QSettings::IniFormat);
     settings.setValue(key, value);
