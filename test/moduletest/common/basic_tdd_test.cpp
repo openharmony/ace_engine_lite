@@ -200,7 +200,7 @@ void BasicTddTest::Click(const UIView *view, uint8_t sleepTicks) const
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::Click]: Failed to click because view is nullptr");
         return;
     }
-    Rect rect = view->GetRect();
+    Rect rect = view->GetOrigRect();
     int16_t x = rect.GetLeft() + rect.GetWidth() / NUMBER_TWO;
     int16_t y = rect.GetTop() + rect.GetHeight() / NUMBER_TWO;
     return Click(x, y, sleepTicks);
@@ -212,7 +212,7 @@ void BasicTddTest::LongPress(const UIView *view, uint8_t sleepTicks) const
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::LongPress]: Failed to long press because view is nullptr");
         return;
     }
-    Rect rect = view->GetRect();
+    Rect rect = view->GetOrigRect();
     int16_t x = rect.GetLeft() + rect.GetWidth() / NUMBER_TWO;
     int16_t y = rect.GetTop() + rect.GetHeight() / NUMBER_TWO;
     return LongPress(x, y, sleepTicks);
