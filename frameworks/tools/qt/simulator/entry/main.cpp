@@ -14,32 +14,78 @@
  */
 
 #include <iostream>
-#include <QApplication>
 
+
+#include <QApplication>
+#include <QDir>
+#include <QFileInfo>
+#include <QSettings>
+#include <Qt>
+
+#include "child_widget.h"
 #include "graphic_startup.h"
 #include "js_ability.h"
 #include "js_debugger_config.h"
 #include "main_widget.h"
 #include "monitor.h"
+#include "simulator_config.h"
+
+namespace  {
+    void InitUIkit()
+    {
+        OHOS::GraphicStartUp::Init();
+        OHOS::Monitor::GetInstance()->InitHal();
+        OHOS::Monitor::GetInstance()->InitFontEngine();
+        OHOS::Monitor::GetInstance()->InitImageDecodeAbility();
+    }
+
+    void SetJSDebuggerConfig(int32_t defaultHeapSize)
+    {
+        const int16_t bytes = 1024;
+        OHOS::ACELite::DebuggerConfig jsDebuggerConfig;
+        jsDebuggerConfig.startDebuggerServer = false;
+        jsDebuggerConfig.snapshotMode = false;
+        jsDebuggerConfig.heapSize = defaultHeapSize * bytes;
+        OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
+    }
+
+    void InitPage(OHOS::MainWidget *mainWidget, int16_t jsWindowHeight, int16_t jsWindowWidth, int16_t childPageHeight)
+    {
+        QString jsBundlePath = SimulatorConfig::GetInstance().GetConfigValue(CONFIG_KEY_JSBUNDLE_PATH);
+        if (jsBundlePath.isNull() || jsBundlePath.isEmpty()) {
+            jsBundlePath = "";
+        } else {
+            QFileInfo *file = new QFileInfo(jsBundlePath);
+            if (file->exists() == false) {
+                jsBundlePath = "";
+            }
+        }
+        int16_t defaultHeapSize = DEFAULT_JSHEAP_SIZE; // KB
+        QString jsHeapSize = SimulatorConfig::GetInstance().GetConfigValue(CONFIG_KEY_JSHEAP_SIZE);
+        if (!jsHeapSize.isNull() && !jsHeapSize.isEmpty()) {
+            int tempSize = jsHeapSize.toInt();
+            if (tempSize >= MIN_JSHEAP_SIZE && tempSize <= MAX_JSHEAP_SIZE) {
+                defaultHeapSize = tempSize;
+            }
+        }
+        ChildWidget *childWidget = new ChildWidget(mainWidget, jsBundlePath, QString::number(defaultHeapSize));
+        childWidget->setGeometry(QRect(0, jsWindowHeight, jsWindowWidth, childPageHeight));
+        OHOS::ACELite::JSAbility jsAbility;
+        SetJSDebuggerConfig(defaultHeapSize);
+        jsAbility.Launch(jsBundlePath.toStdString().c_str(), "MyApplication", 0);
+        jsAbility.Show();
+    }
+}
 
 int main(int argc, char* argv[])
 {
-    const int32_t defaultHeapSize = 65536; // 64*1024,64kB
     QApplication app(argc, argv);
-    OHOS::GraphicStartUp::Init();
-    OHOS::Monitor::GetInstance()->InitHal();
-    OHOS::Monitor::GetInstance()->InitFontEngine();
-    OHOS::Monitor::GetInstance()->InitImageDecodeAbility();
-    OHOS::ACELite::JSAbility jsAbility;
-    OHOS::ACELite::DebuggerConfig jsDebuggerConfig;
-    jsDebuggerConfig.startDebuggerServer = false;
-    jsDebuggerConfig.snapshotMode = false;
-    jsDebuggerConfig.heapSize = defaultHeapSize;
-    OHOS::ACELite::Debugger::GetInstance().ConfigEngineDebugger(jsDebuggerConfig);
-    jsAbility.Launch("D:\\app\\div", "MyApplication", 0);
-    jsAbility.Show();
+    InitUIkit();
     OHOS::MainWidget mainWidget;
-    mainWidget.resize(OHOS::HORIZONTAL_RESOLUTION, OHOS::VERTICAL_RESOLUTION);
+    mainWidget.setWindowTitle("ACE Simulator");
+    mainWidget.setFixedSize(DEFAULT_JSWINDOW_WIDTH, DEFAULT_JSWINDOW_HEIGHT + CHILD_PAGE_HEIGHT);
+    InitPage(&mainWidget, DEFAULT_JSWINDOW_HEIGHT, DEFAULT_JSWINDOW_WIDTH, CHILD_PAGE_HEIGHT);
     mainWidget.show();
     return app.exec();
 }
+
