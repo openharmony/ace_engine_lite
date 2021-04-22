@@ -1425,8 +1425,8 @@ void EventBubbleTddTest::EventBubbleTest017()
     int16_t startY = rect.GetTop() + rect.GetHeight() - diffY;
     int16_t endY = rect.GetTop() + diffY;
     Swipe(x, startY, x, endY);
-    EXPECT_FALSE(JSObject::GetBooolean(page, "divSwipe"));
-    EXPECT_TRUE(JSObject::GetBooolean(page, "listSwipe"));
+    EXPECT_FALSE(JSObject::GetBoolean(page, "divSwipe"));
+    EXPECT_TRUE(JSObject::GetBoolean(page, "listSwipe"));
     EXPECT_EQ(container->GetOrigRect().GetY(), prevContainerY);
     DestroyPage(page);
     TDD_CASE_END();

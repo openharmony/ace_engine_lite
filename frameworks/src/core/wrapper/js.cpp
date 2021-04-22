@@ -138,7 +138,7 @@ double JSObject::GetNumber(JSValue target, const char * const prop)
     JSRelease(value);
     return number;
 }
-bool JSObject::GetBooolean(JSValue target, const char * const prop)
+bool JSObject::GetBoolean(JSValue target, const char * const prop)
 {
     JSValue value = JSObject::Get(target, prop);
     bool flag = JSBoolean::Value(value);

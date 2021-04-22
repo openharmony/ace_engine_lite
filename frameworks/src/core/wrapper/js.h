@@ -50,7 +50,7 @@ public:
     static JSValue Get(JSValue target, const char * const prop);
     static char *GetString(JSValue target, const char * const prop);
     static double GetNumber(JSValue target, const char * const prop);
-    static bool GetBooolean(JSValue target, const char * const prop);
+    static bool GetBoolean(JSValue target, const char * const prop);
     static void Set(JSValue target, const char * const prop, JSValue value);
     static void SetString(JSValue target, const char * const prop, const char * const value);
     static void SetNumber(JSValue target, const char * const prop, const double value);
