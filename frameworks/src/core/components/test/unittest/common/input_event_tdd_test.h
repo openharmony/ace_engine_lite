@@ -32,6 +32,8 @@ public:
     void InputForTest008();
     void RadioTest009();
     void InputTest010();
+    void CheckboxChangeClick011();
+    void RadioChangeClick012();
 };
 }
 }

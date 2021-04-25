@@ -99,28 +99,32 @@ void InputCheckboxComponent::PostRender()
 
 void InputCheckboxComponent::DealEvent()
 {
-    if (changeListener_ != nullptr) {
-        bool state = (checkbox_.GetState() == UICheckBox::UICheckBoxState::SELECTED);
-        changeListener_->SetState(state);
-        checkbox_.SetOnChangeListener(changeListener_);
-        if (clickListener_ == nullptr) {
-            // trigger changeEvent
-            clickListener_ = new ViewOnClickListener(UNDEFINED, true);
-            if (clickListener_ == nullptr) {
-                HILOG_ERROR(HILOG_MODULE_ACE, "create click listener failed");
-                return;
-            }
-        }
-        clickListener_->SetComponentListener(changeListener_);
-        checkbox_.SetOnClickListener(clickListener_);
-    }
-
     if (normalBackGroundImg_ != nullptr || pressedBackGroundImg_ != nullptr) {
         // make sure the normal and pressed image same in case user only set one of them
         char *normalImg = (normalBackGroundImg_ == nullptr) ? pressedBackGroundImg_ : normalBackGroundImg_;
         char *pressedImg = (pressedBackGroundImg_ == nullptr) ? normalBackGroundImg_ : pressedBackGroundImg_;
         checkbox_.SetImages(pressedImg, normalImg);
     }
+    if ((clickListener_ == nullptr) && (changeListener_ == nullptr)) {
+        return;
+    }
+    if (changeListener_ != nullptr) {
+        bool state = (checkbox_.GetState() == UICheckBox::UICheckBoxState::SELECTED);
+        changeListener_->SetState(state);
+        checkbox_.SetOnChangeListener(changeListener_);
+    }
+
+    if (clickListener_ == nullptr) {
+        // trigger changeEvent
+        clickListener_ = new ViewOnClickListener(UNDEFINED, true);
+        if (clickListener_ == nullptr) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "create click listener failed");
+            return;
+        }
+    }
+
+    clickListener_->SetComponentListener(changeListener_);
+    checkbox_.SetOnClickListener(clickListener_);
 }
 } // namespace ACELite
 } // namespace OHOS
