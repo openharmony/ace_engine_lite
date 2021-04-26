@@ -1564,6 +1564,5 @@ HWTEST_F(InputEventTddTest, RadioChangeClick012, TestSize.Level1)
     DestroyPage(page);
     TDD_CASE_END();
 }
-
 }
 }
