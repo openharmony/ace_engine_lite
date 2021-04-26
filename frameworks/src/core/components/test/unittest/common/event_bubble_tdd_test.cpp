@@ -14,6 +14,8 @@
  */
 #include "event_bubble_tdd_test.h"
 #include <unistd.h>
+#include "flex_layout.h"
+#include "ui_list.h"
 #include "wrapper/js.h"
 
 namespace OHOS {
@@ -904,6 +906,93 @@ const char BUNDLE_CLICK_PRESSURE2[] =
     "  });\n"
     "})();";
 
+const char BUBBLE_PREVENT_DOUBLE_SWIPE[] =
+    "(function () {\n"
+    "  return new ViewModel({\n"
+    "    render: function (vm) {\n"
+    "      var _vm = vm || this;\n"
+    "      return _c(\n"
+    "        'div',\n"
+    "        {\n"
+    "          staticClass: ['container'],\n"
+    "          onBubbleEvents: { swipe: _vm.handleDivSwipe },\n"
+    "          attrs: { ref: 'box' }\n"
+    "        },\n"
+    "        [\n"
+    "          _c('text', { attrs: { value: 'Header' } }),\n"
+    "          _c(\n"
+    "            'list',\n"
+    "            {\n"
+    "              staticClass: ['list'],\n"
+    "              catchBubbleEvents: { swipe: _vm.handleListSwipe },\n"
+    "              attrs: { ref: 'list' }\n"
+    "            },\n"
+    "            [\n"
+    "              _l(\n"
+    "                function () {\n"
+    "                  return _vm.dataSource;\n"
+    "                },\n"
+    "                function (item, $idx) {\n"
+    "                  return _c('list-item', { staticClass: ['list-item'] }, [\n"
+    "                    _c('text', {\n"
+    "                      staticClass: ['title'],\n"
+    "                      attrs: {\n"
+    "                        value: function () {\n"
+    "                          return item.title;\n"
+    "                        }\n"
+    "                      }\n"
+    "                    })\n"
+    "                  ]);\n"
+    "                }\n"
+    "              )\n"
+    "            ]\n"
+    "          ),\n"
+    "          _c('text', { attrs: { value: 'Footer' } }),\n"
+    "        ]\n"
+    "      );\n"
+    "    },\n"
+    "    styleSheet: {\n"
+    "      classSelectors: {\n"
+    "        container: {\n"
+    "          flexDirection: 'column',\n"
+    "          justifyContent: 'center',\n"
+    "          alignItems: 'center',\n"
+    "          height: '200%',\n"
+    "          width: '100%'\n"
+    "        },\n"
+    "        list: {\n"
+    "          backgroundColor: 'blanchedalmond',\n"
+    "          width: '80%',\n"
+    "          height: 400\n"
+    "        },\n"
+    "        'list-item': {\n"
+    "          width: '100%',\n"
+    "          height: 200,\n"
+    "          justifyContent: 'center',\n"
+    "          alignItems: 'center'\n"
+    "        },\n"
+    "      },\n"
+    "    },\n"
+    "    data: {\n"
+    "      dataSource: [\n"
+    "        { title: 'Item 1' },\n"
+    "        { title: 'Item 2' },\n"
+    "        { title: 'Item 3' },\n"
+    "        { title: 'Item 4' },\n"
+    "        { title: 'Item 5' }\n"
+    "      ],\n"
+    "      divSwipe: false,\n"
+    "      listSwipe: false\n"
+    "    },\n"
+    "    handleDivSwipe: function () {\n"
+    "      this.divSwipe = true;\n"
+    "    },\n"
+    "    handleListSwipe: function () {\n"
+    "      this.listSwipe = true;\n"
+    "    }\n"
+    "  });\n"
+    "})();\n";
+
 constexpr uint8_t NUM_TWO = 2;
 constexpr uint8_t NUM_THREE = 3;
 
@@ -1320,6 +1409,29 @@ void EventBubbleTddTest::EventBubbleTest016()
     TDD_CASE_END();
 }
 
+void EventBubbleTddTest::EventBubbleTest017()
+{
+    TDD_CASE_BEGIN();
+
+    JSValue page = CreatePage(BUBBLE_PREVENT_DOUBLE_SWIPE, strlen(BUBBLE_PREVENT_DOUBLE_SWIPE));
+    FlexLayout *container = reinterpret_cast<FlexLayout *>(GetViewByRef(page, "box"));
+    EXPECT_TRUE(container != nullptr);
+    int16_t prevContainerY = container->GetOrigRect().GetY();
+    UIList *list = reinterpret_cast<UIList *>(GetViewByRef(page, "list"));
+    EXPECT_TRUE(list != nullptr);
+    Rect rect = list->GetOrigRect();
+    int16_t diffY = 100;
+    int16_t x = rect.GetLeft() + rect.GetWidth() / NUM_TWO;
+    int16_t startY = rect.GetTop() + rect.GetHeight() - diffY;
+    int16_t endY = rect.GetTop() + diffY;
+    Swipe(x, startY, x, endY);
+    EXPECT_FALSE(JSObject::GetBoolean(page, "divSwipe"));
+    EXPECT_TRUE(JSObject::GetBoolean(page, "listSwipe"));
+    EXPECT_EQ(container->GetOrigRect().GetY(), prevContainerY);
+    DestroyPage(page);
+    TDD_CASE_END();
+}
+
 void EventBubbleTddTest::RunTests()
 {
     EventBubbleTest001();
@@ -1338,6 +1450,7 @@ void EventBubbleTddTest::RunTests()
     EventBubbleTest014();
     EventBubbleTest015();
     EventBubbleTest016();
+    EventBubbleTest017();
 }
 
 #ifdef TDD_ASSERTIONS
@@ -1499,6 +1612,16 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest015, TestSize.Level1)
 HWTEST_F(EventBubbleTddTest, EventBubbleTest016, TestSize.Level1)
 {
     EventBubbleTddTest::EventBubbleTest016();
+}
+
+/* *
+ * @tc.name: EventBubbleTest017
+ * @tc.desc: Verify event bubble.
+ * @tc.require: AR000F3PDN
+ */
+HWTEST_F(EventBubbleTddTest, EventBubbleTest017, TestSize.Level1)
+{
+    EventBubbleTddTest::EventBubbleTest017();
 }
 
 #endif // TDD_ASSERTIONS

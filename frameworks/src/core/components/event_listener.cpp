@@ -117,8 +117,17 @@ bool ViewOnTouchCancelListener::OnCancel(UIView &view, const CancelEvent &event)
 
 bool ViewOnSwipeListener::OnDragStart(UIView& view, const DragEvent &event)
 {
+    UNUSED(view);
     UNUSED(event);
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDragStart received");
+    return isStopPropagation_;
+}
+
+bool ViewOnSwipeListener::OnDrag(UIView& view, const DragEvent& event)
+{
+    UNUSED(view);
+    UNUSED(event);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "OnDrag received");
     return isStopPropagation_;
 }
 

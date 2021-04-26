@@ -40,6 +40,7 @@ public:
     void EventBubbleTest014();
     void EventBubbleTest015();
     void EventBubbleTest016();
+    void EventBubbleTest017();
     void RunTests();
 };
 } // namespace ACELite
