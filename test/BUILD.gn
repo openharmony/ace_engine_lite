@@ -42,6 +42,7 @@ config("test_whole_archive_config") {
 
 group("unittest") {
   deps = [
+    "$ace_lite_root/test/moduletest/common:door_unittest",
     "$cache_manager_unittest_root:cache_manager_unittest",
     "$components_unittest_root:components_unittest",
     "$context_unittest_root:js_frameworks_unittest",
