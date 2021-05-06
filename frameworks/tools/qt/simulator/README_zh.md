@@ -6,15 +6,17 @@
 
 ​    本工程基于QT Creator搭建，开发者使用前需要下载和安装QT Creator。
 
-1. **安装程序下载。**地址：https://www.qt.io/offline-installers ，安装程序较大，建议下载离线稳定版本。
+1. **安装程序下载。**
 
-2. **双击安装程序安装。**安装前需要注册账号（已注册直接登录），登录完成后，按引导界面完成安装即可。
+   地址：https://www.qt.io/offline-installers ，安装程序较大，建议下载离线稳定版本。
+
+2. **双击安装程序安装。**
+
+   安装前需要注册账号（已注册直接登录），登录完成后，按引导界面完成安装即可。
 
    *注意安装时，在选择组件界面，Qt x.x.x展开栏和Developer and Designer Tools展开栏都要勾选minGW组件（基于当前电脑操作系统选择32-bit还是64-bit）。*
 
-
-
-<img src="..\..\..\..\figures\MinGW-select.png" style="zoom:80%;" />
+![安装组件选择](../../../../figures/MinGW-select.png)
 
 
 
