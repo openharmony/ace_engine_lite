@@ -721,6 +721,110 @@ const char BUNDLE10[] =
     "});\n"
     "})();\n";
 
+const char BUNDLE11[] =
+    "(function() {\n"
+    "return new ViewModel({\n"
+    "render:function (vm) {\n"
+    "  var _vm = vm || this;\n"
+    "  return _c('stack', {'staticClass' : ['stack']} , [\n"
+    "    _c('input', {'attrs' : {'type' : 'checkbox'},\n"
+    "      'staticStyle' : {'left' : '20%','top' : '20%'},\n"
+    "      'onBubbleEvents' : {'click' : _vm.clickOnly}} ),\n"
+    "    _c('input', {'attrs' : {'type' : 'checkbox'},\n"
+    "      'staticStyle' : {'left' : '20%','top' : '40%','width' : '15%','height' : '15%'},\n"
+    "      'onBubbleEvents' : {'change' : _vm.changeOnly}}),\n"
+    "    _c('input', {'attrs' : {'type' : 'checkbox'},\n"
+    "      'staticStyle' : {'left' : '20%','top' : '60%','width' : '15%','height' : '15%'},\n"
+    "      'onBubbleEvents' : {'click' : _vm.clickOnly,'change' : _vm.changeOnly}}),\n"
+    "    _c('text', {'attrs' : {'value' : function () {return (_vm.click) + ' ' + (_vm.change)}},\n"
+    "      'staticClass' : ['text']} )\n"
+    "      ])},\n"
+    "styleSheet: {\n"
+    "  classSelectors : {\n"
+    "    'stack' : {\n"
+    "      'width' : '100%',\n"
+    "      'height' : '100%'\n"
+    "    },\n"
+    "    'text' : {\n"
+    "      'width' : '40%',\n"
+    "      'top' : '80%',\n"
+    "      'left' : '30%'\n"
+    "    }\n"
+    "  },\n"
+    "},\n"
+    "data : {\n"
+    "  'click' : 'click',\n"
+    "  'change' : 'none'\n"
+    "},\n"
+    "clickOnly: function() {\n"
+    "  if (this.click == 'click') {\n"
+    "    this.click = 'clicked';\n"
+    "  } else {\n"
+    "    this.click = 'click';\n"
+    "  }\n"
+    "},\n"
+    "changeOnly: function(e) {\n"
+    "  if (e.checked) {\n"
+    "    this.change = 'changed';\n"
+    "  } else {\n"
+    "    this.change = 'change';\n"
+    "  }\n"
+    "}\n"
+    "});\n"
+    "})();\n";
+
+const char BUNDLE12[] =
+    "(function() {\n"
+    "return new ViewModel({\n"
+    "render:function (vm) {\n"
+    "  var _vm = vm || this;\n"
+    "  return _c('stack', {'staticClass' : ['stack']} , [\n"
+    "    _c('input', {'attrs' : {'type' : 'radio'},\n"
+    "      'staticStyle' : {'left' : '20%','top' : '20%'},\n"
+    "      'onBubbleEvents' : {'click' : _vm.clickOnly}} ),\n"
+    "    _c('input', {'attrs' : {'type' : 'radio'},\n"
+    "      'staticStyle' : {'left' : '20%','top' : '40%','width' : '15%','height' : '15%'},\n"
+    "      'onBubbleEvents' : {'change' : _vm.changeOnly}}),\n"
+    "    _c('input', {'attrs' : {'type' : 'radio'},\n"
+    "      'staticStyle' : {'left' : '20%','top' : '60%','width' : '15%','height' : '15%'},\n"
+    "      'onBubbleEvents' : {'click' : _vm.clickOnly,'change' : _vm.changeOnly}}),\n"
+    "    _c('text', {'attrs' : {'value' : function () {return (_vm.click) + ' ' + (_vm.change)}},\n"
+    "      'staticClass' : ['text']} )\n"
+    "      ])},\n"
+    "styleSheet: {\n"
+    "  classSelectors : {\n"
+    "    'stack' : {\n"
+    "      'width' : '100%',\n"
+    "      'height' : '100%'\n"
+    "    },\n"
+    "    'text' : {\n"
+    "      'width' : '40%',\n"
+    "      'top' : '80%',\n"
+    "      'left' : '30%'\n"
+    "    }\n"
+    "  },\n"
+    "},\n"
+    "data : {\n"
+    "  'click' : 'click',\n"
+    "  'change' : 'none'\n"
+    "},\n"
+    "clickOnly: function() {\n"
+    "  if (this.click == 'click') {\n"
+    "    this.click = 'clicked';\n"
+    "  } else {\n"
+    "    this.click = 'click';\n"
+    "  }\n"
+    "},\n"
+    "changeOnly: function(e) {\n"
+    "  if (e.checked) {\n"
+    "    this.change = 'changed';\n"
+    "  } else {\n"
+    "    this.change = 'change';\n"
+    "  }\n"
+    "}\n"
+    "});\n"
+    "})();\n";
+
 void InputEventTddTest::ClickPosition(const double xRate, const double yRate) const
 {
     // compute the position
@@ -1344,6 +1448,119 @@ HWTEST_F(InputEventTddTest, InputTest010, TestSize.Level1)
     value = JSObject::GetString(page, "value");
     EXPECT_FALSE((value == nullptr) || (strcmp(value, "China11!")));
     ACE_FREE(value);
+    DestroyPage(page);
+    TDD_CASE_END();
+}
+
+/**
+ * @tc.name: CheckboxChangeClick011
+ * @tc.desc: test the click and change event in checkbox
+ */
+HWTEST_F(InputEventTddTest, CheckboxChangeClick011, TestSize.Level0)
+{
+    TDD_CASE_BEGIN();
+    /**
+     * @tc.steps:step1.eval js bundle
+     * @tc.expected:step1.eval js success
+     */
+    JSValue page = CreatePage(BUNDLE11, strlen(BUNDLE11));
+    EXPECT_FALSE(JSUndefined::Is(page));
+
+    /**
+     * @tc.steps:step2.click the first checkbox
+     * @tc.expected:step2.the click value is clicked, the change value is none
+     */
+    const double xRate = 0.2;
+    double yRate = 0.2;
+    ClickPosition(xRate, yRate);
+    char *click = JSObject::GetString(page, "click");
+    EXPECT_FALSE((click == nullptr) || (strcmp(click, "clicked")));
+    ACE_FREE(click);
+    char *change = JSObject::GetString(page, "change");
+    EXPECT_FALSE((change == nullptr) || (strcmp(change, "none")));
+    ACE_FREE(change);
+
+    /**
+     * @tc.steps: step3.click the second checkbox
+     * @tc.expected:step3.the click value is clicked, the change value is changed
+     */
+    yRate = 0.4;
+    ClickPosition(xRate, yRate);
+    click = JSObject::GetString(page, "click");
+    EXPECT_FALSE((click == nullptr) || (strcmp(click, "clicked")));
+    ACE_FREE(click);
+    change = JSObject::GetString(page, "change");
+    EXPECT_FALSE((change == nullptr) || (strcmp(change, "changed")));
+    ACE_FREE(change);
+
+    /**
+     * @tc.steps: step4.click the third checkbox
+     * @tc.expected: step5.the click value is click, the change value is changed
+     */
+    yRate = 0.6;
+    ClickPosition(xRate, yRate);
+    click = JSObject::GetString(page, "click");
+    EXPECT_FALSE((click == nullptr) || (strcmp(click, "click")));
+    ACE_FREE(click);
+    change = JSObject::GetString(page, "change");
+    EXPECT_FALSE((change == nullptr) || (strcmp(change, "changed")));
+    ACE_FREE(change);
+    DestroyPage(page);
+    TDD_CASE_END();
+}
+
+/**
+ * @tc.name: RadioChangeClick012
+ * @tc.desc: test click and change event in radio
+ */
+HWTEST_F(InputEventTddTest, RadioChangeClick012, TestSize.Level1)
+{
+    /**
+     * @tc.steps:step1.eval js bundle
+     * @tc.expected:step1.eval js success
+     */
+    JSValue page = CreatePage(BUNDLE12, strlen(BUNDLE12));
+    EXPECT_FALSE(JSUndefined::Is(page));
+
+    /**
+     * @tc.steps:step2.click the first radio
+     * @tc.expected:step2.the click value is clicked, the change value is none
+     */
+    const double xRate = 0.2;
+    double yRate = 0.2;
+    ClickPosition(xRate, yRate);
+    char *click = JSObject::GetString(page, "click");
+    EXPECT_FALSE((click == nullptr) || (strcmp(click, "clicked")));
+    ACE_FREE(click);
+    char *change = JSObject::GetString(page, "change");
+    EXPECT_FALSE((change == nullptr) || (strcmp(change, "none")));
+    ACE_FREE(change);
+
+    /**
+     * @tc.steps: step3.click the second radio
+     * @tc.expected:step3.the click value is clicked, the change value is changed
+     */
+    yRate = 0.4;
+    ClickPosition(xRate, yRate);
+    click = JSObject::GetString(page, "click");
+    EXPECT_FALSE((click == nullptr) || (strcmp(click, "clicked")));
+    ACE_FREE(click);
+    change = JSObject::GetString(page, "change");
+    EXPECT_FALSE((change == nullptr) || (strcmp(change, "changed")));
+    ACE_FREE(change);
+
+    /**
+     * @tc.steps: step4.click the third radio
+     * @tc.expected: step5.the click value is click, the change value is changed
+     */
+    yRate = 0.6;
+    ClickPosition(xRate, yRate);
+    click = JSObject::GetString(page, "click");
+    EXPECT_FALSE((click == nullptr) || (strcmp(click, "click")));
+    ACE_FREE(click);
+    change = JSObject::GetString(page, "change");
+    EXPECT_FALSE((change == nullptr) || (strcmp(change, "changed")));
+    ACE_FREE(change);
     DestroyPage(page);
     TDD_CASE_END();
 }
