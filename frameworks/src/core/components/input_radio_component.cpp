@@ -109,6 +109,16 @@ void InputRadioComponent::PostRender()
 
 void InputRadioComponent::DealEvent()
 {
+    if (normalBackGroundImg_ != nullptr || pressedBackGroundImg_ != nullptr) {
+        // make sure the normal and pressed image same in case user only set one of them
+        char *normalImg = (normalBackGroundImg_ == nullptr) ? pressedBackGroundImg_ : normalBackGroundImg_;
+        char *pressedImg = (pressedBackGroundImg_ == nullptr) ? normalBackGroundImg_ : pressedBackGroundImg_;
+        radioButton_.SetImages(pressedImg, normalImg);
+    }
+
+    if ((clickListener_ == nullptr) && (changeListener_ == nullptr)) {
+        return;
+    }
     if (changeListener_ != nullptr) {
         bool state = (radioButton_.GetState() == UICheckBox::UICheckBoxState::SELECTED);
         changeListener_->SetState(state);
@@ -126,13 +136,6 @@ void InputRadioComponent::DealEvent()
 
     clickListener_->SetComponentListener(changeListener_);
     radioButton_.SetOnClickListener(clickListener_);
-
-    if (normalBackGroundImg_ != nullptr || pressedBackGroundImg_ != nullptr) {
-        // make sure the normal and pressed image same in case user only set one of them
-        char *normalImg = (normalBackGroundImg_ == nullptr) ? pressedBackGroundImg_ : normalBackGroundImg_;
-        char *pressedImg = (pressedBackGroundImg_ == nullptr) ? normalBackGroundImg_ : pressedBackGroundImg_;
-        radioButton_.SetImages(pressedImg, normalImg);
-    }
 }
 } // namespace ACELite
 } // namespace OHOS
