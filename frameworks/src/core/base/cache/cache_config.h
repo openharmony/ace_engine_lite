@@ -23,15 +23,20 @@ namespace ACELite {
 /**
  * The magic number used at the beginning of every cache memory area.
  */
+constexpr uint8_t MAGIC_NUMBER_COUNT = 2; // will put one magic number at the begin and end of every buffer for each
 constexpr uint8_t MAGIC_NUMBER_LENGTH = 4; // count in bytes
+constexpr uint8_t MAGIC_NUMBER_TOTAL_LENGTH_FOR_EACH = MAGIC_NUMBER_LENGTH * MAGIC_NUMBER_COUNT;
 constexpr uint32_t CACHE_MEM_MAGIC_NUMBER = 0xCCCCCCCC;
 
 constexpr uint8_t ALIGNMENT_SIZE = 8;
+
+constexpr uint8_t CACHE_USER_MAX_COUNT = 16;
 
 /**
  * Every cache user can not use more than the max length buffer.
  * Count in KB.
  */
+constexpr uint16_t CACHE_REQUIREMENT_MAX_KBS = 4096; // the cache max total size, 4M
 constexpr uint8_t CACHE_UNIT_MAX_KBS = 128; // max 128KB
 constexpr uint32_t CACHE_UNIT_MAX_BYTES = CACHE_UNIT_MAX_KBS * 1024;
 
@@ -50,7 +55,7 @@ enum CacheUser : uint8_t {
 struct CacheUnit {
     // the cache unit owner
     CacheUser cacheUser_;
-    // the required min buffer length, count in KB, max is 255KB
+    // the required min buffer length, count in KB
     uint8_t minLength_;
     // constructors
     CacheUnit() : cacheUser_(USER_MAX_COUNT), minLength_(CACHE_UNIT_MAX_KBS) {}

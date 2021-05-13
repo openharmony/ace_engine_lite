@@ -56,9 +56,9 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute001, TestSize.Level1)
     size_t localicationBufSize = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
     const uintptr_t targetPos = startAddr + MAGIC_NUMBER_LENGTH;
     const size_t unit = 1024;
-    const uint8_t magicNumberCount = 2;
+    const uint8_t magicNumberCount = MAGIC_NUMBER_COUNT;
     const uint8_t localicationMin = 16;
-    const size_t targetLength = (localicationMin * unit) + (magicNumberCount * MAGIC_NUMBER_LENGTH);
+    const size_t targetLength = localicationMin * unit;
     EXPECT_EQ(localicationPos, targetPos);
     EXPECT_EQ(localicationBufSize, targetLength);
     ace_free(buffer);
@@ -99,10 +99,10 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute002, TestSize.Level1)
     uintptr_t bufferPos = CacheManager::GetInstance().GetCacheBufAddress(CacheUser::USER_LOCALICATION);
     size_t bufSize = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
     const size_t unit = 1024;
-    const uint8_t magicNumberCount = 2;
+    const uint8_t magicNumberCount = MAGIC_NUMBER_COUNT;
     uintptr_t targetPos =
         startAddr + (pageFileBufLength * unit) + (magicNumberCount * MAGIC_NUMBER_LENGTH) + MAGIC_NUMBER_LENGTH;
-    const size_t targetLength = (localicationBufLength * unit) + (magicNumberCount * MAGIC_NUMBER_LENGTH);
+    const size_t targetLength = localicationBufLength * unit;
     EXPECT_EQ(bufferPos, targetPos);
     EXPECT_EQ(bufSize, targetLength);
     ace_free(buffer);
@@ -169,8 +169,8 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute004, TestSize.Level1)
     size_t bufLength = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
     uint32_t headMagicNumber = *(uint32_t *)(bufStartPos - MAGIC_NUMBER_LENGTH);
     EXPECT_EQ(headMagicNumber, CACHE_MEM_MAGIC_NUMBER);
-    const uint8_t magicNumberCount = 2;
-    uint32_t tailMagicNumber = *(uint32_t *)(bufStartPos + bufLength - (magicNumberCount * MAGIC_NUMBER_LENGTH));
+    const uint8_t magicNumberCount = MAGIC_NUMBER_COUNT;
+    uint32_t tailMagicNumber = *(uint32_t *)(bufStartPos + bufLength);
     EXPECT_EQ(tailMagicNumber, CACHE_MEM_MAGIC_NUMBER);
     ace_free(buffer);
     buffer = nullptr;
@@ -216,6 +216,39 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute005, TestSize.Level1)
 }
 
 /**
+ * @tc.name: CacheDistributeTest006
+ * @tc.desc: Verify the cache distribution process, considering the magic number length
+ * @tc.require: AR000F8FOG
+ */
+HWTEST_F(CacheManagerTddTest, CacheDistribute006, TestSize.Level1)
+{
+    /**
+     * @tc.steps: step1. prepare cache buffer
+     */
+    const size_t totalSize = 16 * 1024; // 16KB, the total length equals to the requirement
+    char *buffer = static_cast<char *>(ace_malloc(sizeof(char) * totalSize));
+    if (buffer == nullptr) {
+        return;
+    }
+
+    /**
+     * @tc.steps: step2. trigger the cache setup, will failed, as no extra space for the magic numbers
+     */
+    uintptr_t startAddr = reinterpret_cast<uintptr_t>(buffer);
+    CacheManager::GetInstance().SetupCacheMemInfo(startAddr, totalSize);
+
+    /**
+     * @tc.steps: step3. check the result, the distributing will fail
+     */
+    uintptr_t bufStartPos = CacheManager::GetInstance().GetCacheBufAddress(CacheUser::USER_LOCALICATION);
+    size_t bufLength = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
+    EXPECT_EQ(bufStartPos, 0);
+    EXPECT_EQ(bufLength, 0);
+    ace_free(buffer);
+    buffer = nullptr;
+}
+
+/**
  * used for debugging TDD implementation on simulator
  */
 void CacheManagerTddTest::RunTests()
@@ -226,6 +259,7 @@ void CacheManagerTddTest::RunTests()
     CacheDistribute003();
     CacheDistribute004();
     CacheDistribute005();
+    CacheDistribute006();
 #endif // TDD_ASSERTIONS
 }
 } // namespace ACELite

@@ -50,7 +50,9 @@ class CacheManager final {
 public:
     static CacheManager &GetInstance();
     void SetupCacheMemInfo(uintptr_t startAddr, size_t length);
+    // return the start addrss of the assigned buffer the unit can use, which doesn't includ the starting magic number
     uintptr_t GetCacheBufAddress(CacheUser user) const;
+    // return the total buffer length the unit can use, which doesn't include the starting and ending magic numbers
     size_t GetCacheBufLength(CacheUser user) const;
     bool IsCacheAvailable(CacheUser user) const;
     bool IsCacheOverflow(CacheUser user) const;
@@ -73,11 +75,12 @@ private:
     /**
      * @brief DistributeCacheRange called once to assign proper memory rang to all the user in the config table
      * @param startAddr the entire cache buffer start address
-     * @param length the entire cache length
+     * @param totalBytes the entire cache length
      * @return the result of the assignment process, if the memory size can not meet the  lowest request, the process
      * will return false as failure
      */
-    CacheSetupState DistributeCacheRange(uintptr_t startAddr, size_t length);
+    CacheSetupState DistributeCacheRange(uintptr_t startAddr, size_t totalBytes);
+    CacheSetupState PrecheckStatus(uintptr_t startAddr, size_t length);
     bool IsEnvReady(CacheUser user) const;
     CacheMemInfo wholeCacheMemInfo_;
     CacheMemInfo cacheUnitInfo_[USER_MAX_COUNT]; // count in bytes
