@@ -33,6 +33,7 @@
 #define LOG_TAG "ACE"
 #include "hilog/log.h"
 #elif defined(FEATURE_ACELITE_MC_LOG_PRINTF)
+#include "hilog/log.h"
 #ifndef HILOG_DEBUG
 #define HILOG_DEBUG(mod, format, ...)
 #endif
