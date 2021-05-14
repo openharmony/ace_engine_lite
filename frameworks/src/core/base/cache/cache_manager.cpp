@@ -81,7 +81,7 @@ void CacheManager::SetupCacheMemInfo(uintptr_t startAddr, size_t length)
     wholeCacheMemInfo_.cacheLength = length;
 }
 
-CacheSetupState CacheManager::PrecheckStatus(uintptr_t startAddr, size_t totalBytes)
+CacheSetupState CacheManager::PrecheckStatus(uintptr_t startAddr, size_t totalBytes) const
 {
     // check basic info
     if (configTableLen_ == 0 || configTable_ == nullptr) {
@@ -133,7 +133,7 @@ CacheSetupState CacheManager::DistributeCacheRange(uintptr_t startAddr, size_t t
     constexpr uint16_t bytesOneKB = 1024;
     size_t offset = 0;
     while (index < configTableLen_) {
-        size_t requestBytes = (configTable_[index].minLength_ * bytesOneKB)+ MAGIC_NUMBER_TOTAL_LENGTH_FOR_EACH;
+        size_t requestBytes = (configTable_[index].minLength_ * bytesOneKB) + MAGIC_NUMBER_TOTAL_LENGTH_FOR_EACH;
         uintptr_t startPos = startAddr + offset;
         cacheUnitInfo_[configTable_[index].cacheUser_].cacheStartAddr = startPos;
         cacheUnitInfo_[configTable_[index].cacheUser_].cacheLength = requestBytes;
