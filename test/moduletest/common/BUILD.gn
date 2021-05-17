@@ -51,7 +51,6 @@ unittest("js_frameworks_tdd_door") {
     "$ace_lite_src_core/modules/presets/test/unittest/common/number_format_module_tdd_test.cpp",
     "$ace_lite_src_core/modules/presets/test/unittest/common/timer_module_tdd_test.cpp",
     "$ace_lite_src_core/modules/test/unittest/common/dfx_tdd_test.cpp",
-    "$ace_lite_src_core/modules/test/unittest/common/dialog_tdd_test.cpp",
     "$ace_lite_src_core/stylemgr/test/unittest/common/stylemgr_tdd_test.cpp",
   ]
   deps = all_external_deps
