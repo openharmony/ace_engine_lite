@@ -1,5 +1,4 @@
 TEMPLATE = lib
-CONFIG += staticlib
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
@@ -216,5 +215,5 @@ INCLUDEPATH += \
             $${ROOT_PATH}/foundation/aafwk/aafwk_lite/frameworks/abilitymgr_lite/include \
             $${ROOT_PATH}/foundation/communication/ipc_lite/liteipc/include \
 
-
-
+LIBS += $$DESTDIR/jerryScript.dll
+LIBS += $$OUT_PWD/../../../../../../../graphic/ui/tools/qt/simulator/libs/libui.dll
