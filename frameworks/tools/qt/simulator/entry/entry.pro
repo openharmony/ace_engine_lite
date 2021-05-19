@@ -7,29 +7,16 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES -= UNICODE
 DEFINES += QT_COMPILER
 DEFINES += Q_OBJECT
-DEFINES += QT_DEPRECATED_WARNINGS
-
-JSDESTDIR = ../libs
-
-LIBS += -L$$JSDESTDIR \
-        -ljsfwk \
-        -ljerryScript
+DEFINES += QT_DEPRECATED_WARNINGS \
+"ENABLE_ICU=1" \
+"ENABLE_VECTOR_FONT=1"
+DESTDIR = ../libs
 
 ROOT_PATH = ../../../../../../../..
 FOUNDATION_PATH = ../../../../../../..
 ACELITE_PATH = ../../../../..
 ACELITE_FRAMEWORK_PATH = ../../../..
 UIDESTDIR = $${ROOT_PATH}/foundation/graphic/ui/tools/qt/simulator
-
-LIBS += -L$$UIDESTDIR/libs \
-        -llibui \
-        -lfreetype \
-        -lharfbuzz \
-        -licu \
-        -llibpng \
-        -lzlib \
-        -llibjpeg \
-        -lqrcodegen
 
 INCLUDEPATH += \
     $${ACELITE_PATH}/interfaces/innerkits/builtin/async \
@@ -41,6 +28,7 @@ INCLUDEPATH += \
     $${FOUNDATION_PATH}/../third_party/freetype/include \
     $${FOUNDATION_PATH}/graphic/ui/interfaces/innerkits \
     $${FOUNDATION_PATH}/graphic/ui/frameworks \
+    $${FOUNDATION_PATH}/graphic/ui/test/framework \
     $${FOUNDATION_PATH}/graphic/ui/interfaces/kits \
     $${FOUNDATION_PATH}/graphic/ui/interfaces/innerkits/common \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers \
@@ -61,6 +49,7 @@ HEADERS += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.h \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/ui_mainwidget.h \
     $${ACELITE_FRAMEWORK_PATH}/include/context/js_ability.h \
+    $${FOUNDATION_PATH}/graphic/ui/test/framework/common/ui_text_language.h \
     child_widget.h \
     simulator_config.h
 
@@ -71,7 +60,23 @@ SOURCES += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mouse_input.cpp \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.cpp \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/test/framework/common/ui_text_language.cpp \
+    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/key_input.cpp \
     child_widget.cpp \
     main.cpp \
     simulator_config.cpp
-    
+
+LIBS += $$DESTDIR/jsfwk.dll
+LIBS += $$DESTDIR/jerryScript.dll
+LIBS += $$UIDESTDIR/libs/libui.dll
+
+COPY_DEST = $$replace(OUT_PWD, /, \\)
+UILIBS = $$FOUNDATION_PATH/graphic/ui/tools/qt/simulator/libs
+UI_LIBS = $$replace(UILIBS, /, \\)
+QMAKE_POST_LINK += copy $$UI_LIBS\\freetype.dll $$COPY_DEST\\..\\libs\\freetype.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\icu.dll $$COPY_DEST\\..\\libs\\icu.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\libjpeg.dll $$COPY_DEST\\..\\libs\\libjpeg.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\libpng.dll $$COPY_DEST\\..\\libs\\libpng.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\libui.dll $$COPY_DEST\\..\\libs\\libui.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\qrcodegen.dll $$COPY_DEST\\..\\libs\\qrcodegen.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\zlib.dll $$COPY_DEST\\..\\libs\\zlib.dll
