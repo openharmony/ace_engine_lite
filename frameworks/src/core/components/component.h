@@ -215,7 +215,7 @@ public:
     /**
      * @brief This function will be called after the ApplyCommonStyle, make padding style work.
      */
-    bool AdaptBoxSizing() const;
+    bool AdaptBoxSizing(uint16_t attrKeyId = K_UNKNOWN) const;
     void AlignDimensions(const ConstrainedParameter &param);
 
 protected:
@@ -513,6 +513,7 @@ private:
      * @brief Apply combined styles into native view.
      */
     void ApplyStyles(const jerry_value_t options, Component& currentComponent) const;
+    bool IsLayoutRelatedAttrs(uint16_t attrKeyId) const;
     void ApplyAlignedPosition(UIView &uiView) const;
     void AdapteBoxRectArea(UIView &uiView) const;
     void SetVisible(UIView& view, const AppStyleItem *styleItem) const;
