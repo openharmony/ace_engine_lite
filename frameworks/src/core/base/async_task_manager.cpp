@@ -62,7 +62,7 @@ AsyncTaskManager::AsyncTaskManager()
 #endif
 }
 
-AsyncTaskManager::~AsyncTaskManager()
+void AsyncTaskManager::Reset()
 {
     while (head_ != nullptr) {
         AsyncTask *task = head_;
@@ -81,6 +81,7 @@ AsyncTaskManager &AsyncTaskManager::GetInstance()
 
 void AsyncTaskManager::Init()
 {
+    Reset(); // make sure no residual task in list
     if (initialized_) {
         // do not add repeatly
         return;
