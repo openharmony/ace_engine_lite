@@ -31,20 +31,17 @@ void ListTddTest::SetUp()
 
     objGlob = jerry_get_global_object();
 
-    jerry_value_t keyAttrs = jerry_create_string((const jerry_char_t*)"attrs");
     objAttrs = jerry_create_object();
-    jerry_set_property(objGlob, keyAttrs, objAttrs);
-    jerry_release_value(keyAttrs);
+    JSObject::Set(objGlob, "attrs", objAttrs);
 
-    jerry_value_t keyStaticStyle = jerry_create_string(reinterpret_cast<const jerry_char_t *>("staticStyle"));
     objStaticStyle = jerry_create_object();
-    jerry_set_property(objGlob, keyStaticStyle, objStaticStyle);
-    jerry_release_value(keyStaticStyle);
+    JSObject::Set(objGlob, "staticStyle", objStaticStyle);
 }
 
 void ListTddTest::TearDown()
 {
     JsAppContext::GetInstance()->ReleaseStyles();
+    ReleaseJerryValue(objGlob, objAttrs, objStaticStyle, VA_ARG_END_FLAG);
 }
 
 void ListTddTest::ListTest001()
@@ -53,17 +50,15 @@ void ListTddTest::ListTest001()
     /**
      * @tc.steps: step1. setting flex-direction style = row.
      */
-    jerry_value_t keyDirection = jerry_create_string((const jerry_char_t*)"flexDirection");
-    jerry_value_t valueDirection = jerry_create_string((const jerry_char_t*)"row");
-    jerry_set_property(objStaticStyle, keyDirection, valueDirection);
+    JSObject::SetString(objStaticStyle, "flexDirection", "row");
 
     jerry_value_t children = jerry_create_null();
     uint16_t componentNameId = KeyParser::ParseKeyId("list", strlen("list"));
     Component* component = ComponentFactory::CreateComponent(componentNameId, objGlob, children);
-
+    jerry_release_value(children);
     component->Render();
 
-    UIViewGroup* listView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
+    UIList* listView = reinterpret_cast<UIList *>(component->GetComponentRootView());
 
 #ifdef TDD_ASSERTIONS
     char className[] = "N4OHOS6UIListE";
@@ -71,21 +66,20 @@ void ListTddTest::ListTest001()
     char className[] = "class OHOS::UIList";
 #endif
 
-    static constexpr uint8_t horizontal = 0;
-
     /**
      * @tc.expected: step1. get flex-direction style = row.
      */
     if (strcmp(className, typeid(*listView).name()) == 0 &&
-        reinterpret_cast<UIList *>(listView)->GetDirection() == horizontal) {
+        reinterpret_cast<UIList *>(listView)->GetDirection() == UIList::HORIZONTAL) {
         printf("[Test Case] [ListTest001] PASSED\n");
     } else {
         printf("[Test Case] [ListTest001] FAILED\n");
     }
     EXPECT_TRUE(strcmp(className, typeid(*listView).name()) == 0 &&
-        reinterpret_cast<UIList *>(listView)->GetDirection() == horizontal);
-    delete (listView);
-    listView = nullptr;
+        reinterpret_cast<UIList *>(listView)->GetDirection() == UIList::HORIZONTAL);
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -95,14 +89,13 @@ void ListTddTest::ListTest002()
     /**
      * @tc.steps: step1. setting flex-direction style = column.
      */
-    jerry_value_t keyDirection = jerry_create_string((const jerry_char_t*)"flexDirection");
-    jerry_value_t valueDirection = jerry_create_string((const jerry_char_t*)"column");
-    jerry_set_property(objStaticStyle, keyDirection, valueDirection);
+    JSObject::SetString(objStaticStyle, "flexDirection", "column");
 
     jerry_value_t children = jerry_create_null();
 
     uint16_t componentNameId = KeyParser::ParseKeyId("list", strlen("list"));
     Component* component = ComponentFactory::CreateComponent(componentNameId, objGlob, children);
+    jerry_release_value(children);
 
     component->Render();
 
@@ -126,8 +119,9 @@ void ListTddTest::ListTest002()
     }
     EXPECT_TRUE(strcmp(className, typeid(*listView).name()) == 0 &&
         reinterpret_cast<UIList *>(listView)->GetDirection() == vertical);
-    delete (listView);
-    listView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -137,15 +131,13 @@ void ListTddTest::ListTest003()
     /**
      * @tc.steps: step1. setting not exist flex-direction style = abcd.
      */
-    jerry_value_t keyDirection = jerry_create_string((const jerry_char_t*)"flexDirection");
-    jerry_value_t valueDirection = jerry_create_string((const jerry_char_t*)"abcd");
-    jerry_set_property(objStaticStyle, keyDirection, valueDirection);
+    JSObject::SetString(objStaticStyle, "flexDirection", "abcd");
 
     jerry_value_t children = jerry_create_null();
 
     uint16_t componentNameId = KeyParser::ParseKeyId("list", strlen("list"));
     Component* component = ComponentFactory::CreateComponent(componentNameId, objGlob, children);
-
+    jerry_release_value(children);
     component->Render();
 
     UIViewGroup* listView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
@@ -169,8 +161,9 @@ void ListTddTest::ListTest003()
     }
     EXPECT_TRUE(strcmp(className, typeid(*listView).name()) == 0 &&
         reinterpret_cast<UIList *>(listView)->GetDirection() == vertical);
-    delete (listView);
-    listView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -180,15 +173,13 @@ void ListTddTest::ListTest004()
     /**
      * @tc.steps: step1. not setting flex-direction style.
      */
-    jerry_value_t keyWidth = jerry_create_string((const jerry_char_t*)"width");
-    jerry_value_t valueWidth = jerry_create_string((const jerry_char_t*)"240");
-    jerry_set_property(objStaticStyle, keyWidth, valueWidth);
+    JSObject::SetString(objStaticStyle, "width", "240");
 
     jerry_value_t children = jerry_create_null();
 
     uint16_t componentNameId = KeyParser::ParseKeyId("list", strlen("list"));
     Component* component = ComponentFactory::CreateComponent(componentNameId, objGlob, children);
-
+    jerry_release_value(children);
     component->Render();
 
     UIViewGroup* listView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
@@ -212,8 +203,9 @@ void ListTddTest::ListTest004()
     }
     EXPECT_TRUE(strcmp(className, typeid(*listView).name()) == 0 &&
         reinterpret_cast<UIList *>(listView)->GetDirection() == vertical);
-    delete (listView);
-    listView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
