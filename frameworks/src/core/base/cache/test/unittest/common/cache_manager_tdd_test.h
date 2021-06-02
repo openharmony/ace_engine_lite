@@ -43,6 +43,7 @@ public:
     void CacheDistribute003();
     void CacheDistribute004();
     void CacheDistribute005();
+    void CacheDistribute006();
     void RunTests();
 
 private:

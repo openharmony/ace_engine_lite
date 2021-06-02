@@ -81,37 +81,59 @@ void CacheManager::SetupCacheMemInfo(uintptr_t startAddr, size_t length)
     wholeCacheMemInfo_.cacheLength = length;
 }
 
-CacheSetupState CacheManager::DistributeCacheRange(uintptr_t startAddr, size_t totalBytes)
+CacheSetupState CacheManager::PrecheckStatus(uintptr_t startAddr, size_t totalBytes) const
 {
+    // check basic info
     if (configTableLen_ == 0 || configTable_ == nullptr) {
         // no user, return normal as no one cares
         return STATE_NORMAL;
+    }
+    if (configTableLen_ > CACHE_USER_MAX_COUNT) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "too many user!");
+        return STATE_FAILURE;
     }
     if (startAddr == 0 || totalBytes == 0) {
         HILOG_ERROR(HILOG_MODULE_ACE, "error cache buffer rang!");
         return STATE_FAILURE;
     }
-    // count in KB
-    size_t lowestRequirement = 0;
+
+    // calculate the lowest requirement
+    size_t lowestRequiredKBs = 0;
     size_t index = 0;
     while (index < configTableLen_) {
-        lowestRequirement = lowestRequirement + configTable_[index].minLength_;
+        lowestRequiredKBs = lowestRequiredKBs + configTable_[index].minLength_;
         index++;
     }
+    if (lowestRequiredKBs > CACHE_REQUIREMENT_MAX_KBS) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "the requirement KBs is too much!");
+        return STATE_FAILURE;
+    }
+
     constexpr uint16_t bytesOneKB = 1024;
-    size_t totalKBs = totalBytes / bytesOneKB;
-    if (lowestRequirement > totalKBs) {
+    // convert the required KBs to bytes
+    size_t totalRequiredBytes = lowestRequiredKBs * bytesOneKB;
+    // consider the magic number length for each unit
+    totalRequiredBytes += (configTableLen_ * MAGIC_NUMBER_TOTAL_LENGTH_FOR_EACH);
+    if (totalRequiredBytes > totalBytes) {
         // the given buffer is less than the lowest requirement
         HILOG_ERROR(HILOG_MODULE_ACE, "the cache buffer length can not meet the lowest requirement!");
         return STATE_FAILURE;
     }
+    return STATE_SUCCESS;
+}
 
-    index = 0;
-    // will put one magic number at the begin and end of every buffer
-    constexpr uint8_t magicNumberCount = 2;
+CacheSetupState CacheManager::DistributeCacheRange(uintptr_t startAddr, size_t totalBytes)
+{
+    CacheSetupState setupResult = PrecheckStatus(startAddr, totalBytes);
+    if (setupResult != STATE_SUCCESS) {
+        return setupResult;
+    }
+
+    size_t index = 0;
+    constexpr uint16_t bytesOneKB = 1024;
     size_t offset = 0;
     while (index < configTableLen_) {
-        size_t requestBytes = (configTable_[index].minLength_ * bytesOneKB) + (MAGIC_NUMBER_LENGTH * magicNumberCount);
+        size_t requestBytes = (configTable_[index].minLength_ * bytesOneKB) + MAGIC_NUMBER_TOTAL_LENGTH_FOR_EACH;
         uintptr_t startPos = startAddr + offset;
         cacheUnitInfo_[configTable_[index].cacheUser_].cacheStartAddr = startPos;
         cacheUnitInfo_[configTable_[index].cacheUser_].cacheLength = requestBytes;
@@ -145,7 +167,7 @@ size_t CacheManager::GetCacheBufLength(CacheUser user) const
     if (!IsEnvReady(user)) {
         return 0;
     }
-    return cacheUnitInfo_[user].cacheLength;
+    return cacheUnitInfo_[user].cacheLength - MAGIC_NUMBER_TOTAL_LENGTH_FOR_EACH;
 }
 
 bool CacheManager::IsCacheOverflow(CacheUser user) const
