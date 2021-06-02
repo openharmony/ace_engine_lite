@@ -16,6 +16,9 @@
 #ifndef OHOS_ACELITE_CONFIG_H
 #define OHOS_ACELITE_CONFIG_H
 
+// some features depend on the low layer configuration
+#include "graphic_config.h"
+
 /**
  * ================================================================================================
  *                 config for win simulator
@@ -144,5 +147,15 @@
 // path format is different on linux or apple with windows
 #define PROFILER_ENABLE_FLAG_FILE "~/profiler_enable"
 #endif
+
+/**
+ * Rotation API feature
+ */
+#if (defined(ENABLE_ROTATE_INPUT) && (ENABLE_ROTATE_INPUT == 1))
+// low layer supports
+#ifndef FEATURE_ROTATION_API
+#define FEATURE_ROTATION_API
+#endif
+#endif // (defined(ENABLE_ROTATE_INPUT) && (ENABLE_ROTATE_INPUT == 1))
 
 #endif // OHOS_ACELITE_CONFIG_H
