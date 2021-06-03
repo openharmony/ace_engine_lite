@@ -932,8 +932,8 @@ HWTEST_F(InputEventTddTest, InputEventTest002, TestSize.Level1)
      * @tc.steps:step2.click the one arg button
      * @tc.expected: step2.the value attribute is clickOne
      */
-    const double xRate = 0.3;
-    double yRate = 0.2;
+    const double xRate = 0.5;
+    double yRate = 0.3;
     ClickPosition(xRate, yRate);
     char *textValue = JSObject::GetString(page, "value");
     EXPECT_FALSE((textValue == nullptr) || (strcmp(textValue, "clickOne")));
@@ -952,7 +952,7 @@ HWTEST_F(InputEventTddTest, InputEventTest002, TestSize.Level1)
      * @tc.steps: step4.click the no arg button
      * @tc.expected: step4.the value of attribute is 'clickNo'
      */
-    yRate = 0.45;
+    yRate = 0.5;
     ClickPosition(xRate, yRate);
     textValue = JSObject::GetString(page, "value");
     EXPECT_FALSE((textValue == nullptr) || (strcmp(textValue, "clickNo")));
