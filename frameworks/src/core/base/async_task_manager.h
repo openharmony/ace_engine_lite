@@ -58,7 +58,9 @@ public:
 private:
     AsyncTaskManager();
 
-    ~AsyncTaskManager();
+    ~AsyncTaskManager() = default;
+
+    void Reset();
 
     AsyncTask *head_;
     AsyncTask *tail_;
