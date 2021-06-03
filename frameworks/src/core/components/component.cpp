@@ -240,7 +240,7 @@ bool Component::UpdateView(uint16_t attrKeyId, jerry_value_t attrValue)
         parent_->GetConstrainedParam(parentParam);
         AlignDimensions(parentParam);
     }
-    AdaptBoxSizing();
+    AdaptBoxSizing(attrKeyId);
     // force parent to relayout the children in case component's area is changed
     InvalidateIfNeeded(attrKeyId, false);
     if (updateResult) {
@@ -423,6 +423,16 @@ void Component::ApplyAlignedMargin(UIView &uiView) const
     }
 }
 
+bool Component::IsLayoutRelatedAttrs(uint16_t attrKeyId) const
+{
+    return (attrKeyId == K_HEIGHT || attrKeyId == K_WIDTH || attrKeyId == K_MARGIN || attrKeyId == K_MARGIN_BOTTOM ||
+            attrKeyId == K_MARGIN_LEFT || attrKeyId == K_MARGIN_RIGHT || attrKeyId == K_MARGIN_TOP ||
+            attrKeyId == K_PADDING || attrKeyId == K_PADDING_BOTTOM || attrKeyId == K_PADDING_LEFT ||
+            attrKeyId == K_PADDING_RIGHT || attrKeyId == K_PADDING_TOP || attrKeyId == K_BORDER_BOTTOM_WIDTH ||
+            attrKeyId == K_BORDER_LEFT_WIDTH || attrKeyId == K_BORDER_RIGHT_WIDTH || attrKeyId == K_BORDER_TOP_WIDTH ||
+            attrKeyId == K_BORDER_WIDTH || attrKeyId == K_BORDER_RADIUS || attrKeyId == K_LEFT || attrKeyId == K_TOP);
+}
+
 void Component::ApplyAlignedPosition(UIView &uiView) const
 {
     if (top_.type == DimensionType::TYPE_PIXEL) {
@@ -477,14 +487,17 @@ void Component::AdapteBoxRectArea(UIView &uiView) const
     }
 }
 
-bool Component::AdaptBoxSizing() const
+bool Component::AdaptBoxSizing(uint16_t attrKeyId) const
 {
     UIView *uiView = GetComponentRootView();
     if (uiView == nullptr) {
         return false;
     }
-    // apply aligned top and left
-    ApplyAlignedPosition(*uiView);
+    bool isNeedAlignedPosition = ((attrKeyId == K_UNKNOWN) ? true : IsLayoutRelatedAttrs(attrKeyId));
+    if (isNeedAlignedPosition) {
+        // apply aligned top and left
+        ApplyAlignedPosition(*uiView);
+    }
     // apply aligned magin
     ApplyAlignedMargin(*uiView);
     // adjust the box sizing
@@ -1289,12 +1302,7 @@ void Component::InvalidateIfNeeded(uint16_t attrKeyId, bool invalidateSelf) cons
         return;
     }
 
-    if (attrKeyId == K_HEIGHT || attrKeyId == K_WIDTH || attrKeyId == K_MARGIN || attrKeyId == K_MARGIN_BOTTOM ||
-        attrKeyId == K_MARGIN_LEFT || attrKeyId == K_MARGIN_RIGHT || attrKeyId == K_MARGIN_TOP ||
-        attrKeyId == K_PADDING || attrKeyId == K_PADDING_BOTTOM || attrKeyId == K_PADDING_LEFT ||
-        attrKeyId == K_PADDING_RIGHT || attrKeyId == K_PADDING_TOP || attrKeyId == K_BORDER_BOTTOM_WIDTH ||
-        attrKeyId == K_BORDER_LEFT_WIDTH || attrKeyId == K_BORDER_RIGHT_WIDTH || attrKeyId == K_BORDER_TOP_WIDTH ||
-        attrKeyId == K_BORDER_WIDTH || attrKeyId == K_BORDER_RADIUS || attrKeyId == K_LEFT || attrKeyId == K_TOP) {
+    if (IsLayoutRelatedAttrs(attrKeyId)) {
         if (invalidateSelf) {
             uiView->Invalidate();
             return;
