@@ -1,7 +1,6 @@
 TEMPLATE = lib
 CONFIG += console c++11
 CONFIG -= app_bundle
-CONFIG -= qt
 
 LOSCFG_TEST_JS_BUILD = false
 is_debug = debug
@@ -30,7 +29,7 @@ ACELITE_CORE_PATH = $${ACELITE_FRAMEWORK_PATH}/src/core
 
 SOURCES += \
         $${ACELITE_CORE_PATH}/animation/transition_impl.cpp \
-        #$${ACELITE_CORE_PATH}/async/js_async_work.cpp \
+        $${ACELITE_CORE_PATH}/async/js_async_work.cpp \
         #$${ACELITE_CORE_PATH}/async/message_queue_utils.cpp \
         $${ACELITE_CORE_PATH}/base/ace_log.cpp \
         $${ACELITE_CORE_PATH}/base/ace_mem_base.cpp \
@@ -129,14 +128,17 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/stylemgr/app_style_sheet.cpp \
         $${ACELITE_CORE_PATH}/wrapper/js.cpp \
         $${ACELITE_FRAMEWORK_PATH}/targets/platform_adapter.cpp \
-        #$${ACELITE_CORE_PATH}/modules/presets/feature_ability_module.cpp \
-        targets/simulator/mock/async_work_manager.cpp \
         targets/simulator/mock/hal_sys_param.cpp \
-        targets/simulator/mock/js_async_work.cpp
+        targets/simulator/mock/message_queue_utils.cpp \ # the mocked message queue
+        targets/simulator/mock/mock_services.cpp \ # the mocked message queue
+        targets/simulator/mock/jsthread/js_thread.cpp \
+        targets/simulator/mock/vsyncthread/vsync_dispatch_manager.cpp \
+        targets/simulator/mock/vsyncthread/vsync_thread.cpp \
+        targets/simulator/mock/amsthread/ams_thread.cpp \
+        targets/simulator/mock/timerthread/timer_thread.cpp
 
 HEADERS += \
-        $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/components/ui_view.h \
-        targets/simulator/mock/async_work_manager.h
+        $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/components/ui_view.h
 
 
 INCLUDEPATH += \
@@ -189,6 +191,10 @@ INCLUDEPATH += \
             $${ACELITE_FRAMEWORK_PATH}/targets \
             targets/simulator \
             targets/simulator/mock \
+            targets/simulator/mock/jsthread \
+            targets/simulator/mock/vsyncthread \
+            targets/simulator/mock/amsthread \
+            targets/simulator/mock/timerthread \
             $${ROOT_PATH}/kernel/liteos_a/kernel/include/ \
             $${ROOT_PATH}/kernel/liteos_a/kernel/common \
             $${ROOT_PATH}/third_party/jerryscript/jerry-core/include \

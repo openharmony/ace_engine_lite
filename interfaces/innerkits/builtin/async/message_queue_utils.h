@@ -70,6 +70,7 @@ typedef void* QueueHandler;
 enum AbilityMsgId {
     UNKNOWN,
     START_ABILITY,
+    START,
     ACTIVE,
     NEW_DATA,
     BACKGROUND,

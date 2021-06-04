@@ -36,7 +36,13 @@ INCLUDEPATH += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev \
     $${ACELITE_FRAMEWORK_PATH}/targets/simulator \
-    $${ACELITE_FRAMEWORK_PATH}/include/context/
+    $${ACELITE_FRAMEWORK_PATH}/include/context/ \
+    $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock \
+    $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock/jsthread \
+    $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock/vsyncthread \
+    $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock/amsthread \
+    $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock/timerthread \
+    $${FOUNDATION_PATH}/../utils/native/lite/timer_task/include/
 
 HEADERS += \
     $${FOUNDATION_PATH}/graphic/ui/interfaces/innerkits/font/ui_font_vector.h \
@@ -59,9 +65,9 @@ SOURCES += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/display/task_thread.cpp \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mouse_input.cpp \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/mousewheel_input.cpp \
-    $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/uitest/main_widget.cpp \
     $${FOUNDATION_PATH}/graphic/ui/test/framework/common/ui_text_language.cpp \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev/key_input.cpp \
+    main_widget.cpp \
     child_widget.cpp \
     main.cpp \
     simulator_config.cpp

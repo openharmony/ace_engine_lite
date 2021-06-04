@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 #ifndef OHOS_ACELITE_CONFIG_H
 #define OHOS_ACELITE_CONFIG_H
 
@@ -83,21 +83,20 @@
 #define FEATURE_MODULE_CONFIGURATION
 
 /**
- * timer module
- */
-#define FEATURE_TIMER_MODULE
-
-/**
  * support storage API for JS
  */
 #define FEATURE_MODULE_STORAGE
-
 
 /**
  * localization module
  */
 #define FEATURE_LOCALIZATION_MODULE
-#endif
+#endif // QT_SIMULATOR
+
+/**
+ * timer module
+ */
+#define FEATURE_TIMER_MODULE
 
 #define FEATURE_CUSTOM_ENTRY_PAGE
 

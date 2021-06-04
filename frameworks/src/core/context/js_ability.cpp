@@ -22,10 +22,10 @@
 #include "async_task_manager.h"
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
 #include "dft_impl.h"
-#include "js_async_work.h"
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "fatal_handler.h"
 #include "js_ability_impl.h"
+#include "js_async_work.h"
 #include "js_profiler.h"
 #include "product_adapter.h"
 
@@ -212,7 +212,6 @@ void JSAbility::HandleRenderTick()
     LazyLoadHandleRenderTick(nullptr);
 #endif
 
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
     if ((ProductAdapter::IsTEHandlersRegisted()) && !(FatalHandler::GetInstance().IsAppExiting())) {
         FatalHandler::GetInstance().SetTEHandlingFlag(true);
         ProductAdapter::ProcessOneTE();
@@ -222,7 +221,6 @@ void JSAbility::HandleRenderTick()
         }
         FatalHandler::GetInstance().SetTEHandlingFlag(false);
     }
-#endif // OHOS_ACELITE_PRODUCT_WATCH
 }
 } // namespace ACELite
 } // namespace OHOS

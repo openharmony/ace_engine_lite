@@ -15,19 +15,20 @@
 
 #include <iostream>
 
-
 #include <QApplication>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
 #include <Qt>
 
+#include "ability_manager_interface.h"
 #include "child_widget.h"
 #include "graphic_startup.h"
 #include "js_ability.h"
 #include "js_debugger_config.h"
 #include "main_widget.h"
 #include "monitor.h"
+#include "product_adapter.h"
 #include "simulator_config.h"
 
 namespace  {
@@ -70,17 +71,28 @@ namespace  {
         }
         ChildWidget *childWidget = new ChildWidget(mainWidget, jsBundlePath, QString::number(defaultHeapSize));
         childWidget->setGeometry(QRect(0, jsWindowHeight, jsWindowWidth, childPageHeight));
-        OHOS::ACELite::JSAbility jsAbility;
         SetJSDebuggerConfig(defaultHeapSize);
-        jsAbility.Launch(jsBundlePath.toStdString().c_str(), "MyApplication", 0);
-        jsAbility.Show();
+        childWidget->StartApp(jsBundlePath.toStdString().c_str());
     }
+}
+
+static void TerminateInterface(uint32_t token, bool forceStop)
+{
+    (void)(forceStop);
+    TerminateAbility(token);
+}
+
+static void RegisterTerminateHandler()
+{
+    OHOS::ACELite::ProductAdapter::RegTerminatingHandler(TerminateInterface);
 }
 
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
     InitUIkit();
+    // do some product adapter mock
+    RegisterTerminateHandler();
     OHOS::MainWidget mainWidget;
     mainWidget.setWindowTitle("ACE Simulator");
     mainWidget.setFixedSize(DEFAULT_JSWINDOW_WIDTH, DEFAULT_JSWINDOW_HEIGHT + CHILD_PAGE_HEIGHT);
