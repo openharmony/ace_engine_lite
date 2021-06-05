@@ -130,6 +130,11 @@ void JSAbility::TransferToDestroy()
     ProductAdapter::UpdateShowingState(false);
     FatalHandler::GetInstance().ResetRendering();
     FatalHandler::GetInstance().SetExitingFlag(false);
+#ifdef FEATURE_SCREEN_ON_VISIBLE
+    if (ProductAdapter::SetScreenOnVisible(false) == false) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "Fail to recover screen visible property");
+    }
+#endif
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
     JsAsyncWork::SetAppQueueHandler(nullptr);
     DftImpl::GetInstance()->RegisterPageReplaced(nullptr);
@@ -196,7 +201,7 @@ void JSAbility::HandleRenderTick()
         // skip the TE tick if we are not forground
         ProductAdapter::NotifyRenderEnd();
         errorTickCount_++;
-        if (errorTickCount_ %  ERR_TICK_COUNT_TRACE_CTRL == 1) {
+        if ((errorTickCount_ % ERR_TICK_COUNT_TRACE_CTRL) == 1) {
             HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not actived, count[%d]", errorTickCount_);
         }
         if (errorTickCount_ == UINT32_MAX) {

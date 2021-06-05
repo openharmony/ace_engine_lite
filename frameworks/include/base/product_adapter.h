@@ -48,12 +48,12 @@ typedef void (*NativeMemInfoGetter)(NativeMemInfo *memInfo);
 /**
  * Product modules hook.
  */
-typedef Module* (*ProductModulesGetter)(uint16_t& moduleCount);
+typedef Module *(*ProductModulesGetter)(uint16_t &moduleCount);
 
 /**
  * Private modules hook.
  */
-typedef PrivateModule* (*PrivateModulesGetter)(uint16_t& moduleCount);
+typedef PrivateModule *(*PrivateModulesGetter)(uint16_t &moduleCount);
 
 /**
  * The hook for terminating ability.
@@ -66,6 +66,11 @@ typedef void (*TerminateAbilityHandler)(uint32_t token, bool forceStop);
  */
 typedef void (*RenderTEHandler)();
 typedef void (*VoidFuncHook)();
+
+/**
+ * The hook for screen on visible.
+ */
+typedef bool (*SetScreenOnVisibleHandler)(bool visible);
 
 /**
  * The wrapper data structure for get native memory pool info.
@@ -105,6 +110,7 @@ public:
     static TEDispatchingResult DispatchTEMessage();
     static void SetDefaultFontStyle(const char *defaultFontFamily, uint8_t defaultFontSize);
     static void SetScreenSize(uint16_t width, uint16_t height);
+    static void RegSetScreenOnVisibleHandler(SetScreenOnVisibleHandler handler);
 
     // wrapper functions, for ace internal calling
     static void PrintEventTrace(uint8_t info2, uint8_t info3, uint8_t info4);
@@ -119,6 +125,7 @@ public:
     static uint8_t GetDefaultFontSize();
     static void UpdateShowingState(bool forground);
     static void GetScreenSize(uint16_t &width, uint16_t &height);
+    static bool SetScreenOnVisible(bool visible);
 };
 } // namespace ACELite
 } // namespace OHOS

@@ -17,6 +17,7 @@
 #define OHOS_ACELITE_APP_MODULE_H
 
 #include <cJSON.h>
+#include "acelite_config.h"
 #include "jsi.h"
 #include "non_copyable.h"
 
@@ -27,8 +28,11 @@ public:
     ACE_DISALLOW_COPY_AND_MOVE(AppModule);
     AppModule() = default;
     ~AppModule() = default;
-    static JSIValue GetInfo(const JSIValue thisVal, const JSIValue* args, uint8_t argsNum);
-    static JSIValue Terminate(const JSIValue thisVal, const JSIValue* args, uint8_t argsNum);
+    static JSIValue GetInfo(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
+    static JSIValue Terminate(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
+#ifdef FEATURE_SCREEN_ON_VISIBLE
+    static JSIValue ScreenOnVisible(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
+#endif
 
 private:
     static const char * const FILE_MANIFEST;
@@ -37,11 +41,29 @@ private:
     static const char * const KEY_VERSION_CODE;
 
     static cJSON* ReadManifest();
+
+#ifdef FEATURE_SCREEN_ON_VISIBLE
+    static const char * const SCREEN_ON_VISIBLE_KEY;
+    static const char * const SCREEN_ON_VISIBLE_DATA;
+    static const char * const SCREEN_ON_VISIBLE_CODE;
+    static const char * const SCREEN_ON_VISIBLE_INVALID_PARAMETER;
+    static const uint8_t SCREEN_ON_VISIBLE_ERR;
+
+    static void OnSetActionSuccess(const JSIValue thisVal, const JSIValue *args);
+    static void OnSetActionFail(const JSIValue thisVal, const JSIValue *args);
+    static void OnSetActionComplete(const JSIValue thisVal, const JSIValue *args);
+    static void AsyncCallFunction(const JSIValue thisVal, const JSIValue callback, const JSIValue result);
+    static void Execute(void *data);
+#endif
 };
+
 void InitAppModule(JSIValue exports)
 {
     JSI::SetModuleAPI(exports, "getInfo", AppModule::GetInfo);
     JSI::SetModuleAPI(exports, "terminate", AppModule::Terminate);
+#ifdef FEATURE_SCREEN_ON_VISIBLE
+    JSI::SetModuleAPI(exports, "screenOnVisible", AppModule::ScreenOnVisible);
+#endif
 }
 } // namespace ACELite
 } // namespace OHOS
