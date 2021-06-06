@@ -1,4 +1,4 @@
-# JS Application Framework<a name="EN-US_TOPIC_0000001125689015"></a>
+# JS UI Framework<a name="EN-US_TOPIC_0000001125689015"></a>
 
 -   [Introduction](#section11660541593)
 -   [Directory Structure](#section1464106163817)
@@ -8,13 +8,13 @@
 
 ## Introduction<a name="section11660541593"></a>
 
-The JS application framework is provided for you to develop OpenHarmony JavaScript applications. The following figure shows the framework architecture.
+The JS UI framework is a set of JS-UI framework provided for you to develop OpenHarmony applications. The following figure shows the framework architecture.
 
 **Figure  1**  Framework architecture<a name="fig11520531310"></a>
 
 ![](figures/framework-architecture.png "framework-architecture")
 
-The JS application framework consists of the JavaScript data binding framework, JavaScript runtime, and JavaScript framework.
+The JS UI framework consists of the JavaScript data binding framework, JavaScript runtime, and JavaScript framework.
 
 -   **JavaScript data binding**
 
@@ -46,7 +46,7 @@ The source code of the framework is stored in  **/foundation/ace/ace\_engine\_li
 │   └── tools       # Tool code
 ├── interfaces      # APIs exposed externally
 │   └── innerkits   # Header files for internal subsystems
-│       └── builtin # JavaScript third-party module APIs exposed by the JS application framework
+│       └── builtin # JavaScript third-party module APIs exposed by the JS UI framework
 └── test            # Test cases
 ```
 
@@ -58,7 +58,7 @@ For details about the APIs, see the  [JS Application Development](https://device
 
 For details, go to the  **readme**  repository:
 
-[https://gitee.com/openharmony/docs/blob/master/en/readme/js-application-framework.md](https://gitee.com/openharmony/docs/blob/master/en/readme/js-application-framework.md)
+[https://gitee.com/openharmony/docs/blob/master/en/readme/js-ui-framework.md](https://gitee.com/openharmony/docs/blob/master/en/readme/js-ui-framework.md)
 
 ## Repositories Involved<a name="section11683135113011"></a>
 
