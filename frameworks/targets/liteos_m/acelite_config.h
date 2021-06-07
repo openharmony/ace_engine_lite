@@ -47,6 +47,11 @@
  */
 #define FEATURE_TERMINATE_ABILITY
 
+/**
+ * support screenOnVisible() API from JS
+ */
+#define FEATURE_SCREEN_ON_VISIBLE
+
 #ifdef ACELITE_DEPENDENCY_IS_READY
 /**
  * enable FeatureAbility API

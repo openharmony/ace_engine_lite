@@ -51,6 +51,7 @@ struct DFXWrapper {
 static DFXWrapper g_dfxWrapper;
 static TEHandlingHooks g_teHandlingHooks = {nullptr, nullptr};
 static TerminateAbilityHandler g_termiantingHandler = nullptr;
+static SetScreenOnVisibleHandler g_setScreenOnHandler = nullptr;
 // default font styles
 static char *g_defaultFontFamilyName = nullptr;
 static uint8_t g_defaultFontSize = 30;
@@ -220,6 +221,16 @@ void ProductAdapter::GetScreenSize(uint16_t &width, uint16_t &height)
 {
     width = g_screenWidth;
     height = g_screenHeight;
+}
+
+void ProductAdapter::RegSetScreenOnVisibleHandler(SetScreenOnVisibleHandler handler)
+{
+    g_setScreenOnHandler = handler;
+}
+
+bool ProductAdapter::SetScreenOnVisible(bool visible)
+{
+    return (g_setScreenOnHandler != nullptr) ? g_setScreenOnHandler(visible) : false;
 }
 } // namespace ACELite
 } // namespace OHOS
