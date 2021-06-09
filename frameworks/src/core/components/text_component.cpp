@@ -130,7 +130,7 @@ void TextComponent::SetTextLetterSpace(UILabel &label, const AppStyleItem *style
 
 void TextComponent::SetTextLineHeight(UILabel &label, const AppStyleItem *styleItem) const
 {
-    label.SetStyle(STYLE_LINE_SPACE, (int16_t)GetStylePixelValue(styleItem));
+    label.SetStyle(STYLE_LINE_HEIGHT, (int16_t)GetStylePixelValue(styleItem));
 }
 
 void TextComponent::SetTextOverflow(UILabel &label, const AppStyleItem *styleItem)
