@@ -53,34 +53,26 @@
 
    - 点击configure project按钮加载工程。
 
-3. **设置JS bundle路径**
-
-   - 展开项目树
-
-     ```
-     simulator
-       |-entry
-         |-Sources
-           |-main.cpp
-     ```
-
-   - 双击main.cpp文件，修改
-
-     `jsAbility.Launch("D:\\app\\slider", "MyApplication", 0)`
-
-     函数中的第一个参数为要运行的JS bundle路径。
-
-     备注：JS bundle可通过下载DevEco Studio创建后编译生成，示例源码可从目录ace_engine_lite\frameworks\examples获取
-
-4. **编译**
+3. **编译**
 
     依次点击：**构建—>编译项目**，或者直接在项目树中右键，在右键菜单中选择**重新构建**即可。
 
-5. **调试**
+4. **调试**
 
     编译完成后，点击调试按钮即可运行调试。
 
+5. **设置JS bundle路径**
 
+    项目第一次启动时，由于未配置JS Bundle路径，无法正常显示应用，需要开发者手动配置路径，配置后再次启动时会根据已配置信息显示应用。
+
+    配置方法：点击界面下方JS Bundle目录选择按钮，选择JS Bundle所在目录，然后点击Start按钮即可启动。
+
+    备注：JS Bundle可通过下载DevEco Studio创建应用后编译生成（编译生成的JS Bundle路径：项目所在目录\entry\build\intermediates\res\debug\lite\assets\js\default），部分应用示例源码可从目录ace_engine_lite\frameworks\examples      
+    获取。JS应用开发可参考文档  https://device.harmonyos.com/cn/docs/develop/demo/oem_camera_fa_des-0000001050065839。 
+
+6. **备注**
+
+  1、当前模拟器工程暂时只支持UI调试，不支持JS API，如果项目中使用了部分JS API，可能会导致应用无法正常显示。对JS API的支持会陆续增加完善，敬请期待。
 
 ### 场景二：C++ UI应用打开方式：
 
