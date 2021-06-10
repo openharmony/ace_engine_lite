@@ -494,7 +494,7 @@ bool CJSONParser::CacheValue(const char *key, cJSON item)
     if ((item.type == cJSON_Number) || (item.type == cJSON_String)) {
         result = PutNumOrStrValue(mergeKey, item);
     } else if (item.type == cJSON_Object) {
-        if ((cJSON_IsNull(item.child)) || (!CacheValue(mergeKey, *item.child))) {
+        if ((item.child == nullptr) || (!CacheValue(mergeKey, *item.child))) {
             result = false;
         }
     } else {
@@ -533,8 +533,10 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key, jerry_value_t args,
             result = jerry_create_number(curJsonItem->valuedouble);
         } else {
             char *value = FillPlaceholder(curJsonItem->valuestring, args, argsNum);
-            result = jerry_create_string(reinterpret_cast<jerry_char_t *>(value));
-            ACE_FREE(value);
+            if (value != nullptr) {
+                result = jerry_create_string(reinterpret_cast<jerry_char_t *>(value));
+                ACE_FREE(value);
+            }
         }
     }
     cJSON_Delete(fileJson);
