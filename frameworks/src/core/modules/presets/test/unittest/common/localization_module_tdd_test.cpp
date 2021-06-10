@@ -21,7 +21,7 @@
 #include "test_common.h"
 namespace OHOS {
 namespace ACELite {
-void LocalizationModuleTest::SetUp()
+void LocalizationModuleTddTest::SetUp()
 {
 #ifdef TARGET_SIMULATOR
     constexpr char testAppPath[] = "..\\moduletest\\unittest";
@@ -47,7 +47,7 @@ void LocalizationModuleTest::SetUp()
     localization_ = jerryx_get_property_str(viewModel_, "$t");
 }
 
-void LocalizationModuleTest::TearDown()
+void LocalizationModuleTddTest::TearDown()
 {
     if (viewModel_ != 0) {
         jerry_release_value(viewModel_);
@@ -62,7 +62,7 @@ void LocalizationModuleTest::TearDown()
     env->Cleanup();
 }
 
-char *LocalizationModuleTest::GetLocalizationResult(const jerry_value_t args[], const jerry_size_t argsNum) const
+char *LocalizationModuleTddTest::GetLocalizationResult(const jerry_value_t args[], const jerry_size_t argsNum) const
 {
     jerry_value_t result = CallJSFunction(localization_, viewModel_, args, argsNum);
     if (jerry_value_is_error(result)) {
@@ -78,7 +78,7 @@ char *LocalizationModuleTest::GetLocalizationResult(const jerry_value_t args[], 
  * @tc.desc: Test null object value in resource file
  * @tc.require: AR000EUO7G
  */
-HWTEST_F(LocalizationModuleTest, TestNullValue009, TestSize.Level1)
+HWTEST_F(LocalizationModuleTddTest, TestNullValue009, TestSize.Level1)
 {
     TDD_CASE_BEGIN();
 
@@ -94,7 +94,7 @@ HWTEST_F(LocalizationModuleTest, TestNullValue009, TestSize.Level1)
 }
 
 #ifndef TDD_ASSERTIONS
-void LocalizationModuleTest::RunTests()
+void LocalizationModuleTddTest::RunTests()
 {
     TestNullValue009();
 }

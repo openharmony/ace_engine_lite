@@ -21,10 +21,10 @@
 #include "js_fwk_common.h"
 namespace OHOS {
 namespace ACELite {
-class LocalizationModuleTest : public BasicTddTest {
+class LocalizationModuleTddTest : public BasicTddTest {
 public:
 
-    LocalizationModuleTest() : localization_(0), viewModel_(0) {}
+    LocalizationModuleTddTest() : localization_(0), viewModel_(0) {}
 
     void SetUp();
 
