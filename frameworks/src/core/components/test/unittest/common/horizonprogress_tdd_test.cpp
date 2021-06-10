@@ -88,8 +88,9 @@ void HorizonProgressTddTest::HorizonProgressTest001()
         printf("[Test Case] [HorizonProgressTest001] FAILED\n");
     }
     EXPECT_TRUE(strcmp(className, typeid(*progressView).name()) == 0);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -130,8 +131,9 @@ void HorizonProgressTddTest::HorizonProgressTest002()
         printf("[Test Case] [HorizonProgressTest002] FAILED\n");
     }
     EXPECT_TRUE(strcmp(className, typeid(*progressView).name()) == 0);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -172,8 +174,9 @@ void HorizonProgressTddTest::HorizonProgressTest003()
         printf("[Test Case] [HorizonProgressTest003] FAILED\n");
     }
     EXPECT_TRUE(strcmp(className, typeid(*progressView).name()) == 0);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -214,8 +217,9 @@ void HorizonProgressTddTest::HorizonProgressTest004()
         printf("[Test Case] [HorizonProgressTest004] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValue() != percentNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -258,8 +262,9 @@ void HorizonProgressTddTest::HorizonProgressTest005()
         printf("[Test Case] [HorizonProgressTest005] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValue() == percentNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -302,8 +307,9 @@ void HorizonProgressTddTest::HorizonProgressTest006()
         printf("[Test Case] [HorizonProgressTest006] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValue() != percentNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -345,8 +351,9 @@ void HorizonProgressTddTest::HorizonProgressTest007()
         printf("[Test Case] [HorizonProgressTest007] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValue() != percentNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -388,8 +395,9 @@ void HorizonProgressTddTest::HorizonProgressTest008()
         printf("[Test Case] [HorizonProgressTest008] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValue() != percentNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -440,8 +448,9 @@ void HorizonProgressTddTest::HorizonProgressTest009()
     EXPECT_TRUE(tempColor.red == redNum);
     EXPECT_TRUE(tempColor.green == greenNum);
     EXPECT_TRUE(tempColor.blue == blueNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -491,8 +500,9 @@ void HorizonProgressTddTest::HorizonProgressTest013()
     EXPECT_TRUE(tempColor.red == redNum);
     EXPECT_TRUE(tempColor.green == greenNum);
     EXPECT_TRUE(tempColor.blue == blueNum);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -531,8 +541,9 @@ void HorizonProgressTddTest::HorizonProgressTest014()
         printf("[Test Case] [HorizonProgressTest014] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValidHeight() == strokeWidth);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -571,8 +582,9 @@ void HorizonProgressTddTest::HorizonProgressTest015()
         printf("[Test Case] [HorizonProgressTest015] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValidHeight() == strokeWidth);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -611,8 +623,9 @@ void HorizonProgressTddTest::HorizonProgressTest016()
         printf("[Test Case] [HorizonProgressTest016] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValidHeight() != strokeWidth);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
@@ -651,8 +664,9 @@ void HorizonProgressTddTest::HorizonProgressTest017()
         printf("[Test Case] [HorizonProgressTest017] FAILED\n");
     }
     EXPECT_TRUE(progressView->GetValidHeight() == strokeWidth);
-    delete (progressView);
-    progressView = nullptr;
+    component->Release();
+    delete component;
+    component = nullptr;
     TDD_CASE_END();
 }
 
