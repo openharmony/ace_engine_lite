@@ -19,6 +19,7 @@
 #include "common/graphic_startup.h"
 #include "common/task_manager.h"
 #include "component_utils.h"
+#include "core/render_manager.h"
 #include "descriptor_utils.h"
 #include "dock/screen_device_proxy.h"
 #include "event_injector.h"
@@ -61,8 +62,9 @@ void BasicTddTest::SetUpTestCase(void)
     rootView->SetWidth(width);
     rootView->SetHeight(height);
     window_->BindRootView(rootView);
-
+    TaskManager::GetInstance()->Remove(&RenderManager::GetInstance());
     if (pthread_create(&tickThread_, nullptr, TickHandler, nullptr) == 0) {
+        pthread_detach(tickThread_);
         HILOG_DEBUG(HILOG_MODULE_ACE, "[BasicTddTest::SetUpTestCase]: Success to fork tick thread.");
     } else {
         HILOG_ERROR(HILOG_MODULE_ACE, "[BasicTddTest::SetUpTestCase]: Failed to fork tick thread.");
