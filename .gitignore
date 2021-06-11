@@ -2,7 +2,10 @@ x64/
 x32
 *.vcxproj.user
 .vscode
+*.autosave
 
 target/
 node_modules/
-frameworks/test/
+frameworks/tools/qt/build-simulator*
+frameworks/tools/qt/simulator/font/
+frameworks/tools/qt/simulator/simulator.pro.user

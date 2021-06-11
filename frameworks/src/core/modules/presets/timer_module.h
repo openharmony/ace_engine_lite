@@ -131,7 +131,7 @@ private:
                                     const jerry_value_t *args,
                                     const jerry_length_t argsNum);
 
-#ifndef TARGET_SIMULATOR
+#ifndef SYNC_TIMER_CALLBACK
     static void Execute(void *data);
 #endif
     TimerList *timerList_;

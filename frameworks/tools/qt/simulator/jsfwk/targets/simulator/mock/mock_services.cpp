@@ -13,25 +13,34 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_ACELITE_ASYNCWORK_H
-#define OHOS_ACELITE_ASYNCWORK_H
+#include "mock_services.h"
 
-#include <list>
-#include <mutex>
-#include <utility>
-#include "js_async_work.h"
+namespace OHOS {
+namespace ACELite {
+void MockServices::StartAll()
+{
+    if (!amsThread_.isRunning()) {
+        amsThread_.start();
+    }
+    if (!vsyncThread_.isRunning()) {
+        vsyncThread_.start();
+    }
+    if (!timerThread_.isRunning()) {
+        timerThread_.start();
+    }
+}
 
-class AsyncWorkManager {
-public:
-    static AsyncWorkManager& GetInstance();
-    void AppendAsyncWork(OHOS::ACELite::AsyncWorkHandler work, void* arg);
-    void ExecAllAsyncWork();
-    void ClearAllAsyncWork();
-
-private:
-    AsyncWorkManager(){};
-    ~AsyncWorkManager(){};
-    std::mutex mutex;
-    std::list<std::pair<OHOS::ACELite::AsyncWorkHandler, void*>> workList;
-};
-#endif
+void MockServices::QuitAll()
+{
+    if (vsyncThread_.isRunning()) {
+        vsyncThread_.quit();
+    }
+    if (amsThread_.isRunning()) {
+        amsThread_.quit();
+    }
+    if (timerThread_.isRunning()) {
+        timerThread_.quit();
+    }
+}
+} // namespace ACELite
+} // namespace OHOS

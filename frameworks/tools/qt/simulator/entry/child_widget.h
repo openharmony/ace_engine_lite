@@ -21,22 +21,27 @@
 #include <QPushButton>
 #include <QWidget>
 
+#include "mock_services.h"
+
 class ChildWidget : public QWidget {
     Q_OBJECT
 public:
-    ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSize);
+    ChildWidget(QWidget *parent, const QString jsBundlePath, const QString jsHeapSize);
+    ~ChildWidget();
 
 public slots:
     void OpenFolderDialog();
     void RestartApp() const;
+    void StartApp(const char *path);
 
 private:
-    void InitPage(QString jsBundlePath, QString jsHeapSize);
+    void InitPage(const QString jsBundlePath, const QString jsHeapSize);
     void InitSignalSlots() const;
     QLineEdit jsBundleText;
     QLineEdit jsHeapText;
     QPushButton configBtn;
     QPushButton selectFolderBtn;
+    OHOS::ACELite::MockServices mockServices_;
 };
 
 #endif // CHILD_WIDGET_H

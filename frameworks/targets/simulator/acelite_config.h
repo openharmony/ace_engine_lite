@@ -86,6 +86,11 @@
 #define FEATURE_TIMER_MODULE
 
 /**
+ * execute timer callback directly for previewer
+ */
+#define SYNC_TIMER_CALLBACK
+
+/**
  * support storage API for JS
  */
 #define FEATURE_MODULE_STORAGE

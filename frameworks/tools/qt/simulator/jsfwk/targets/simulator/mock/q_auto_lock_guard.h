@@ -13,13 +13,27 @@
  * limitations under the License.
  */
 
-#include "js_async_work.h"
-#include "async_work_manager.h"
+#ifndef OHOS_ACELITE_MOCK_AUTO_LOCK_GUARD_H
+#define OHOS_ACELITE_MOCK_AUTO_LOCK_GUARD_H
 
-using namespace OHOS::ACELite;
+#include <QMutex>
 
-bool JsAsyncWork::DispatchAsyncWork(AsyncWorkHandler workHandler, void *data)
-{
-    AsyncWorkManager::GetInstance().AppendAsyncWork(workHandler, data);
-    return true;
-}
+namespace OHOS {
+namespace ACELite {
+class  QAutoLockGuard final {
+public:
+    explicit QAutoLockGuard(QMutex &mutexlock) : lock_(mutexlock)
+    {
+        lock_.lock();
+    }
+    ~QAutoLockGuard()
+    {
+        lock_.unlock();
+    }
+
+private:
+    QMutex &lock_;
+};
+} // namespace ACELite
+} // namespace OHOS
+#endif // OHOS_ACELITE_MOCK_AUTO_LOCK_GUARD_H

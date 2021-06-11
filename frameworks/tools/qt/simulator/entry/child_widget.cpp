@@ -28,15 +28,21 @@
 #include <QString>
 #include <Qt>
 
+#include "ability_manager_interface.h"
 #include "simulator_config.h"
 
-ChildWidget::ChildWidget(QWidget *parent, QString jsBundlePath, QString jsHeapSize): QWidget(parent)
+ChildWidget::ChildWidget(QWidget *parent, const QString jsBundlePath, const QString jsHeapSize) : QWidget(parent)
 {
     InitPage(jsBundlePath, jsHeapSize);
     InitSignalSlots();
 }
 
-void ChildWidget::InitPage(QString jsBundlePath, QString jsHeapSize)
+ChildWidget::~ChildWidget()
+{
+    mockServices_.QuitAll();
+}
+
+void ChildWidget::InitPage(const QString jsBundlePath, const QString jsHeapSize)
 {
     QVBoxLayout *vLayout = new QVBoxLayout(this);
     vLayout->setAlignment(Qt::AlignTop);
@@ -100,4 +106,16 @@ void ChildWidget::RestartApp() const
     QStringList arguments = QApplication::arguments();
     QProcess::startDetached(program, arguments, QDir::currentPath());
     QApplication::exit();
+}
+
+void ChildWidget::StartApp(const char *path)
+{
+    if (path == nullptr || ((path != nullptr) && (strlen(path) == 0))) {
+        return;
+    }
+    // start all necessary mock threads
+    mockServices_.StartAll();
+    const unsigned long breakTime = 30;
+    QThread::msleep(breakTime);
+    StartAbility(path, "com.app.example");
 }

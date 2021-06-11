@@ -22,7 +22,7 @@
 #ifdef TDD_ASSERTIONS
 #include "async_task_manager.h"
 #endif
-#ifndef TARGET_SIMULATOR
+#ifndef SYNC_TIMER_CALLBACK
 #include "js_async_work.h"
 #endif // TARGET_SIMULATOR
 #include "js_fwk_common.h"
@@ -167,7 +167,7 @@ void TimerModule::Task(void *arguments)
     if (timerList == nullptr) {
         return;
     }
-#ifndef TARGET_SIMULATOR
+#ifndef SYNC_TIMER_CALLBACK
     uint8_t* index = static_cast<uint8_t*>(ace_malloc(sizeof(uint8_t)));
     bool check = true;
     if (index == nullptr) {
@@ -193,17 +193,17 @@ void TimerModule::Task(void *arguments)
 #endif
         timerList->DeleteTimer(arg->index);
     }
-#else // TARGET_SIMULATOR
+#else // SYNC_TIMER_CALLBACK
     if (jerry_value_is_function(arg->func)) {
         CallJSFunctionAutoRelease(arg->func, arg->context, arg->args, arg->argsNum);
     }
     if (!arg->repeated) {
         timerList->DeleteTimer(arg->index);
     }
-#endif // TARGET_SIMULATOR
+#endif // SYNC_TIMER_CALLBACK
 }
 
-#ifndef TARGET_SIMULATOR
+#ifndef SYNC_TIMER_CALLBACK
 void TimerModule::Execute(void *data)
 {
     uint8_t* timerId = static_cast<uint8_t*>(data);
