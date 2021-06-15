@@ -66,6 +66,7 @@ char *LocalizationModuleTddTest::GetLocalizationResult(const jerry_value_t args[
 {
     jerry_value_t result = CallJSFunction(localization_, viewModel_, args, argsNum);
     if (jerry_value_is_error(result)) {
+        jerry_release_value(result);
         return nullptr;
     }
     char *content = MallocStringOf(result);
@@ -90,6 +91,8 @@ HWTEST_F(LocalizationModuleTddTest, TestNullValue009, TestSize.Level1)
     args[0] = jerry_create_string(reinterpret_cast<const jerry_char_t *>("localization01.test"));
     JSValue result = CallJSFunction(localization_, viewModel_, args, 1);
     EXPECT_TRUE(JSUndefined::Is(result));
+    jerry_release_value(args[0]);
+    jerry_release_value(result);
     TDD_CASE_END();
 }
 
