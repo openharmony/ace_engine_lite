@@ -50,3 +50,14 @@ unittest("js_frameworks_test_console") {
   sources += [ "common/console_module_test.cpp" ]
   deps = all_external_deps
 }
+
+unittest("js_frameworks_test_localization") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+      "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+      "common/localization_module_tdd_test.cpp"
+      ]
+  deps = ace_test_deps
+}
