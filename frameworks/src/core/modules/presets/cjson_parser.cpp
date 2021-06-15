@@ -535,7 +535,8 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key, jerry_value_t args,
             char *value = FillPlaceholder(curJsonItem->valuestring, args, argsNum);
             if (value != nullptr) {
                 result = jerry_create_string(reinterpret_cast<jerry_char_t *>(value));
-                ACE_FREE(value);
+                ace_free(value);
+                value = nullptr;
             }
         }
     }

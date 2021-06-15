@@ -54,11 +54,10 @@ unittest("js_frameworks_test_console") {
 unittest("js_frameworks_test_localization") {
   output_extension = "bin"
   output_dir = test_output_root
-  configs = [ "$ace_lite_root/test:test_whole_archive_config" ]
-  sources = all_acelite_source_files
+  configs = [ "$ace_lite_root/test:test_common_config" ]
   sources += [
       "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
       "common/localization_module_tdd_test.cpp"
       ]
-  deps = all_external_deps
+  deps = ace_test_deps
 }
