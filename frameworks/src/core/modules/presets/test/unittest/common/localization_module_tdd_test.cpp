@@ -34,7 +34,7 @@ void LocalizationModuleTddTest::SetUp()
     }
     env->InitJsFramework();
     const int defaultToken = 1000;
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo(testAppPath, "aaaa", defaultToken);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo(testAppPath, "com.localization.test", defaultToken);
     const char *content = "new ViewModel({});";
     const jerry_char_t *jScript = reinterpret_cast<const jerry_char_t *>(content);
     viewModel_ = jerry_eval(jScript, strlen(content), JERRY_PARSE_NO_OPTS);
