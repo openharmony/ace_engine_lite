@@ -30,8 +30,6 @@ public:
 
     void TearDown();
 
-    char *GetLocalizationResult(const jerry_value_t args[], const jerry_size_t argsNum) const;
-
     void TestNullValue009();
 
 #ifndef TDD_ASSERTIONS

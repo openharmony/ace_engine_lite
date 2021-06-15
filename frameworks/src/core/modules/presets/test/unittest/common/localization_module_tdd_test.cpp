@@ -62,18 +62,6 @@ void LocalizationModuleTddTest::TearDown()
     env->Cleanup();
 }
 
-char *LocalizationModuleTddTest::GetLocalizationResult(const jerry_value_t args[], const jerry_size_t argsNum) const
-{
-    jerry_value_t result = CallJSFunction(localization_, viewModel_, args, argsNum);
-    if (jerry_value_is_error(result)) {
-        jerry_release_value(result);
-        return nullptr;
-    }
-    char *content = MallocStringOf(result);
-    jerry_release_value(result);
-    return content;
-}
-
 /**
  * @tc.name: TestNullValue009
  * @tc.desc: Test null object value in resource file
