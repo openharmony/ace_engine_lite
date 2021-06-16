@@ -40,6 +40,7 @@ bool CircleProgressComponent::CreateNativeViews()
     const char * const defaultBackgroundColor = "rgba(255,255,255,0.15)";
     if (ParseColor(defaultBackgroundColor, color, alpha)) {
         progressView_.SetBackgroundStyle(STYLE_LINE_COLOR, GetRGBColor(color).full);
+        progressView_.SetBackgroundStyle(STYLE_LINE_OPA, alpha);
     }
     progressView_.SetForegroundStyle(StyleDefault::GetBrightColorStyle());
     progressView_.SetForegroundStyle(STYLE_BACKGROUND_OPA, 0);
