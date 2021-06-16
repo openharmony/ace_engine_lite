@@ -39,9 +39,7 @@ config("ace_lite_config") {
 shared_library("ace_lite") {
   configs -= [ "//build/lite/config:language_cpp" ]
   cflags = [
-    "-Wall",
-    "-Wno-format",
-    "-Wno-format-extra-args",
+    "-Wall"
   ]
   cflags_cc = cflags
   configs += [ ":ace_lite_config" ]
