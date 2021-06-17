@@ -213,10 +213,6 @@ void JSAbility::HandleRenderTick()
     // reset error tick tracing count
     errorTickCount_ = 0;
 
-#if defined(TARGET_SIMULATOR) && defined(FEATURE_LAZY_LOADING_MODULE)
-    LazyLoadHandleRenderTick(nullptr);
-#endif
-
     if ((ProductAdapter::IsTEHandlersRegisted()) && !(FatalHandler::GetInstance().IsAppExiting())) {
         FatalHandler::GetInstance().SetTEHandlingFlag(true);
         ProductAdapter::ProcessOneTE();
