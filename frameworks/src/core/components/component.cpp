@@ -1020,24 +1020,27 @@ int32_t Component::GetAnimatorValue(char *animatorValue, const int8_t index, boo
 
 jerry_value_t Component::AddWatcherItem(const jerry_value_t attrKey, const jerry_value_t attrValue, bool isLazyLoading)
 {
-#ifdef FEATURE_LAZY_LOADING_MODULE
-    isLazyLoading = true;
-#endif
     jerry_value_t options = jerry_create_object();
     JerrySetNamedProperty(options, ARG_WATCH_EL, nativeElement_);
     JerrySetNamedProperty(options, ARG_WATCH_ATTR, attrKey);
     jerry_value_t watcher = CallJSWatcher(attrValue, WatcherCallbackFunc, options);
-    jerry_value_t propValue = UNDEFINED;
+    jerry_release_value(options);
     if (IS_UNDEFINED(watcher) || jerry_value_is_error(watcher)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Failed to create Watcher instance.");
-    } else {
-        InsertWatcherCommon(watchersHead_, watcher);
-        if (!isLazyLoading) {
-            propValue = jerryx_get_property_str(watcher, "_lastValue");
-        }
+        jerry_release_value(watcher); // release error case, note: release undefined is harmless
+        return UNDEFINED;
     }
-    jerry_release_value(options);
-    return propValue;
+    // watcher is valide, insert it to the list
+    InsertWatcherCommon(watchersHead_, watcher);
+    if (isLazyLoading) {
+        // If the watcher creating is lazy loading, need to call watcher's update function to make sure the view
+        // is updated with latest value properly, because it's the lazy case, the value might be changed already.
+        JSRelease(JSObject::Call(watcher, "update", nullptr, 0));
+        return UNDEFINED;
+    }
+
+    // is the direct watcher creating, return the lastValue and need to be released out of this function
+    return jerryx_get_property_str(watcher, "_lastValue");
 }
 
 void Component::ParseAttrs()

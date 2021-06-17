@@ -307,16 +307,12 @@ void StateMachine::RenderPage()
     START_TRACING(RENDER);
     // if not in init state, reset all watchers of previous page at first
     LazyLoadManager* lazy = const_cast<LazyLoadManager *>(appContext_->GetLazyLoadManager());
-    if (lazy->GetState() != LazyLoadState::INIT) {
+    if (lazy != nullptr) {
         lazy->ResetWatchers();
     }
     // Note: do not release the returned value by Render function, it will be released by component
     jerry_value_t element = appContext_->Render(viewModel_);
 
-    // mark lazy load te task
-    if (lazy->GetLazyWatcher() != nullptr) {
-        lazy->SetState(LazyLoadState::READY);
-    }
     rootComponent_ = ComponentUtils::GetComponentFromBindingObject(element);
     // append scroll layer to the outermost view
     scrollLayer_ = new ScrollLayer();

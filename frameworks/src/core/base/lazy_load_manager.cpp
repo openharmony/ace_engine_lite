@@ -47,14 +47,15 @@ void LazyLoadManager::RenderLazyLoadWatcher()
 {
     LazyLoadWatcher *next = nullptr;
     while (firstWatcher_ != nullptr) {
-        Component *componet = ComponentUtils::GetComponentFromBindingObject(firstWatcher_->GetNativeElement());
-        if (componet != nullptr) {
-            componet->AddWatcherItem(firstWatcher_->GetAttrName(), firstWatcher_->GetAttrGetter());
+        Component *component = ComponentUtils::GetComponentFromBindingObject(firstWatcher_->GetNativeElement());
+        if (component != nullptr) {
+            component->AddWatcherItem(firstWatcher_->GetAttrName(), firstWatcher_->GetAttrGetter(), true);
         }
         next = const_cast<LazyLoadWatcher *>(firstWatcher_->GetNext());
         delete firstWatcher_;
         firstWatcher_ = next;
     }
+    lastWatcher_ = nullptr;
     state_ = LazyLoadState::DONE;
 }
 
@@ -77,6 +78,9 @@ void LazyLoadManager::AddLazyLoadWatcher(jerry_value_t nativeElement, jerry_valu
         lastWatcher_->SetNext(*watcher);
         lastWatcher_ = watcher;
     }
+    // The state must be ready if any watcher lazy loading request was added, otherwise, in some cases,
+    // the js_ability may not be able to know there are watchers need to be loaded.
+    state_ = LazyLoadState::READY;
 }
 } // namespace ACELite
 } // namespace OHOS
