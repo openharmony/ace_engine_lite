@@ -148,7 +148,8 @@ void PanelView::SetVideoSlider()
     videoSlider_->SetValidHeight(sliderWidth);
     videoSlider_->SetValidWidth(visibleWidth - knobWidth);
     videoSlider_->SetKnobWidth(knobWidth);
-    videoSlider_->SetSliderRadius(defaultBorderRadius, defaultBorderRadius, knobRadius);
+    videoSlider_->SetSliderRadius(defaultBorderRadius, defaultBorderRadius);
+    videoSlider_->SetKnobRadius(knobRadius);
     const uint8_t alpha = OPA_OPAQUE;
     /* set videoSlider_ background color */
     videoSlider_->SetBackgroundStyle(STYLE_BACKGROUND_COLOR, Color::White().full);
