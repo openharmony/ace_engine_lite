@@ -93,6 +93,8 @@
 #define FEATURE_LOCALIZATION_MODULE
 #endif // QT_SIMULATOR
 
+#define FEATURE_LAZY_LOADING_MODULE
+
 /**
  * timer module
  */
