@@ -30,8 +30,7 @@ namespace ACELite {
 using OHOS::ACELite::LogLevel;
 
 // use this struture for holding test contents
-struct TestObjectWrapper
-{
+struct TestObjectWrapper {
     size_t codeLength;
     const char *code;
     size_t targetLogLen;
