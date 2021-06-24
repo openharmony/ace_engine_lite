@@ -1416,9 +1416,15 @@ void EventBubbleTddTest::EventBubbleTest017()
     JSValue page = CreatePage(BUBBLE_PREVENT_DOUBLE_SWIPE, strlen(BUBBLE_PREVENT_DOUBLE_SWIPE));
     FlexLayout *container = reinterpret_cast<FlexLayout *>(GetViewByRef(page, "box"));
     EXPECT_TRUE(container != nullptr);
+    if (container == nullptr) {
+        return;
+    }
     int16_t prevContainerY = container->GetOrigRect().GetY();
     UIList *list = reinterpret_cast<UIList *>(GetViewByRef(page, "list"));
     EXPECT_TRUE(list != nullptr);
+    if (list == nullptr) {
+        return;
+    }
     Rect rect = list->GetOrigRect();
     int16_t diffY = 100;
     int16_t x = rect.GetLeft() + rect.GetWidth() / NUM_TWO;
