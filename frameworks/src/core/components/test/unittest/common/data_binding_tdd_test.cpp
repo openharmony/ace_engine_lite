@@ -192,11 +192,13 @@ void DataBindingTddTest::AttrBindingTest001()
     JSValue page = CreatePage(BUNDLE_OF_ATTR_BINDING, strlen(BUNDLE_OF_ATTR_BINDING));
     UILabel *label = reinterpret_cast<UILabel *>(GetViewByRef(page, "text"));
     EXPECT_TRUE(label != nullptr);
-    EXPECT_STREQ(label->GetText(), "0");
-    ClickByRef(page, "increaseBtn");
-    EXPECT_STREQ(label->GetText(), "1");
-    ClickByRef(page, "decreaseBtn");
-    EXPECT_STREQ(label->GetText(), "0");
+    if (label != nullptr) {
+        EXPECT_STREQ(label->GetText(), "0");
+        ClickByRef(page, "increaseBtn");
+        EXPECT_STREQ(label->GetText(), "1");
+        ClickByRef(page, "decreaseBtn");
+        EXPECT_STREQ(label->GetText(), "0");
+    }
     DestroyPage(page);
     TDD_CASE_END();
 }
@@ -207,13 +209,15 @@ void DataBindingTddTest::StyleBindingTest002()
     JSValue page = CreatePage(BUNDLE_OF_STYLE_BINDING, strlen(BUNDLE_OF_STYLE_BINDING));
     UILabel *label = reinterpret_cast<UILabel *>(GetViewByRef(page, "text"));
     EXPECT_TRUE(label != nullptr);
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff000000);
-    ClickByRef(page, "redBgColorBtn");
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xffff0000);
-    ClickByRef(page, "greenBgColorBtn");
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff00ff00);
-    ClickByRef(page, "blueBgColorBtn");
-    EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff0000ff);
+    if (label != nullptr) {
+        EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff000000);
+        ClickByRef(page, "redBgColorBtn");
+        EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xffff0000);
+        ClickByRef(page, "greenBgColorBtn");
+        EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff00ff00);
+        ClickByRef(page, "blueBgColorBtn");
+        EXPECT_EQ(label->GetStyle(STYLE_BACKGROUND_COLOR), 0xff0000ff);
+    }
     DestroyPage(page);
     TDD_CASE_END();
 }

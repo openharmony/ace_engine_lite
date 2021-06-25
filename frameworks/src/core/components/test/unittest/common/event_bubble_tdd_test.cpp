@@ -1416,18 +1416,22 @@ void EventBubbleTddTest::EventBubbleTest017()
     JSValue page = CreatePage(BUBBLE_PREVENT_DOUBLE_SWIPE, strlen(BUBBLE_PREVENT_DOUBLE_SWIPE));
     FlexLayout *container = reinterpret_cast<FlexLayout *>(GetViewByRef(page, "box"));
     EXPECT_TRUE(container != nullptr);
-    int16_t prevContainerY = container->GetOrigRect().GetY();
-    UIList *list = reinterpret_cast<UIList *>(GetViewByRef(page, "list"));
-    EXPECT_TRUE(list != nullptr);
-    Rect rect = list->GetOrigRect();
-    int16_t diffY = 100;
-    int16_t x = rect.GetLeft() + rect.GetWidth() / NUM_TWO;
-    int16_t startY = rect.GetTop() + rect.GetHeight() - diffY;
-    int16_t endY = rect.GetTop() + diffY;
-    Swipe(x, startY, x, endY);
-    EXPECT_FALSE(JSObject::GetBoolean(page, "divSwipe"));
-    EXPECT_TRUE(JSObject::GetBoolean(page, "listSwipe"));
-    EXPECT_EQ(container->GetOrigRect().GetY(), prevContainerY);
+    if (container != nullptr) {
+        int16_t prevContainerY = container->GetOrigRect().GetY();
+        UIList *list = reinterpret_cast<UIList *>(GetViewByRef(page, "list"));
+        EXPECT_TRUE(list != nullptr);
+        if (list != nullptr) {
+            Rect rect = list->GetOrigRect();
+            int16_t diffY = 100;
+            int16_t x = rect.GetLeft() + rect.GetWidth() / NUM_TWO;
+            int16_t startY = rect.GetTop() + rect.GetHeight() - diffY;
+            int16_t endY = rect.GetTop() + diffY;
+            Swipe(x, startY, x, endY);
+            EXPECT_FALSE(JSObject::GetBoolean(page, "divSwipe"));
+            EXPECT_TRUE(JSObject::GetBoolean(page, "listSwipe"));
+            EXPECT_EQ(container->GetOrigRect().GetY(), prevContainerY);
+        }
+    }
     DestroyPage(page);
     TDD_CASE_END();
 }
