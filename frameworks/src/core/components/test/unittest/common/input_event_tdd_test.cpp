@@ -901,11 +901,17 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
     EXPECT_FALSE((fontFamily == nullptr) || (strcmp(fontFamily, "HYQiHei-65S.otf")));
     ACE_FREE(fontFamily);
 
+    InputBindingTest001Extra(page);
+}
+
+void InputEventTddTest::InputBindingTest001Extra(JSValue page)
+{
     /**
      * @tc.steps: step4.click the fontSize button
      * @tc.expected: step4.the fontSize attribute value is 38
      */
-    yRate = 0.65;
+    const double xRate = 0.3;
+    double yRate = 0.65;
     ClickPosition(xRate, yRate);
     int8_t fontSize = JSObject::GetNumber(page, "fontSize");
     EXPECT_TRUE(fontSize == 38);
