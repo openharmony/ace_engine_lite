@@ -266,13 +266,11 @@ const char * const DialogTddTest::MSG = "msg";
 
 const char * const DialogTddTest::DEFAULT = "dialog";
 
-bool DialogTddTest::CallPageMethod(JSValue page, const char * const prop)
+bool DialogTddTest::CallPageMethod(JSValue page, const char * const prop) const
 {
     JSValue ret = JSObject::Call(page, prop);
     if (jerry_value_is_error(ret)) {
         jerry_release_value(ret);
-        DestroyPage(page);
-        TDD_CASE_END();
         return false;
     }
     jerry_release_value(ret);
@@ -289,6 +287,8 @@ void DialogTddTest::DialogTest001()
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -317,6 +317,8 @@ void DialogTddTest::DialogTest002()
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -334,6 +336,8 @@ void DialogTddTest::DialogTest002()
 
     // step4: release previous result and call dialog method again
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -361,6 +365,8 @@ void DialogTddTest::DialogTest003()
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -378,6 +384,8 @@ void DialogTddTest::DialogTest003()
 
     // step4: release previous result and call dialog method again
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -394,6 +402,8 @@ void DialogTddTest::DialogTest003()
 
     // step7: release previous result and call dialog method again
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -421,6 +431,8 @@ void DialogTddTest::DialogTest004()
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -438,6 +450,8 @@ void DialogTddTest::DialogTest004()
 
     // step4: release previous result and call dialog method again
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -454,6 +468,8 @@ void DialogTddTest::DialogTest004()
 
     // step7: release previous result and call dialog method again
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
@@ -481,6 +497,8 @@ void DialogTddTest::DialogTest005()
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
     if (!CallPageMethod(page, METHOD)) {
+        DestroyPage(page);
+        TDD_CASE_END();
         return;
     }
 
