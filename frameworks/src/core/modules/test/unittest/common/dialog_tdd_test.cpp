@@ -266,6 +266,17 @@ const char * const DialogTddTest::MSG = "msg";
 
 const char * const DialogTddTest::DEFAULT = "dialog";
 
+bool DialogTddTest::CallPageMethod(JSValue page, const char * const prop) const
+{
+    JSValue ret = JSObject::Call(page, prop);
+    if (jerry_value_is_error(ret)) {
+        jerry_release_value(ret);
+        return false;
+    }
+    jerry_release_value(ret);
+    return true;
+}
+
 void DialogTddTest::DialogTest001()
 {
     TDD_CASE_BEGIN();
@@ -275,9 +286,7 @@ void DialogTddTest::DialogTest001()
     char *val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
-    JSValue ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -294,7 +303,6 @@ void DialogTddTest::DialogTest001()
     val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, CONFIRM);
     ACE_FREE(val);
-    jerry_release_value(ret);
     DestroyPage(page);
     TDD_CASE_END();
 }
@@ -308,9 +316,7 @@ void DialogTddTest::DialogTest002()
     char *val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
-    JSValue ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -329,10 +335,7 @@ void DialogTddTest::DialogTest002()
     ACE_FREE(val);
 
     // step4: release previous result and call dialog method again
-    jerry_release_value(ret);
-    ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -348,7 +351,6 @@ void DialogTddTest::DialogTest002()
     val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, CANCEL);
     ACE_FREE(val);
-    jerry_release_value(ret);
     DestroyPage(page);
     TDD_CASE_END();
 }
@@ -362,9 +364,7 @@ void DialogTddTest::DialogTest003()
     char *val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
-    JSValue ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -383,10 +383,7 @@ void DialogTddTest::DialogTest003()
     ACE_FREE(val);
 
     // step4: release previous result and call dialog method again
-    jerry_release_value(ret);
-    ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -404,10 +401,7 @@ void DialogTddTest::DialogTest003()
     ACE_FREE(val);
 
     // step7: release previous result and call dialog method again
-    jerry_release_value(ret);
-    ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -423,7 +417,6 @@ void DialogTddTest::DialogTest003()
     val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, COMPLETE);
     ACE_FREE(val);
-    jerry_release_value(ret);
     DestroyPage(page);
     TDD_CASE_END();
 }
@@ -437,9 +430,7 @@ void DialogTddTest::DialogTest004()
     char *val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
-    JSValue ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -458,10 +449,7 @@ void DialogTddTest::DialogTest004()
     ACE_FREE(val);
 
     // step4: release previous result and call dialog method again
-    jerry_release_value(ret);
-    ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -479,10 +467,7 @@ void DialogTddTest::DialogTest004()
     ACE_FREE(val);
 
     // step7: release previous result and call dialog method again
-    jerry_release_value(ret);
-    ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -498,7 +483,6 @@ void DialogTddTest::DialogTest004()
     val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, COMPLETE);
     ACE_FREE(val);
-    jerry_release_value(ret);
     DestroyPage(page);
     TDD_CASE_END();
 }
@@ -512,9 +496,7 @@ void DialogTddTest::DialogTest005()
     char *val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, DEFAULT);
     ACE_FREE(val);
-    JSValue ret = JSObject::Call(page, METHOD);
-    if (jerry_value_is_error(ret)) {
-        jerry_release_value(ret);
+    if (!CallPageMethod(page, METHOD)) {
         DestroyPage(page);
         TDD_CASE_END();
         return;
@@ -531,7 +513,6 @@ void DialogTddTest::DialogTest005()
     val = JSObject::GetString(page, MSG);
     EXPECT_STREQ(val, dismissiontVal);
     ACE_FREE(val);
-    jerry_release_value(ret);
     DestroyPage(page);
     TDD_CASE_END();
 }
