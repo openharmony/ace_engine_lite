@@ -96,6 +96,11 @@
 #define FEATURE_LAZY_LOADING_MODULE
 
 /**
+ * enable fatal error handling
+ */
+#define FEATURE_FATAL_ERROR_HANDLING
+
+/**
  * timer module
  */
 #define FEATURE_TIMER_MODULE
