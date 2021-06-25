@@ -33,6 +33,7 @@ public:
     void RunTests();
 
 private:
+    bool CallPageMethod(JSValue page, const char * const prop);
     static const char * const BUNDLE1;
     static const char * const BUNDLE2;
     static const char * const BUNDLE3;
