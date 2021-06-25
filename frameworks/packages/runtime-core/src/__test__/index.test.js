@@ -66,8 +66,9 @@ describe('ViewModel', () => {
     expect(vm.count).toBe(1);
     const watcher = vm.$watch(
         () => vm.count,
-        value => {
-          expect(value).toBe(2);
+        (newValue,oldValue) => {
+          expect(oldValue).toBe(1);
+          expect(newValue).toBe(2);
           watcher.unsubscribe();
           done();
         }
@@ -87,8 +88,9 @@ describe('ViewModel', () => {
 
     const watcher = vm.$watch(
         () => vm.user.name,
-        name => {
-          expect(name).toBe('Chen2');
+        (newName,oldName) => {
+          expect(oldName).toBe('Chen');
+          expect(newName).toBe('Chen2');
           watcher.unsubscribe();
           done();
         }
@@ -335,6 +337,38 @@ describe('ViewModel', () => {
         }
     );
     vm.numbers.sort();
+  });
+  test('17_observed_complex_expression', done => {
+    const vm = new ViewModel({
+      data: {
+        a: 1,
+        b: 2
+      },
+      increaseA() {
+        ++this.a;
+      },
+      increaseB() {
+        ++this.b;
+      },
+    });
+    const watcher = vm.$watch(
+        () => vm.a + vm.b,
+        number => {
+          expect(number).toEqual(4);
+          watcher.unsubscribe()
+          done();
+        }
+    );
+    vm.increaseA();
+    const watcher2 = vm.$watch(
+        () => vm.a + vm.b,
+        number => {
+          expect(number).toEqual(5);
+          watcher2.unsubscribe()
+          done();
+        }
+    );
+    vm.increaseB();
   });
   test('99_lifecycle', () => {
     const onInit = jest.fn().mockReturnValue('onInit');
