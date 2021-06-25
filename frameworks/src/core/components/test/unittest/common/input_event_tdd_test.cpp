@@ -869,6 +869,10 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
      */
     JSValue page = CreatePage(BUNDLE1, strlen(BUNDLE1));
     EXPECT_FALSE(JSUndefined::Is(page));
+    if (JSUndefined::Is(page)) {
+        TDD_CASE_END();
+        return;
+    }
 
     /**
      * @tc.steps: step2.click the position(0.3, 0.25)
@@ -879,6 +883,11 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
     ClickPosition(xRate, yRate);
     UILabelButton *button = reinterpret_cast<UILabelButton *>(GetComponent(page, "button"));
     EXPECT_FALSE(button == nullptr);
+    if (button == nullptr) {
+        DestroyPage(page);
+        TDD_CASE_END();
+        return;
+    }
     const char *textValue = button->GetText();
     EXPECT_FALSE((textValue == nullptr) || (strcmp(textValue, "english")));
 
