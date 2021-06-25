@@ -914,16 +914,18 @@ void InputEventTddTest::InputBindingTest001Extra(JSValue page)
     double yRate = 0.65;
     ClickPosition(xRate, yRate);
     int8_t fontSize = JSObject::GetNumber(page, "fontSize");
-    EXPECT_TRUE(fontSize == 38);
+    const int8_t targetFontSize = 38;
+    EXPECT_TRUE(fontSize == targetFontSize);
 
     /**
      * @tc.steps:step5.click the color button
      * @tc.expected:step5.the color value is 220
      */
-    yRate = 0.85;
-    ClickPosition(xRate, yRate);
+    double newYRate = 0.85;
+    ClickPosition(xRate, newYRate);
     int16_t colorValue = JSObject::GetNumber(page, "color");
-    EXPECT_TRUE(colorValue == 220);
+    const int16_t targetColor = 220;
+    EXPECT_TRUE(colorValue == targetColor);
     DestroyPage(page);
     TDD_CASE_END();
 }
