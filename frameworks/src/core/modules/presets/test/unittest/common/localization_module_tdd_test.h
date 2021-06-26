@@ -24,8 +24,6 @@ namespace ACELite {
 class LocalizationModuleTddTest : public BasicTddTest {
 public:
 
-    LocalizationModuleTddTest() : localization_(0), viewModel_(0) {}
-
     void SetUp();
 
     void TearDown();

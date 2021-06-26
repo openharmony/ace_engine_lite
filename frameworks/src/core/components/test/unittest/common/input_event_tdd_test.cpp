@@ -869,6 +869,10 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
      */
     JSValue page = CreatePage(BUNDLE1, strlen(BUNDLE1));
     EXPECT_FALSE(JSUndefined::Is(page));
+    if (JSUndefined::Is(page)) {
+        TDD_CASE_END();
+        return;
+    }
 
     /**
      * @tc.steps: step2.click the position(0.3, 0.25)
@@ -879,6 +883,11 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
     ClickPosition(xRate, yRate);
     UILabelButton *button = reinterpret_cast<UILabelButton *>(GetComponent(page, "button"));
     EXPECT_FALSE(button == nullptr);
+    if (button == nullptr) {
+        DestroyPage(page);
+        TDD_CASE_END();
+        return;
+    }
     const char *textValue = button->GetText();
     EXPECT_FALSE((textValue == nullptr) || (strcmp(textValue, "english")));
 
@@ -892,23 +901,31 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
     EXPECT_FALSE((fontFamily == nullptr) || (strcmp(fontFamily, "HYQiHei-65S.otf")));
     ACE_FREE(fontFamily);
 
+    InputBindingTest001Extra(page);
+}
+
+void InputEventTddTest::InputBindingTest001Extra(JSValue page)
+{
     /**
      * @tc.steps: step4.click the fontSize button
      * @tc.expected: step4.the fontSize attribute value is 38
      */
-    yRate = 0.65;
+    const double xRate = 0.3;
+    double yRate = 0.65;
     ClickPosition(xRate, yRate);
     int8_t fontSize = JSObject::GetNumber(page, "fontSize");
-    EXPECT_TRUE(fontSize == 38);
+    const int8_t targetFontSize = 38;
+    EXPECT_TRUE(fontSize == targetFontSize);
 
     /**
      * @tc.steps:step5.click the color button
      * @tc.expected:step5.the color value is 220
      */
-    yRate = 0.85;
-    ClickPosition(xRate, yRate);
+    double newYRate = 0.85;
+    ClickPosition(xRate, newYRate);
     int16_t colorValue = JSObject::GetNumber(page, "color");
-    EXPECT_TRUE(colorValue == 220);
+    const int16_t targetColor = 220;
+    EXPECT_TRUE(colorValue == targetColor);
     DestroyPage(page);
     TDD_CASE_END();
 }
