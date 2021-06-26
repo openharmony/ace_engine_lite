@@ -23,7 +23,7 @@ public:
     void LongPressPosition(const double xRate, const double yRate) const;
     UIView *GetComponent(JSValue page, const char *name) const;
     void InputBindingTest001();
-    void InputBindingTest001Extra(JSValue page) const;
+    void InputBindingTest001Extra(JSValue page);
     void InputEventTest002();
     void ChangeEventTest003();
     void CheckboxEventTest004();

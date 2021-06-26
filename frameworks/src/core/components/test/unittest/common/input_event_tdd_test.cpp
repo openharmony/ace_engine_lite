@@ -904,7 +904,7 @@ HWTEST_F(InputEventTddTest, InputBindingTest001, TestSize.Level0)
     InputBindingTest001Extra(page);
 }
 
-void InputEventTddTest::InputBindingTest001Extra(JSValue page) const
+void InputEventTddTest::InputBindingTest001Extra(JSValue page)
 {
     /**
      * @tc.steps: step4.click the fontSize button
