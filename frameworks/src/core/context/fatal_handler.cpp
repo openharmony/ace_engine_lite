@@ -16,17 +16,18 @@
 #include "fatal_handler.h"
 #include "ace_event_error_code.h"
 #include "ace_log.h"
+#include "async_task_manager.h"
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
 #include "cmsis_os2.h"
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "jerryscript-port-default.h"
+#include "js_app_context.h"
 #include "js_fwk_common.h"
 #include "presets/console_log_impl.h"
 #include "presets/feature_ability_module.h"
 #include "product_adapter.h"
 #include "root_view.h"
 #include "task_manager.h"
-#include "ui_label.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -50,35 +51,37 @@ static void HandleFatal(int errorCode)
     // record error code
     FatalHandler::GetInstance().SetFatalError(errorCode);
     // send message to AMS to tear down us
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
     // try to recycling resource first
     FatalHandler::GetInstance().HandleFatalInternal();
     // inform AMS we are facing fatal error
-    ProductAdapter::SendTerminatingRequest(0, true);
+    ProductAdapter::SendTerminatingRequest(JsAppContext::GetInstance()->GetCurrentAbilityToken(), true);
     // sleep to stuck engien to make ANR for triggering force-stop
     const uint32_t sleepTime = 3000;
     uint8_t maxRetryCount = 20;
     while (maxRetryCount > 0) {
+#ifdef OHOS_ACELITE_PRODUCT_WATCH
         osDelay(sleepTime);
+#endif // OHOS_ACELITE_PRODUCT_WATCH
         maxRetryCount--;
     }
     HILOG_ERROR(HILOG_MODULE_ACE, "the JS task is not killed after sleep very long time");
-#endif // OHOS_ACELITE_PRODUCT_WATCH
 #else
-    const char * const fatalErrorStr = FatalHandler::GetInstance().GetErrorStr(errorCode);
-    LogString(LogLevel::LOG_LEVEL_ERR, "[JS Exception]: ");
-    LogString(LogLevel::LOG_LEVEL_ERR, fatalErrorStr);
-    LogString(LogLevel::LOG_LEVEL_ERR, "\n");
+    FatalHandler::GetInstance().DumpFatalTrace(errorCode);
 #endif // FEATURE_FATAL_ERROR_HANDLING
+}
+
+void FatalHandler::DumpFatalTrace(int errorCode) const
+{
+    LogString(LogLevel::LOG_LEVEL_ERR, "[JS Exception]: ");
+    LogString(LogLevel::LOG_LEVEL_ERR, GetErrorStr(errorCode));
+    LogString(LogLevel::LOG_LEVEL_ERR, "\n");
 }
 
 void FatalHandler::RegisterFatalHandler(JSAbility *ability)
 {
     jsAbility_ = ability;
-#ifndef JERRY_PORTING_DEPENDENCY
     // set callback into jerry
     jerry_port_default_set_fatal_handler(HandleFatal);
-#endif // JERRY_PORTING_DEPENDENCY
 }
 
 bool FatalHandler::IsErrorSupported(int errorCode) const
@@ -144,6 +147,9 @@ void FatalHandler::HandleFatalError(int errorCode)
         HILOG_WARN(HILOG_MODULE_ACE, "hitted again when handling fatal error");
     }
 
+    DumpFatalTrace(fatalErrorCode_);
+
+    AsyncTaskManager::GetInstance().SetFront(false);
     // reset the low layer rendering flag if needed
     FatalHandler::GetInstance().ResetRendering();
     FeaAbilityModule::Release();
@@ -158,9 +164,7 @@ void FatalHandler::ResetRendering()
 {
     if (IsTEHandling()) {
         // release the render flag as we are going into sleep and will be force killed
-#ifdef RENDER_MUTEX_CONTROL_ENABLE
         TaskManager::GetInstance()->ResetTaskHandlerMutex();
-#endif
         SetTEHandlingFlag(false);
     }
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
