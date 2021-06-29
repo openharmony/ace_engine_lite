@@ -136,6 +136,11 @@ public:
     }
     char *GetResourcePath(const char *uri) const;
 
+    uint16_t GetCurrentAbilityToken() const
+    {
+        return currentToken_;
+    }
+
 private:
     /**
      * @brief: release the ability info saved

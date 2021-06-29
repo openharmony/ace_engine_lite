@@ -48,6 +48,7 @@ public:
     bool IsAppExiting() const;
     // when the page is attached or destroyed by state machine, the fatal handler will be got notified
     void SetCurrentPageRootView(UIView *pageRoot);
+    void DumpFatalTrace(int errorCode) const;
     // define all fatal error below, please note the jerry fatal defines, avoid conflicts
     static const int ERR_INVALID = 0;
     static const int ERR_NATIVE_OUT_OF_MEMORY = 200;
