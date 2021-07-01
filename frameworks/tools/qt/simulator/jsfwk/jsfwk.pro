@@ -128,6 +128,8 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/stylemgr/app_style_sheet.cpp \
         $${ACELITE_CORE_PATH}/wrapper/js.cpp \
         $${ACELITE_FRAMEWORK_PATH}/targets/platform_adapter.cpp \
+        targets/simulator/utils/js_heap_stats_dumper.cpp \
+        targets/simulator/utils/js_heap_stats_writer.cpp \
         targets/simulator/mock/hal_sys_param.cpp \
         targets/simulator/mock/message_queue_utils.cpp \ # the mocked message queue
         targets/simulator/mock/mock_services.cpp \ # the mocked message queue
@@ -190,6 +192,7 @@ INCLUDEPATH += \
             $${ACELITE_CORE_PATH}/wrapper \
             $${ACELITE_FRAMEWORK_PATH}/targets \
             targets/simulator \
+            targets/simulator/utils \
             targets/simulator/mock \
             targets/simulator/mock/jsthread \
             targets/simulator/mock/vsyncthread \

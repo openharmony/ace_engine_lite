@@ -130,6 +130,7 @@ void JSThread::HandleEventLoop()
             case AbilityMsgId::TE_EVENT: {
                 // vsync arrived, process
                 ProcessOneRenderTick();
+                jsHeapStatsDumper_.Dump();
                 break;
             }
             default:

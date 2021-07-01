@@ -23,6 +23,7 @@
 #include <QWaitCondition>
 
 #include "js_ability.h"
+#include "js_heap_stats_dumper.h"
 #include "message_queue_utils.h"
 #include "product_adapter.h"
 
@@ -51,6 +52,7 @@ private:
     QWaitCondition queueCondition_;
     QMutex mutexlock_;
     bool actived_;
+    JSHeapStatsDumper jsHeapStatsDumper_;
 };
 } // namespace ACELite
 } // namespace OHOS
