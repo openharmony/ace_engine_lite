@@ -31,7 +31,6 @@ public:
 
 private:
     QFile file_;
-    bool hasEnter_;
 };
 } // namespace ACELite
 } // namespace OHOS

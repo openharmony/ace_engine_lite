@@ -17,23 +17,22 @@
 #include "ace_log.h"
 namespace OHOS {
 namespace ACELite {
-JSHeapStatsWriter::JSHeapStatsWriter(const QString filename) : file_(filename), hasEnter_(false)
+JSHeapStatsWriter::JSHeapStatsWriter(const QString filename) : file_(filename)
 {
-    if (!file_.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "failed to open file: %s", filename.toStdString().c_str());
-    }
 }
 JSHeapStatsWriter::~JSHeapStatsWriter()
 {
+    file_.flush();
     file_.close();
 }
 
 void JSHeapStatsWriter::Write(const char *text)
 {
-    if (hasEnter_) {
-        file_.write(",");
-    } else {
-        hasEnter_ = true;
+    if (!file_.isOpen()) {
+        if (!file_.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "failed to open file.");
+            return;
+        }
     }
     file_.write(text);
     file_.flush();

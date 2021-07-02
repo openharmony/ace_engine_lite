@@ -69,8 +69,11 @@ void JSHeapStatsDumper::LogStats(JSHeapStatus &stats) const
 
 void JSHeapStatsDumper::SaveStats(JSHeapStatus &stats)
 {
-    char buffer[255];
-    sprintf(buffer, "%d/%d", stats.allocBytes, stats.peakAllocBytes);
+    char buffer[255] = {0};
+    if (sprintf_s(buffer, sizeof(buffer), "%d/%d ", stats.allocBytes, stats.peakAllocBytes) < 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "failed to format dump message.");
+        return;
+    }
     writer_.Write(buffer);
 }
 } // namespace ACELite
