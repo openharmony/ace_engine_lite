@@ -36,44 +36,20 @@ ScrollLayer::~ScrollLayer()
 
 UIScrollView *ScrollLayer::AddScrollLayer(UIView &view) const
 {
-    int16_t viewWidth = view.GetWidth();
-    int16_t viewHeight = view.GetHeight();
-    int16_t viewBorderWidth = view.GetStyle(STYLE_BORDER_WIDTH);
-    int16_t scrollWidth = viewWidth + viewBorderWidth + viewBorderWidth;
-    int16_t scrollHeight = viewHeight + viewBorderWidth + viewBorderWidth;
-
-    if (scrollWidth <= 0 || scrollHeight <= 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Scroll Layer: Get scroll width or height failed.");
+    UIScrollView *scroll = new UIScrollView();
+    if (scroll == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "Scroll Layer: Create scroll view failed.");
         return nullptr;
     }
-
-    uint16_t horizontalResolution = GetHorizontalResolution();
-    uint16_t verticalResolution = GetVerticalResolution();
-    if (scrollWidth > horizontalResolution || scrollHeight > verticalResolution) {
-        UIScrollView *scroll = new UIScrollView();
-        if (scroll == nullptr) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "Scroll Layer: Create scroll view failed.");
-            return nullptr;
-        }
-
-        if (scrollHeight > verticalResolution) {
-            scrollHeight = verticalResolution;
-        }
-        if (scrollWidth > horizontalResolution) {
-            scrollWidth = horizontalResolution;
-        }
-
-        scroll->SetPosition(0, 0);
-        scroll->SetWidth(scrollWidth);
-        scroll->SetHeight(scrollHeight);
-        scroll->SetXScrollBarVisible(false);
-        scroll->SetYScrollBarVisible(false);
-        scroll->SetThrowDrag(true);
-        scroll->Add(&view);
-        scroll->SetReboundSize(0);
-        return scroll;
-    }
-    return nullptr;
+    scroll->SetPosition(0, 0);
+    scroll->SetWidth(GetHorizontalResolution());
+    scroll->SetHeight(GetVerticalResolution());
+    scroll->SetXScrollBarVisible(false);
+    scroll->SetYScrollBarVisible(false);
+    scroll->SetThrowDrag(true);
+    scroll->Add(&view);
+    scroll->SetReboundSize(0);
+    return scroll;
 }
 
 void ScrollLayer::AppendScrollLayer(Component *rootComponent)
