@@ -248,7 +248,7 @@ void TextComponent::SetTextAlign(UILabel &label, const AppStyleItem *styleItem) 
                        stylePropValue);
             break;
     }
-    label.SetAlign(align);
+    label.SetAlign(align, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
 }
 } // namespace ACELite
 } // namespace OHOS
