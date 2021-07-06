@@ -213,10 +213,8 @@ bool StateMachine::BindUri(jerry_value_t &jsRes)
         return false;
     }
     // check5:object's uri is not existed, need to move
-    char *fullPath = RelocateJSSourceFilePath(appRootPath_, jsPagePath_);
     appContext_->SetCurrentJsPath(jsPagePath_);
-    if (GetFileSize(fullPath) == 0) {
-        ACE_FREE(fullPath);
+    if (!CheckJSSourceFile()) {
         ace_free(uri_);
         uri_ = nullptr;
         HILOG_ERROR(HILOG_MODULE_ACE, "statemachine init failed as js file isn't existed.");
@@ -224,8 +222,42 @@ bool StateMachine::BindUri(jerry_value_t &jsRes)
                                    reinterpret_cast<const jerry_char_t *>("route target doesn't existed."));
         return false;
     }
-    ACE_FREE(fullPath);
     return true;
+}
+
+bool StateMachine::CheckJSSourceFile() const
+{
+    char *fullPath = RelocateJSSourceFilePath(appRootPath_, jsPagePath_);
+    if (fullPath == nullptr) {
+        return false;
+    }
+
+    bool result = false;
+    do {
+        size_t pathLength = strlen(fullPath);
+        const uint8_t fileSuffixLength = 3;
+        if ((pathLength == 0) || (pathLength > PATH_LENGTH_MAX) || (pathLength < fileSuffixLength)) {
+            break;
+        }
+
+        result = (GetFileSize(fullPath) > 0);
+        if (result) {
+            // try first one mode successfully
+            break;
+        }
+
+        const char * const anotherSuffix = (JsAppEnvironment::GetInstance()->IsSnapshotMode()) ? ".js" : ".bc";
+        // change file suffix to another mode file
+        if (strcpy_s((fullPath + (pathLength - fileSuffixLength)), (fileSuffixLength + 1), anotherSuffix) != EOK) {
+            break;
+        }
+        result = (GetFileSize(fullPath) > 0);
+    } while (0);
+
+    ace_free(fullPath);
+    fullPath = nullptr;
+
+    return result;
 }
 
 void StateMachine::BindParameters()
