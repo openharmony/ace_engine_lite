@@ -41,6 +41,7 @@ bool TextComponent::CreateNativeViews()
 {
     /* set default text OverFlow clip */
     uiLabel_.SetLineBreakMode(overflowMode_);
+    uiLabel_.SetAlign(UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
     return CopyFontFamily(fontFamily_, ProductAdapter::GetDefaultFontFamilyName());
 }
 
