@@ -50,9 +50,9 @@ void JsAppContext::ClearContext()
 /**
  * return value should be released by caller when it's not used
  */
-jerry_value_t JsAppContext::Eval(const char * const jsFileFullPath, size_t fileNameLength, bool isAppEval) const
+jerry_value_t JsAppContext::Eval(char *fullPath, size_t fullPathLength, bool isAppEval) const
 {
-    if ((jsFileFullPath == nullptr) || (fileNameLength == 0)) {
+    if ((fullPath == nullptr) || (fullPathLength == 0)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Failed to eval js code cause by empty JavaScript script.");
         ACE_ERROR_CODE_PRINT(EXCE_ACE_ROUTER_REPLACE_FAILED, EXCE_ACE_PAGE_INDEX_MISSING);
         return UNDEFINED;
@@ -60,23 +60,24 @@ jerry_value_t JsAppContext::Eval(const char * const jsFileFullPath, size_t fileN
 
     uint32_t contentLength = 0;
     START_TRACING(PAGE_CODE_LOAD);
-    bool snapshotMode = JsAppEnvironment::GetInstance()->IsSnapshotMode();
-    char *jsCode = ReadFile(jsFileFullPath, contentLength, snapshotMode);
+    bool isSnapshotMode = JsAppEnvironment::GetInstance()->IsSnapshotMode();
+    char *jsCode = EvaluateFile(isSnapshotMode, contentLength, fullPath, fullPathLength);
     STOP_TRACING();
     if ((jsCode == nullptr) || (contentLength > FILE_CONTENT_LENGTH_MAX)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "empty js file or length is incorrect, eval user code failed");
         ACE_ERROR_CODE_PRINT(EXCE_ACE_ROUTER_REPLACE_FAILED, EXCE_ACE_PAGE_FILE_READ_FAILED);
+        ACE_FREE(jsCode);
         return UNDEFINED;
     }
 
     START_TRACING(PAGE_CODE_EVAL);
     jerry_value_t viewModel = UNDEFINED;
-    if (snapshotMode) {
+    if (isSnapshotMode) {
         const uint32_t *snapshotContent = reinterpret_cast<const uint32_t *>(jsCode);
         viewModel = jerry_exec_snapshot(snapshotContent, contentLength, 0, 1);
     } else {
         const jerry_char_t *jsScript = reinterpret_cast<const jerry_char_t *>(jsCode);
-        jerry_value_t retValue = jerry_parse(reinterpret_cast<const jerry_char_t *>(jsFileFullPath), fileNameLength,
+        jerry_value_t retValue = jerry_parse(reinterpret_cast<const jerry_char_t *>(fullPath), fullPathLength,
                                              jsScript, contentLength, JERRY_PARSE_NO_OPTS);
         if (jerry_value_is_error(retValue)) {
             ACE_ERROR_CODE_PRINT(EXCE_ACE_ROUTER_REPLACE_FAILED, EXCE_ACE_PAGE_JS_EVAL_FAILED);
@@ -106,6 +107,40 @@ jerry_value_t JsAppContext::Eval(const char * const jsFileFullPath, size_t fileN
 
     SetGlobalNamedProperty(isAppEval, viewModel);
     return viewModel;
+}
+
+char *JsAppContext::EvaluateFile(bool &isSnapshotMode,
+                                 uint32_t &outLength,
+                                 char *fullPath,
+                                 size_t fullPathLength) const
+{
+    if (fullPath == nullptr || fullPathLength == 0) {
+        return nullptr;
+    }
+    const uint8_t fileSuffixLength = 3; // file suffix is fixed, .js or .bc
+    size_t filePathLen = strlen(fullPath);
+    if ((filePathLen == 0) || (filePathLen != fullPathLength) || (fullPathLength < fileSuffixLength)) {
+        return nullptr;
+    }
+    outLength = 0;
+    char *jsCode = ReadFile(fullPath, outLength, isSnapshotMode);
+    if ((jsCode != nullptr) && (outLength <= FILE_CONTENT_LENGTH_MAX)) {
+        // read successfully
+        return jsCode;
+    }
+    // make sure the memory is freeed
+    ACE_FREE(jsCode);
+
+    const char * const anotherSuffx = isSnapshotMode ? ".js" : ".bc";
+    // change file suffix to another mode file
+    if (strcpy_s((fullPath + (fullPathLength - fileSuffixLength)), (fileSuffixLength + 1), anotherSuffx) != EOK) {
+        return nullptr;
+    }
+    // snapshot mode changed to another
+    isSnapshotMode = !isSnapshotMode;
+    HILOG_ERROR(HILOG_MODULE_ACE, "JS mode changed unexpected [%d]", isSnapshotMode);
+    jsCode = ReadFile(fullPath, outLength, isSnapshotMode);
+    return jsCode;
 }
 
 void JsAppContext::SetGlobalNamedProperty(bool isAppEval, jerry_value_t viewModel) const

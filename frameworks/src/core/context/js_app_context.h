@@ -40,11 +40,11 @@ public:
     /**
      * @brief eval user's JS Code and return FeatureAbility object
      *
-     * @param: jsFileFullPath js file full path
-     * @param: fileNameLength the given file name length
+     * @param: fullPath js file full path
+     * @param: fullPathLength the given file name length
      * @param: the flag for app eval or page eval.True is eval flag.
      */
-    jerry_value_t Eval(const char * const jsFileFullPath, size_t fileNameLength, bool isAppEval) const;
+    jerry_value_t Eval(char *fullPath, size_t fullPathLength, bool isAppEval) const;
     /**
      * @brief call FeatureAbility's render function
      *
@@ -148,6 +148,17 @@ private:
     void ReleaseAbilityInfo();
 
     void SetGlobalNamedProperty(bool isAppEval, jerry_value_t viewModel) const;
+    /**
+     * @brief try read the target mode file content, if failed, change to read another mode
+     *
+     * @param: isSnapshotMode target mode, can be adjusted to the proper mode
+     * @param: outLength the reading content length
+     * @param: fullPath js file full path
+     * @param: fullPathLength the given file name length
+     *
+     * @return the target mode file content or nullptr for reading failure
+     */
+    char *EvaluateFile(bool &isSnapshotMode, uint32_t &outLength, char *fullPathPath, size_t fullPathLength) const;
     char *currentBundleName_ = nullptr;
     char *currentAbilityPath_ = nullptr;
     char *currentJsPath_ = nullptr;
