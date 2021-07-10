@@ -37,6 +37,7 @@ INCLUDEPATH += \
     $${FOUNDATION_PATH}/graphic/ui/tools/qt/simulator/drivers/indev \
     $${ACELITE_FRAMEWORK_PATH}/targets/simulator \
     $${ACELITE_FRAMEWORK_PATH}/include/context/ \
+    $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/utils \
     $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock \
     $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock/jsthread \
     $${ACELITE_FRAMEWORK_PATH}/tools/qt/simulator/jsfwk/targets/simulator/mock/vsyncthread \
