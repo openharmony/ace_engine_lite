@@ -82,6 +82,7 @@ private:
     int GenerateJsPagePath(const char * const uri);
     void DeleteViewModelProperties() const;
     void ReleaseRootObject() const;
+    bool CheckJSSourceFile() const;
 
 private:
     int8_t currentState_;
