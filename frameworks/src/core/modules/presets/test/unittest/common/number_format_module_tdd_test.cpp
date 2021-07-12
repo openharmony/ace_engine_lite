@@ -455,7 +455,8 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test008, T
      */
     numberFormat = RunJs("new Intl.NumberFormat('zh-CN', {minimumFractionDigits:6});");
     formatRes = FormatNumber(numberFormat, args, 1);
-    EXPECT_FALSE((formatRes == nullptr) || (strcmp(formatRes, "1.234560")));
+    EXPECT_FALSE(formatRes == nullptr);
+    EXPECT_FALSE(strcmp(formatRes, "1.234560") != 0);
     ACE_FREE(formatRes);
     ReleaseJerryValue(numberFormat, args[0], VA_ARG_END_FLAG);
     TDD_CASE_END();
