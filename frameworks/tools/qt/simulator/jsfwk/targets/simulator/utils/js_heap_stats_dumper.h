@@ -29,11 +29,11 @@ public:
     void Dump();
 
 private:
-    bool HasChanged(JSHeapStatus &stats) const;
-    void HandleChange(JSHeapStatus &stats);
-    void UpdateStats(JSHeapStatus &stats);
-    void LogStats(JSHeapStatus &stats) const;
-    void SaveStats(JSHeapStatus &stats);
+    bool HasChanged(const JSHeapStatus &stats) const;
+    void HandleChange(const JSHeapStatus &stats);
+    void UpdateStats(const JSHeapStatus &stats);
+    void LogStats(const JSHeapStatus &stats) const;
+    void SaveStats(const JSHeapStatus &stats);
 
     JSHeapStatus stats_;
     JSHeapStatsWriter writer_;

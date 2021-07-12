@@ -24,7 +24,7 @@ namespace OHOS {
 namespace ACELite {
 class JSHeapStatsWriter {
 public:
-    JSHeapStatsWriter(const QString filename);
+    explicit JSHeapStatsWriter(const QString filename);
     ~JSHeapStatsWriter();
 
     void Write(const char *text);
