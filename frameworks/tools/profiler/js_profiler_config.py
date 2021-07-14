@@ -22,9 +22,6 @@ if ace js framework add config, when you use the util should adapter the config
 key_word = [
     'UNKNOWN',
     'alignItems',
-    # ifdef FEATURE_COMPONENT_ANALOG_CLOCK
-    # 'analog-clock'
-    # endif
     'animationDelay',
     'animationDuration',
     'animationFillMode',
@@ -47,6 +44,7 @@ key_word = [
     'borderTopWidth',
     'borderWidth',
     'break',
+    'canvas',
     'center',
     'centerX',
     'centerY',
@@ -56,17 +54,12 @@ key_word = [
     'click',
     'clip',
     'chart',
-    # ifdef FEATURE_COMPONENT_ANALOG_CLOCK
-    # 'clock-hand',
-    # endif
     'color',
     'column',
     'column-reverse',
-    'columns',
     'datasets',
-    # ifdef FEATURE_COMPONENT_DATE_PICKER
-    # 'date',
-    # endif
+    'day',
+    'digit2',
     'direction',
     'display',
     'div',
@@ -76,11 +69,9 @@ key_word = [
     'ease-in-out',
     'ease-out',
     'ellipsis',
-    # ifdef FEATURE_COMPONENT_DATE_PICKER
-    # 'end',
-    # endif
     'expand',
     'false',
+    'fillmode',
     'fixedsize',
     'flexDirection',
     'flex-end',
@@ -90,9 +81,8 @@ key_word = [
     'fontFamily',
     'forwards',
     'height',
-    # ifdef FEATURE_COMPONENT_ANALOG_CLOCK
-    # 'hour',
-    # endif
+    'hour',
+    'hour12',
     'id',
     'image',
     'image-animator',
@@ -102,15 +92,14 @@ key_word = [
     'itemselected',
     'iteration',
     'justifyContent',
-    # 'key',
     'labels',
     'larger',
     'left',
     'letterSpacing',
     'lineHeight',
-    'list-weak',
     'list',
     'list-item',
+    'long',
     'longpress',
     'loop',
     'margin',
@@ -122,10 +111,13 @@ key_word = [
     'max',
     'min',
     'mini',
+    'minute',
+    'month',
     'name',
     'none',
+    'numeric',
     'opacity',
-    'opations',
+    'options',
     'padding',
     'paddingBottom',
     'paddingLeft',
@@ -134,11 +126,8 @@ key_word = [
     'percent',
     'picker-view',
     'ref',
-    # ifdef FEATURE_COMPONENT_ANALOG_CLOCK
-    # 'pivotX',
-    # 'pivotY',
-    # endif
     'progress',
+    'qrcode',
     'radio',
     'radius',
     'range',
@@ -150,55 +139,46 @@ key_word = [
     'scrollamount',
     'scrollend',
     'scrollstart',
-    # ifdef FEATURE_COMPONENT_ANALOG_CLOCK
-    # 'sec',
-    # endif
+    'second',
     'selected',
     'selectedColor',
     'selectedFontFamily',
     'selectedFontSize',
+    'short',
     'show',
     'slider',
     'space-around',
     'space-between',
+    'space-evenly',
     'src',
     'stack',
     'standard',
     'stop',
-    # ifdef FEATURE_COMPONENT_DATE_PICKER
-    # 'start',
-    # endif
     'startAngle',
     'step',
     'strokeWidth',
     'swipe',
     'swiper',
     'switch',
-    # ifdef FEATURE_COMPONENT_TABS
-    # 'tab-bar',
-    # 'tab-content',
-    # 'tabs',
-    # endif
     'text',
     'textAlign',
     'textOverflow',
     'time',
     'top',
     'total-angle',
-    # 'touchcancel',
-    # 'touchend',
-    # 'touchmove',
-    # 'touchstart',
     'translateX',
     'translateY',
     'true',
-    # ifdef FEATURE_COMPONENT_ANALOG_CLOCK
-    # 'type',
-    # endif
     'value',
     'vertical',
     'width',
-    'wrap'
+    'wrap',
+    'weekday',
+    'year',
+    'style',
+    'useGroup',
+    'minimumFractionDigits',
+    'maximumFractionDigits'
 ]
 
 label_name = [
@@ -228,6 +208,7 @@ label_name = [
     'PAGE_ON_INIT',
     'PAGE_ON_READY',
     'PAGE_ON_SHOW',
+    'PAGE_ON_BACKGROUND',
     'PAGE_ON_DESTROY',
     'RENDER',
     'ADD_TO_ROOT_VIEW',
@@ -275,6 +256,7 @@ profiler_name = {
     'PAGE_ON_INIT': 'ROUTER_REPLACE',
     'PAGE_ON_READY': 'ROUTER_REPLACE',
     'PAGE_ON_SHOW': 'ROUTER_REPLACE',
+    'PAGE_ON_BACKGROUND': 'ROUTER_REPLACE',
     'PAGE_ON_DESTROY': 'P_UNKNOWN',
     'RENDER': 'ROUTER_REPLACE',
     'ADD_TO_ROOT_VIEW': 'LAUNCH',
