@@ -26,7 +26,7 @@ class LazyLoadWatcher final : public MemoryHeap {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(LazyLoadWatcher);
 
-    LazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter);
+    LazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter, uint16_t keyId);
 
     ~LazyLoadWatcher();
 
@@ -54,11 +54,17 @@ public:
     {
         return getter_;
     }
+
+    uint16_t GetKeyId() const
+    {
+        return keyId_;
+    }
 private:
     jerry_value_t nativeElement_;
     jerry_value_t attrName_;
     jerry_value_t getter_;
     LazyLoadWatcher *next_;
+    uint16_t keyId_;
 };
 } // namespace ACELite
 } // namespace OHOS

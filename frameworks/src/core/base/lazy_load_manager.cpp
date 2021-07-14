@@ -47,9 +47,23 @@ void LazyLoadManager::RenderLazyLoadWatcher()
 {
     LazyLoadWatcher *next = nullptr;
     while (firstWatcher_ != nullptr) {
+        jerry_value_t attrName = firstWatcher_->GetAttrName();
+        jerry_value_t attrGetter = firstWatcher_->GetAttrGetter();
+        uint16_t attrKeyID = firstWatcher_->GetKeyId();
         Component *component = ComponentUtils::GetComponentFromBindingObject(firstWatcher_->GetNativeElement());
-        if (component != nullptr) {
-            component->AddWatcherItem(firstWatcher_->GetAttrName(), firstWatcher_->GetAttrGetter(), true);
+        jerry_value_t latestValue =
+            (component == nullptr) ? UNDEFINED : component->AddWatcherItem(attrName, attrGetter, true);
+        if (attrKeyID == K_UNKNOWN) {
+            // try to parse from attr name directly
+            attrKeyID = ParseKeyIdFromJSString(attrName);
+        }
+        if ((!IS_UNDEFINED(latestValue)) && (attrKeyID != K_UNKNOWN)) {
+            // need to update the view with the latest value, in case the value is already changed
+            if (component->UpdateView(attrKeyID, latestValue)) {
+                component->Invalidate();
+            }
+            // the new value has been calculated out by ParseExpression, need to be released
+            jerry_release_value(latestValue);
         }
         next = const_cast<LazyLoadWatcher *>(firstWatcher_->GetNext());
         delete firstWatcher_;
@@ -59,14 +73,24 @@ void LazyLoadManager::RenderLazyLoadWatcher()
     state_ = LazyLoadState::DONE;
 }
 
-void LazyLoadManager::AddLazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter)
+void LazyLoadManager::AddLazyLoadWatcher(jerry_value_t nativeElement,
+                                         jerry_value_t attrName,
+                                         jerry_value_t getter)
+{
+    // pass key ID as UNKNOWN, and will be calculated out from attrName when using
+    AddLazyLoadWatcher(nativeElement, attrName, getter, K_UNKNOWN);
+}
+
+void LazyLoadManager::AddLazyLoadWatcher(jerry_value_t nativeElement,
+                                         jerry_value_t attrName,
+                                         jerry_value_t getter,
+                                         uint16_t keyId)
 {
     if (nativeElement == UNDEFINED || attrName == UNDEFINED || getter == UNDEFINED) {
         return;
     }
 
-    LazyLoadWatcher *watcher =
-            new LazyLoadWatcher(nativeElement, jerry_acquire_value(attrName), jerry_acquire_value(getter));
+    LazyLoadWatcher *watcher = new LazyLoadWatcher(nativeElement, attrName, getter, keyId);
     if (watcher == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "create watcher errpr");
         return;
