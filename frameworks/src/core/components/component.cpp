@@ -96,6 +96,13 @@ Component::Component(jerry_value_t options, jerry_value_t children, AppStyleMana
       marginRight_(-1, DimensionType::TYPE_UNKNOWN),
       marginBottom_(-1, DimensionType::TYPE_UNKNOWN)
 {
+    JSValue attrs = JSObject::Get(options, ATTR_ATTRS);
+    if (JSUndefined::Is(attrs)) {
+        freeze_ = false;
+    } else {
+        freeze_ = JSObject::GetBoolean(attrs, ATTR_FREEZE);
+    }
+    JSRelease(attrs);
     // create native element object before combining styles, as style data binding need it
     nativeElement_ = jerry_create_object();
     jerry_value_t global = jerry_get_global_object();
@@ -459,7 +466,7 @@ void Component::AdapteBoxRectArea(UIView &uiView) const
                                 uiView.GetStyle(STYLE_PADDING_TOP) - uiView.GetStyle(STYLE_PADDING_BOTTOM);
         if (contentHeight <= 0) {
             HILOG_WARN(HILOG_MODULE_ACE,
-                "component height can not include padding and border width, padding and border will be set 0");
+                       "component height can not include padding and border width, padding and border will be set 0");
             uiView.SetStyle(STYLE_BORDER_WIDTH, 0);
             uiView.SetStyle(STYLE_PADDING_TOP, 0);
             uiView.SetStyle(STYLE_PADDING_BOTTOM, 0);
@@ -476,7 +483,7 @@ void Component::AdapteBoxRectArea(UIView &uiView) const
                                uiView.GetStyle(STYLE_PADDING_LEFT) - uiView.GetStyle(STYLE_PADDING_RIGHT);
         if (contentWidth <= 0) {
             HILOG_WARN(HILOG_MODULE_ACE,
-                "component width can not include padding and border width, padding and border will be set 0");
+                       "component width can not include padding and border width, padding and border will be set 0");
             uiView.SetStyle(STYLE_BORDER_WIDTH, 0);
             uiView.SetStyle(STYLE_PADDING_LEFT, 0);
             uiView.SetStyle(STYLE_PADDING_RIGHT, 0);
@@ -1066,14 +1073,18 @@ void Component::ParseAttrs()
 
         if (jerry_value_is_function(attrValue)) {
             START_TRACING_WITH_COMPONENT_NAME(SET_ATTR_PARSE_EXPRESSION, componentName_);
+            if (freeze_) {
+                newAttrValue = JSFunction::Call(attrValue, viewModel_, nullptr, 0);
+            } else {
 #ifdef FEATURE_LAZY_LOADING_MODULE
-            newAttrValue = CallJSFunction(attrValue, viewModel_, nullptr, 0);
-            JsAppContext *context = JsAppContext::GetInstance();
-            LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
-            lazyLoadManager->AddLazyLoadWatcher(nativeElement_, attrKey, attrValue);
+                newAttrValue = CallJSFunction(attrValue, viewModel_, nullptr, 0);
+                JsAppContext *context = JsAppContext::GetInstance();
+                LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
+                lazyLoadManager->AddLazyLoadWatcher(nativeElement_, attrKey, attrValue);
 #else
-            newAttrValue = AddWatcherItem(attrKey, attrValue);
+                newAttrValue = AddWatcherItem(attrKey, attrValue);
 #endif
+            }
             STOP_TRACING();
         }
 

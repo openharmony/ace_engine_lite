@@ -135,6 +135,16 @@ public:
         return componentName_;
     }
 
+    bool IsFreeze() const
+    {
+        return freeze_;
+    }
+
+    JSValue GetViewModel() const
+    {
+        return viewModel_;
+    }
+
     // update this view binded by for instruction when watch triggered.
     virtual bool UpdateForView()
     {
@@ -613,6 +623,7 @@ private:
     uint16_t componentName_;
     bool rendered_;
     bool isAnimationKeyFramesSet_;
+    bool freeze_;
     TransitionImpl *curTransitionImpl_;
     TransitionParams *trans_;
     jerry_value_t descriptors_;
