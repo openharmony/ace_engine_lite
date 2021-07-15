@@ -59,8 +59,6 @@ ace_lite_include_dirs += [
   "$ACE_LITE_PATH/src/core/stylemgr",
   "$ACE_LITE_PATH/src/core/wrapper",
   "$ACE_LITE_PATH/targets",
-  "//kernel/liteos_a/kernel/include/",
-  "//kernel/liteos_a/kernel/common",
   "//third_party/jerryscript/jerry-core/include",
   "//third_party/jerryscript/jerry-ext/include/jerryscript-ext",
   "///third_party/jerryscript/jerry-port/default/include",

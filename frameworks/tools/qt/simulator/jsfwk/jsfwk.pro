@@ -198,8 +198,6 @@ INCLUDEPATH += \
             targets/simulator/mock/vsyncthread \
             targets/simulator/mock/amsthread \
             targets/simulator/mock/timerthread \
-            $${ROOT_PATH}/kernel/liteos_a/kernel/include/ \
-            $${ROOT_PATH}/kernel/liteos_a/kernel/common \
             $${ROOT_PATH}/third_party/jerryscript/jerry-core/include \
             $${ROOT_PATH}/third_party/jerryscript/jerry-ext/include/jerryscript-ext \
             $${ROOT_PATH}//third_party/jerryscript/jerry-port/default/include \
