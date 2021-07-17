@@ -79,6 +79,7 @@ enum PerformanceTag {
     PAGE_ON_INIT,
     PAGE_ON_READY,
     PAGE_ON_SHOW,
+    PAGE_ON_BACKGROUND,
     PAGE_ON_DESTROY,
     RENDER,
     ADD_TO_ROOT_VIEW,
