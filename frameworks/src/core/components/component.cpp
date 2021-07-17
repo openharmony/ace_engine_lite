@@ -234,12 +234,12 @@ bool Component::UpdateView(uint16_t attrKeyId, jerry_value_t attrValue)
             styleItem = nullptr;
         }
     }
-
+    // for root component case, it has no parent, need to use screen resolution as default
+    ConstrainedParameter parentParam(GetHorizontalResolution(), GetVerticalResolution());
     if (parent_ != nullptr) {
-        ConstrainedParameter parentParam;
         parent_->GetConstrainedParam(parentParam);
-        AlignDimensions(parentParam);
     }
+    AlignDimensions(parentParam);
     AdaptBoxSizing(attrKeyId);
     // force parent to relayout the children in case component's area is changed
     InvalidateIfNeeded(attrKeyId, false);
