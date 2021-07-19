@@ -41,9 +41,14 @@ public:
     void ResetWatchers();
 
     /**
-     * @brief Cache watcher
+     * @brief Cache watcher, need to calculate the name key by self
      */
     void AddLazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter);
+
+    /**
+     * @brief Cache watcher
+     */
+    void AddLazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter, uint16_t keyId);
 
     /**
      * @brief Render watcher at next TE task
