@@ -123,7 +123,7 @@ public:
     static void NotifyRenderEnd();
     static const char *GetDefaultFontFamilyName();
     static uint8_t GetDefaultFontSize();
-    static void UpdateShowingState(bool forground);
+    static void UpdateRenderTickAcceptable(bool acceptable);
     static void GetScreenSize(uint16_t &width, uint16_t &height);
     static bool SetScreenOnVisible(bool visible);
 };
