@@ -1277,5 +1277,21 @@ bool CopyFontFamily(char *&destination, const char * const fontFamily, uint32_t 
     }
     return true;
 }
+
+uint16_t ParseKeyIdFromJSString(const jerry_value_t str)
+{
+    // calculate key ID
+    uint16_t keyId = K_UNKNOWN;
+    uint16_t strLength = 0;
+    char *keyStr = MallocStringOf(str, &strLength);
+    if (keyStr != nullptr) {
+        if (strLength != 0) {
+            keyId = KeyParser::ParseKeyId(keyStr, strLength);
+        }
+        ace_free(keyStr);
+        keyStr = nullptr;
+    }
+    return keyId;
+}
 } // namespace ACELite
 } // namespace OHOS

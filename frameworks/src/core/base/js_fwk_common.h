@@ -284,6 +284,13 @@ void CureImagePath(char *&imagePath);
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 const char *ParseImageSrc(jerry_value_t source);
 
+/**
+ * @brief ParseKeyIdFromJSString parse key ID from JS value
+ * @param str the input JS string value
+ * @return the key ID
+ */
+uint16_t ParseKeyIdFromJSString(const jerry_value_t str);
+
 constexpr char PATH_PREFIX[] = ".";
 constexpr char PATH_DEFAULT[] = "/";
 
