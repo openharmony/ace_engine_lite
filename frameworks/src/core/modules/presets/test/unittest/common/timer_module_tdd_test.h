@@ -14,6 +14,7 @@
  */
 
 #ifndef TIMER_MODULE_TEST_H
+#define TIMER_MODULE_TEST_H
 #include "acelite_config.h"
 #include "basic_tdd_test.h"
 #include "test_common.h"
@@ -50,4 +51,4 @@ public:
 };
 }
 }
-#endif
+#endif // TIMER_MODULE_TEST_H
