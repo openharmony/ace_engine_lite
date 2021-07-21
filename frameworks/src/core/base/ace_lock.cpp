@@ -28,6 +28,7 @@ LockType::LockType() : mutex_(PTHREAD_MUTEX_INITIALIZER), mutexInited_(0)
 #else
 LockType::LockType() : mutexInited_(0)
 {
+    (void)mutexInited_;
 }
 #endif
 
@@ -63,6 +64,8 @@ AutoLockGuard::AutoLockGuard(LockType &lock) : lock_(lock)
     lock_.Lock();
 #elif (defined(__LITEOS_M__) || defined(OHOS_ACELITE_PRODUCT_WATCH))
     LOS_TaskLock();
+#else
+    (void)lock_;
 #endif
 }
 
