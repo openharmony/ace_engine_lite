@@ -36,7 +36,7 @@ ohos_static_library("ace_lite") {
     "//foundation/ace/ace_engine_lite/frameworks/src/core/context/ace_ability.cpp",
   ]
   cflags_cc = [
-    "-Wno-error",
+    "-Wall",
     "-D_INC_STRING_S",
     "-D_INC_WCHAR_S",
     "-D_SECIMP=//",
