@@ -27,6 +27,7 @@ ScrollLayer::ScrollLayer() : scroll_(nullptr), pageRootView_(nullptr) {}
 ScrollLayer::~ScrollLayer()
 {
     if (scroll_ != nullptr) {
+        scroll_->RemoveAll();
         delete (scroll_);
         scroll_ = nullptr;
     }
