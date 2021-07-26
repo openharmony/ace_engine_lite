@@ -231,7 +231,7 @@ bool ImageAnimatorComponent::ParseToFrames(jerry_value_t value)
             continue;
         }
 
-        ImageAnimatorInfo frame = {0};
+        ImageAnimatorInfo frame = {{0}};
         frame.imagePath = ParseImageSrc(src);
         jerry_release_value(src);
         frame.width = JerryGetIntegerProperty(image, ATTR_WIDTH);
