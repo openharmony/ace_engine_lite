@@ -24,7 +24,10 @@
 namespace OHOS {
 namespace ACELite {
 ImageComponent::ImageComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager)
-    : Component(options, children, styleManager)
+    : Component(options, children, styleManager),
+      fitOriginalSize_(0),
+      hasSetWidth_(false),
+      hasSetHeight_(false)
 {
     SetComponentName(K_IMAGE);
 }
@@ -33,6 +36,7 @@ bool ImageComponent::CreateNativeViews()
 {
     // set default value
     imageView_.SetAutoEnable(false);
+    imageView_.SetResizeMode(resizeMode_);
     const int16_t defaultOpacity = 0;
     imageView_.SetStyle(STYLE_BACKGROUND_OPA, defaultOpacity);
     return true;
@@ -59,6 +63,75 @@ bool ImageComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrV
     }
 
     return setResult;
+}
+
+void ImageComponent::UpdateWidgetFitMode()
+{
+    // update the imageView
+    if (fitOriginalSize_ && (!hasSetWidth_ || !hasSetHeight_)) {
+        imageView_.SetAutoEnable(true);
+    } else {
+        imageView_.SetAutoEnable(false);
+    }
+    imageView_.SetResizeMode(resizeMode_);
+}
+
+bool ImageComponent::ApplyPrivateStyle(const AppStyleItem *style)
+{
+    uint16_t styleKey = style->GetPropNameId();
+    bool setResult = true;
+    switch (styleKey) {
+        case K_OBJECT_FIT: {
+            const char * const strValue = GetStyleStrValue(style);
+            if (strValue == nullptr) {
+                return false;
+            }
+            uint16_t mode = KeyParser::ParseKeyId(strValue, GetStyleStrValueLen(style));
+            UpdateResizeMode(mode);
+            break;
+        }
+        case K_FIT_ORIGINAL_SIZE: {
+            fitOriginalSize_ = style->GetBoolValue();
+            break;
+        }
+        case K_HEIGHT: {
+            hasSetHeight_ = true;
+            setResult = false;
+            break;
+        }
+        case K_WIDTH: {
+            hasSetWidth_ = true;
+            setResult = false;
+            break;
+        }
+        default:
+            return false;
+    }
+    UpdateWidgetFitMode();
+    return setResult;
+}
+
+void ImageComponent::UpdateResizeMode(uint16_t mode)
+{
+    switch (mode) {
+        case K_COVER:
+            resizeMode_ = UIImageView::ImageResizeMode::COVER;
+            break;
+        case K_CONTAIN:
+            resizeMode_ = UIImageView::ImageResizeMode::CONTAIN;
+            break;
+        case K_FILL:
+            resizeMode_ = UIImageView::ImageResizeMode::FILL;
+            break;
+        case K_NONE:
+            resizeMode_ = UIImageView::ImageResizeMode::CENTER;
+            break;
+        case K_SCALE_DOWN:
+            resizeMode_ = UIImageView::ImageResizeMode::SCALE_DOWN;
+            break;
+        default:
+            break;
+    }
 }
 } // namespace ACELite
 } // namespace OHOS

@@ -35,9 +35,15 @@ protected:
     bool CreateNativeViews() override;
     UIView *GetComponentRootView() const override;
     bool SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue) override;
-
+    bool ApplyPrivateStyle(const AppStyleItem *style) override;
+    void UpdateResizeMode(uint16_t mode);
+    void UpdateWidgetFitMode();
 private:
     UIImageView imageView_;
+    UIImageView::ImageResizeMode resizeMode_ = UIImageView::ImageResizeMode::COVER;
+    bool fitOriginalSize_ : 1;
+    bool hasSetWidth_ : 1;
+    bool hasSetHeight_ : 1;
 };
 } // namespace ACELite
 } // namespace OHOS

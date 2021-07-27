@@ -205,6 +205,12 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
                 return K_CLOCK_HAND;
             }
 #endif // FEATURE_COMPONENT_ANALOG_CLOCK
+            if (!strcmp(s, "over")) {
+                return K_COVER;
+            }
+            if (!strcmp(s, "ontain")) {
+                return K_CONTAIN;
+            }
             break;
         case 'd':
             if (!strcmp(s, "atasets")) {
@@ -298,6 +304,12 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             if (!strcmp(s, "orwards")) {
                 return K_FORWARDS;
+            }
+            if (!strcmp(s, "ill")) {
+                return K_FILL;
+            }
+            if (!strcmp(s, "itOriginalSize")) {
+                return K_FIT_ORIGINAL_SIZE;
             }
             break;
         case 'h':
@@ -456,6 +468,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             if (!strcmp(s, "ptions")) {
                 return K_OPTIONS;
+            }
+            if (!strcmp(s, "bjectFit")) {
+                return K_OBJECT_FIT;
             }
             break;
         case 'p':
@@ -629,6 +644,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             if (!strcmp(s, "witch")) {
                 return K_SWITCH;
+            }
+            if (!strcmp(s, "caleDown")) {
+                return K_SCALE_DOWN;
             }
             break;
         case 't':
