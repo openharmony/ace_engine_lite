@@ -613,6 +613,11 @@ bool PickerViewComponent::SetTextPickerRange(jerry_value_t rangeValue)
         textPickerListener_->SetTextRange(pTextArray_); // call SetTextRange before SetValues!
     }
     textPicker->SetValues(const_cast<const char **>(pTextArray_), textArraySize_);
+    if (textArraySize_ == 1) {
+        textPicker->SetLoopState(false);
+    } else {
+        textPicker->SetLoopState(true);
+    }
     return true;
 }
 } // namespace ACELite

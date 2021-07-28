@@ -133,6 +133,10 @@ void SwiperComponent::SetPageIndex()
     } else {
         swiperView_.SetCurrentPage(index_);
     }
+    if (length == 1) {
+       swiperView_.SetBlankSize(0);
+       swiperView_.SetLoopState(false);
+    }
 }
 
 void SwiperComponent::ChangeListener::OnSwipe(UISwipeView &view)
