@@ -134,8 +134,8 @@ void SwiperComponent::SetPageIndex()
         swiperView_.SetCurrentPage(index_);
     }
     if (length == 1) {
-       swiperView_.SetBlankSize(0);
-       swiperView_.SetLoopState(false);
+        swiperView_.SetBlankSize(0);
+        swiperView_.SetLoopState(false);
     }
 }
 
