@@ -25,6 +25,7 @@ modules_unittest_root =
     "$ace_lite_root/frameworks/src/core/modules/test/unittest"
 stylemgr_unittest_root =
     "$ace_lite_root/frameworks/src/core/stylemgr/test/unittest"
+router_unittest_root = "$ace_lite_root/frameworks/src/core/router/test/unittest"
 
 # common config for all test, append extra in self gn
 config("test_common_config") {
@@ -48,6 +49,7 @@ group("unittest") {
     "$context_unittest_root:js_frameworks_unittest",
     "$jsi_unittest_root:jsi_unittest",
     "$modules_unittest_root:modules_unittest",
+    "$router_unittest_root:router_module_unittest",
     "$stylemgr_unittest_root:stylemgr_unittest",
   ]
 }

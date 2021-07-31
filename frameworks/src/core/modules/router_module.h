@@ -32,10 +32,7 @@ public:
     static JSIValue Replace(const JSIValue thisVal, const JSIValue* args, uint8_t argsNum);
 };
 
-void InitRouterModule(JSIValue exports)
-{
-    JSI::SetModuleAPI(exports, "replace", RouterModule::Replace);
-}
+void InitRouterModule(JSIValue exports);
 } // namespace ACELite
 } // namespace OHOS
 

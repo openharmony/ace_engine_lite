@@ -262,13 +262,14 @@ bool StateMachine::CheckJSSourceFile() const
 
 void StateMachine::BindParameters()
 {
+    if (uri_ == nullptr) {
+        return;
+    }
     jerry_value_t params = jerryx_get_property_str(object_, ROUTER_PAGE_PARAMS);
     RegisterUriAndParamsToPage(uri_, params);
     jerry_release_value(params);
-    if (uri_ != nullptr) {
-        ace_free(uri_);
-        uri_ = nullptr;
-    }
+    ace_free(uri_);
+    uri_ = nullptr;
 }
 
 void StateMachine::ChangeState(int newState)
@@ -295,13 +296,14 @@ void StateMachine::EvalPage()
         return;
     }
 
-    viewModel_ = appContext_->Eval(pageFilePath, strlen(pageFilePath), false);
-    if (IS_UNDEFINED(viewModel_)) {
+    jerry_value_t evalResult = appContext_->Eval(pageFilePath, strlen(pageFilePath), false);
+    if (IS_UNDEFINED(evalResult)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Eval JS file failed");
         ace_free(pageFilePath);
         pageFilePath = nullptr;
         return;
     }
+    viewModel_ = evalResult;
 
     jerry_value_t params = jerryx_get_property_str(object_, ROUTER_PAGE_PARAMS);
     jerry_value_t keys = jerry_get_object_keys(params);
@@ -487,5 +489,15 @@ void StateMachine::SetHiddenFlag(bool flag)
 {
     isEntireHidden_ = flag;
 }
+
+#ifdef TDD_ASSERTIONS
+void StateMachine::SetViewModel(jerry_value_t viewModel)
+{
+    DeleteViewModelProperties();
+    jerry_release_value(viewModel_);
+    viewModel_ = viewModel;
+    // should add all router param to new view model again?
+}
+#endif // TDD_ASSERTIONS
 } // namespace ACELite
 } // namespace OHOS
