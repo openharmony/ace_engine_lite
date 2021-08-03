@@ -52,6 +52,7 @@ static DFXWrapper g_dfxWrapper;
 static TEHandlingHooks g_teHandlingHooks = {nullptr, nullptr};
 static TerminateAbilityHandler g_termiantingHandler = nullptr;
 static SetScreenOnVisibleHandler g_setScreenOnHandler = nullptr;
+static ExtraPresetModulesHook g_extraPresetModulesHooks = {nullptr, nullptr};
 // default font styles
 static char *g_defaultFontFamilyName = nullptr;
 static uint8_t g_defaultFontSize = 30;
@@ -231,6 +232,26 @@ void ProductAdapter::RegSetScreenOnVisibleHandler(SetScreenOnVisibleHandler hand
 bool ProductAdapter::SetScreenOnVisible(bool visible)
 {
     return (g_setScreenOnHandler != nullptr) ? g_setScreenOnHandler(visible) : false;
+}
+
+void ProductAdapter::RegExtraPresetModulesHook(ExtraPresetModulesHook hook)
+{
+    g_extraPresetModulesHooks.loadingHandler = hook.loadingHandler;
+    g_extraPresetModulesHooks.unloadingHandler = hook.unloadingHandler;
+}
+
+void ProductAdapter::LoadExtraPresetModules()
+{
+    if (g_extraPresetModulesHooks.loadingHandler != nullptr) {
+        g_extraPresetModulesHooks.loadingHandler();
+    }
+}
+
+void ProductAdapter::UnloadExtraPresetModules()
+{
+    if (g_extraPresetModulesHooks.unloadingHandler != nullptr) {
+        g_extraPresetModulesHooks.unloadingHandler();
+    }
 }
 } // namespace ACELite
 } // namespace OHOS
