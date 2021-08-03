@@ -26,6 +26,17 @@ unittest("js_frameworks_test_arc") {
   deps = ace_test_deps
 }
 
+unittest("js_frameworks_test_directive") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "directive_tdd_test.cpp",
+  ]
+  deps = ace_test_deps
+}
+
 unittest("js_frameworks_test_data_binding") {
   output_extension = "bin"
   output_dir = test_output_root

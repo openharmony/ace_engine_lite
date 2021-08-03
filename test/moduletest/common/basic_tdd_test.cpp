@@ -266,6 +266,17 @@ void BasicTddTest::Swipe(int16_t startX, int16_t startY, int16_t endX, int16_t e
     usleep(sleepTicks * TICK);
 }
 
+uint8_t BasicTddTest::GetChildrenSize(const UIViewGroup &grop) const
+{
+    UIView *child = grop.GetChildrenHead();
+    uint8_t size = 0;
+    while (child != nullptr) {
+        ++size;
+        child = child->GetNextSibling();
+    }
+    return size;
+}
+
 void *BasicTddTest::TickHandler(void *args)
 {
     prctl(PR_SET_NAME, "TickTask");

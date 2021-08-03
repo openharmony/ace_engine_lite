@@ -15,6 +15,7 @@ group("components_unittest") {
   deps = [
     "common:js_frameworks_test_arc",
     "common:js_frameworks_test_data_binding",
+    "common:js_frameworks_test_directive",
     "common:js_frameworks_test_div",
     "common:js_frameworks_test_event_bubble",
     "common:js_frameworks_test_horizonprogress",
