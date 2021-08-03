@@ -17,6 +17,7 @@
 #include "ace_log.h"
 #include "fatal_handler.h"
 #include "js_page_state.h"
+#include "js_profiler.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -29,7 +30,9 @@ void PageInitState::Handle(StateMachine &sm)
         sm.BindParameters();
         // do this state's action: eval user js code and invoke life cycle callback
         sm.EvalPage();
+        START_TRACING(PAGE_ON_INIT);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_ON_INIT);
+        STOP_TRACING();
         sm.ChangeState(READY_STATE);
     } else {
         HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing undefined state to init state.",
@@ -44,7 +47,9 @@ void PageReadyState::Handle(StateMachine &sm)
         HILOG_INFO(HILOG_MODULE_ACE, "init state -> ready state");
         // do this state's action:call render to setup user interface
         sm.RenderPage();
+        START_TRACING(PAGE_ON_READY);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_CALLBACK_ON_READY);
+        STOP_TRACING();
         sm.SetCurrentState(READY_STATE);
     } else {
         HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing init state to ready state.",
@@ -59,7 +64,9 @@ void PageShowState::Handle(StateMachine &sm)
         HILOG_INFO(HILOG_MODULE_ACE, "current state(%d) -> show state", currState);
         // do this state's action: call show to display user interface
         sm.ShowPage();
+        START_TRACING(PAGE_ON_SHOW);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_CALLBACK_ON_SHOW);
+        STOP_TRACING();
         sm.SetCurrentState(SHOW_STATE);
     } else {
         HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing ready state to show state.",
@@ -73,7 +80,9 @@ void PageBackgroundState::Handle(StateMachine &sm)
     if ((currState == READY_STATE) || (currState == SHOW_STATE)) {
         HILOG_INFO(HILOG_MODULE_ACE, "current state(%d) -> background state", currState);
         sm.HidePage();
+        START_TRACING(PAGE_ON_BACKGROUND);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_CALLBACK_ON_HIDE);
+        STOP_TRACING();
         sm.SetCurrentState(BACKGROUND_STATE);
     } else {
         HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing show state to background state.",
@@ -88,7 +97,9 @@ void PageDestroyState::Handle(StateMachine &sm)
     if ((currState >= INIT_STATE) || (FatalHandler::GetInstance().IsFatalErrorHitted())) {
         HILOG_INFO(HILOG_MODULE_ACE, "current state(%d) -> destroy state", currState);
         ACE_EVENT_PRINT(MT_ACE_RELEASE_HISTORY_PAGE, 0);
+        START_TRACING(PAGE_ON_DESTROY);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_CALLBACK_ON_DESTROY);
+        STOP_TRACING();
         sm.ReleaseHistoryPageResource();
         sm.SetCurrentState(DESTROY_STATE);
     } else {

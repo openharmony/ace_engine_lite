@@ -604,6 +604,30 @@ static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = fa
     return open(path, O_RDONLY);
 }
 
+static void OutputFileMaxLimitationTrace(const char * const fullPath, size_t limitation)
+{
+    if (fullPath == nullptr || strlen(fullPath) == 0) {
+        return;
+    }
+    const char *ptr = strrchr(fullPath, PATH_SEPARATOR);
+    const size_t fileNameMaxLen = 32;
+    if (ptr == nullptr || strlen(ptr) > fileNameMaxLen) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "file name too long.");
+        return;
+    }
+    const size_t traceDataLen = 128;
+    char traceData[traceDataLen] = {0};
+    const size_t oneKB = 1024;
+    size_t currentLimitation = limitation / oneKB;
+    if (sprintf_s(traceData, traceDataLen, "%s is bigger than %d KB.\n", (ptr + 1), currentLimitation) < 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "splice trace data failed.");
+        return;
+    }
+
+    LogOutLevel(LogLevel::LOG_LEVEL_ERR);
+    LogString(LogLevel::LOG_LEVEL_ERR, traceData);
+}
+
 /**
  * Check if the file length is under MAX limitation.
  */
@@ -616,15 +640,7 @@ static bool CheckFileLength(const char * const fullPath, int32_t &outFileSize)
         return false;
     }
     if (fileSize > FILE_CONTENT_LENGTH_MAX) {
-        LogString(LogLevel::LOG_LEVEL_ERR, "[JS Exception]: file ");
-        LogString(LogLevel::LOG_LEVEL_ERR, fullPath);
-        LogString(LogLevel::LOG_LEVEL_ERR, " is bigger than ");
-        const uint8_t len = 10;
-        char markdata[len];
-        const uint32_t num = 30; // calculate thresold by file type
-        if (sprintf_s(markdata, len, "%d kb.\n", num) < 0) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "init error message failed");
-        }
+        OutputFileMaxLimitationTrace(fullPath, FILE_CONTENT_LENGTH_MAX);
         ACE_ERROR_CODE_PRINT(EXCE_ACE_ROUTER_REPLACE_FAILED, EXCE_ACE_PAGE_FILE_TOO_HUGE);
         return false;
     }
@@ -1276,6 +1292,22 @@ bool CopyFontFamily(char *&destination, const char * const fontFamily, uint32_t 
         return false;
     }
     return true;
+}
+
+uint16_t ParseKeyIdFromJSString(const jerry_value_t str)
+{
+    // calculate key ID
+    uint16_t keyId = K_UNKNOWN;
+    uint16_t strLength = 0;
+    char *keyStr = MallocStringOf(str, &strLength);
+    if (keyStr != nullptr) {
+        if (strLength != 0) {
+            keyId = KeyParser::ParseKeyId(keyStr, strLength);
+        }
+        ace_free(keyStr);
+        keyStr = nullptr;
+    }
+    return keyId;
 }
 } // namespace ACELite
 } // namespace OHOS

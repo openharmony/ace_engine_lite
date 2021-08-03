@@ -59,7 +59,7 @@ static uint16_t g_screenWidth = 454;
 static uint16_t g_screenHeight = 454;
 
 // indicating if the ace application is on forground
-static bool g_isAceForground = false;
+static bool g_isRenderTickAcceptable = false;
 
 void ProductAdapter::InitAceTags(uint8_t *aceTags, uint8_t tagCount)
 {
@@ -150,7 +150,7 @@ void ProductAdapter::RegTEHandlers(const TEHandlingHooks &teHandlingHooks)
 TEDispatchingResult ProductAdapter::DispatchTEMessage()
 {
 #ifdef OHOS_ACELITE_PRODUCT_WATCH // only some specific products support TE dispatching
-    if (!g_isAceForground) {
+    if (!g_isRenderTickAcceptable) {
         return TEDispatchingResult::REFUSED;
     }
 
@@ -206,9 +206,9 @@ uint8_t ProductAdapter::GetDefaultFontSize()
     return g_defaultFontSize;
 }
 
-void ProductAdapter::UpdateShowingState(bool forground)
+void ProductAdapter::UpdateRenderTickAcceptable(bool acceptable)
 {
-    g_isAceForground = forground;
+    g_isRenderTickAcceptable = acceptable;
 }
 
 void ProductAdapter::SetScreenSize(uint16_t width, uint16_t height)

@@ -28,7 +28,8 @@ void PrintInfo(const char *format, va_list args)
 
 void HILOG_FATAL(HiLogModuleType mod, const char *msg, ...)
 {
-    printf("[FATAL]:");
+    (void)(mod);
+    printf("[ACELite][FATAL]:");
     va_list args;
     va_start(args, msg);
     PrintInfo(msg, args);
@@ -37,7 +38,8 @@ void HILOG_FATAL(HiLogModuleType mod, const char *msg, ...)
 
 void HILOG_ERROR(HiLogModuleType mod, const char *msg, ...)
 {
-    printf("[ERROR]:");
+    (void)(mod);
+    printf("[ACELite][ERROR]:");
     va_list args;
     va_start(args, msg);
     PrintInfo(msg, args);
@@ -46,7 +48,8 @@ void HILOG_ERROR(HiLogModuleType mod, const char *msg, ...)
 
 void HILOG_INFO(HiLogModuleType mod, const char *msg, ...)
 {
-    printf("[INFO]:");
+    (void)(mod);
+    printf("[ACELite][INFO]:");
     va_list args;
     va_start(args, msg);
     PrintInfo(msg, args);
@@ -55,7 +58,8 @@ void HILOG_INFO(HiLogModuleType mod, const char *msg, ...)
 
 void HILOG_WARN(HiLogModuleType mod, const char *msg, ...)
 {
-    printf("[WARN]:");
+    (void)(mod);
+    printf("[ACELite][WARN]:");
     va_list args;
     va_start(args, msg);
     PrintInfo(msg, args);
@@ -64,7 +68,8 @@ void HILOG_WARN(HiLogModuleType mod, const char *msg, ...)
 
 void HILOG_DEBUG(HiLogModuleType mod, const char *msg, ...)
 {
-    printf("[DEBUG]:");
+    (void)(mod);
+    printf("[ACELite][DEBUG]:");
     va_list args;
     va_start(args, msg);
     PrintInfo(msg, args);

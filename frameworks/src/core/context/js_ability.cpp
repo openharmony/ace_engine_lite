@@ -80,6 +80,8 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
         return;
     }
     START_TRACING(LAUNCH);
+    // mark the flag in advance to make sure we can take over render tick as soon as possible
+    ProductAdapter::UpdateRenderTickAcceptable(true);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->InitEnvironment(abilityPath, bundleName, token);
     FatalHandler::GetInstance().RegisterFatalHandler(this);
@@ -98,7 +100,7 @@ void JSAbility::Show()
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Show();
     AsyncTaskManager::GetInstance().SetFront(true);
-    ProductAdapter::UpdateShowingState(true);
+    ProductAdapter::UpdateRenderTickAcceptable(true);
     isActived_ = true;
 }
 
@@ -112,7 +114,7 @@ void JSAbility::Hide()
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Hide();
     AsyncTaskManager::GetInstance().SetFront(false);
-    ProductAdapter::UpdateShowingState(false);
+    ProductAdapter::UpdateRenderTickAcceptable(false);
     isActived_ = false;
 }
 
@@ -127,7 +129,7 @@ void JSAbility::TransferToDestroy()
     jsAbilityImpl->CleanUp();
     // Reset render flag or low layer task mutex in case we are during the rendering process,
     // this situation might happen if the destroy function is called outside of JS thread, such as AMS.
-    ProductAdapter::UpdateShowingState(false);
+    ProductAdapter::UpdateRenderTickAcceptable(false);
     FatalHandler::GetInstance().ResetRendering();
     FatalHandler::GetInstance().SetExitingFlag(false);
 #ifdef FEATURE_SCREEN_ON_VISIBLE

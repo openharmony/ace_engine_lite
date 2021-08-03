@@ -16,11 +16,15 @@
 #include "lazy_load_watcher.h"
 namespace OHOS {
 namespace ACELite {
-LazyLoadWatcher::LazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter)
+LazyLoadWatcher::LazyLoadWatcher(jerry_value_t nativeElement,
+                                 jerry_value_t attrName,
+                                 jerry_value_t getter,
+                                 uint16_t keyId)
     : nativeElement_(nativeElement),
-      attrName_(attrName),
-      getter_(getter),
-      next_(nullptr)
+      attrName_(jerry_acquire_value(attrName)),
+      getter_(jerry_acquire_value(getter)),
+      next_(nullptr),
+      keyId_(keyId)
 {
 }
 

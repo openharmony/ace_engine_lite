@@ -16,8 +16,8 @@
 #ifndef OHOS_ACELITE_JS_HEAP_STATS_DUMPER_H
 #define OHOS_ACELITE_JS_HEAP_STATS_DUMPER_H
 
-#include "jsi.h"
 #include "js_heap_stats_writer.h"
+#include "jsi.h"
 
 namespace OHOS {
 namespace ACELite {

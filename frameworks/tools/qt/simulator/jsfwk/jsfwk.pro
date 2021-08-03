@@ -15,6 +15,17 @@ DEFINES += SCREENSIZE_SPECIFIED
 DEFINES += JS_PROFILER=0
 DEFINES += QT_SIMULATOR
 
+# Following defines are copied from libui.pro, as jsfwk depends the ui defines, and there is no way to
+# share those macros. But graphic module might consider to setup them in one C header file, which can
+# pass them to jsfwk by including the header.
+DEFINES += "ENABLE_SHAPING=0" \
+    "ENABLE_ICU=1" \
+    "ENABLE_VECTOR_FONT=1" \
+    "ENABLE_BITMAP_FONT=0" \
+    "ENABLE_MULTI_FONT=0" \
+    "ENABLE_STATIC_FONT=0" \
+    "DEFAULT_ANIMATION=1"
+
 eval(is_debug == release) {
     DEFINES += JS_PROFILER=1
 }
@@ -198,8 +209,6 @@ INCLUDEPATH += \
             targets/simulator/mock/vsyncthread \
             targets/simulator/mock/amsthread \
             targets/simulator/mock/timerthread \
-            $${ROOT_PATH}/kernel/liteos_a/kernel/include/ \
-            $${ROOT_PATH}/kernel/liteos_a/kernel/common \
             $${ROOT_PATH}/third_party/jerryscript/jerry-core/include \
             $${ROOT_PATH}/third_party/jerryscript/jerry-ext/include/jerryscript-ext \
             $${ROOT_PATH}//third_party/jerryscript/jerry-port/default/include \

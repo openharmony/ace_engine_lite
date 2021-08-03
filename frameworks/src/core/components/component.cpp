@@ -241,12 +241,12 @@ bool Component::UpdateView(uint16_t attrKeyId, jerry_value_t attrValue)
             styleItem = nullptr;
         }
     }
-
+    // for root component case, it has no parent, need to use screen resolution as default
+    ConstrainedParameter parentParam(GetHorizontalResolution(), GetVerticalResolution());
     if (parent_ != nullptr) {
-        ConstrainedParameter parentParam;
         parent_->GetConstrainedParam(parentParam);
-        AlignDimensions(parentParam);
     }
+    AlignDimensions(parentParam);
     AdaptBoxSizing(attrKeyId);
     // force parent to relayout the children in case component's area is changed
     InvalidateIfNeeded(attrKeyId, false);
@@ -1027,6 +1027,7 @@ int32_t Component::GetAnimatorValue(char *animatorValue, const int8_t index, boo
 
 jerry_value_t Component::AddWatcherItem(const jerry_value_t attrKey, const jerry_value_t attrValue, bool isLazyLoading)
 {
+    (void)(isLazyLoading); // for lazy cases, the process is same currently
     jerry_value_t options = jerry_create_object();
     JerrySetNamedProperty(options, ARG_WATCH_EL, nativeElement_);
     JerrySetNamedProperty(options, ARG_WATCH_ATTR, attrKey);
@@ -1039,14 +1040,8 @@ jerry_value_t Component::AddWatcherItem(const jerry_value_t attrKey, const jerry
     }
     // watcher is valide, insert it to the list
     InsertWatcherCommon(watchersHead_, watcher);
-    if (isLazyLoading) {
-        // If the watcher creating is lazy loading, need to call watcher's update function to make sure the view
-        // is updated with latest value properly, because it's the lazy case, the value might be changed already.
-        JSRelease(JSObject::Call(watcher, "update", nullptr, 0));
-        return UNDEFINED;
-    }
 
-    // is the direct watcher creating, return the lastValue and need to be released out of this function
+    // return the lastValue and need to be released out of this function
     return jerryx_get_property_str(watcher, "_lastValue");
 }
 
@@ -1065,12 +1060,12 @@ void Component::ParseAttrs()
     }
 
     uint16_t length = jerry_get_array_length(attrKeys);
-    uint16_t attrKeyStrLength = 0;
     for (uint32_t index = 0; index < length; ++index) {
         jerry_value_t attrKey = jerry_get_property_by_index(attrKeys, index);
         jerry_value_t attrValue = jerry_get_property(attrs, attrKey);
         jerry_value_t newAttrValue = attrValue;
-
+        // calculate key ID
+        uint16_t attrKeyId = ParseKeyIdFromJSString(attrKey);
         if (jerry_value_is_function(attrValue)) {
             START_TRACING_WITH_COMPONENT_NAME(SET_ATTR_PARSE_EXPRESSION, componentName_);
             if (freeze_) {
@@ -1080,7 +1075,7 @@ void Component::ParseAttrs()
                 newAttrValue = CallJSFunction(attrValue, viewModel_, nullptr, 0);
                 JsAppContext *context = JsAppContext::GetInstance();
                 LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
-                lazyLoadManager->AddLazyLoadWatcher(nativeElement_, attrKey, attrValue);
+                lazyLoadManager->AddLazyLoadWatcher(nativeElement_, attrKey, attrValue, attrKeyId);
 #else
                 newAttrValue = AddWatcherItem(attrKey, attrValue);
 #endif
@@ -1088,20 +1083,13 @@ void Component::ParseAttrs()
             STOP_TRACING();
         }
 
-        char *attrKeyStr = MallocStringOf(attrKey, &attrKeyStrLength);
-        if (attrKeyStr != nullptr) {
-            if (attrKeyStrLength != 0) {
-                uint16_t attrKeyId = KeyParser::ParseKeyId(attrKeyStr, attrKeyStrLength);
-                // ignore the return result for no need to invalided views here
-                START_TRACING_WITH_EXTRA_INFO(SET_ATTR_SET_TO_NATIVE, componentName_, attrKeyId);
-                SetAttribute(attrKeyId, newAttrValue);
-                STOP_TRACING();
-            }
-            ace_free(attrKeyStr);
-            attrKeyStr = nullptr;
+        if (attrKeyId != K_UNKNOWN) {
+            START_TRACING_WITH_EXTRA_INFO(SET_ATTR_SET_TO_NATIVE, componentName_, attrKeyId);
+            SetAttribute(attrKeyId, newAttrValue);
+            STOP_TRACING();
         }
         if (newAttrValue != attrValue) {
-            // the new value has been calculated out by ParseExpression, need to be released
+            // for watcher case, the attrValue is getter, and the newAttrValue is the real value
             jerry_release_value(newAttrValue);
         }
         ReleaseJerryValue(attrKey, attrValue, VA_ARG_END_FLAG);
