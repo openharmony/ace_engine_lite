@@ -127,11 +127,15 @@ void SwiperComponent::SetPageIndex()
         HILOG_INFO(HILOG_MODULE_ACE, "Swiper children don't exist.");
         return;
     }
-    uint16_t length = jerry_get_array_length(GetChildren());
-    if (index_ < 0 || index_ >= length) {
+    uint16_t childrenNum = jerry_get_array_length(GetChildren());
+    if (index_ < 0 || index_ >= childrenNum) {
         swiperView_.SetCurrentPage(0);
     } else {
         swiperView_.SetCurrentPage(index_);
+    }
+    if (childrenNum == 1) {
+        swiperView_.SetBlankSize(0);
+        swiperView_.SetLoopState(false);
     }
 }
 
