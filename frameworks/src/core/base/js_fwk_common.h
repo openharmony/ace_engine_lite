@@ -126,6 +126,7 @@ constexpr char COMMON_STYLE_BACKGROUND_COLOR[] = "backgroundColor";
 constexpr char ARG_WATCH_EL[] = "el";
 constexpr char ARG_WATCH_ATTR[] = "attr";
 constexpr char ATTR_ATTRS[] = "attrs";
+constexpr char ATTR_FREEZE[] = "freeze";
 constexpr char ABILITY_LIFECYCLE_CALLBACK_ON_CREATE[] = "onCreate";
 constexpr char ABILITY_LIFECYCLE_CALLBACK_ON_DESTROY[] = "onDestroy";
 constexpr char BACK_PRESSED_NAME[] = "$backPress";

@@ -183,14 +183,19 @@ void AppStyleManager::HandleDynamicStyle(const jerry_value_t options, Component 
         jerry_value_t propValue = jerry_get_property(dynamicStyleValue, propKey);
         // parse expression and new watcher for it
         if (jerry_value_is_function(propValue)) {
+            jerry_value_t expressionValue;
+            if (curr.IsFreeze()) {
+                expressionValue = JSFunction::Call(propValue, curr.GetViewModel(), nullptr, 0);
+            } else {
 #ifdef FEATURE_LAZY_LOADING_MODULE
-            jerry_value_t expressionValue = CallJSFunction(propValue, curr.GetNativeElement(), nullptr, 0);
-            JsAppContext *context = JsAppContext::GetInstance();
-            LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
-            lazyLoadManager->AddLazyLoadWatcher(curr.GetNativeElement(), propKey, propValue);
+                expressionValue = CallJSFunction(propValue, curr.GetNativeElement(), nullptr, 0);
+                JsAppContext *context = JsAppContext::GetInstance();
+                LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
+                lazyLoadManager->AddLazyLoadWatcher(curr.GetNativeElement(), propKey, propValue);
 #else
-            jerry_value_t expressionValue = curr.AddWatcherItem(propKey, propValue);
+                expressionValue = curr.AddWatcherItem(propKey, propValue);
 #endif
+            }
             // the expression's calculating result should be used, not the function value itself
             AppStyleItem *newStyleItem = AppStyleItem::GenerateFromJSValue(propKey, expressionValue);
             if (newStyleItem != nullptr) {
