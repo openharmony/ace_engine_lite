@@ -437,7 +437,8 @@ bool Component::IsLayoutRelatedAttrs(uint16_t attrKeyId) const
             attrKeyId == K_PADDING || attrKeyId == K_PADDING_BOTTOM || attrKeyId == K_PADDING_LEFT ||
             attrKeyId == K_PADDING_RIGHT || attrKeyId == K_PADDING_TOP || attrKeyId == K_BORDER_BOTTOM_WIDTH ||
             attrKeyId == K_BORDER_LEFT_WIDTH || attrKeyId == K_BORDER_RIGHT_WIDTH || attrKeyId == K_BORDER_TOP_WIDTH ||
-            attrKeyId == K_BORDER_WIDTH || attrKeyId == K_BORDER_RADIUS || attrKeyId == K_LEFT || attrKeyId == K_TOP);
+            attrKeyId == K_BORDER_WIDTH || attrKeyId == K_BORDER_RADIUS || attrKeyId == K_LEFT || attrKeyId == K_TOP ||
+            attrKeyId == K_SHOW || attrKeyId == K_DISPLAY);
 }
 
 void Component::ApplyAlignedPosition(UIView &uiView) const
