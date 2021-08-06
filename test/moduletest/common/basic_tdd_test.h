@@ -57,6 +57,7 @@ protected:
     void Click(int16_t x, int16_t y, uint8_t sleepTicks = 50) const;
     void LongPress(int16_t x, int16_t y, uint8_t sleepTicks = 200) const;
     void Swipe(int16_t startX, int16_t startY, int16_t endX, int16_t endY, uint8_t sleepTicks = 150) const;
+    uint8_t GetChildrenSize(const UIViewGroup &grop) const;
 
 private:
     static void *TickHandler(void *args);
