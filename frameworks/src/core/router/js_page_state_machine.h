@@ -76,6 +76,10 @@ public:
     void InvokePageLifeCycleCallback(const char * const name) const;
     void ReleaseHistoryPageResource();
     void SetHiddenFlag(bool flag);
+#ifdef TDD_ASSERTIONS
+    // this function is just for unittest's view modle hooking purpose, should not be used in real environment
+    void SetViewModel(jerry_value_t viewModel);
+#endif // TDD_ASSERTIONS
 
 private:
     void RegisterUriAndParamsToPage(const char * const uri, jerry_value_t params);
