@@ -19,8 +19,10 @@ group("components_unittest") {
     "common:js_frameworks_test_div",
     "common:js_frameworks_test_event_bubble",
     "common:js_frameworks_test_horizonprogress",
+    "common:js_frameworks_test_image_animator",
     "common:js_frameworks_test_image_path_support",
     "common:js_frameworks_test_input",
+    "common:js_frameworks_test_input_event",
     "common:js_frameworks_test_jsbundle",
     "common:js_frameworks_test_list",
     "common:js_frameworks_test_marquee",
@@ -34,6 +36,5 @@ group("components_unittest") {
     "common:js_frameworks_test_switch",
     "common:js_frameworks_test_text",
     "common:js_frameworks_test_text_exception",
-    "common:js_frameworks_test_input_event",
   ]
 }

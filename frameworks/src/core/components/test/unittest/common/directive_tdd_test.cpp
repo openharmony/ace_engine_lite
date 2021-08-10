@@ -192,7 +192,7 @@ void DirectiveTddTest::DirectiveTest001()
 void DirectiveTddTest::DirectiveTest002()
 {
     TDD_CASE_BEGIN();
-    JSValue page = CreatePage(BUNDLE02, strlen(BUNDLE01));
+    JSValue page = CreatePage(BUNDLE02, strlen(BUNDLE02));
     FlexLayout *textBox = reinterpret_cast<FlexLayout *>(GetViewByRef(page, "textBox"));
     EXPECT_TRUE(textBox != nullptr);
     if (textBox != nullptr) {
