@@ -92,6 +92,8 @@ JSIValue DfxModule::Screenshot(const JSIValue thisVal, const JSIValue *args, uin
     JSIValue retVal = JSI::CreateBoolean(true);
 #ifdef __LITEOS_A__
     const char * const savingPath = GetDataPath();
+#elif defined(__linux__)
+    const char * const savingPath = "/storage/nfs";
 #else
     const char * const savingPath = "user/log";
 #endif
