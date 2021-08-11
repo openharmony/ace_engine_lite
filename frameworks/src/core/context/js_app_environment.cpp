@@ -33,6 +33,7 @@
 #include "presets/require_module.h"
 #include "presets/timer_module.h"
 #include "presets/version_module.h"
+#include "product_adapter.h"
 #ifdef JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED
 extern "C" {
 #include "generate-bytecode.h"
@@ -79,6 +80,7 @@ void JsAppEnvironment::InitJsFramework() const
 #endif // JSFWK_TEST
     AsyncTaskManager::GetInstance().Init();
     LoadAceBuiltInModules();
+    ProductAdapter::LoadExtraPresetModules();
     LoadFramework();
     LocalModule::Load();
     STOP_TRACING();
@@ -116,6 +118,7 @@ void JsAppEnvironment::Cleanup()
 {
     Debugger::GetInstance().TearDownDebugger();
     FeaAbilityModule::Release();
+    ProductAdapter::UnloadExtraPresetModules();
 
     // clean up engine, NOTE: all JS value must be released properly befor cleanup
     jerry_cleanup();
