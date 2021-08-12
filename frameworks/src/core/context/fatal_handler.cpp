@@ -40,6 +40,16 @@ FatalHandler &FatalHandler::GetInstance()
     return instance;
 }
 
+bool FatalHandler::IsErrorHittedWrapper()
+{
+    return FatalHandler::GetInstance().IsFatalErrorHitted();
+}
+
+bool FatalHandler::IsAppExitingWrapper()
+{
+    return FatalHandler::GetInstance().IsAppExiting();
+}
+
 static void HandleFatal(int errorCode)
 {
 #ifdef FEATURE_FATAL_ERROR_HANDLING
