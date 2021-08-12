@@ -80,6 +80,7 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/base/ecma-module.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/base/ecma-property-hashmap.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array-iterator-prototype.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array-prototype-unscopables.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-array.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-arraybuffer-prototype.c \
@@ -96,12 +97,16 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-evalerror.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-function-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-function.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-generator-function.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-generator-prototype.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-generator.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-global.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-helpers-date.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-helpers-error.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-helpers-json.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-helpers-sort.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-helpers.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-intrinsic.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-iterator-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-json.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-map-iterator-prototype.c \
@@ -114,10 +119,12 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-object.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-promise-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-promise.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-proxy.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-rangeerror-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-rangeerror.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-referenceerror-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-referenceerror.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-reflect.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-regexp-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-regexp.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-set-iterator-prototype.c \
@@ -135,6 +142,10 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-typeerror.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-urierror-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-urierror.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-weakmap-prototype.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-weakmap.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-weakset-prototype.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtin-weakset.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/ecma-builtins.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/typedarray/ecma-builtin-float32array-prototype.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/builtin-objects/typedarray/ecma-builtin-float32array.c \
@@ -177,6 +188,7 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-objects-general.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-objects.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-promise-object.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-proxy-object.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-reference.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-regexp-object.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/ecma/operations/ecma-string-object.c \
@@ -200,8 +212,10 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-parser-mem.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-parser-module.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-parser-statm.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-parser-tagged-template-literal.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-parser-util.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-parser.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-scanner-ops.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-scanner-util.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/js/js-scanner.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-core/parser/regexp/re-bytecode.c \
@@ -230,23 +244,35 @@ SOURCES += \
         $${ROOT_PATH}/third_party/jerryscript/jerry-ext/handler/handler-print.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-ext/handler/handler-register.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-ext/module/module.c \
+        $${ROOT_PATH}/third_party/jerryscript/jerry-ext/handler/handler-resource-name.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/acos.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/acosh.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/asin.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/asinh.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/atan.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/atan2.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/atanh.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/cbrt.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/ceil.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/copysign.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/cosh.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/exp.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/expm1.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/fabs.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/finite.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/floor.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/fmod.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/isnan.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/log.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/log10.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/log1p.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/log2.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/nextafter.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/pow.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/scalbn.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/sinh.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/sqrt.c \
+        #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/tanh.c \
         #$${ROOT_PATH}/third_party/jerryscript/jerry-libm/trig.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-port/default/default-date.c \
         $${ROOT_PATH}/third_party/jerryscript/jerry-port/default/default-debugger.c \
