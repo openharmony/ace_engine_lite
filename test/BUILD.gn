@@ -14,13 +14,12 @@
 import("//build/lite/config/test.gni")
 import("//foundation/ace/ace_engine_lite/test/ace_test_config.gni")
 
-cache_manager_unittest_root =
-    "$ace_lite_root/frameworks/src/core/base/cache/test/unittest"
+cache_manager_unittest_root = "$ACE_LITE_COMMON_PATH/memory/cache/test/unittest"
 components_unittest_root =
     "$ace_lite_root/frameworks/src/core/components/test/unittest"
 context_unittest_root =
     "$ace_lite_root/frameworks/src/core/context/test/unittest"
-jsi_unittest_root = "$ace_lite_root/frameworks/src/core/jsi/test/unittest"
+jsi_unittest_root = "$NATIVE_ENGINE_PATH/jsi/test/unittest"
 modules_unittest_root =
     "$ace_lite_root/frameworks/src/core/modules/test/unittest"
 stylemgr_unittest_root =

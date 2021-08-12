@@ -38,9 +38,7 @@ config("ace_lite_config") {
 
 shared_library("ace_lite") {
   configs -= [ "//build/lite/config:language_cpp" ]
-  cflags = [
-    "-Wall"
-  ]
+  cflags = [ "-Wall" ]
   cflags_cc = cflags
   configs += [ ":ace_lite_config" ]
   public_configs = configs
@@ -48,22 +46,21 @@ shared_library("ace_lite") {
   sources = ace_lite_sources
 
   public_deps = [
-    "${appexecfwk_lite_path}/interfaces/kits/bundle_lite/js/builtin:capability_api",
+    "$ACE_LITE_COMMON_PATH:ace_common_lite",
+    "$MODULE_MANAGER_PATH:ace_module_manager_lite",
+    "$NATIVE_ENGINE_PATH:ace_native_engine_lite",
     "//base/global/i18n_lite/frameworks/i18n:global_i18n",
     "//base/global/resmgr_lite/frameworks/resmgr_lite:global_resmgr",
-    "//base/security/huks/frameworks/crypto_lite/js/builtin:ace_kit_cipher",
     "//build/lite/config/component/cJSON:cjson_shared",
     "//foundation/graphic/surface:lite_surface",
     "//foundation/graphic/ui:lite_ui",
     "//foundation/multimedia/camera_lite/frameworks:camera_lite",
     "//foundation/multimedia/media_lite/frameworks/player_lite:player_lite",
-    "//foundation/multimedia/media_lite/interfaces/kits/player_lite/js/builtin:audio_lite_api",
     "//third_party/bounds_checking_function:libsec_shared",
     "//third_party/jerryscript/jerry-core:jerry-core_shared",
     "//third_party/jerryscript/jerry-ext:jerry-ext_shared",
     "//third_party/jerryscript/jerry-libm:jerry-libm_shared",
     "//third_party/jerryscript/jerry-port/default:jerry-port-default_shared",
-    "//utils/native/lite/js/builtin:ace_utils_kits",
     "//utils/native/lite/timer_task:ace_kit_timer",
   ]
 

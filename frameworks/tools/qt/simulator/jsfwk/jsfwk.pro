@@ -37,16 +37,19 @@ LOSCFG_TEST_JS_BUILD {
 ROOT_PATH = ../../../../../../../..
 ACELITE_FRAMEWORK_PATH = ../../../..
 ACELITE_CORE_PATH = $${ACELITE_FRAMEWORK_PATH}/src/core
+ACELITE_COMMON_PATH = $${ACELITE_FRAMEWORK_PATH}/common
+ACELITE_NATIVE_ENGINE_PATH = $${ACELITE_FRAMEWORK_PATH}/native_engine
+ACELITE_MODULE_MANAGER_PATH = $${ACELITE_FRAMEWORK_PATH}/module_manager
 
 SOURCES += \
         $${ACELITE_CORE_PATH}/animation/transition_impl.cpp \
-        $${ACELITE_CORE_PATH}/async/js_async_work.cpp \
-        #$${ACELITE_CORE_PATH}/async/message_queue_utils.cpp \
-        $${ACELITE_CORE_PATH}/base/ace_log.cpp \
-        $${ACELITE_CORE_PATH}/base/ace_mem_base.cpp \
+        $${ACELITE_NATIVE_ENGINE_PATH}/async/js_async_work.cpp \
+        #$${ACELITE_NATIVE_ENGINE_PATH}/async/message_queue_utils.cpp \
+        $${ACELITE_COMMON_PATH}/log/ace_log.cpp \
+        $${ACELITE_COMMON_PATH}/memory/ace_mem_base.cpp \
         $${ACELITE_CORE_PATH}/base/dft_impl.cpp \
         $${ACELITE_CORE_PATH}/base/async_task_manager.cpp \
-        $${ACELITE_CORE_PATH}/base/cache/cache_manager.cpp \
+        $${ACELITE_COMMON_PATH}/memory/cache/cache_manager.cpp \
         $${ACELITE_CORE_PATH}/base/dfx_assist.cpp \
         $${ACELITE_CORE_PATH}/base/event_util.cpp \
         $${ACELITE_CORE_PATH}/base/js_debugger_config.cpp \
@@ -55,8 +58,8 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/base/lazy_load_manager.cpp \
         $${ACELITE_CORE_PATH}/base/lazy_load_watcher.cpp \
         $${ACELITE_CORE_PATH}/base/locale_util.cpp \
-        $${ACELITE_CORE_PATH}/base/mem_proc.cpp \
-        $${ACELITE_CORE_PATH}/base/memory_heap.cpp \
+        $${ACELITE_COMMON_PATH}/memory/mem_proc.cpp \
+        $${ACELITE_COMMON_PATH}/memory/memory_heap.cpp \
         $${ACELITE_CORE_PATH}/base/number_parser.cpp \
         $${ACELITE_CORE_PATH}/base/product_adapter.cpp \
         $${ACELITE_CORE_PATH}/base/string_util.cpp \
@@ -107,11 +110,11 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/dialog/js_dialog.cpp \
         $${ACELITE_CORE_PATH}/directive/descriptor_utils.cpp \
         $${ACELITE_CORE_PATH}/directive/directive_watcher_callback.cpp \
-        $${ACELITE_CORE_PATH}/jsi/jsi.cpp \
+        $${ACELITE_NATIVE_ENGINE_PATH}/jsi/jsi.cpp \
         $${ACELITE_CORE_PATH}/modules/app_module.cpp \
         $${ACELITE_CORE_PATH}/modules/dfx_module.cpp \
         $${ACELITE_CORE_PATH}/modules/dialog_module.cpp \
-        $${ACELITE_CORE_PATH}/modules/module_manager.cpp \
+        $${ACELITE_MODULE_MANAGER_PATH}/module_manager.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/cjson_parser.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/console_log_impl.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/console_module.cpp \
@@ -191,13 +194,18 @@ INCLUDEPATH += \
             $${ACELITE_CORE_PATH} \
             $${ACELITE_CORE_PATH}/animation \
             $${ACELITE_CORE_PATH}/base \
-            $${ACELITE_CORE_PATH}/base/cache \
+            $${ACELITE_COMMON_PATH}/log \
+            $${ACELITE_COMMON_PATH}/memory \
+            $${ACELITE_COMMON_PATH}/memory/cache \
+            $${ACELITE_COMMON_PATH}/utils \
             $${ACELITE_CORE_PATH}/components \
             $${ACELITE_CORE_PATH}/context \
             $${ACELITE_CORE_PATH}/directive \
             $${ACELITE_CORE_PATH}/router \
-            $${ACELITE_CORE_PATH}/jsi \
+            $${ACELITE_NATIVE_ENGINE_PATH} \
+            $${ACELITE_NATIVE_ENGINE_PATH}/jsi \
             $${ACELITE_CORE_PATH}/modules \
+            $${ACELITE_MODULE_MANAGER_PATH} \
             $${ACELITE_CORE_PATH}/router \
             $${ACELITE_CORE_PATH}/stylemgr \
             $${ACELITE_CORE_PATH}/wrapper \
