@@ -87,6 +87,14 @@ enum TEDispatchingResult : uint8_t {
 };
 
 /**
+ * The wrapper data structure for get native memory pool info.
+ */
+struct ExtraPresetModulesHook {
+    VoidFuncHook loadingHandler;
+    VoidFuncHook unloadingHandler;
+};
+
+/**
  * The wrapper class for some product feature implementation, since some interfaces are provided by specific product.
  */
 class ProductAdapter final {
@@ -111,6 +119,7 @@ public:
     static void SetDefaultFontStyle(const char *defaultFontFamily, uint8_t defaultFontSize);
     static void SetScreenSize(uint16_t width, uint16_t height);
     static void RegSetScreenOnVisibleHandler(SetScreenOnVisibleHandler handler);
+    static void RegExtraPresetModulesHook(ExtraPresetModulesHook hook);
 
     // wrapper functions, for ace internal calling
     static void PrintEventTrace(uint8_t info2, uint8_t info3, uint8_t info4);
@@ -126,6 +135,8 @@ public:
     static void UpdateRenderTickAcceptable(bool acceptable);
     static void GetScreenSize(uint16_t &width, uint16_t &height);
     static bool SetScreenOnVisible(bool visible);
+    static void LoadExtraPresetModules();
+    static void UnloadExtraPresetModules();
 };
 } // namespace ACELite
 } // namespace OHOS
