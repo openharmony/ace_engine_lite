@@ -28,6 +28,8 @@ class FatalHandler final : public MemoryHeap {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(FatalHandler);
     static FatalHandler& GetInstance();
+    static bool IsErrorHittedWrapper();
+    static bool IsAppExitingWrapper();
     const char* GetErrorStr(int errorCode) const;
     void RegisterFatalHandler(JSAbility *ability);
     void SetFatalError(int errorCode);

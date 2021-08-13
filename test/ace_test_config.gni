@@ -51,13 +51,11 @@ ace_test_includes = [
   "$ace_lite_root/frameworks/src/core",
   "$ace_lite_root/frameworks/src/core/animation",
   "$ace_lite_root/frameworks/src/core/base",
-  "$ace_lite_root/frameworks/src/core/base/cache",
   "$ace_lite_root/frameworks/src/core/components",
   "$ace_lite_root/frameworks/src/core/components/test/unittest/common",
   "$ace_lite_root/frameworks/src/core/context",
   "$ace_lite_root/frameworks/src/core/directive",
   "$ace_lite_root/frameworks/src/core/router",
-  "$ace_lite_root/frameworks/src/core/jsi",
   "$ace_lite_root/frameworks/src/core/modules",
   "$ace_lite_root/frameworks/src/core/modules/presets",
   "$ace_lite_root/frameworks/src/core/router",
@@ -74,6 +72,9 @@ ace_test_defines = [
 ]
 
 ace_test_deps = [
+  "$ACE_LITE_COMMON_PATH:ace_common_lite",
+  "$MODULE_MANAGER_PATH:ace_module_manager_lite",
+  "$NATIVE_ENGINE_PATH:ace_native_engine_lite",
   "${aafwk_lite_path}/frameworks/ability_lite:aafwk_abilitykit_lite",
   "${appexecfwk_lite_path}/frameworks/bundle_lite:bundle",
   "//foundation/ace/ace_engine_lite/frameworks:ace_lite",

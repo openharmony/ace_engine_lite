@@ -29,12 +29,17 @@ config("ace_lite_config") {
 ohos_static_library("ace_lite") {
   public_configs = [ ":ace_lite_config" ]
   sources = ace_lite_sources
-  sources += [ "//foundation/ace/ace_engine_lite/frameworks/src/core/modules/presets/feature_ability_module.cpp" ]
-  sources -= [
-    "//foundation/ace/ace_engine_lite/frameworks/src/core/async/js_async_work.cpp",
-    "//foundation/ace/ace_engine_lite/frameworks/src/core/async/message_queue_utils.cpp",
-    "//foundation/ace/ace_engine_lite/frameworks/src/core/context/ace_ability.cpp",
+  sources += [
+    "$ACE_LITE_COMMON_PATH/log/ace_log.cpp",
+    "$ACE_LITE_COMMON_PATH/memory/ace_mem_base.cpp",
+    "$ACE_LITE_COMMON_PATH/memory/cache/cache_manager.cpp",
+    "$ACE_LITE_COMMON_PATH/memory/mem_proc.cpp",
+    "$ACE_LITE_COMMON_PATH/memory/memory_heap.cpp",
+    "$MODULE_MANAGER_PATH/module_manager.cpp",
+    "$NATIVE_ENGINE_PATH/jsi/jsi.cpp",
+    "//foundation/ace/ace_engine_lite/frameworks/src/core/modules/presets/feature_ability_module.cpp",
   ]
+  sources -= [ "//foundation/ace/ace_engine_lite/frameworks/src/core/context/ace_ability.cpp" ]
   cflags_cc = [
     "-Wall",
     "-D_INC_STRING_S",
@@ -55,6 +60,7 @@ ohos_static_library("ace_lite") {
     "TARGET_SIMULATOR",
     "JS_ENGINE_EXTERNAL_CONTEXT",
     "SCREENSIZE_SPECIFIED",
+    "MOCK_JS_ASYNC_WORK",
   ]
   if (is_debug == "debug") {
     defines += [ "JS_PROFILER=1" ]
