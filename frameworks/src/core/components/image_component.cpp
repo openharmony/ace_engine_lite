@@ -68,7 +68,7 @@ bool ImageComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrV
 void ImageComponent::UpdateWidgetFitMode()
 {
     // update the imageView
-    if (fitOriginalSize_ && (!hasSetWidth_ || !hasSetHeight_)) {
+    if (fitOriginalSize_ && !(hasSetWidth_ || hasSetHeight_)) {
         imageView_.SetAutoEnable(true);
     } else {
         imageView_.SetAutoEnable(false);

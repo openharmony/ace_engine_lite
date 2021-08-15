@@ -205,11 +205,11 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
                 return K_CLOCK_HAND;
             }
 #endif // FEATURE_COMPONENT_ANALOG_CLOCK
-            if (!strcmp(s, "over")) {
-                return K_COVER;
-            }
             if (!strcmp(s, "ontain")) {
                 return K_CONTAIN;
+            }
+            if (!strcmp(s, "over")) {
+                return K_COVER;
             }
             break;
         case 'd':
@@ -273,6 +273,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "alse")) {
                 return K_FALSE;
             }
+            if (!strcmp(s, "ill")) {
+                return K_FILL;
+            }
             if (!strcmp(s, "illmode")) {
                 return K_FILL_MODE;
             }
@@ -284,6 +287,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
                 return K_FINISH;
             }
 #endif // FEATURE_COMPONENT_VIDEO
+            if (!strcmp(s, "itOriginalSize")) {
+                return K_FIT_ORIGINAL_SIZE;
+            }
             if (!strcmp(s, "lex-end")) {
                 return K_FLEX_END;
             }
@@ -304,12 +310,6 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             if (!strcmp(s, "orwards")) {
                 return K_FORWARDS;
-            }
-            if (!strcmp(s, "ill")) {
-                return K_FILL;
-            }
-            if (!strcmp(s, "itOriginalSize")) {
-                return K_FIT_ORIGINAL_SIZE;
             }
             break;
         case 'h':
@@ -463,14 +463,14 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
 #endif
             break;
         case 'o':
+            if (!strcmp(s, "bjectFit")) {
+                return K_OBJECT_FIT;
+            }
             if (!strcmp(s, "pacity")) {
                 return K_OPACITY;
             }
             if (!strcmp(s, "ptions")) {
                 return K_OPTIONS;
-            }
-            if (!strcmp(s, "bjectFit")) {
-                return K_OBJECT_FIT;
             }
             break;
         case 'p':
@@ -554,6 +554,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             break;
         case 's':
+            if (!strcmp(s, "cale-down")) {
+                return K_SCALE_DOWN;
+            }
             if (!strcmp(s, "crollamount")) {
                 return K_SCROLLAMOUNT;
             }
@@ -644,9 +647,6 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             if (!strcmp(s, "witch")) {
                 return K_SWITCH;
-            }
-            if (!strcmp(s, "caleDown")) {
-                return K_SCALE_DOWN;
             }
             break;
         case 't':
