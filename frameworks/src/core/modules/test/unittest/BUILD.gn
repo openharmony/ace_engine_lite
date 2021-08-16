@@ -17,6 +17,18 @@ import("//foundation/ace/ace_engine_lite/test/ace_test_config.gni")
 presets_unittest_root =
     "$ace_lite_root/frameworks/src/core/modules/presets/test/unittest"
 
+unittest("js_frameworks_test_app") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_whole_archive_config" ]
+  sources = all_acelite_source_files
+  sources += [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "common/app_tdd_test.cpp",
+  ]
+  deps = all_external_deps
+}
+
 unittest("js_frameworks_test_dfx") {
   output_extension = "bin"
   output_dir = test_output_root
@@ -41,6 +53,7 @@ unittest("js_frameworks_test_dialog") {
 
 group("modules_unittest") {
   deps = [
+    ":js_frameworks_test_app",
     ":js_frameworks_test_dfx",
     ":js_frameworks_test_dialog",
     "$presets_unittest_root:js_frameworks_test_date_time",

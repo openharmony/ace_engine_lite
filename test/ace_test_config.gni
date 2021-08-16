@@ -69,6 +69,7 @@ ace_test_configs = [ "$ace_lite_root/frameworks:ace_lite_config" ]
 ace_test_defines = [
   "TDD_ASSERTIONS",
   "__LITEOS__",
+  "FEATURE_TERMINATE_ABILITY",
 ]
 
 ace_test_deps = [
