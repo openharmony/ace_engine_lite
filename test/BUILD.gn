@@ -19,7 +19,9 @@ components_unittest_root =
     "$ace_lite_root/frameworks/src/core/components/test/unittest"
 context_unittest_root =
     "$ace_lite_root/frameworks/src/core/context/test/unittest"
+async_unittest_root = "$NATIVE_ENGINE_PATH/async/test/unittest"
 jsi_unittest_root = "$NATIVE_ENGINE_PATH/jsi/test/unittest"
+module_manager_unittest_root = "$MODULE_MANAGER_PATH/test/unittest"
 modules_unittest_root =
     "$ace_lite_root/frameworks/src/core/modules/test/unittest"
 stylemgr_unittest_root =
@@ -43,10 +45,12 @@ config("test_whole_archive_config") {
 group("unittest") {
   deps = [
     "$ace_lite_root/test/moduletest/common:door_unittest",
+    "$async_unittest_root:async_unittest",
     "$cache_manager_unittest_root:cache_manager_unittest",
     "$components_unittest_root:components_unittest",
     "$context_unittest_root:js_frameworks_unittest",
     "$jsi_unittest_root:jsi_unittest",
+    "$module_manager_unittest_root:module_manager_unittest",
     "$modules_unittest_root:modules_unittest",
     "$router_unittest_root:router_module_unittest",
     "$stylemgr_unittest_root:stylemgr_unittest",

@@ -25,6 +25,8 @@ unittest("js_frameworks_tdd_door") {
   sources = all_acelite_source_files
   sources += [
     "$ACE_LITE_COMMON_PATH/memory/cache/test/unittest/common/cache_manager_tdd_test.cpp",
+    "$MODULE_MANAGER_PATH/test/unittest/common/require_module_tdd_test.cpp",
+    "$NATIVE_ENGINE_PATH/async/test/unittest/common/js_async_work_tdd_test.cpp",
     "$NATIVE_ENGINE_PATH/jsi/test/unittest/common/jsi_interface_tdd_test.cpp",
     "$ace_lite_root/frameworks/src/core/components/test/unittest/common/root_component_mock.cpp",
     "$ace_lite_root/test/moduletest/common/base_test.cpp",
@@ -40,6 +42,7 @@ unittest("js_frameworks_tdd_door") {
     "$ace_lite_src_core/components/test/unittest/common/percent_tdd_test.cpp",
     "$ace_lite_src_core/components/test/unittest/common/radio_switch_tdd_test.cpp",
     "$ace_lite_src_core/components/test/unittest/common/slider_tdd_test.cpp",
+    "$ace_lite_src_core/components/test/unittest/common/stack_tdd_test.cpp",
     "$ace_lite_src_core/components/test/unittest/common/switch_tdd_test.cpp",
     "$ace_lite_src_core/components/test/unittest/common/text_tdd_exception_test.cpp",
     "$ace_lite_src_core/components/test/unittest/common/text_tdd_test.cpp",
