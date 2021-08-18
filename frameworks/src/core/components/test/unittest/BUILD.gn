@@ -32,6 +32,7 @@ group("components_unittest") {
     "common:js_frameworks_test_pickerview",
     "common:js_frameworks_test_radio_switch_width",
     "common:js_frameworks_test_slider",
+    "common:js_frameworks_test_stack",
     "common:js_frameworks_test_swiper",
     "common:js_frameworks_test_switch",
     "common:js_frameworks_test_text",
