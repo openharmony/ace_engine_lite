@@ -278,3 +278,36 @@ unittest("js_frameworks_test_stack") {
   ]
   deps = ace_test_deps
 }
+
+unittest("js_frameworks_test_qrcode") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "qrcode_tdd_test.cpp",
+  ]
+  deps = ace_test_deps
+}
+
+unittest("js_frameworks_test_chart") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "chart_tdd_test.cpp",
+  ]
+  deps = ace_test_deps
+}
+
+unittest("js_frameworks_test_canvas") {
+  output_extension = "bin"
+  output_dir = test_output_root
+  configs = [ "$ace_lite_root/test:test_common_config" ]
+  sources = [
+    "$ace_lite_root/test/moduletest/common/basic_tdd_test.cpp",
+    "canvas_tdd_test.cpp",
+  ]
+  deps = ace_test_deps
+}
