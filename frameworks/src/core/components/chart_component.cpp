@@ -90,6 +90,10 @@ bool ChartComponent::CreateNativeViews()
     }
     ReleaseJerryValue(hasTypeProp, typeStrHandler, attrsPropValue, VA_ARG_END_FLAG);
     if (!strcmp(chartType_, LINE)) {
+        if (chartView_) {
+            delete (chartView_);
+            chartView_ = nullptr;
+        }
         chartView_ = new UIChartPolyline();
     }
     if (chartView_ == nullptr) {
