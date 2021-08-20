@@ -14,6 +14,8 @@
 group("components_unittest") {
   deps = [
     "common:js_frameworks_test_arc",
+    "common:js_frameworks_test_canvas",
+    "common:js_frameworks_test_chart",
     "common:js_frameworks_test_data_binding",
     "common:js_frameworks_test_directive",
     "common:js_frameworks_test_div",
@@ -30,6 +32,7 @@ group("components_unittest") {
     "common:js_frameworks_test_opacity",
     "common:js_frameworks_test_percent",
     "common:js_frameworks_test_pickerview",
+    "common:js_frameworks_test_qrcode",
     "common:js_frameworks_test_radio_switch_width",
     "common:js_frameworks_test_slider",
     "common:js_frameworks_test_stack",
