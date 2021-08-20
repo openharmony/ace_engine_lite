@@ -90,7 +90,7 @@ bool ChartComponent::CreateNativeViews()
     }
     ReleaseJerryValue(hasTypeProp, typeStrHandler, attrsPropValue, VA_ARG_END_FLAG);
     if (!strcmp(chartType_, LINE)) {
-        if (chartView_) {
+        if (chartView_ != nullptr) {
             delete (chartView_);
             chartView_ = nullptr;
         }
