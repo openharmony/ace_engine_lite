@@ -14,6 +14,10 @@
 import("//build/lite/config/subsystem/aafwk/path.gni")
 
 ACE_LITE_PATH = "//foundation/ace/ace_engine_lite/frameworks"
+ACE_LITE_COMMON_PATH = "//foundation/ace/ace_engine_lite/frameworks/common"
+NATIVE_ENGINE_PATH = "//foundation/ace/ace_engine_lite/frameworks/native_engine"
+MODULE_MANAGER_PATH =
+    "//foundation/ace/ace_engine_lite/frameworks/module_manager"
 GRAPHIC_LITE_PATH = "//foundation/graphic/ui"
 
 ace_lite_include_dirs = [
@@ -48,17 +52,22 @@ ace_lite_include_dirs += [
   "$ACE_LITE_PATH/src/core",
   "$ACE_LITE_PATH/src/core/animation",
   "$ACE_LITE_PATH/src/core/base",
-  "$ACE_LITE_PATH/src/core/base/cache",
   "$ACE_LITE_PATH/src/core/components",
   "$ACE_LITE_PATH/src/core/context",
   "$ACE_LITE_PATH/src/core/directive",
   "$ACE_LITE_PATH/src/core/router",
-  "$ACE_LITE_PATH/src/core/jsi",
   "$ACE_LITE_PATH/src/core/modules",
   "$ACE_LITE_PATH/src/core/router",
   "$ACE_LITE_PATH/src/core/stylemgr",
   "$ACE_LITE_PATH/src/core/wrapper",
   "$ACE_LITE_PATH/targets",
+  "$ACE_LITE_COMMON_PATH/log",
+  "$ACE_LITE_COMMON_PATH/memory",
+  "$ACE_LITE_COMMON_PATH/memory/cache",
+  "$ACE_LITE_COMMON_PATH/utils",
+  "$NATIVE_ENGINE_PATH",
+  "$NATIVE_ENGINE_PATH/jsi",
+  "$MODULE_MANAGER_PATH",
   "//third_party/jerryscript/jerry-core/include",
   "//third_party/jerryscript/jerry-ext/include/jerryscript-ext",
   "///third_party/jerryscript/jerry-port/default/include",
@@ -88,13 +97,8 @@ ace_lite_include_dirs_simulator = [
 
 ace_lite_sources = [
   "$ACE_LITE_PATH/src/core/animation/transition_impl.cpp",
-  "$ACE_LITE_PATH/src/core/async/js_async_work.cpp",
-  "$ACE_LITE_PATH/src/core/async/message_queue_utils.cpp",
   "$ACE_LITE_PATH/src/core/base/ace_lock.cpp",
-  "$ACE_LITE_PATH/src/core/base/ace_log.cpp",
-  "$ACE_LITE_PATH/src/core/base/ace_mem_base.cpp",
   "$ACE_LITE_PATH/src/core/base/async_task_manager.cpp",
-  "$ACE_LITE_PATH/src/core/base/cache/cache_manager.cpp",
   "$ACE_LITE_PATH/src/core/base/dft_impl.cpp",
   "$ACE_LITE_PATH/src/core/base/dfx_assist.cpp",
   "$ACE_LITE_PATH/src/core/base/event_util.cpp",
@@ -104,8 +108,6 @@ ace_lite_sources = [
   "$ACE_LITE_PATH/src/core/base/lazy_load_manager.cpp",
   "$ACE_LITE_PATH/src/core/base/lazy_load_watcher.cpp",
   "$ACE_LITE_PATH/src/core/base/locale_util.cpp",
-  "$ACE_LITE_PATH/src/core/base/mem_proc.cpp",
-  "$ACE_LITE_PATH/src/core/base/memory_heap.cpp",
   "$ACE_LITE_PATH/src/core/base/number_parser.cpp",
   "$ACE_LITE_PATH/src/core/base/product_adapter.cpp",
   "$ACE_LITE_PATH/src/core/base/string_util.cpp",
@@ -156,11 +158,9 @@ ace_lite_sources = [
   "$ACE_LITE_PATH/src/core/dialog/js_dialog.cpp",
   "$ACE_LITE_PATH/src/core/directive/descriptor_utils.cpp",
   "$ACE_LITE_PATH/src/core/directive/directive_watcher_callback.cpp",
-  "$ACE_LITE_PATH/src/core/jsi/jsi.cpp",
   "$ACE_LITE_PATH/src/core/modules/app_module.cpp",
   "$ACE_LITE_PATH/src/core/modules/dfx_module.cpp",
   "$ACE_LITE_PATH/src/core/modules/dialog_module.cpp",
-  "$ACE_LITE_PATH/src/core/modules/module_manager.cpp",
   "$ACE_LITE_PATH/src/core/modules/presets/cjson_parser.cpp",
   "$ACE_LITE_PATH/src/core/modules/presets/console_log_impl.cpp",
   "$ACE_LITE_PATH/src/core/modules/presets/console_module.cpp",

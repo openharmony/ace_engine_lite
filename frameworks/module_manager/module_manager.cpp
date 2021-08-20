@@ -16,14 +16,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "acelite_config.h"
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
 #include "securec.h"
-#endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "ace_log.h"
-#include "fatal_handler.h"
 #include "internal/jsi_internal.h"
-#include "js_app_context.h"
-#include "js_fwk_common.h"
 #include "ohos_module_config.h"
 
 namespace OHOS {
@@ -53,7 +48,7 @@ JSIValue ModuleManager::RequireModule(const char * const moduleName)
 #endif // FEATURE_PRODUCT_MODULE
 #ifdef FEATURE_PRIVATE_MODULE
         if ((JSI::ValueIsUndefined(moduleObj)) && (privateModulesGetter_ != nullptr)) {
-            const char * const bundleName = JsAppContext::GetInstance()->GetCurrentBundleName();
+            const char * const bundleName = (bundleNameGetter_ != nullptr) ? bundleNameGetter_() : nullptr;
             moduleObj = GetModuleObject(name, nullptr, 0, requiredSystemModules, bundleName);
         }
 #endif // FEATURE_PRIVATE_MODULE

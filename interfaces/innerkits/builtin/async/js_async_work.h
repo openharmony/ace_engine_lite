@@ -18,6 +18,9 @@
 
 #include "message_queue_utils.h"
 #include "memory_heap.h"
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+#include <functional>
+#endif
 
 namespace OHOS {
 namespace ACELite {
@@ -31,6 +34,12 @@ typedef void (*AsyncWorkHandler)(void* data);
  * Function pointer type used for async work.
  */
 typedef void (*AsyncHandler)(void* data, int8_t statusCode);
+
+typedef bool (*FatalHandleFunc)();
+
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+typedef bool (*PostUITaskFunc)(std::function<void()> task);
+#endif
 
 struct AsyncWork : public MemoryHeap {
     AsyncWorkHandler workHandler;
@@ -103,6 +112,12 @@ public:
      */
     static void ExecuteAsyncWork(AsyncWork *&asyncWork, int8_t statusCode = ERR_OK);
 
+    static void SetFatalHandleFunc(FatalHandleFunc isFatalErrorHitted, FatalHandleFunc isAppExiting);
+
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+    static void SetPostUITaskFunc(PostUITaskFunc postUITask);
+#endif
+
     // Error code used for async work processing
     static const int8_t ERR_OK = 0;
     static const int8_t ERR_FAIL = -1;
@@ -110,6 +125,11 @@ public:
 private:
     static bool DispatchAsyncWorkInner(AsyncWorkHandler workHandler, AsyncHandler handler, void *data);
     static QueueHandler appQueuehandler_;
+    static FatalHandleFunc isFatalErrorHitted_;
+    static FatalHandleFunc isAppExiting_;
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+    static PostUITaskFunc postUITask_;
+#endif
 };
 } // namespace ACELite
 } // namespace OHOS

@@ -28,6 +28,10 @@
 #include "js_async_work.h"
 #include "js_profiler.h"
 #include "product_adapter.h"
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+#include "ace_ability.h"
+#endif
+#include "module_manager.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -73,6 +77,13 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
         return;
     }
 
+#ifndef MOCK_JS_ASYNC_WORK
+    JsAsyncWork::SetFatalHandleFunc(FatalHandler::IsErrorHittedWrapper, FatalHandler::IsAppExitingWrapper);
+#endif
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
+    JsAsyncWork::SetPostUITaskFunc(AceAbility::PostUITask);
+#endif
+    ModuleManager::GetInstance()->SetBundleNameGetter(JSAbility::GetPackageName);
     DumpNativeMemoryUsage();
     jsAbilityImpl_ = new JSAbilityImpl();
     if (jsAbilityImpl_ == nullptr) {
