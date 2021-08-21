@@ -397,8 +397,8 @@ uint64_t JSProfiler::GetCurrentClockTick() const
 #elif defined(FEATURE_ACELITE_JS_PROFILER)
     const uint32_t unit = 1000;
     // ipcamera
-    timeval timeVal;
-    timezone timeZone;
+    struct timeval timeVal;
+    struct timezone timeZone;
     return (gettimeofday(&timeVal, &timeZone) == 0) ? ((timeVal.tv_usec / unit) + (timeVal.tv_sec * unit)) : 0;
 #else
     // PC simulator
