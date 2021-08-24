@@ -87,11 +87,12 @@
  */
 #define FEATURE_MODULE_STORAGE
 
+#endif // QT_SIMULATOR
+
 /**
  * localization module
  */
 #define FEATURE_LOCALIZATION_MODULE
-#endif // QT_SIMULATOR
 
 #define FEATURE_LAZY_LOADING_MODULE
 
