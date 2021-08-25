@@ -115,6 +115,11 @@ bool ViewOnTouchCancelListener::OnCancel(UIView &view, const CancelEvent &event)
 }
 #endif // JS_TOUCH_EVENT_SUPPORT
 
+void ViewOnSwipeListener::SetStopPropagation(bool isStopPropogation)
+{
+    isStopPropagation_ = isStopPropogation;
+}
+
 bool ViewOnSwipeListener::OnDragStart(UIView& view, const DragEvent &event)
 {
     UNUSED(view);

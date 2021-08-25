@@ -178,7 +178,7 @@ public:
      */
     virtual void OnViewAttached() {}
     virtual void LayoutChildren() {}
-    static void BuildViewTree(Component *currComponent, Component *parent, ConstrainedParameter &alignParameter);
+    static void BuildViewTree(Component *currComponent, Component *parent, ConstrainedParameter &parentParameter);
 
     const Component *GetParent() const
     {
@@ -227,6 +227,7 @@ public:
      */
     bool AdaptBoxSizing(uint16_t attrKeyId = K_UNKNOWN) const;
     void AlignDimensions(const ConstrainedParameter &param);
+    void EnableTransmitSwipe();
 
 protected:
     void SetComponentName(uint16_t name)
