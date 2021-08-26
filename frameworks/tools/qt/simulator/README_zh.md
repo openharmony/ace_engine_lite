@@ -38,10 +38,19 @@
 ## 2、打开工程
 
 ### 场景一：JS应用打开方式：
+1. **源码下载**
+   建议在Linux下使用 repo 批量下载所涉及到的代码仓到windows盘符下，下载后在windows下打开工程。
 
-1. **打开QT Creator**
+   ```
+   // 初始化 repo
+   repo init -u https://gitee.com/openharmony/manifest.git -b master --no-repo-verify
+   // sync 所有相关仓
+   repo sync graphic_surface graphic_ui graphic_utils graphic_wms third_party_bounds_checking_function third_party_cJSON third_party_zlib third_party_freetype third_party_harfbuzz third_party_icu third_party_libjpeg third_party_libpng third_party_qrcodegen third_party_zlib utils_native_lite aafwk_aafwk_lite third_party_jerryscript ace_engine_lite global_resmgr_lite
+   ```
 
-2. **点击菜单：文件—>打开文件或项目**
+2. **打开QT Creator**
+
+3. **点击菜单：文件—>打开文件或项目**
 
    - 弹出的文件选择框中选择工程项目
 
@@ -53,15 +62,15 @@
 
    - 点击configure project按钮加载工程。
 
-3. **编译**
+4. **编译**
 
     依次点击：**构建—>编译项目**，或者直接在项目树中右键，在右键菜单中选择**重新构建**即可。
 
-4. **调试**
+5. **调试**
 
     编译完成后，点击调试按钮即可运行调试。
 
-5. **设置JS bundle路径**
+6. **设置JS bundle路径**
 
     项目第一次启动时，由于未配置JS Bundle路径，无法正常显示应用，需要开发者手动配置路径，配置后再次启动时会根据已配置信息显示应用。
 

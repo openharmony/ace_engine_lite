@@ -151,7 +151,8 @@ SOURCES += \
         targets/simulator/mock/vsyncthread/vsync_dispatch_manager.cpp \
         targets/simulator/mock/vsyncthread/vsync_thread.cpp \
         targets/simulator/mock/amsthread/ams_thread.cpp \
-        targets/simulator/mock/timerthread/timer_thread.cpp
+        targets/simulator/mock/timerthread/timer_thread.cpp \
+        targets/simulator/mock/global_impl_mock.cpp
 
 HEADERS += \
         $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/components/ui_view.h

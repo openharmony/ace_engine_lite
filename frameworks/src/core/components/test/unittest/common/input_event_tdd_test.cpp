@@ -1296,7 +1296,7 @@ HWTEST_F(InputEventTddTest, InputForTest008, TestSize.Level0)
     UIView *view1 = GetComponent(page, "data1");
     EXPECT_FALSE(view1 == nullptr);
     UIView *view2 = GetComponent(page, "data2");
-    EXPECT_TRUE(view2 == nullptr);
+    EXPECT_TRUE(view2 != nullptr);
 
     /**
      * @tc.steps:step3.click the "changeButtonFor" button
@@ -1319,7 +1319,7 @@ HWTEST_F(InputEventTddTest, InputForTest008, TestSize.Level0)
     view1 = GetComponent(page, "checkbox1");
     EXPECT_FALSE(view1 == nullptr);
     view2 = GetComponent(page, "checkbox2");
-    EXPECT_TRUE(view2 == nullptr);
+    EXPECT_TRUE(view2 != nullptr);
 
     /**
      * @tc.steps: step5.click the "changeCheckboxFor" button
@@ -1342,7 +1342,7 @@ HWTEST_F(InputEventTddTest, InputForTest008, TestSize.Level0)
     view1 = GetComponent(page, "name1");
     EXPECT_FALSE(view1 == nullptr);
     view2 = GetComponent(page, "name2");
-    EXPECT_TRUE(view2 == nullptr);
+    EXPECT_TRUE(view2 != nullptr);
 
     /**
      * @tc.steps: step7.click the "changeRadioFor" button
