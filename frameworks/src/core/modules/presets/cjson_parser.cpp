@@ -507,13 +507,17 @@ bool CJSONParser::CacheValue(const char *key, cJSON item)
     return (item.next == nullptr) || (CacheValue(key, *item.next));
 }
 
-jerry_value_t CJSONParser::GetValueFromFile(const char *key, jerry_value_t args, jerry_size_t argsNum)
+jerry_value_t CJSONParser::GetValueFromFile(const char *key,
+                                            jerry_value_t args,
+                                            jerry_size_t argsNum,
+                                            const char *languageFile)
 {
-    HILOG_WARN(HILOG_MODULE_ACE, "get value from cache failed");
+    if (languageFile == nullptr || strlen(languageFile) == 0) {
+        return UNDEFINED;
+    }
     ListNode *keys = nullptr;
     uint8_t keyCount = Split(key, '.', *&keys);
-    const char *defaultFile = "en-US.json";
-    char *content = ReadJSFile(filePath_, defaultFile);
+    char *content = ReadJSFile(filePath_, languageFile);
     cJSON *fileJson = cJSON_Parse(content);
     ACE_FREE(content);
     cJSON *curJsonItem = fileJson;
@@ -547,27 +551,48 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key, jerry_value_t args,
 
 jerry_value_t CJSONParser::GetValue(const char *key, const jerry_value_t args[], const jerry_size_t argsNum)
 {
-    char *result = nullptr;
     jerry_value_t arg = (argsNum > 1) ? args[1] : UNDEFINED;
-    if (isCached_) {
-        Node *node = GetValueFromCache(key);
-        if (node != nullptr) {
-            if (node->isNumber) {
-                return jerry_create_number(node->valueIndex);
-            } else {
-                result = reinterpret_cast<char *>(startPos_ + (uint32_t)(node->valueIndex));
-                result = FillPlaceholder(result, arg, argsNum);
-                jerry_value_t resultProp = jerry_create_string(reinterpret_cast<jerry_char_t *>(result));
-                ACE_FREE(result);
-                return resultProp;
-            }
+    // try finding from cache first
+    Node *node = GetValueFromCache(key);
+    if (node == nullptr) {
+        HILOG_WARN(HILOG_MODULE_ACE, "get value from cache failed");
+        // no node found from cache, searching from current language file then
+        jerry_value_t resultFromFile = GetValueFromFile(key, arg, argsNum, languageFile_);
+        if (!IS_UNDEFINED(resultFromFile)) {
+            // found
+            return resultFromFile;
         }
+        jerry_release_value(resultFromFile);
+        // failed, get from default language file last
+        resultFromFile = GetValueFromFile(key, arg, argsNum, "en-US.json");
+        if (!IS_UNDEFINED(resultFromFile)) {
+            return resultFromFile;
+        }
+        jerry_release_value(resultFromFile);
+        return jerry_create_string((const jerry_char_t *)(key));
     }
-    return GetValueFromFile(key, arg, argsNum);
+
+    // cache node found, number case
+    if (node->isNumber) {
+        return jerry_create_number(node->valueIndex);
+    }
+    // NOT number case
+    const char *result = reinterpret_cast<char *>(startPos_ + (uint32_t)(node->valueIndex));
+    char *valueStr = FillPlaceholder(result, arg, argsNum);
+    if (valueStr == nullptr) {
+        // empty value, return the key
+        return jerry_create_string((const jerry_char_t *)(key));
+    }
+    jerry_value_t valueJSValue = jerry_create_string(reinterpret_cast<jerry_char_t *>(valueStr));
+    ACE_FREE(valueStr);
+    return valueJSValue;
 }
 
 CJSONParser::Node *CJSONParser::GetValueFromCache(const char *key)
 {
+    if (!isCached_) {
+        return nullptr;
+    }
     uint16_t index = FNVHash(key);
     uint32_t *valueIndex = reinterpret_cast<uint32_t *>(startPos_ + index * sizeof (uint32_t));
     while ((valueIndex != nullptr) && (*valueIndex != 0)) {
