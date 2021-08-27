@@ -36,17 +36,20 @@ JS-UI框架子系统源代码在/foundation/ace/ace\_engine\_lite下，目录结
 
 ```
 /foundation/ace/ace_engine_lite
-├── frameworks      # 框架代码目录
-│   ├── examples    # 示例代码目录
-│   ├── include     # 头文件目录
-│   ├── packages    # 框架JS实现存放目录
-│   ├── src         # 源代码存放目录
-│   ├── targets     # 各目标设备配置文件存放目录
-│   └── tools       # 工具代码存放目录
-├── interfaces      # 对外接口存放目录
-│   └── innerkits   # 对内部子系统暴露的头文件存放目录
-│       └── builtin # JS-UI框架子系统对外暴露JS三方module API接口存放目录
-└── test            # 测试用例目录
+├── frameworks         # 框架代码目录
+│   ├── common         # 公共工具类目录
+│   ├── examples       # 示例代码目录
+│   ├── include        # 头文件目录
+│   ├── module_manager # JS模块管理类目录
+│   ├── native_engine  # JS引擎适配层目录
+│   ├── packages       # 框架JS实现存放目录
+│   ├── src            # 源代码存放目录
+│   ├── targets        # 各目标设备配置文件存放目录
+│   └── tools          # 工具代码存放目录
+├── interfaces         # 对外接口存放目录
+│   └── innerkits      # 对内部子系统暴露的头文件存放目录
+│       └── builtin    # JS-UI框架子系统对外暴露JS三方module API接口存放目录
+└── test               # 测试用例目录
 ```
 
 ## 接口<a name="section1096322014288"></a>

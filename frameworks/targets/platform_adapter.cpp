@@ -47,10 +47,12 @@ void SetEngineSnapshotMode(bool &mode)
 
 void SetEngineSnapshotModeManually(bool &mode)
 {
-#ifndef TARGET_SIMULATOR
+#if defined(__LITEOS_A__)
     // if not starting debugger, on real device, give a chance to use JS mode manually
+    mode = IsFileExisted(RUNTIME_MODE_FILE_PATH);
+#elif !defined(TARGET_SIMULATOR)
     mode = !(IsFileExisted(RUNTIME_MODE_FILE_PATH));
-#endif // TARGET_SIMULATOR
+#endif
 }
 
 void Terminate(uint16_t token)
