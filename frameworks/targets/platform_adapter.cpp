@@ -47,7 +47,7 @@ void SetEngineSnapshotMode(bool &mode)
 
 void SetEngineSnapshotModeManually(bool &mode)
 {
-#if defined(__LITEOS_A__)
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
     // if not starting debugger, on real device, give a chance to use JS mode manually
     mode = IsFileExisted(RUNTIME_MODE_FILE_PATH);
 #elif !defined(TARGET_SIMULATOR)
