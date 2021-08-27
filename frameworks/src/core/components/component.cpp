@@ -408,6 +408,13 @@ void Component::AlignDimensions(const ConstrainedParameter &param)
     OnDimensionsAligned();
 }
 
+void Component::EnableTransmitSwipe()
+{
+    if (onSwipeListener_ != nullptr) {
+        onSwipeListener_->SetStopPropagation(false);
+    }
+}
+
 void Component::GetConstrainedParam(ConstrainedParameter &param) const
 {
     param.maxWidth = width_.value.pixel;
