@@ -25,6 +25,7 @@
 #include "event_injector.h"
 #include "js_app_context.h"
 #include "js_app_environment.h"
+#include "module_manager.h"
 #include "root_view.h"
 
 namespace OHOS {
@@ -97,6 +98,7 @@ void BasicTddTest::SetUp()
 
 void BasicTddTest::TearDown()
 {
+    ModuleManager::GetInstance()->CleanUpModule();
     JsAppEnvironment::GetInstance()->Cleanup();
 
     EventInjector *injector = EventInjector::GetInstance();
