@@ -167,11 +167,53 @@ const char * const BUNDLE02 =
     "  });\n"
     "})();\n";
 
+const char * const BUNDLE03 =
+    "(function () {\n"
+    "  return new ViewModel({\n"
+    "    render: function render(vm) {\n"
+    "      var _vm = vm || this;\n"
+    "      return _c('div', {\n"
+    "        staticClass: ['container']\n"
+    "      }, [_c('text', {\n"
+    "        staticClass: ['title'],\n"
+    "        attrs: {\n"
+    "          ref: 'text',\n"
+    "          show: false,\n"
+    "          value: function value() {\n"
+    "            return 'Hello ' + _vm.message;\n"
+    "          }\n"
+    "        }\n"
+    "      })]);\n"
+    "    },\n"
+    "    styleSheet: {\n"
+    "      classSelectors: {\n"
+    "        container: {\n"
+    "          flexDirection: 'column',\n"
+    "          justifyContent: 'center',\n"
+    "          alignItems: 'center',\n"
+    "          height: '100%',\n"
+    "          width: '100%'\n"
+    "        },\n"
+    "        title: {\n"
+    "          textAlign: 'center',\n"
+    "          width: '80%',\n"
+    "          display: 'flex'\n"
+    "        }\n"
+    "      }\n"
+    "    },\n"
+    "    data: {\n"
+    "      message: 'OpenHarmony'\n"
+    "    }\n"
+    "  });\n"
+    "})();\n";
+
 void DirectiveTddTest::RunTests()
 {
     DirectiveTest001();
     DirectiveTest002();
+    DirectiveTest003();
 }
+
 void DirectiveTddTest::DirectiveTest001()
 {
     TDD_CASE_BEGIN();
@@ -189,6 +231,7 @@ void DirectiveTddTest::DirectiveTest001()
     DestroyPage(page);
     TDD_CASE_END();
 }
+
 void DirectiveTddTest::DirectiveTest002()
 {
     TDD_CASE_BEGIN();
@@ -211,10 +254,23 @@ void DirectiveTddTest::DirectiveTest002()
     TDD_CASE_END();
 }
 
+void DirectiveTddTest::DirectiveTest003()
+{
+    TDD_CASE_BEGIN();
+    JSValue page = CreatePage(BUNDLE03, strlen(BUNDLE03));
+    UILabel *text = reinterpret_cast<UILabel *>(GetViewByRef(page, "text"));
+    EXPECT_TRUE(text != nullptr);
+    if (text != nullptr) {
+        EXPECT_FALSE(text->IsVisible());
+    }
+    DestroyPage(page);
+    TDD_CASE_END();
+}
+
 #ifdef TDD_ASSERTIONS
 /**
  * @tc.name: DirectiveTest001
- * @tc.desc: test the attribute data binding
+ * @tc.desc: test id directive
  */
 HWTEST_F(DirectiveTddTest, DirectiveTest001, TestSize.Level1)
 {
@@ -223,11 +279,20 @@ HWTEST_F(DirectiveTddTest, DirectiveTest001, TestSize.Level1)
 
 /**
  * @tc.name: DirectiveTest002
- * @tc.desc: test the style data binding
+ * @tc.desc: test for directive
  */
 HWTEST_F(DirectiveTddTest, DirectiveTest002, TestSize.Level0)
 {
     DirectiveTddTest::DirectiveTest002();
+}
+
+/**
+ * @tc.name: DirectiveTest003
+ * @tc.desc: test show directive
+ */
+HWTEST_F(DirectiveTddTest, DirectiveTest003, TestSize.Level0)
+{
+    DirectiveTddTest::DirectiveTest003();
 }
 #endif
 } // namespace ACELite

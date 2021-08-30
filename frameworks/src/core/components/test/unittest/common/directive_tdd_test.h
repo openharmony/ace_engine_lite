@@ -26,6 +26,7 @@ public:
 
     void DirectiveTest001();
     void DirectiveTest002();
+    void DirectiveTest003();
     void RunTests();
 };
 } // namespace ACELite
