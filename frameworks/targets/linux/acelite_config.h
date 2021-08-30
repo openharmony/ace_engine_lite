@@ -131,7 +131,7 @@
 
 #define PROFILER_ENABLE_FLAG_FILE "/user/data/profiler_enable"
 
-#define RUNTIME_MODE_FILE_PATH "/user/data/jsparser_enable"
+#define RUNTIME_MODE_FILE_PATH "/user/data/js_snapshot_enable"
 
 #endif // OHOS_ACELITE_CONFIG_H
 
