@@ -59,7 +59,7 @@ void ScrollLayer::AppendScrollLayer(Component *rootComponent)
         HILOG_ERROR(HILOG_MODULE_ACE, "Scroll Layer: AppendScrollLayer function parameter rootComponent error.");
         return;
     }
-
+    rootComponent->EnableTransmitSwipe();
     uint16_t horizontalResolution = GetHorizontalResolution();
     uint16_t verticalResolution = GetVerticalResolution();
     ConstrainedParameter rootViewParam(horizontalResolution, verticalResolution);
