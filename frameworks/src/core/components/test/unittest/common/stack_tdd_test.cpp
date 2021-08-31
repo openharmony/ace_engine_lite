@@ -81,6 +81,7 @@ void StackTddTest::ComponentStackTest001()
     jerry_value_t children = jerry_create_null();
     Component *component = GetRenderedComponent(componentNameId_, children);
     EXPECT_TRUE(component != nullptr);
+    CASE_END_IF_NULLPTR(component);
     UIViewGroup *stackView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
     /* *
      * @tc.expected: step1. check childView = nullptr
@@ -100,6 +101,7 @@ void StackTddTest::ComponentStackTest002()
     jerry_value_t childOptions = jerry_create_null();
     Component *child = CreateChildComponent(childOptions);
     EXPECT_TRUE(child != nullptr);
+    CASE_END_IF_NULLPTR(child);
     /* *
      * @tc.steps: step2. set children object
      */
@@ -111,6 +113,7 @@ void StackTddTest::ComponentStackTest002()
      */
     Component *component = GetRenderedComponent(componentNameId_, children);
     EXPECT_TRUE(component != nullptr);
+    CASE_END_IF_NULLPTR(component);
     UIViewGroup *stackView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
     /* *
      * @tc.expected: step3. check stackView != nullptr &&  childView != nullptr
@@ -131,8 +134,10 @@ void StackTddTest::ComponentStackTest003()
     jerry_value_t childOptions = jerry_create_null();
     Component *child1 = CreateChildComponent(childOptions);
     EXPECT_TRUE(child1 != nullptr);
+    CASE_END_IF_NULLPTR(child1);
     Component *child2 = CreateChildComponent(childOptions);
     EXPECT_TRUE(child2 != nullptr);
+    CASE_END_IF_NULLPTR(child2);
     /* *
      * @tc.steps: step2. set children object
      */
@@ -145,13 +150,16 @@ void StackTddTest::ComponentStackTest003()
      */
     Component *component = GetRenderedComponent(componentNameId_, children);
     EXPECT_TRUE(component != nullptr);
+    CASE_END_IF_NULLPTR(component);
     UIViewGroup *stackView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
     EXPECT_TRUE(stackView != nullptr);
+    CASE_END_IF_NULLPTR(stackView);
     /* *
      * @tc.steps: step4. get children views
      */
     UIView *childView1 = stackView->GetChildrenHead();
     EXPECT_TRUE(childView1 != nullptr);
+    CASE_END_IF_NULLPTR(childView1);
     UIView *childView2 = childView1->GetNextSibling();
     /* *
      * @tc.expected: step4. check two children views
@@ -177,6 +185,7 @@ void StackTddTest::ComponentStackTest004()
     JerrySetNamedProperty(childOptions, "attrs", childAttrsObj);
     Component *child = CreateChildComponent(childOptions);
     EXPECT_TRUE(child != nullptr);
+    CASE_END_IF_NULLPTR(child);
     /* *
      * @tc.steps: step2. set child to children object
      */
@@ -188,13 +197,16 @@ void StackTddTest::ComponentStackTest004()
      */
     Component *component = GetRenderedComponent(componentNameId_, children);
     EXPECT_TRUE(component != nullptr);
+    CASE_END_IF_NULLPTR(component);
     UIViewGroup *stackView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
     EXPECT_TRUE(stackView != nullptr);
+    CASE_END_IF_NULLPTR(stackView);
     /* *
      * @tc.steps: step4. get child view
      */
     UIView *childView = stackView->GetChildrenHead();
     EXPECT_TRUE(childView != nullptr);
+    CASE_END_IF_NULLPTR(childView);
     /* *
      * @tc.expected: step4. check the child view attribute
      */
@@ -221,6 +233,7 @@ void StackTddTest::ComponentStackTest005()
     JerrySetNamedProperty(childOptions, "staticStyle", childStylesObj);
     Component *child = CreateChildComponent(childOptions);
     EXPECT_TRUE(child != nullptr);
+    CASE_END_IF_NULLPTR(child);
     /* *
      * @tc.steps: step2. set child to children object
      */
@@ -232,13 +245,16 @@ void StackTddTest::ComponentStackTest005()
      */
     Component *component = GetRenderedComponent(componentNameId_, children);
     EXPECT_TRUE(component != nullptr);
+    CASE_END_IF_NULLPTR(component);
     UIViewGroup *stackView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
     EXPECT_TRUE(stackView != nullptr);
+    CASE_END_IF_NULLPTR(stackView);
     /* *
      * @tc.steps: step4. get child view
      */
     UIView *childView = stackView->GetChildrenHead();
     EXPECT_TRUE(childView != nullptr);
+    CASE_END_IF_NULLPTR(childView);
     /* *
      * @tc.expected: step4. check the child view styles
      */
@@ -265,6 +281,7 @@ void StackTddTest::ComponentStackTest006()
     JerrySetNamedProperty(childOptions, "staticStyle", childStylesObj);
     Component *child = CreateChildComponent(childOptions);
     EXPECT_TRUE(child != nullptr);
+    CASE_END_IF_NULLPTR(child);
     /* *
      * @tc.steps: step2. set child to children object
      */
@@ -276,13 +293,16 @@ void StackTddTest::ComponentStackTest006()
      */
     Component *component = GetRenderedComponent(componentNameId_, children);
     EXPECT_TRUE(component != nullptr);
+    CASE_END_IF_NULLPTR(component);
     UIViewGroup *stackView = reinterpret_cast<UIViewGroup *>(component->GetComponentRootView());
     EXPECT_TRUE(stackView != nullptr);
+    CASE_END_IF_NULLPTR(stackView);
     /* *
      * @tc.steps: step4. get child view
      */
     UIView *childView = stackView->GetChildrenHead();
     EXPECT_TRUE(childView != nullptr);
+    CASE_END_IF_NULLPTR(childView);
     /* *
      * @tc.expected: step4. check the child view styles
      */

@@ -25,6 +25,14 @@
 #include "root_component_mock.h"
 #include "test_common.h"
 
+#define CASE_END_IF_NULLPTR(ptr) \
+    do {                         \
+        if (ptr == nullptr) {    \
+            TDD_CASE_END();      \
+            return;              \
+        }                        \
+    } while (0)
+
 namespace OHOS {
 namespace ACELite {
 #ifdef TDD_ASSERTIONS
