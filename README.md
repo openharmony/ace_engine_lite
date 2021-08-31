@@ -37,17 +37,20 @@ The source code of the framework is stored in  **/foundation/ace/ace\_engine\_li
 
 ```
 /foundation/ace/ace_engine_lite
-├── frameworks      # Framework code
-│   ├── examples    # Sample code
-│   ├── include     # Header files
-│   ├── packages    # JavaScript implementation
-│   ├── src         # Source code
-│   ├── targets     # Configuration files of target devices
-│   └── tools       # Tool code
-├── interfaces      # APIs exposed externally
-│   └── innerkits   # Header files for internal subsystems
-│       └── builtin # JavaScript third-party module APIs exposed by the JS UI framework
-└── test            # Test cases
+├── frameworks         # Framework code
+│   ├── common         # Common kits
+│   ├── examples       # Sample code
+│   ├── include        # Header files
+│   ├── module_manager # JS module manager
+│   ├── native_engine  # JS engine adapter
+│   ├── packages       # JavaScript implementation
+│   ├── src            # Source code
+│   ├── targets        # Configuration files of target devices
+│   └── tools          # Tool code
+├── interfaces         # APIs exposed externally
+│   └── innerkits      # Header files for internal subsystems
+│       └── builtin    # JavaScript third-party module APIs exposed by the JS UI framework
+└── test               # Test cases
 ```
 
 ## Available APIs<a name="section1096322014288"></a>
