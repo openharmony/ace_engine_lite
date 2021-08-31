@@ -323,7 +323,7 @@ void DialogTddTest::DialogTest002()
     }
 
     // step2: set dialog window id and click
-    const int16_t positionX1 = 414;
+    const int16_t positionX1 = 460;
     const int16_t positionY1 = 274;
     Window *window = RootView::GetInstance()->GetBoundWindow();
     EventInjector::GetInstance()->SetWindowId(window->GetWindowId() + 1);
@@ -342,7 +342,7 @@ void DialogTddTest::DialogTest002()
     }
 
     // step5: set dialog window id and click
-    const int16_t positionX2 = 469;
+    const int16_t positionX2 = 500;
     const int16_t positionY2 = 274;
     EventInjector::GetInstance()->SetWindowId(window->GetWindowId() + 1);
     Click(positionX2, positionY2);
