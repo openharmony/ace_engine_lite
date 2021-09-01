@@ -53,7 +53,7 @@ bool FatalHandler::IsAppExitingWrapper()
 static void HandleFatal(int errorCode)
 {
 #ifdef FEATURE_FATAL_ERROR_HANDLING
-    HILOG_ERROR(HILOG_MODULE_ACE, "hitted by fatal error[%d]", errorCode);
+    HILOG_ERROR(HILOG_MODULE_ACE, "hitted by fatal error[%{public}d]", errorCode);
     if (FatalHandler::GetInstance().IsFatalErrorHitted()) {
         // fatal hitted again during one fatal handing, return to avoid dead loop
         return;

@@ -167,7 +167,7 @@ char *MallocStringOf(jerry_value_t source, uint16_t *strLength)
 
         length = jerry_string_to_char_buffer(target, buffer, size);
         if ((length == 0) || (length >= UINT16_MAX) || (length > size)) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "jerry string to char buffer failed, target size[%d]", size);
+            HILOG_ERROR(HILOG_MODULE_ACE, "jerry string to char buffer failed, target size[%{public}d]", size);
             break;
         }
         success = true;
@@ -456,7 +456,7 @@ char *RelocateFilePath(const char *appRootPath, const char *subPath, const char 
     size_t totalLength = appRootPathLength + subPathLength + fileNameLength + addedLength;
     char *fullPath = static_cast<char *>(ace_malloc(totalLength + 1));
     if (fullPath == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%u]", (totalLength + 1));
+        HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%{public}u]", (totalLength + 1));
         return nullptr;
     }
     fullPath[0] = '\0';
@@ -577,7 +577,7 @@ int32_t GetFileSize(const char * const filePath)
     struct stat info = {0};
     int32_t ret = stat(filePath, &info);
     if (ret < 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "file doesn't exit or it's empty, [%s]", filePath);
+        HILOG_ERROR(HILOG_MODULE_ACE, "file doesn't exit or it's empty, [%{public}s]", filePath);
     }
     return info.st_size;
 }
@@ -594,7 +594,7 @@ static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = fa
     }
 #else
     if (realpath(orgFullPath, fullPath) == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "realpath handle failed, [%s]", orgFullPath);
+        HILOG_ERROR(HILOG_MODULE_ACE, "realpath handle failed, [%{public}s]", orgFullPath);
         return -1;
     }
 #endif
@@ -636,7 +636,7 @@ static bool CheckFileLength(const char * const fullPath, int32_t &outFileSize)
     outFileSize = 0;
     int32_t fileSize = GetFileSize(fullPath);
     if (fileSize <= 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "open file[%s] failed for reading.", fullPath);
+        HILOG_ERROR(HILOG_MODULE_ACE, "open file[%{public}s] failed for reading.", fullPath);
         return false;
     }
     if (fileSize > FILE_CONTENT_LENGTH_MAX) {
@@ -668,13 +668,14 @@ char *ReadFile(const char * const fullPath, uint32_t &fileSize, const bool binar
         fileSize = 0;
         fd = OpenFileInternal(fullPath, O_RDONLY);
         if (fd < 0) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "open file[fd: %d] failed for reading", fd);
-            HILOG_ERROR(HILOG_MODULE_ACE, "open file[path: %s] failed for reading", fullPath);
+            HILOG_ERROR(HILOG_MODULE_ACE, "open file[fd: %{public}d] failed for reading", fd);
+            HILOG_ERROR(HILOG_MODULE_ACE, "open file[path: %{public}s] failed for reading", fullPath);
             break;
         }
         scriptBuffer = static_cast<char *>(ace_malloc(scriptLength + 1));
         if (scriptBuffer == nullptr) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for file content failed, file length[%d]", scriptLength);
+            HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for file content failed, file length[%{public}d]",
+                        scriptLength);
             break;
         }
         if (EOK != memset_s(scriptBuffer, (scriptLength + 1), 0, (scriptLength + 1))) {
@@ -682,7 +683,8 @@ char *ReadFile(const char * const fullPath, uint32_t &fileSize, const bool binar
         }
         int32_t count = read(fd, scriptBuffer, scriptLength);
         if ((count <= 0) || (count > scriptLength)) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "read fail, count(%d), length(%u), path(%s)", count, scriptLength, fullPath);
+            HILOG_ERROR(HILOG_MODULE_ACE, "read fail, count(%{public}d), length(%{public}u), path(%{public}s)", count,
+                        scriptLength, fullPath);
             break;
         }
         scriptBuffer[count] = '\0';
@@ -785,7 +787,8 @@ char *CreatePathStrFromUrl(const char * const url)
     }
     char *filePath = static_cast<char *>(ace_malloc(pathLength + 1));
     if (filePath == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for file path calculating from url, file length[%d]", pathLength);
+        HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for file path calculating from url, file length[%{public}d]",
+                    pathLength);
         return nullptr;
     }
     if (memcpy_s(filePath, pathLength, (url + start), pathLength) != 0) {
@@ -1156,14 +1159,15 @@ void ExpandImagePathMem(char *&imagePath, const int16_t dotPos, const int16_t su
     }
     char *newImagePath = static_cast<char *>(ace_malloc(len));
     if (newImagePath == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%u]", (dotPos + 1 + suffixLen + 1));
+        HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%{public}u]",
+                    (dotPos + 1 + suffixLen + 1));
         ACE_FREE(imagePath);
         return;
     }
 
     errno_t err = strcpy_s(newImagePath, len, imagePath);
     if (err != 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "use strcpy_s secure function errro(%d)", err);
+        HILOG_ERROR(HILOG_MODULE_ACE, "use strcpy_s secure function errro(%{public}d)", err);
         ace_free(newImagePath);
         newImagePath = nullptr;
         ACE_FREE(imagePath);
@@ -1212,7 +1216,7 @@ void CureImagePath(char *&imagePath)
         if (imagePathLen < (suffixLen + dotPos + 1)) {
             ExpandImagePathMem(imagePath, dotPos, suffixLen, imagePathLen);
             if (imagePath == nullptr) {
-                HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%u]",
+                HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%{public}u]",
                             (dotPos + 1 + suffixLen + 1));
                 return;
             }

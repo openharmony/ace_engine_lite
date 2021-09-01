@@ -38,7 +38,7 @@ JSIValue DialogModule::ShowDialog(const JSIValue thisVal, const JSIValue args[],
 {
     // js calling allow argsNum > 1, but do not process.
     if (argsNum < 1) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "ShowDialog args num(%d) is invalid.", argsNum);
+        HILOG_ERROR(HILOG_MODULE_ACE, "ShowDialog args num(%{public}d) is invalid.", argsNum);
         return AS_JSI_VALUE(jerry_create_error(JERRY_ERROR_TYPE,
             reinterpret_cast<const jerry_char_t *>("params should only be one object.")));
     }
@@ -55,12 +55,12 @@ JSIValue DialogModule::ShowDialog(const JSIValue thisVal, const JSIValue args[],
     /* parse dialog title */
     char *dialogTitle = JSI::GetStringProperty(args[0], TITLE_KEY);
     jsDialog->SetTitle(dialogTitle);
-    HILOG_INFO(HILOG_MODULE_ACE, "dialog title = %s", dialogTitle);
+    HILOG_INFO(HILOG_MODULE_ACE, "dialog title = %{public}s", dialogTitle);
 
     /* parse dialog message */
     char *message = JSI::GetStringProperty(args[0], MSG_KEY);
     jsDialog->SetMessage(message);
-    HILOG_INFO(HILOG_MODULE_ACE, "dialog message =%s", message);
+    HILOG_INFO(HILOG_MODULE_ACE, "dialog message =%{public}s", message);
 
     /* parse dialog button */
     JSIValue buttons = JSI::GetNamedProperty(args[0], BUTTON_KEY);

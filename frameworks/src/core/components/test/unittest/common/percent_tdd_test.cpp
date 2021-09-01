@@ -110,7 +110,7 @@ void PercentTddTest::DumpJSObjectJson(JSValue value) const
         return;
     }
     char *jsonStr = MallocStringOf(jerry_json_stringify(value));
-    HILOG_DEBUG(HILOG_MODULE_ACE, "JSObject: %s", jsonStr);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "JSObject: %{public}s", jsonStr);
     ACE_FREE(jsonStr);
 }
 

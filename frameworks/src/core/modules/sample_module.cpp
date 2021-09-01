@@ -187,14 +187,14 @@ JSIValue SampleModule::Setter(const JSIValue thisVal, const JSIValue *args, uint
     double newValue = JSI::ValueToNumber(args[0]);
     counter_ = (int8_t)newValue;
 
-    HILOG_DEBUG(HILOG_MODULE_ACE, "SampleModule: Setter called, setting: %d", counter_);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "SampleModule: Setter called, setting: %{public}d", counter_);
     return JSI::CreateUndefined();
 }
 
 JSIValue SampleModule::Getter(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum)
 {
     counter_++;
-    HILOG_DEBUG(HILOG_MODULE_ACE, "SampleModule: Getter called, returning: %d", counter_);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "SampleModule: Getter called, returning: %{public}d", counter_);
     return JSI::CreateNumber(counter_);
 }
 

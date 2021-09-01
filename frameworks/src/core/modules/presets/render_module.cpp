@@ -137,8 +137,8 @@ jerry_value_t RenderModule::LoopRender(const jerry_value_t func,
                                        const jerry_length_t length)
 {
     if (length != ARG_LENGTH_RENDER) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Failed to LoopRender as the length of arguments invalid. Expect 2 but %d",
-                    length);
+        HILOG_ERROR(HILOG_MODULE_ACE,
+                    "Failed to LoopRender as the length of arguments invalid. Expect 2 but %{public}d", length);
         return UNDEFINED;
     }
 
@@ -151,7 +151,7 @@ jerry_value_t RenderModule::ConditionalRender(const jerry_value_t func,
                                               const jerry_length_t argsNum)
 {
     if (argsNum != ARG_LENGTH_RENDER) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Failed to ConditionalRender cause by invlaid paramters. Expect 2 but %d",
+        HILOG_ERROR(HILOG_MODULE_ACE, "Failed to ConditionalRender cause by invlaid paramters. Expect 2 but %{public}d",
                     argsNum);
         return UNDEFINED;
     }

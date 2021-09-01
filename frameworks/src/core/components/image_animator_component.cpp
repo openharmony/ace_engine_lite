@@ -220,14 +220,14 @@ bool ImageAnimatorComponent::ParseToFrames(jerry_value_t value)
     for (uint16_t idx = 0; idx < framesSize_; ++idx) {
         jerry_value_t image = jerry_get_property_by_index(value, idx);
         if (jerry_value_is_undefined(image) || !jerry_value_is_object(image)) {
-            HILOG_WARN(HILOG_MODULE_ACE, "the %d frame is null or not a object.", idx);
+            HILOG_WARN(HILOG_MODULE_ACE, "the %{public}d frame is null or not a object.", idx);
             continue;
         }
 
         jerry_value_t src = jerryx_get_property_str(image, ATTR_SRC);
         if (jerry_value_is_undefined(src)) {
             jerry_release_value(image);
-            HILOG_WARN(HILOG_MODULE_ACE, "the src of %d frame is null.", src);
+            HILOG_WARN(HILOG_MODULE_ACE, "the src of %{public}d frame is null.", src);
             continue;
         }
 

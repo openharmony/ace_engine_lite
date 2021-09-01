@@ -52,7 +52,7 @@ static void DumpNativeMemoryUsage()
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
     NativeMemInfo memInfo;
     ProductAdapter::GetNativeMemInfo(&memInfo);
-    HILOG_DEBUG(HILOG_MODULE_ACE, "available free size: %d", memInfo.freeSize);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "available free size: %{public}d", memInfo.freeSize);
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 }
 
@@ -215,7 +215,8 @@ void JSAbility::HandleRenderTick()
         ProductAdapter::NotifyRenderEnd();
         errorTickCount_++;
         if ((errorTickCount_ % ERR_TICK_COUNT_TRACE_CTRL) == 1) {
-            HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not actived, count[%d]", errorTickCount_);
+            HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not actived, count[%{public}d]",
+                       errorTickCount_);
         }
         if (errorTickCount_ == UINT32_MAX) {
             errorTickCount_ = 0;

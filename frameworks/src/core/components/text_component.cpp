@@ -157,7 +157,7 @@ void TextComponent::SetTextOverflow(UILabel &label, const AppStyleItem *styleIte
             overflowMode_ = UILabel::LINE_BREAK_WRAP;
             break;
         default:
-            HILOG_WARN(HILOG_MODULE_ACE, "TextOverFlow id=%d is invalid, using default instead", propNameId);
+            HILOG_WARN(HILOG_MODULE_ACE, "TextOverFlow id=%{public}d is invalid, using default instead", propNameId);
             break;
     }
     label.SetLineBreakMode(overflowMode_);
@@ -245,7 +245,7 @@ void TextComponent::SetTextAlign(UILabel &label, const AppStyleItem *styleItem) 
             align = UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER;
             break;
         default:
-            HILOG_WARN(HILOG_MODULE_ACE, "text textAlign style value =%s is invalid, using default instead",
+            HILOG_WARN(HILOG_MODULE_ACE, "text textAlign style value =%{public}s is invalid, using default instead",
                        stylePropValue);
             break;
     }

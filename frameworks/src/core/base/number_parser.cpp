@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 #include "number_parser.h"
+#include "ace_log.h"
 #include <cstdlib>
 #include <cstring>
-#include "ace_log.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -58,7 +58,8 @@ bool NumberParser::ParsePercentValue(const char *percentStr, uint16_t strLength,
     // only support max 15 bytes length string
     constexpr uint16_t maxLength = 16;
     if (ensuredStrLength > maxLength) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "parse percent value failed, input string too long [%d]", ensuredStrLength);
+        HILOG_ERROR(HILOG_MODULE_ACE, "parse percent value failed, input string too long [%{public}d]",
+                    ensuredStrLength);
         return false;
     }
     // the latest charater must be %, and the first digit must not be "."
