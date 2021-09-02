@@ -286,6 +286,7 @@ uint8_t BasicTddTest::GetChildrenSize(const UIViewGroup &grop) const
 
 void *BasicTddTest::TickHandler(void *args)
 {
+    (void)args;
     prctl(PR_SET_NAME, "TickTask");
     while (isTickTaskRunning_) {
         // Periodically call TaskHandler(). It could be done in a timer interrupt or an OS task too.

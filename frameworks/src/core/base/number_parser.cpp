@@ -81,7 +81,7 @@ bool NumberParser::ParsePercentValue(const char *percentStr, uint16_t strLength,
         index++;
     }
     // do the parsing
-    outValue = (float)(strtod(percentStr, nullptr));
+    outValue = static_cast<float>(strtod(percentStr, nullptr));
     return true;
 }
 
