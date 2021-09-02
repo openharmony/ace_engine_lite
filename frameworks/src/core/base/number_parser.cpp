@@ -58,7 +58,8 @@ bool NumberParser::ParsePercentValue(const char *percentStr, uint16_t strLength,
     // only support max 15 bytes length string
     constexpr uint16_t maxLength = 16;
     if (ensuredStrLength > maxLength) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "parse percent value failed, input string too long [%d]", ensuredStrLength);
+        HILOG_ERROR(HILOG_MODULE_ACE, "parse percent value failed, input string too long [%{public}d]",
+                    ensuredStrLength);
         return false;
     }
     // the latest charater must be %, and the first digit must not be "."
@@ -80,7 +81,7 @@ bool NumberParser::ParsePercentValue(const char *percentStr, uint16_t strLength,
         index++;
     }
     // do the parsing
-    outValue = (float)(strtod(percentStr, nullptr));
+    outValue = static_cast<float>(strtod(percentStr, nullptr));
     return true;
 }
 

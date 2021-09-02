@@ -34,8 +34,8 @@ void AceAbility::OnStart(const Want &want)
 
     const char * const abilitySrcPath = GetSrcPath();
     const char * const bundleName = GetBundleName();
-    HILOG_DEBUG(HILOG_MODULE_ACE, "ace ability src path = %s", abilitySrcPath);
-    HILOG_DEBUG(HILOG_MODULE_ACE, "ace ability bundle name = %s", bundleName);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "ace ability src path = %{public}s", abilitySrcPath);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "ace ability bundle name = %{public}s", bundleName);
 
     char fullRootPath[PATH_MAX + 1] = {0};
     if (realpath(abilitySrcPath, fullRootPath) == nullptr) {
@@ -45,7 +45,7 @@ void AceAbility::OnStart(const Want &want)
     const char *fullRootPathStr = fullRootPath;
 
     char* jsBundlePath = RelocateJSSourceFilePath(fullRootPathStr, "assets/js/default/");
-    HILOG_DEBUG(HILOG_MODULE_ACE, "ace ability js bundle path = %s", jsBundlePath);
+    HILOG_DEBUG(HILOG_MODULE_ACE, "ace ability js bundle path = %{public}s", jsBundlePath);
     const uint16_t token = 0xff; // js ability's token is hidden by AMS
     jsAbility_.Launch(jsBundlePath, bundleName, (uint16_t)token);
     ACE_FREE(jsBundlePath);

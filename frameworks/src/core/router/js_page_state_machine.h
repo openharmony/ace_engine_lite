@@ -21,14 +21,14 @@
 #include "non_copyable.h"
 #include "scroll_layer.h"
 
-#define JS_PAGE_RETURN_IF_ERROR(error, pagePath)                                   \
-    do {                                                                           \
-        if (error != 0) {                                                          \
-            HILOG_ERROR(HILOG_MODULE_ACE, "use secure function error(%d)", error); \
-            ace_free(pagePath);                                                    \
-            pagePath = nullptr;                                                    \
-            return ERROR_SECURE_USE;                                               \
-        }                                                                          \
+#define JS_PAGE_RETURN_IF_ERROR(error, pagePath)                                           \
+    do {                                                                                   \
+        if (error != 0) {                                                                  \
+            HILOG_ERROR(HILOG_MODULE_ACE, "use secure function error(%{public}d)", error); \
+            ace_free(pagePath);                                                            \
+            pagePath = nullptr;                                                            \
+            return ERROR_SECURE_USE;                                                       \
+        }                                                                                  \
     } while (0)
 
 namespace OHOS {

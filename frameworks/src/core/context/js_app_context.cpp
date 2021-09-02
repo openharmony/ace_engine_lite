@@ -138,7 +138,7 @@ char *JsAppContext::EvaluateFile(bool &isSnapshotMode,
     }
     // snapshot mode changed to another
     isSnapshotMode = !isSnapshotMode;
-    HILOG_ERROR(HILOG_MODULE_ACE, "JS mode changed unexpected [%d]", isSnapshotMode);
+    HILOG_ERROR(HILOG_MODULE_ACE, "JS mode changed unexpected [%{public}d]", isSnapshotMode);
     jsCode = ReadFile(fullPath, outLength, isSnapshotMode);
     return jsCode;
 }

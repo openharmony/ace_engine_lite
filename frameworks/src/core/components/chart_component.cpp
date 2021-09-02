@@ -454,11 +454,11 @@ bool ChartComponent::ParseDataValue(jerry_value_t dataValue, uint16_t interval, 
         size_t dataValue = static_cast<size_t>(jerry_get_number_value(data));
         pointArray[index].x = (index + interval);
         if (dataValue < yMinValue_) {
-            HILOG_WARN(HILOG_MODULE_ACE, "the value %d is less than min value, and will use minValue instead",
+            HILOG_WARN(HILOG_MODULE_ACE, "the value %{public}d is less than min value, and will use minValue instead",
                 dataValue);
             pointArray[index].y = yMinValue_;
         } else if (dataValue > yMaxValue_) {
-            HILOG_WARN(HILOG_MODULE_ACE, "the value %d is larger than max value, and will use maxValue instead",
+            HILOG_WARN(HILOG_MODULE_ACE, "the value %{public}d is larger than max value, and will use maxValue instead",
                 dataValue);
             pointArray[index].y = yMaxValue_;
         } else {
@@ -652,7 +652,7 @@ bool ChartComponent::SetOptionsAxisDataRange(jerry_value_t xAxisValue, bool isXA
     if (maxValue == 0) {
         if (!jerryx_has_property_str(xAxisValue, "max")) {
             HILOG_WARN(HILOG_MODULE_ACE,
-                "max value is not defined, and will use default value %d instead", defaultMaxValue);
+                "max value is not defined, and will use default value %{public}d instead", defaultMaxValue);
             maxValue = defaultMaxValue;
         }
     }
@@ -678,18 +678,20 @@ bool ChartComponent::SetOptionsAxisDataRange(uint16_t minValue, uint16_t maxValu
     const char * const xOrY = isXaxis ?  "x" : "y";
     if ((minValue < supportMinValue) || (minValue > supportedMaxValue)) {
         HILOG_WARN(HILOG_MODULE_ACE,
-            "%s min value: %d is not between %d ~ %d, and will use default value %d instead",
+                   "%{public}s min value: %{public}d is not between %{public}d ~ %{public}d, and will use default "
+                   "value %{public}d instead",
             xOrY, minValue, supportMinValue, supportedMaxValue, defaultMinValue);
         minValue = defaultMinValue;
     }
     if ((maxValue < supportMinValue) || (maxValue > supportedMaxValue)) {
         HILOG_WARN(HILOG_MODULE_ACE,
-            "%s max value: %d is not between %d ~ %d, and will use default value %d instead",
+                   "%{public}s max value: %{public}d is not between %{public}d ~ %{public}d, and will use default "
+                   "value %{public}d instead",
             xOrY, maxValue, supportMinValue, supportedMaxValue, defaultMaxValue);
         maxValue = defaultMaxValue;
     }
     if (minValue > maxValue) {
-        HILOG_WARN(HILOG_MODULE_ACE, "%s min value is larger than max value, we will use default value", xOrY);
+        HILOG_WARN(HILOG_MODULE_ACE, "%{public}s min value is larger than max value, we will use default value", xOrY);
         maxValue = defaultMaxValue;
         minValue = defaultMinValue;
     }

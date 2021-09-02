@@ -24,7 +24,7 @@ namespace ACELite {
 JSIValue RouterModule::Replace(const JSIValue thisVal, const JSIValue* args, uint8_t argsNum)
 {
     if (argsNum != 1) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Replace args num(%d) is invalid.", argsNum);
+        HILOG_ERROR(HILOG_MODULE_ACE, "Replace args num(%{public}d) is invalid.", argsNum);
         return AS_JSI_VALUE(jerry_create_error(JERRY_ERROR_TYPE,
             reinterpret_cast<const jerry_char_t *>("params should only be one object.")));
     }

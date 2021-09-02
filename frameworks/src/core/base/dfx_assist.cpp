@@ -54,7 +54,7 @@ void DfxAssist::DumpErrorCode(const jerry_value_t errorValue)
     jerry_size_t stringEnd = jerry_string_to_utf8_char_buffer(errStrVal, errStrBuffer, errStrSize);
     errStrBuffer[stringEnd] = '\0';
     // output to platform trace
-    HILOG_ERROR(HILOG_MODULE_ACE, " [JS Error]: %s", reinterpret_cast<char *>(errStrBuffer));
+    HILOG_ERROR(HILOG_MODULE_ACE, " [JS Error]: %{public}s", reinterpret_cast<char *>(errStrBuffer));
     // output to user console
     LogString(LogLevel::LOG_LEVEL_ERR, "[JS Exception]: ");
     LogString(LogLevel::LOG_LEVEL_ERR, reinterpret_cast<char *>(errStrBuffer));
@@ -105,11 +105,11 @@ void DfxAssist::DumpErrorMessage(const jerry_value_t errorValue)
         }
 
         if (strSize >= stackMsgMaxLength) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "%u: [Backtrace string too long]", i);
+            HILOG_ERROR(HILOG_MODULE_ACE, "%{public}u: [Backtrace string too long]", i);
         } else {
             jerry_size_t stringEnd = jerry_string_to_utf8_char_buffer(itemVal, errStrBuffer, strSize);
             errStrBuffer[stringEnd] = '\0';
-            HILOG_ERROR(HILOG_MODULE_ACE, "%u: %s", i, reinterpret_cast<char *>(errStrBuffer));
+            HILOG_ERROR(HILOG_MODULE_ACE, "%{public}u: %{public}s", i, reinterpret_cast<char *>(errStrBuffer));
         }
         jerry_release_value(itemVal);
     }
