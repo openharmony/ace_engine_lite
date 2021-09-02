@@ -137,12 +137,8 @@ bool Component::Render()
 
     // step3: parse options for attributes and events, will call child class's according methods
     ParseOptions();
-    // step4: apply styles
-    START_TRACING_WITH_COMPONENT_NAME(RENDER_APPLY_STYLE, componentName_);
-    ApplyStyles(options_, *this);
-    STOP_TRACING();
 
-    // step5:process this component's children
+    // step4:process this component's children
     START_TRACING_WITH_COMPONENT_NAME(RENDER_PROCESS_CHILDREN, componentName_);
     renderResult = ProcessChildren();
     STOP_TRACING();
@@ -702,6 +698,9 @@ void Component::ParseOptions()
         return;
     }
 
+    START_TRACING_WITH_COMPONENT_NAME(RENDER_APPLY_STYLE, componentName_);
+    ApplyStyles(options_, *this);
+    STOP_TRACING();
     START_TRACING(RENDER_PARSE_ATTR);
     ParseAttrs();
     STOP_TRACING();
