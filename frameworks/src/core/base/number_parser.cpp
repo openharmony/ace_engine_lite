@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 #include "number_parser.h"
-#include "ace_log.h"
 #include <cstdlib>
 #include <cstring>
+#include "ace_log.h"
 
 namespace OHOS {
 namespace ACELite {
