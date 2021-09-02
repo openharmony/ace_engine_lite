@@ -157,7 +157,7 @@ ColorType JSDialog::ParseButtonColor(const char * const buttonColorText)
         HILOG_ERROR(HILOG_MODULE_ACE, "input dialog button color error, please check. default color instead");
         return Color::GetColorFromRGB(0, 0, 0);
     }
-    HILOG_INFO(HILOG_MODULE_ACE, "dialog buttonColorText = %s, colorVal = %d", buttonColorText, color);
+    HILOG_INFO(HILOG_MODULE_ACE, "dialog buttonColorText = %{public}s, colorVal = %{public}d", buttonColorText, color);
     uint8_t red8 = uint8_t((color & TEXT_RED_COLOR_MASK) >> RED_COLOR_START_BIT);
     uint8_t green8 = uint8_t((color & TEXT_GREEN_COLOR_MASK) >> GREEN_COLOR_START_BIT);
     uint8_t blue8 = uint8_t((color & TEXT_BLUE_COLOR_MASK));

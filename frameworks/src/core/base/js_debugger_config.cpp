@@ -53,7 +53,7 @@ void Debugger::StartDebugger()
     // increase jerry log level to see the Waiting for client connection message
     jerry_port_default_set_log_level(JERRY_LOG_LEVEL_DEBUG);
     // currently, only support tcp::websocket
-    HILOG_INFO(HILOG_MODULE_ACE, "please connect to debugger server with localhost:%d", debuggerConfig_.port);
+    HILOG_INFO(HILOG_MODULE_ACE, "please connect to debugger server with localhost:%{public}d", debuggerConfig_.port);
     bool protocol = jerryx_debugger_tcp_create(debuggerConfig_.port);
     bool connected = jerryx_debugger_ws_create();
     jerryx_debugger_after_connect(protocol && connected);

@@ -80,7 +80,7 @@ StateMachine::~StateMachine()
 void StateMachine::SetCurrentState(int8_t newState)
 {
     if (newState <= UNDEFINED_STATE || newState >= END_STATE) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "error input state:%d", newState);
+        HILOG_ERROR(HILOG_MODULE_ACE, "error input state:%{public}d", newState);
         return;
     }
     currentState_ = newState;
@@ -275,7 +275,7 @@ void StateMachine::BindParameters()
 void StateMachine::ChangeState(int newState)
 {
     if ((newState <= UNDEFINED_STATE) || (newState >= END_STATE)) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "error input state:%d", newState);
+        HILOG_ERROR(HILOG_MODULE_ACE, "error input state:%{public}d", newState);
         return;
     }
     // jump to new State
@@ -329,8 +329,8 @@ static void ForceGC(void *data)
         // dump the JS heap status
         JSHeapStatus heapStatus;
         if (JSI::GetJSHeapStatus(heapStatus)) {
-            HILOG_DEBUG(HILOG_MODULE_ACE, "JS Heap allocBytes[%d], peakAllocBytes[%d]", heapStatus.allocBytes,
-                        heapStatus.peakAllocBytes);
+            HILOG_DEBUG(HILOG_MODULE_ACE, "JS Heap allocBytes[%{public}d], peakAllocBytes[%{public}d]",
+                        heapStatus.allocBytes, heapStatus.peakAllocBytes);
         }
     }
 #endif

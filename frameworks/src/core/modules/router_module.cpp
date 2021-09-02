@@ -29,7 +29,7 @@ void InitRouterModule(JSIValue exports)
 JSIValue RouterModule::Replace(const JSIValue thisVal, const JSIValue* args, uint8_t argsNum)
 {
     if (argsNum != 1 || args == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Replace args invalid, args num(%d).", argsNum);
+        HILOG_ERROR(HILOG_MODULE_ACE, "Replace args invalid, args num(%{public}d).", argsNum);
         return AS_JSI_VALUE(jerry_create_error(JERRY_ERROR_TYPE,
             reinterpret_cast<const jerry_char_t *>("params should only be one object.")));
     }

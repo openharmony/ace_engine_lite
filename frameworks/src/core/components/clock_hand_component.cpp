@@ -228,7 +228,7 @@ char *ClockHandComponent::GetStringAttrByName(const char * const name)
         if (jerry_value_is_string(attrPropValue)) {
             strValue = MallocStringOf(attrPropValue);
         } else {
-            HILOG_INFO(HILOG_MODULE_ACE, "ClockHandComponent: attribute: %s does not exits", name);
+            HILOG_INFO(HILOG_MODULE_ACE, "ClockHandComponent: attribute: %{public}s does not exits", name);
         }
         jerry_release_value(attrPropValue);
         jerry_release_value(attrPropName);

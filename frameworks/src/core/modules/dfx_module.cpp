@@ -39,7 +39,7 @@ const char * const DfxModule::SCREEN_SNAP_PATH = "screensnap.bin";
 bool DfxModule::PreCheck(uint8_t argsNum)
 {
     if (argsNum > 1) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Dfx Module args num(%d) is invalid, at most one parameter", argsNum);
+        HILOG_ERROR(HILOG_MODULE_ACE, "Dfx Module args num(%{public}d) is invalid, at most one parameter", argsNum);
         return false;
     }
     return true;
@@ -218,7 +218,7 @@ JSIValue DfxModule::InjectEvent(const JSIValue thisVal, const JSIValue *args, ui
     // pre check
     const uint8_t num = 2;
     if (argsNum != num) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Dfx Module args num(%d) is invalid, only one parameter", argsNum);
+        HILOG_ERROR(HILOG_MODULE_ACE, "Dfx Module args num(%{public}d) is invalid, only one parameter", argsNum);
         return JSI::CreateBoolean(false);
     }
 

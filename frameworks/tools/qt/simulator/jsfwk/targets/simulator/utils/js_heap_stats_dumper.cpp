@@ -63,7 +63,8 @@ void JSHeapStatsDumper::UpdateStats(const JSHeapStatus &stats)
 
 void JSHeapStatsDumper::LogStats(const JSHeapStatus &stats) const
 {
-    HILOG_DEBUG(HILOG_MODULE_ACE, "Current Allocated Bytes: %d, Peak Allocated Bytes: %d, Total Bytes: %d",
+    HILOG_DEBUG(HILOG_MODULE_ACE,
+                "Current Allocated Bytes: %{public}d, Peak Allocated Bytes: %{public}d, Total Bytes: %{public}d",
                 stats.allocBytes, stats.peakAllocBytes, stats.totalBytes);
 }
 

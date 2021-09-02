@@ -38,7 +38,7 @@ void TimerModule::Init()
     const char * const clearInterval = "clearInterval";
     initRes_ = InitTimerTask();
     if (initRes_ < 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "init timer failed %d", initRes_);
+        HILOG_ERROR(HILOG_MODULE_ACE, "init timer failed %{public}d", initRes_);
     }
     CreateNamedFunction(setTimeout, SetTimeout);
     CreateNamedFunction(clearTimeout, ClearTimer);
@@ -53,7 +53,7 @@ jerry_value_t TimerModule::CreateTimer(const jerry_value_t func,
                                        bool repeated)
 {
     if (TimerModule::GetInstance()->GetInitState() < 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "start timer failed, timer init failed %d",
+        HILOG_ERROR(HILOG_MODULE_ACE, "start timer failed, timer init failed %{public}d",
                     TimerModule::GetInstance()->GetInitState());
         return UNDEFINED;
     }
@@ -132,7 +132,7 @@ jerry_value_t TimerModule::ClearTimer(const jerry_value_t func,
                                       const jerry_length_t argsNum)
 {
     if (TimerModule::GetInstance()->GetInitState() < 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "stop timer failed, init timer failed %d",
+        HILOG_ERROR(HILOG_MODULE_ACE, "stop timer failed, init timer failed %{public}d",
                     TimerModule::GetInstance()->GetInitState());
         return UNDEFINED;
     }

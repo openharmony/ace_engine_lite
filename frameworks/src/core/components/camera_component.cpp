@@ -246,7 +246,8 @@ void CameraCallback::OnCreated(Media::Camera &camera)
 
 void CameraCallback::OnCreateFailed(const string cameraId, int32_t errorCode)
 {
-    HILOG_ERROR(HILOG_MODULE_ACE, "CameraCallback: camera:%s unavailable, errorCode:%d", cameraId.c_str(), errorCode);
+    HILOG_ERROR(HILOG_MODULE_ACE, "CameraCallback: camera:%{public}s unavailable, errorCode:%{public}d",
+                cameraId.c_str(), errorCode);
     if (jerry_value_is_function(errorCallback_)) {
         const char * const detailKey = "detail";
         const char * const detailValue = "camera unavailable";
