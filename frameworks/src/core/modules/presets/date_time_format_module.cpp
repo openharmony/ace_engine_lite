@@ -88,7 +88,7 @@ bool DateTimeFormatModule::InitNumArray(LocaleInfo info)
         int numStatus = 0;
         std::string result = numFormat.Format(i, numStatus);
         if ((numStatus == I18nStatus::IERROR) || (result.empty())) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "init array %d failed", i);
+            HILOG_ERROR(HILOG_MODULE_ACE, "init array %{public}d failed", i);
             ReleaseNumArray();
             return false;
         }

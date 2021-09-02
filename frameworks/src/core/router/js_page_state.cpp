@@ -35,8 +35,8 @@ void PageInitState::Handle(StateMachine &sm)
         STOP_TRACING();
         sm.ChangeState(READY_STATE);
     } else {
-        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing undefined state to init state.",
-                    currState);
+        HILOG_ERROR(HILOG_MODULE_ACE,
+                    "current state(%{public}d) is invalid when changing undefined state to init state.", currState);
     }
 }
 
@@ -52,7 +52,7 @@ void PageReadyState::Handle(StateMachine &sm)
         STOP_TRACING();
         sm.SetCurrentState(READY_STATE);
     } else {
-        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing init state to ready state.",
+        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%{public}d) is invalid when changing init state to ready state.",
                     currState);
     }
 }
@@ -61,7 +61,7 @@ void PageShowState::Handle(StateMachine &sm)
 {
     int currState = sm.GetCurrentState();
     if ((currState == READY_STATE) || (currState == BACKGROUND_STATE)) {
-        HILOG_INFO(HILOG_MODULE_ACE, "current state(%d) -> show state", currState);
+        HILOG_INFO(HILOG_MODULE_ACE, "current state(%{public}d) -> show state", currState);
         // do this state's action: call show to display user interface
         sm.ShowPage();
         START_TRACING(PAGE_ON_SHOW);
@@ -69,7 +69,7 @@ void PageShowState::Handle(StateMachine &sm)
         STOP_TRACING();
         sm.SetCurrentState(SHOW_STATE);
     } else {
-        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing ready state to show state.",
+        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%{public}d) is invalid when changing ready state to show state.",
                     currState);
     }
 }
@@ -78,15 +78,15 @@ void PageBackgroundState::Handle(StateMachine &sm)
 {
     int currState = sm.GetCurrentState();
     if ((currState == READY_STATE) || (currState == SHOW_STATE)) {
-        HILOG_INFO(HILOG_MODULE_ACE, "current state(%d) -> background state", currState);
+        HILOG_INFO(HILOG_MODULE_ACE, "current state(%{public}d) -> background state", currState);
         sm.HidePage();
         START_TRACING(PAGE_ON_BACKGROUND);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_CALLBACK_ON_HIDE);
         STOP_TRACING();
         sm.SetCurrentState(BACKGROUND_STATE);
     } else {
-        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing show state to background state.",
-                    currState);
+        HILOG_ERROR(HILOG_MODULE_ACE,
+                    "current state(%{public}d) is invalid when changing show state to background state.", currState);
     }
 }
 
@@ -95,7 +95,7 @@ void PageDestroyState::Handle(StateMachine &sm)
     int currState = sm.GetCurrentState();
     // any normal state can jump to destroy state
     if ((currState >= INIT_STATE) || (FatalHandler::GetInstance().IsFatalErrorHitted())) {
-        HILOG_INFO(HILOG_MODULE_ACE, "current state(%d) -> destroy state", currState);
+        HILOG_INFO(HILOG_MODULE_ACE, "current state(%{public}d) -> destroy state", currState);
         ACE_EVENT_PRINT(MT_ACE_RELEASE_HISTORY_PAGE, 0);
         START_TRACING(PAGE_ON_DESTROY);
         sm.InvokePageLifeCycleCallback(PAGE_LIFECYCLE_CALLBACK_ON_DESTROY);
@@ -103,7 +103,7 @@ void PageDestroyState::Handle(StateMachine &sm)
         sm.ReleaseHistoryPageResource();
         sm.SetCurrentState(DESTROY_STATE);
     } else {
-        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%d) is invalid when changing show state to destroy state.",
+        HILOG_ERROR(HILOG_MODULE_ACE, "current state(%{public}d) is invalid when changing show state to destroy state.",
                     currState);
     }
 }

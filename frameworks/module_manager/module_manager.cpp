@@ -54,7 +54,7 @@ JSIValue ModuleManager::RequireModule(const char * const moduleName)
 #endif // FEATURE_PRIVATE_MODULE
     } else {
         moduleObj = JSI::CreateUndefined();
-        HILOG_ERROR(HILOG_MODULE_ACE, "ModuleManager:RequireModule category %s does not exists!", category);
+        HILOG_ERROR(HILOG_MODULE_ACE, "ModuleManager:RequireModule category %{public}s does not exists!", category);
     }
 
     ace_free(category);
@@ -167,7 +167,7 @@ JSIValue ModuleManager::GetModuleObject(const char * const moduleName, const Mod
                 return InitModuleObject(moduleName, privateModules[i].module, categoryObj);
             }
         }
-        HILOG_WARN(HILOG_MODULE_ACE, "ModuleManager:module %s does not exists!", moduleName);
+        HILOG_WARN(HILOG_MODULE_ACE, "ModuleManager:module %{public}s does not exists!", moduleName);
     }
 #endif
     return JSI::CreateUndefined();

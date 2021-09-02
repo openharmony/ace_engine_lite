@@ -119,7 +119,7 @@ void QrcodeComponent::DrawQrcode()
     const uint16_t defaultHeight = GetHeight();
     uint16_t length = static_cast<uint16_t>(strlen(qrcodeValue_));
     if (length > QRCODE_VAL_MAX || length == 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "Invalid value. target size[%d]", length);
+        HILOG_ERROR(HILOG_MODULE_ACE, "Invalid value. target size[%{public}d]", length);
         return;
     }
 

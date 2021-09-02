@@ -162,14 +162,14 @@ bool VideoView::WaitRebuildPlayerFinish()
 {
     int retCode = pthread_mutex_lock(&rebuildPlayerlock_);
     if (retCode != 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "WaitRebuildPlayerFinish mutex lock failed: %d", retCode);
+        HILOG_ERROR(HILOG_MODULE_ACE, "WaitRebuildPlayerFinish mutex lock failed: %{public}d", retCode);
         return false;
     }
     PrepareRebuildPlayerThread();
     (void)pthread_cond_wait(&rebuildPlayerCondition_, &rebuildPlayerlock_);
     retCode = pthread_mutex_unlock(&rebuildPlayerlock_);
     if (retCode != 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "WaitRebuildPlayerFinish mutex unlock failed: %d", retCode);
+        HILOG_ERROR(HILOG_MODULE_ACE, "WaitRebuildPlayerFinish mutex unlock failed: %{public}d", retCode);
         return false;
     }
     return true;
@@ -211,7 +211,7 @@ bool VideoView::ResetPlayer()
     (void)pthread_mutex_unlock(&rebuildPlayerlock_);
     int retCode = pthread_cond_signal(&rebuildPlayerCondition_);
     if (retCode != 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "mutex unlock failed: %d", retCode);
+        HILOG_ERROR(HILOG_MODULE_ACE, "mutex unlock failed: %{public}d", retCode);
         return false;
     }
     return true;

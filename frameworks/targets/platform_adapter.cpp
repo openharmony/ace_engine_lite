@@ -30,9 +30,9 @@ void PrintVersionTrace()
 {
 #ifdef TARGET_SIMULATOR
     // output version trace on simulator
-    HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite version: %s", ACEVersion::GetStr());
-    HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite commit: %s", ACEVersion::GetCommit());
-    HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite build stamp: %s", ACEVersion::GetTimeStamp());
+    HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite version: %{public}s", ACEVersion::GetStr());
+    HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite commit: %{public}s", ACEVersion::GetCommit());
+    HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite build stamp: %{public}s", ACEVersion::GetTimeStamp());
 #endif // TARGET_SIMULATOR
 }
 
