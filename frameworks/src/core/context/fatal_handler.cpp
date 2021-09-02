@@ -357,5 +357,10 @@ void FatalHandler::SetCurrentPageRootView(UIView *pageRoot)
 {
     pageRootView_ = pageRoot;
 }
+
+uint16_t FatalHandler::GetComponentCount() const
+{
+    return componentNodes_.Size();
+}
 } // namespace ACELite
 } // namespace OHOS

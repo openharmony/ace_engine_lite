@@ -47,6 +47,25 @@ void JsAppContext::ClearContext()
     ReleaseAbilityInfo();
 }
 
+// check byte code file snapshot version is OK with the current
+void JsAppContext::CheckSnapshotVersion(const char *bcFileContent, uint32_t contentLength) const
+{
+    // this is part of engine struct definations
+    typedef struct {
+        uint32_t magic; // four byte magic number
+        uint32_t version; // version number
+    } JerrySnapshotHeaderT;
+    if ((bcFileContent == nullptr) || (contentLength == 0) || (contentLength <= sizeof(JerrySnapshotHeaderT))) {
+        return;
+    }
+    const uint8_t *snapshotData = reinterpret_cast<const uint8_t *>(bcFileContent);
+    const JerrySnapshotHeaderT *headerP = reinterpret_cast<const JerrySnapshotHeaderT *>(snapshotData);
+    // JERRY_SNAPSHOT_VERSION is defined in jerryscript-snapshot.h
+    if (headerP->version != JERRY_SNAPSHOT_VERSION) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "invalid snapshot version[%{public}d]", headerP->version);
+    }
+}
+
 /**
  * return value should be released by caller when it's not used
  */
@@ -73,6 +92,7 @@ jerry_value_t JsAppContext::Eval(char *fullPath, size_t fullPathLength, bool isA
     START_TRACING(PAGE_CODE_EVAL);
     jerry_value_t viewModel = UNDEFINED;
     if (isSnapshotMode) {
+        CheckSnapshotVersion(jsCode, contentLength);
         const uint32_t *snapshotContent = reinterpret_cast<const uint32_t *>(jsCode);
         viewModel = jerry_exec_snapshot(snapshotContent, contentLength, 0, 1);
     } else {
