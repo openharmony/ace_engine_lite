@@ -468,6 +468,11 @@ void StateMachine::ReleaseHistoryPageResource()
 
     // clean up native module objects required
     ModuleManager::GetInstance()->CleanUpModule();
+    // check components leak
+    uint16_t remainComponentCount = FatalHandler::GetInstance().GetComponentCount();
+    if (remainComponentCount != 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "[%{public}d] components leaked!", remainComponentCount);
+    }
 }
 
 void StateMachine::DeleteViewModelProperties() const

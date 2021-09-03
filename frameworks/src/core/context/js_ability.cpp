@@ -77,6 +77,8 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
         return;
     }
 
+    HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability is launching");
+
 #ifndef MOCK_JS_ASYNC_WORK
     JsAsyncWork::SetFatalHandleFunc(FatalHandler::IsErrorHittedWrapper, FatalHandler::IsAppExitingWrapper);
 #endif
@@ -108,6 +110,7 @@ void JSAbility::Show()
         return;
     }
 
+    HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability will be shown");
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Show();
     AsyncTaskManager::GetInstance().SetFront(true);
@@ -121,7 +124,7 @@ void JSAbility::Hide()
         HILOG_ERROR(HILOG_MODULE_ACE, "Must trigger Launch first");
         return;
     }
-
+    HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability will be hidden");
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Hide();
     AsyncTaskManager::GetInstance().SetFront(false);
@@ -136,6 +139,7 @@ void JSAbility::TransferToDestroy()
         return;
     }
 
+    HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability is exiting");
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->CleanUp();
     // Reset render flag or low layer task mutex in case we are during the rendering process,
