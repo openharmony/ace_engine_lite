@@ -159,6 +159,7 @@ private:
      * @return the target mode file content or nullptr for reading failure
      */
     char *EvaluateFile(bool &isSnapshotMode, uint32_t &outLength, char *fullPathPath, size_t fullPathLength) const;
+    void CheckSnapshotVersion(const char *bcFileContent, uint32_t contentLength) const;
     char *currentBundleName_ = nullptr;
     char *currentAbilityPath_ = nullptr;
     char *currentJsPath_ = nullptr;
