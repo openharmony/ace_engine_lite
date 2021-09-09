@@ -54,6 +54,6 @@ shared_library("ace_module_manager") {
     "//third_party/bounds_checking_function:libsec_shared",
     "//third_party/jerryscript/jerry-core:jerry-core_shared",
     "//utils/native/lite/js/builtin:ace_utils_kits",
-	"//base/powermgr/battery_lite/interfaces/kits/js:battery_utils_kits",
+    "//base/powermgr/battery_lite/interfaces/kits/js:ace_battery_kits",
   ]
 }
