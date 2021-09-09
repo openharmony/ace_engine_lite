@@ -68,7 +68,8 @@ int8_t MessageQueueUtils::PutMessage(QueueHandler handler, const void* msgPtr, u
 #else
     osMessageQueueId_t queueId = static_cast<osMessageQueueId_t>(handler);
     if (osMessageQueuePut(queueId, msgPtr, 0, timeOut) != osOK) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:PutMessage failed!");
+        uint32_t msgCount = osMessageQueueGetCount(queueId);
+        HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:PutMessage failed! msg count[%{public}d]", msgCount);
         return MSGQ_FAIL;
     }
     return MSGQ_OK;
