@@ -16,6 +16,7 @@
 #include "jsbundle_tdd_test.h"
 #include "component.h"
 #include "component_utils.h"
+#include "js_app_context.h"
 #include "js_app_environment.h"
 #include "js_fwk_common.h"
 #include "ui_label.h"
@@ -51,6 +52,7 @@ void JsbundleTddTest::SetUp()
 
 void JsbundleTddTest::TearDown()
 {
+    JsAppContext::GetInstance()->ReleaseStyles();
     JsAppEnvironment *env = JsAppEnvironment::GetInstance();
     env->Cleanup();
 }
