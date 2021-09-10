@@ -86,8 +86,12 @@
 /**
  * support device API for JS
  */
-#define FEATURE_MODULE_DEVICE
+#define FEATURE_MODULE_BATTERY
 
+/**
+ * support device API for JS
+ */
+#define FEATURE_MODULE_DEVICE
 /**
  * timer module
  */
