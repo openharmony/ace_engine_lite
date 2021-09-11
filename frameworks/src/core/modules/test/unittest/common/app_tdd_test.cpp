@@ -117,9 +117,9 @@ void AppTddTest::AppTddTest01()
     TDD_CASE_BEGIN();
     const uint8_t token = 255;
 #ifdef __LINUX__
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/storage/nfs", "com.huawei.test", token);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/storage/data", "com.huawei.test", token);
 #else
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/nfs", "com.huawei.test", token);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/user/data", "com.huawei.test", token);
 #endif
     JSValue page = CreatePage(BUNDLE01, strlen(BUNDLE01));
     ClickByRef(page, "btn");
