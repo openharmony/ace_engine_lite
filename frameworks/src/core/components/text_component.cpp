@@ -18,6 +18,7 @@
 #include <string.h>
 #include "ace_log.h"
 #include "font/ui_font_header.h"
+#include "js_app_context.h"
 #include "key_parser.h"
 #include "keys.h"
 #include "product_adapter.h"
@@ -42,6 +43,8 @@ bool TextComponent::CreateNativeViews()
     /* set default text OverFlow clip */
     uiLabel_.SetLineBreakMode(overflowMode_);
     uiLabel_.SetAlign(UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
+    const int32_t supportBaseLineApiVersion = 5;
+    uiLabel_.SetSupportBaseLine(JsAppContext::GetInstance()->GetTargetApi() >= supportBaseLineApiVersion);
     return CopyFontFamily(fontFamily_, ProductAdapter::GetDefaultFontFamilyName());
 }
 

@@ -49,6 +49,7 @@ void JSAbilityImpl::InitEnvironment(const char * const abilityPath, const char *
     appContext_->SetCurrentAbilityInfo(abilityPath, bundleName, token);
     appContext_->SetTopJSAbilityImpl(this);
     appJsEnv->InitJsFramework();
+    appContext_->LoadApiVersion();
 
     // initialize js object after engine started up
     abilityModel_ = UNDEFINED;

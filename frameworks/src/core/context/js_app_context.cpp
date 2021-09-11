@@ -19,6 +19,7 @@
 #if (defined(__LINUX__) || defined(__LITEOS__))
 #include "ace_ability.h"
 #endif
+#include "bundle_manager.h"
 #include "component_factory.h"
 #include "component_utils.h"
 #include "fatal_handler.h"
@@ -296,6 +297,7 @@ void JsAppContext::ReleaseAbilityInfo()
         currentJsPath_ = nullptr;
     }
 }
+
 char *JsAppContext::GetResourcePath(const char *uri) const
 {
     if (uri == nullptr) {
@@ -338,6 +340,28 @@ char *JsAppContext::GetResourcePath(const char *uri) const
         return relocatedPath;
     }
     return RelocateResourceFilePath(currentAbilityPath_, uri);
+}
+
+void JsAppContext::LoadApiVersion()
+{
+    BundleInfo bundle = {0};
+    uint8_t retCode = GetBundleInfo(currentBundleName_, false, &bundle);
+    if (retCode != 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "fail to get api version.");
+        return;
+    }
+    compatibleApi_ = bundle.compatibleApi;
+    targetApi_ = bundle.targetApi;
+}
+
+const int32_t JsAppContext::GetCompatibleApi() const
+{
+    return compatibleApi_;
+}
+
+const int32_t JsAppContext::GetTargetApi() const
+{
+    return targetApi_;
 }
 } // namespace ACELite
 } // namespace OHOS

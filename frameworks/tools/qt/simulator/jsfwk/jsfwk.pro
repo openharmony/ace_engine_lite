@@ -136,6 +136,7 @@ SOURCES += \
         targets/simulator/mock/hal_sys_param.cpp \
         targets/simulator/mock/message_queue_utils.cpp \ # the mocked message queue
         targets/simulator/mock/mock_services.cpp \ # the mocked message queue
+        targets/simulator/mock/bms_interfaces/bundle_manager_mock.cpp \ # mock some BMS interfaces
         targets/simulator/mock/jsthread/js_thread.cpp \
         targets/simulator/mock/vsyncthread/vsync_dispatch_manager.cpp \
         targets/simulator/mock/vsyncthread/vsync_thread.cpp \
@@ -144,7 +145,6 @@ SOURCES += \
 
 HEADERS += \
         $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/components/ui_view.h
-
 
 INCLUDEPATH += \
             $${ROOT_PATH}/foundation/graphic/ui/interfaces/innerkits \
@@ -206,6 +206,7 @@ INCLUDEPATH += \
             targets/simulator/mock/vsyncthread \
             targets/simulator/mock/amsthread \
             targets/simulator/mock/timerthread \
+            targets/simulator/mock/bms_interfaces \
             $${ROOT_PATH}/third_party/jerryscript/jerry-core/include \
             $${ROOT_PATH}/third_party/jerryscript/jerry-ext/include/jerryscript-ext \
             $${ROOT_PATH}//third_party/jerryscript/jerry-port/default/include \
