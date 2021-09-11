@@ -96,6 +96,9 @@ public:
     {
         topJSAbilityImpl_ = object;
     }
+    void LoadApiVersion();
+    const int32_t GetCompatibleApi() const;
+    const int32_t GetTargetApi() const;
 
     const AppStyleManager *GetStyleManager()
     {
@@ -168,6 +171,8 @@ private:
     LazyLoadManager *lazyLoadManager_ = nullptr;
     // record current running ability's uuid && ability path, will be release during app-cleanup
     uint16_t currentToken_ = 0;
+    int32_t compatibleApi_ = 0;
+    int32_t targetApi_ = 0;
 };
 } // namespace ACELite
 } // namespace OHOS
