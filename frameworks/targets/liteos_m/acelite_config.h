@@ -48,11 +48,6 @@
 #define FEATURE_TERMINATE_ABILITY
 
 /**
- * support device API for JS
- */
-//#define FEATURE_MODULE_BATTERY
-
-/**
  * support screenOnVisible() API from JS
  */
 #define FEATURE_SCREEN_ON_VISIBLE
