@@ -84,7 +84,7 @@
 #define FEATURE_MODULE_STORAGE
 
 /**
- * support device API for JS
+ * support battery API for JS
  */
 #define FEATURE_MODULE_BATTERY
 
