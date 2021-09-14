@@ -98,6 +98,8 @@
  */
 #define FEATURE_DATE_FORMAT
 
+#define FEATURE_API_VERSION
+
 /**
  * support lite ace dfx module
  */
