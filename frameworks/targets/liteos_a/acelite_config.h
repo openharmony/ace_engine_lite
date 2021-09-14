@@ -84,10 +84,14 @@
 #define FEATURE_MODULE_STORAGE
 
 /**
+ * support battery API for JS
+ */
+#define FEATURE_MODULE_BATTERY
+
+/**
  * support device API for JS
  */
 #define FEATURE_MODULE_DEVICE
-
 /**
  * timer module
  */
