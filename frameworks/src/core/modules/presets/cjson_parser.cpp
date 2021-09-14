@@ -104,7 +104,7 @@ uint8_t CJSONParser::FormatString(const char *format, jerry_value_t arg, ListNod
     int index = 0;
     int leftIndex = IndexOf(format, leftDelemeter_, index); // get the index of '{'
     while (leftIndex >= 0) {
-        char* value = SubStr(format, index, leftIndex - index);
+        char *value = SubStr(format, index, leftIndex - index);
         if (AddNode(values, value)) {
             length++;
         } else {
@@ -130,7 +130,7 @@ uint8_t CJSONParser::FormatString(const char *format, jerry_value_t arg, ListNod
             index++; // move the index '}' to the next char
         } else {
             // add the remain character to node.eg.the value is {count}aa, add the last aa to the node
-            char* currentVal = SubStr(format, index, strlen(format) - index);
+            char *currentVal = SubStr(format, index, strlen(format) - index);
             if (AddNode(values, currentVal)) {
                 length++;
             } else {
@@ -140,7 +140,7 @@ uint8_t CJSONParser::FormatString(const char *format, jerry_value_t arg, ListNod
         leftIndex = IndexOf(format, leftDelemeter_, index);
     }
     if (leftIndex < 0 && (static_cast<size_t>(index) < strlen(format))) {
-        char* currentVal = SubStr(format, index, strlen(format) - index);
+        char *currentVal = SubStr(format, index, strlen(format) - index);
         if (AddNode(values, currentVal)) {
             length++;
         } else {
@@ -215,7 +215,7 @@ char *CJSONParser::ToString(ListNode *node, uint8_t length)
     if (node == nullptr || (length == 0)) {
         return nullptr;
     }
-    char **temp = static_cast<char **>(ace_malloc(length * sizeof(char*)));
+    char **temp = static_cast<char **>(ace_malloc(length * sizeof(char *)));
     if (temp == nullptr) {
         return nullptr;
     }
@@ -328,6 +328,7 @@ bool CJSONParser::ChangeLanguageFileName()
         if ((languageFile_ != nullptr) && (!strcmp(languageFile_, "en-US.json"))) {
             return false;
         }
+        ACE_FREE(languageFile_); // avoid leaking
         languageFile_ = StringUtil::Copy("en-US.json");
         return true;
     }
@@ -335,7 +336,7 @@ bool CJSONParser::ChangeLanguageFileName()
     uint8_t langLen = strlen(language_);
     size_t fileLen = langLen + strlen(countries_) + addedLen;
     char *languageFile = StringUtil::Malloc(fileLen);
-    if (languageFile ==  nullptr) {
+    if (languageFile == nullptr) {
         return false;
     }
     errno_t error = strcpy_s(languageFile, fileLen, language_);
@@ -361,19 +362,21 @@ bool CJSONParser::ChangeLanguageFileName()
 bool CJSONParser::CacheFile()
 {
     if (!ChangeLanguageFileName()) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "prepare language file name failed, cache status[%{public}d]", isCached_);
         return true;
     }
     isCached_ = false;
     usedOffset_ = sizeof(uint32_t) * MAX_KEY_NUM;
     if (!isAllocated_) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "cache buffer not ready");
         return false;
     }
     if (memset_s(reinterpret_cast<void *>(startPos_), usedOffset_, 0, usedOffset_) != EOK) {
         HILOG_ERROR(HILOG_MODULE_ACE, "initial psram failed");
         return false;
     }
-    if (memset_s(reinterpret_cast<void *>(startPos_ + usedOffset_), LOCALIZATION_SIZE - usedOffset_,
-        '\0', LOCALIZATION_SIZE - usedOffset_) != EOK) {
+    if (memset_s(reinterpret_cast<void *>(startPos_ + usedOffset_), LOCALIZATION_SIZE - usedOffset_, '\0',
+                 LOCALIZATION_SIZE - usedOffset_) != EOK) {
         HILOG_ERROR(HILOG_MODULE_ACE, "init cache content failed");
         return false;
     }
@@ -383,17 +386,21 @@ bool CJSONParser::CacheFile()
         *index = 0;
     }
     if (languageFile_ == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "waring: no correct language file name presented, will cach en-US as default");
         // cache the default file en-US.json
         languageFile_ = StringUtil::Copy("en-US.json");
     }
-    char *content = ReadJSFile(filePath_, languageFile_);
-    if (content == nullptr) {
+    uint32_t fileContentLength = 0;
+    char *content = ReadJSFile(filePath_, languageFile_, fileContentLength);
+    if (content == nullptr || fileContentLength == 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "cache failing, read language file failed");
         return false;
     }
     cJSON *json = cJSON_Parse(content);
     ace_free(content);
     content = nullptr;
     if (json == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "cache failing, cJSON_Parse failed");
         return false;
     }
     isCached_ = CacheValue(nullptr, *json);
@@ -457,7 +464,7 @@ bool CJSONParser::PutNumOrStrValue(const char *key, cJSON item)
         *valueIndex = usedOffset_;
     }
     Node *node = reinterpret_cast<Node *>(startPos_ + usedOffset_);
-    usedOffset_ = GetUseLen(usedOffset_ + sizeof (Node));
+    usedOffset_ = GetUseLen(usedOffset_ + sizeof(Node));
     if (usedOffset_ == 0) {
         return false;
     }
@@ -513,6 +520,7 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key,
                                             const char *languageFile)
 {
     if (languageFile == nullptr || strlen(languageFile) == 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "invalid language file name");
         return UNDEFINED;
     }
     ListNode *keys = nullptr;
@@ -530,20 +538,29 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key,
     } while (!(curKeyIndex == keyCount || (curJsonItem == nullptr)));
     ClearNode(keys);
     jerry_value_t result = UNDEFINED;
-    if (curJsonItem == nullptr) {
-        result = jerry_create_string(reinterpret_cast<const jerry_char_t *>(key));
-    } else {
+    do {
+        if (curJsonItem == nullptr) {
+            result = jerry_create_string(reinterpret_cast<const jerry_char_t *>(key));
+            break;
+        }
         if (cJSON_IsNumber(curJsonItem)) {
             result = jerry_create_number(curJsonItem->valuedouble);
-        } else {
-            char *value = FillPlaceholder(curJsonItem->valuestring, args, argsNum);
-            if (value != nullptr) {
-                result = jerry_create_string(reinterpret_cast<jerry_char_t *>(value));
-                ace_free(value);
-                value = nullptr;
-            }
+            break;
         }
-    }
+        char *value = FillPlaceholder(curJsonItem->valuestring, args, argsNum);
+        if (value == nullptr) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "get nullptr value after place holder filling, keyLen[%{public}d]",
+                        strlen(key));
+            break;
+        }
+        if (strlen(value) == 0) {
+            HILOG_ERROR(HILOG_MODULE_ACE, "warning: get 0 length str after place holder filling, keyLen[%{public}d]",
+                        strlen(key));
+        }
+        result = jerry_create_string(reinterpret_cast<jerry_char_t *>(value));
+        ace_free(value);
+        value = nullptr;
+    } while (0);
     cJSON_Delete(fileJson);
     fileJson = nullptr;
     return result;
@@ -555,20 +572,22 @@ jerry_value_t CJSONParser::GetValue(const char *key, const jerry_value_t args[],
     // try finding from cache first
     Node *node = GetValueFromCache(key);
     if (node == nullptr) {
-        HILOG_WARN(HILOG_MODULE_ACE, "get value from cache failed");
+        HILOG_ERROR(HILOG_MODULE_ACE, "warning: get value from cache failed, keyLen[%{public}d]", strlen(key));
         // no node found from cache, searching from current language file then
         jerry_value_t resultFromFile = GetValueFromFile(key, arg, argsNum, languageFile_);
-        if (!IS_UNDEFINED(resultFromFile)) {
+        if (!IS_UNDEFINED(resultFromFile) && !IS_ERROR_VALUE(resultFromFile)) {
             // found
             return resultFromFile;
         }
         jerry_release_value(resultFromFile);
+        HILOG_ERROR(HILOG_MODULE_ACE, "get error from current language file, try en-US last");
         // failed, get from default language file last
         resultFromFile = GetValueFromFile(key, arg, argsNum, "en-US.json");
-        if (!IS_UNDEFINED(resultFromFile)) {
+        if (!IS_UNDEFINED(resultFromFile) && !IS_ERROR_VALUE(resultFromFile)) {
             return resultFromFile;
         }
         jerry_release_value(resultFromFile);
+        HILOG_ERROR(HILOG_MODULE_ACE, "get error from default file, return the key, keyLen[%{public}d]", strlen(key));
         return jerry_create_string((const jerry_char_t *)(key));
     }
 
@@ -580,8 +599,16 @@ jerry_value_t CJSONParser::GetValue(const char *key, const jerry_value_t args[],
     const char *result = reinterpret_cast<char *>(startPos_ + (uint32_t)(node->valueIndex));
     char *valueStr = FillPlaceholder(result, arg, argsNum);
     if (valueStr == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE,
+                    "get null value after place holder filling, valudeIndex[%{public}d], return the key",
+                    (uint32_t)(node->valueIndex));
         // empty value, return the key
         return jerry_create_string((const jerry_char_t *)(key));
+    }
+    if (strlen(valueStr) == 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE,
+                    "warning: get empty value after place holder filling, valudeIndex[%{public}d], keyLen[%{public}d]",
+                    (uint32_t)(node->valueIndex), strlen(key));
     }
     jerry_value_t valueJSValue = jerry_create_string(reinterpret_cast<jerry_char_t *>(valueStr));
     ACE_FREE(valueStr);
@@ -591,13 +618,17 @@ jerry_value_t CJSONParser::GetValue(const char *key, const jerry_value_t args[],
 CJSONParser::Node *CJSONParser::GetValueFromCache(const char *key)
 {
     if (!isCached_) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "warning: cache status is NO, keyLen[%{public}d]", strlen(key));
         return nullptr;
     }
     uint16_t index = FNVHash(key);
-    uint32_t *valueIndex = reinterpret_cast<uint32_t *>(startPos_ + index * sizeof (uint32_t));
+    uint32_t *valueIndex = reinterpret_cast<uint32_t *>(startPos_ + index * sizeof(uint32_t));
     while ((valueIndex != nullptr) && (*valueIndex != 0)) {
         Node *node = reinterpret_cast<Node *>(startPos_ + (*valueIndex));
         if (node == nullptr) {
+            HILOG_ERROR(HILOG_MODULE_ACE,
+                        "get value from cache failed, valueIndex[%{public}d], keyLen[%{public}d]",
+                        (*valueIndex), strlen(key));
             return nullptr;
         }
         char *nodeKey = reinterpret_cast<char *>(startPos_ + node->pathIndex);
