@@ -100,6 +100,8 @@
 
 #define FEATURE_ACELITE_LITE_DFX_MODULE
 
+#define FEATURE_API_VERSION
+
 /**
  * enable Canvas component Feature API on ipcamera real devices
  */

@@ -97,8 +97,8 @@ public:
         topJSAbilityImpl_ = object;
     }
     void LoadApiVersion();
-    const int32_t GetCompatibleApi() const;
-    const int32_t GetTargetApi() const;
+    int32_t GetCompatibleApi() const;
+    int32_t GetTargetApi() const;
 
     const AppStyleManager *GetStyleManager()
     {
