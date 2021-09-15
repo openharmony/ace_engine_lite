@@ -560,6 +560,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "crollamount")) {
                 return K_SCROLLAMOUNT;
             }
+            if (!strcmp(s, "crolldelay")) {
+                return K_SCROLLDELAY;
+            }
             if (!strcmp(s, "crollend")) {
                 return K_SCROLLEND;
             }
@@ -715,9 +718,9 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             break;
         case 'u':
 #ifdef FEATURE_NUMBER_FORMAT
-        if (!strcmp(s, "seGrouping")) {
-            return K_USEGROUP;
-        }
+            if (!strcmp(s, "seGrouping")) {
+                return K_USEGROUP;
+            }
 #endif // FEATURE_NUMBER_FORMAT
             break;
         case 'v':

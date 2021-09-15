@@ -21,17 +21,23 @@
 namespace OHOS {
 namespace ACELite {
 class MarqueeComponent final : public TextComponent {
-// default animator speed value
-static constexpr int16_t DEFAULT_SPEED = 6;
-
 public:
     ACE_DISALLOW_COPY_AND_MOVE(MarqueeComponent);
     MarqueeComponent() = delete;
-    MarqueeComponent(jerry_value_t options, jerry_value_t children, AppStyleManager* styleManager);
+    MarqueeComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager);
     ~MarqueeComponent() override {}
 
 protected:
     bool CreateNativeViews() override;
+    bool SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue) override;
+
+private:
+    void SetScrollamount(uint16_t scrollamount);
+    void SetScrolldelay(uint16_t scrolldelay);
+    void SetRollSpeed();
+
+    uint16_t scrollamount_ = 6;
+    uint16_t scrolldelay_ = 85;
 };
 } // namespace ACELite
 } // namespace OHOS

@@ -218,6 +218,7 @@ enum {
     KEYWORD(ROW_REVERSE, row-reverse) // layout style
     KEYWORD(SCALE_DOWN, scaleDown) // image component scale down
     KEYWORD(SCROLLAMOUNT, scrollamount) // marquee scroll speed
+    KEYWORD(SCROLLDELAY, scrolldelay) // marquee scroll delay
     KEYWORD(SCROLLEND, scrollend) // scroll end event listener
     KEYWORD(SCROLLSTART, scrollstart) // scroll start event listener
 #ifdef FEATURE_COMPONENT_ANALOG_CLOCK
