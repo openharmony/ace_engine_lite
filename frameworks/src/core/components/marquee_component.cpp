@@ -13,12 +13,16 @@
  * limitations under the License.
  */
 #include "marquee_component.h"
+#include "ace_log.h"
+#include "js_app_context.h"
 #include "key_parser.h"
 #include "keys.h"
 
 namespace OHOS {
 namespace ACELite {
-MarqueeComponent::MarqueeComponent(jerry_value_t options, jerry_value_t children, AppStyleManager* styleManager)
+static constexpr uint16_t MILLISECONDS_PER_SECOND = 1000;
+
+MarqueeComponent::MarqueeComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager)
     : TextComponent(options, children, styleManager)
 {
     SetComponentName(K_MARQUEE);
@@ -31,12 +35,67 @@ bool MarqueeComponent::CreateNativeViews()
         if (uiLabel != nullptr) {
             // default mode, speed
             uiLabel->SetLineBreakMode(UILabel::LINE_BREAK_MARQUEE);
-            uiLabel->SetRollSpeed(DEFAULT_SPEED);
+            SetRollSpeed();
             return true;
         }
     }
 
     return false;
+}
+
+bool MarqueeComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue)
+{
+    bool isSuccess = TextComponent::SetPrivateAttribute(attrKeyId, attrValue);
+    if (!isSuccess) {
+        switch (attrKeyId) {
+            case K_SCROLLAMOUNT: {
+                SetScrollamount(IntegerOf(attrValue));
+                break;
+            }
+            case K_SCROLLDELAY: {
+                SetScrolldelay(IntegerOf(attrValue));
+                break;
+            }
+            default: {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void MarqueeComponent::SetScrollamount(uint16_t scrollamount)
+{
+    scrollamount_ = scrollamount;
+    SetRollSpeed();
+}
+
+void MarqueeComponent::SetScrolldelay(uint16_t scrolldelay)
+{
+    const int16_t minScrolldelay = 60;
+    if (scrolldelay >= minScrolldelay) {
+        scrolldelay_ = scrolldelay;
+    } else {
+        scrolldelay_ = minScrolldelay;
+    }
+    SetRollSpeed();
+}
+
+void MarqueeComponent::SetRollSpeed()
+{
+    UILabelTypeWrapper *uiLabel = TextComponent::GetUILabelView();
+    if (uiLabel != nullptr) {
+        const int32_t supportScrolldelayApiVersion = 5;
+        if (JsAppContext::GetInstance()->GetTargetApi() >= supportScrolldelayApiVersion) {
+            uint32_t rollSpeed = (uint32_t)scrollamount_ * MILLISECONDS_PER_SECOND / scrolldelay_;
+            if (rollSpeed > UINT16_MAX) {
+                rollSpeed = UINT16_MAX;
+            }
+            uiLabel->SetRollSpeed(rollSpeed);
+        } else {
+            uiLabel->SetRollSpeed(scrollamount_);
+        }
+    }
 }
 } // namespace ACELite
 } // namespace OHOS
