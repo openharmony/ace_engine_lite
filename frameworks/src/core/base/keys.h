@@ -87,9 +87,11 @@ enum {
     KEYWORD(COLOR, color) // text style type, rectangular clock-hand fill color, horizon progress style
     KEYWORD(COLUMN, column) // layout style
     KEYWORD(COLUMN_REVERSE, column-reverse) // layout style
+    KEYWORD(CONTAIN, contain) // image component contain
 #ifdef FEATURE_COMPONENT_VIDEO
     KEYWORD(CONTROLS, controls) // video component controls attribute
 #endif // FEATURE_COMPONENT_VIDEO
+    KEYWORD(COVER, cover) // image component cover
     KEYWORD(DATASETS, datasets) // chart data
 #ifdef FEATURE_COMPONENT_DATE_PICKER
     KEYWORD(DATE, date) // picker-view attr value
@@ -118,7 +120,9 @@ enum {
 #ifdef FEATURE_COMPONENT_VIDEO
     KEYWORD(FINISH, finish) // video component finish event tag
 #endif // FEATURE_COMPONENT_VIDEO
+    KEYWORD(FILL, fill) // image component fill
     KEYWORD(FILL_MODE, fillmode) // image-animator attribtue
+    KEYWORD(FIT_ORIGINAL_SIZE, fitOriginalSize) // image component fit original size
     KEYWORD(FIXED_SIZE, fixedsize) // image-animator attribute
     KEYWORD(FLEX_DIRECTION, flexDirection) // layout style
     KEYWORD(FLEX_END, flex-end) // layout style
@@ -179,6 +183,7 @@ enum {
 #ifdef FEATURE_DATE_FORMAT
     KEYWORD(NUMERIC, numeric)
 #endif
+    KEYWORD(OBJECT_FIT, objectFit) // image component object-fit
     KEYWORD(OPACITY, opacity) // common style opacity
     KEYWORD(OPTIONS, options) // chart options
     KEYWORD(PADDING, padding)
@@ -211,6 +216,7 @@ enum {
     KEYWORD(ROTATE, rotate) // animation rotate
     KEYWORD(ROW, row) // layout style
     KEYWORD(ROW_REVERSE, row-reverse) // layout style
+    KEYWORD(SCALE_DOWN, scaleDown) // image component scale down
     KEYWORD(SCROLLAMOUNT, scrollamount) // marquee scroll speed
     KEYWORD(SCROLLEND, scrollend) // scroll end event listener
     KEYWORD(SCROLLSTART, scrollstart) // scroll start event listener

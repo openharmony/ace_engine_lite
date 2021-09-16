@@ -37,5 +37,6 @@ export default {
   changeOpacity: routePage("pages/opacity/01/index").changePage,
   changeQrcode: routePage("pages/qrcode/index/index").changePage,
   changeResource: routePage("pages/resource/resource001/index").changePage,
-  changeDialog: routePage("pages/dialog/dialog001/index").changePage
+  changeDialog: routePage("pages/dialog/dialog001/index").changePage,
+  changeImageView:routePage("pages/imageView/fitObject/index").changePage,
 };
