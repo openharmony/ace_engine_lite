@@ -53,12 +53,12 @@ void TextComponent::ReleaseNativeViews()
 
 inline UIView *TextComponent::GetComponentRootView() const
 {
-    return const_cast<UILabel *>(&uiLabel_);
+    return const_cast<UILabelTypeWrapper *>(&uiLabel_);
 }
 
-UILabel *TextComponent::GetUILabelView() const
+UILabelTypeWrapper *TextComponent::GetUILabelView() const
 {
-    return const_cast<UILabel *>(&uiLabel_);
+    return const_cast<UILabelTypeWrapper *>(&uiLabel_);
 }
 
 bool TextComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue)
@@ -124,17 +124,17 @@ bool TextComponent::ApplyPrivateStyle(const AppStyleItem *styleItem)
     return true;
 }
 
-void TextComponent::SetTextLetterSpace(UILabel &label, const AppStyleItem *styleItem) const
+void TextComponent::SetTextLetterSpace(UILabelTypeWrapper &label, const AppStyleItem *styleItem) const
 {
     label.SetStyle(STYLE_LETTER_SPACE, (int16_t)GetStylePixelValue(styleItem));
 }
 
-void TextComponent::SetTextLineHeight(UILabel &label, const AppStyleItem *styleItem) const
+void TextComponent::SetTextLineHeight(UILabelTypeWrapper &label, const AppStyleItem *styleItem) const
 {
     label.SetStyle(STYLE_LINE_HEIGHT, (int16_t)GetStylePixelValue(styleItem));
 }
 
-void TextComponent::SetTextOverflow(UILabel &label, const AppStyleItem *styleItem)
+void TextComponent::SetTextOverflow(UILabelTypeWrapper &label, const AppStyleItem *styleItem)
 {
     if (!IsStyleValueTypeString(styleItem)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "text overflow style value is invalid!");
@@ -163,7 +163,7 @@ void TextComponent::SetTextOverflow(UILabel &label, const AppStyleItem *styleIte
     label.SetLineBreakMode(overflowMode_);
 }
 
-void TextComponent::SetTextColor(UILabel &label, const AppStyleItem *styleItem) const
+void TextComponent::SetTextColor(UILabelTypeWrapper &label, const AppStyleItem *styleItem) const
 {
     uint32_t color = 0;
     uint8_t alpha = OPA_OPAQUE;
@@ -224,7 +224,7 @@ void TextComponent::PostUpdate(uint16_t attrKeyId)
     }
 }
 
-void TextComponent::SetTextAlign(UILabel &label, const AppStyleItem *styleItem) const
+void TextComponent::SetTextAlign(UILabelTypeWrapper &label, const AppStyleItem *styleItem) const
 {
     if (!IsStyleValueTypeString(styleItem)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "text text align style value is invalid!");
