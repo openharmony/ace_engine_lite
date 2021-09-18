@@ -18,6 +18,12 @@
 #include "key_parser.h"
 #include "non_copyable.h"
 #include "ui_label_button.h"
+#ifdef FEATURE_EXTRA_TEXT_X_SUPPORT
+#include "ui_label_button_x.h"
+#define UILabelButtonTypeWrapper UILabelButtonX
+#else
+#define UILabelButtonTypeWrapper UILabelButton
+#endif // FEATURE_EXTRA_TEXT_X_SUPPORT
 
 namespace OHOS {
 namespace ACELite {
@@ -51,7 +57,7 @@ public:
 protected:
     UIView *GetComponentRootView() const override
     {
-        return const_cast<UILabelButton *>(&button_);
+        return const_cast<UILabelButtonTypeWrapper *>(&button_);
     }
 
 private:
@@ -62,7 +68,7 @@ private:
     bool SetColor(const AppStyleItem &style);
     bool HandleImage(const AppStyleItem &style);
     jerry_value_t options_;
-    UILabelButton button_;
+    UILabelButtonTypeWrapper button_;
     ViewOnClickListener *clickListener_;
     int32_t pressedBackGroundColorValue_;
     uint8_t pressedOpacityValue_;
