@@ -109,20 +109,22 @@ bool ChartComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrV
         HILOG_ERROR(HILOG_MODULE_ACE, "chart view has not been created");
         return false;
     }
+    bool result = true;
     switch (attrKeyId) {
         case K_DATASETS: {
             dataSetsRecord_ = attrValue;
             break;
         }
         case K_OPTIONS: {
-            SetOptions(attrValue);
+            result = SetOptions(attrValue);
             break;
         }
         default: {
+            result = false;
             break;
         }
     }
-    return false;
+    return result;
 }
 
 void ChartComponent::PostUpdate(uint16_t attrKeyId)
