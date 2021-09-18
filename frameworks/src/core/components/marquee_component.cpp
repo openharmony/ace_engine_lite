@@ -27,7 +27,7 @@ MarqueeComponent::MarqueeComponent(jerry_value_t options, jerry_value_t children
 bool MarqueeComponent::CreateNativeViews()
 {
     if (TextComponent::CreateNativeViews()) {
-        UILabel* uiLabel = TextComponent::GetUILabelView();
+        UILabelTypeWrapper *uiLabel = TextComponent::GetUILabelView();
         if (uiLabel != nullptr) {
             // default mode, speed
             uiLabel->SetLineBreakMode(UILabel::LINE_BREAK_MARQUEE);
