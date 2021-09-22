@@ -30,16 +30,6 @@ public:
 
     ~LazyLoadWatcher();
 
-    void SetNext(LazyLoadWatcher &next)
-    {
-        next_ = &next;
-    }
-
-    const LazyLoadWatcher *GetNext() const
-    {
-        return next_;
-    }
-
     jerry_value_t GetNativeElement() const
     {
         return nativeElement_;
@@ -63,7 +53,6 @@ private:
     jerry_value_t nativeElement_;
     jerry_value_t attrName_;
     jerry_value_t getter_;
-    LazyLoadWatcher *next_;
     uint16_t keyId_;
 };
 } // namespace ACELite

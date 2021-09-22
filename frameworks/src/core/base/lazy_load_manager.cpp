@@ -21,7 +21,7 @@
 
 namespace OHOS {
 namespace ACELite {
-LazyLoadManager::LazyLoadManager() : firstWatcher_(nullptr), lastWatcher_(nullptr), state_(LazyLoadState::INIT)
+LazyLoadManager::LazyLoadManager() : state_(LazyLoadState::INIT)
 {
 }
 
@@ -32,45 +32,55 @@ LazyLoadManager::~LazyLoadManager()
 
 void LazyLoadManager::ResetWatchers()
 {
-    LazyLoadWatcher *next = nullptr;
-    while (firstWatcher_ != nullptr) {
-        next = const_cast<LazyLoadWatcher *>(firstWatcher_->GetNext());
-        delete firstWatcher_;
-        firstWatcher_ = next;
+    ListNode<LazyLoadWatcher *> *node = lazyWatchersList_.Begin();
+    while (node != lazyWatchersList_.End()) {
+        if (node->data_ != nullptr) {
+            delete node->data_;
+            node->data_ = nullptr;
+        }
+        node = node->next_;
     }
-
-    lastWatcher_ = nullptr;
+    lazyWatchersList_.Clear();
     state_ = LazyLoadState::INIT;
 }
 
 void LazyLoadManager::RenderLazyLoadWatcher()
 {
-    LazyLoadWatcher *next = nullptr;
-    while (firstWatcher_ != nullptr) {
-        jerry_value_t attrName = firstWatcher_->GetAttrName();
-        jerry_value_t attrGetter = firstWatcher_->GetAttrGetter();
-        uint16_t attrKeyID = firstWatcher_->GetKeyId();
-        Component *component = ComponentUtils::GetComponentFromBindingObject(firstWatcher_->GetNativeElement());
-        jerry_value_t latestValue =
-            (component == nullptr) ? UNDEFINED : component->AddWatcherItem(attrName, attrGetter, true);
-        if (attrKeyID == K_UNKNOWN) {
-            // try to parse from attr name directly
-            attrKeyID = ParseKeyIdFromJSString(attrName);
+    ListNode<LazyLoadWatcher *> *node = lazyWatchersList_.Begin();
+    while (node != lazyWatchersList_.End()) {
+        if (node->data_ != nullptr) {
+            // handle it
+            RenderSingleLazyWatcher(*(node->data_));
+            delete node->data_;
+            node->data_ = nullptr;
         }
-        if ((!IS_UNDEFINED(latestValue)) && (attrKeyID != K_UNKNOWN)) {
-            // need to update the view with the latest value, in case the value is already changed
-            if (component->UpdateView(attrKeyID, latestValue)) {
-                component->Invalidate();
-            }
-            // the new value has been calculated out by ParseExpression, need to be released
-            jerry_release_value(latestValue);
-        }
-        next = const_cast<LazyLoadWatcher *>(firstWatcher_->GetNext());
-        delete firstWatcher_;
-        firstWatcher_ = next;
+        node = node->next_;
     }
-    lastWatcher_ = nullptr;
+    lazyWatchersList_.Clear();
     state_ = LazyLoadState::DONE;
+}
+
+void LazyLoadManager::RenderSingleLazyWatcher(const LazyLoadWatcher &watcher) const
+{
+    jerry_value_t attrName = watcher.GetAttrName();
+    jerry_value_t attrGetter = watcher.GetAttrGetter();
+    uint16_t attrKeyID = watcher.GetKeyId();
+    Component *component = ComponentUtils::GetComponentFromBindingObject(watcher.GetNativeElement());
+    jerry_value_t latestValue =
+        (component == nullptr) ? UNDEFINED : component->AddWatcherItem(attrName, attrGetter, true);
+    if (attrKeyID == K_UNKNOWN) {
+        // try to parse from attr name directly
+        attrKeyID = ParseKeyIdFromJSString(attrName);
+    }
+
+    if ((!IS_UNDEFINED(latestValue)) && (attrKeyID != K_UNKNOWN)) {
+        // need to update the view with the latest value, in case the value is already changed
+        if (component->UpdateView(attrKeyID, latestValue)) {
+            component->Invalidate();
+        }
+    }
+    // the new value has been calculated out by ParseExpression, need to be released
+    jerry_release_value(latestValue);
 }
 
 void LazyLoadManager::AddLazyLoadWatcher(jerry_value_t nativeElement,
@@ -95,16 +105,33 @@ void LazyLoadManager::AddLazyLoadWatcher(jerry_value_t nativeElement,
         HILOG_ERROR(HILOG_MODULE_ACE, "create watcher errpr");
         return;
     }
-    if (firstWatcher_ == nullptr) {
-        firstWatcher_ = watcher;
-        lastWatcher_ = watcher;
-    } else {
-        lastWatcher_->SetNext(*watcher);
-        lastWatcher_ = watcher;
-    }
+    lazyWatchersList_.PushBack(watcher);
     // The state must be ready if any watcher lazy loading request was added, otherwise, in some cases,
     // the js_ability may not be able to know there are watchers need to be loaded.
     state_ = LazyLoadState::READY;
+}
+
+void LazyLoadManager::RemoveLazyWatcher(jerry_value_t nativeElement)
+{
+    if (lazyWatchersList_.IsEmpty()) {
+        return;
+    }
+
+    ListNode<LazyLoadWatcher *> *node = lazyWatchersList_.Begin();
+    while (node != lazyWatchersList_.End()) {
+        if (node->data_ == nullptr) {
+            node = node->next_;
+            continue;
+        }
+        if (node->data_->GetNativeElement() == nativeElement) {
+            // found, remove the node
+            delete node->data_;
+            node->data_ = nullptr;
+            node = lazyWatchersList_.Remove(node);
+            continue;
+        }
+        node = node->next_;
+    }
 }
 } // namespace ACELite
 } // namespace OHOS
