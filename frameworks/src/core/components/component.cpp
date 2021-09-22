@@ -190,6 +190,12 @@ void Component::Release()
 {
     // detach self from fatal handler monitoring
     FatalHandler::GetInstance().DetachComponentNode(this);
+#ifdef FEATURE_LAZY_LOADING_MODULE
+    // detach from lazy pending list
+    JsAppContext *context = JsAppContext::GetInstance();
+    LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
+    lazyLoadManager->RemoveLazyWatcher(nativeElement_);
+#endif // FEATURE_LAZY_LOADING_MODULE
     if (parent_ != nullptr) {
         parent_->RemoveChild(this);
     }
