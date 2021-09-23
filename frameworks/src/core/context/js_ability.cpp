@@ -97,6 +97,7 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
     ProductAdapter::UpdateRenderTickAcceptable(true);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->InitEnvironment(abilityPath, bundleName, token);
+    ACE_EVENT_PRINT(MT_ACE_FWK_LAUNCHING, 0);
     FatalHandler::GetInstance().RegisterFatalHandler(this);
     jsAbilityImpl->DeliverCreate(pageInfo);
     STOP_TRACING();
@@ -111,6 +112,7 @@ void JSAbility::Show()
     }
 
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability will be shown");
+    ACE_EVENT_PRINT(MT_ACE_FWK_ACTIVING, 0);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Show();
     AsyncTaskManager::GetInstance().SetFront(true);
@@ -125,6 +127,7 @@ void JSAbility::Hide()
         return;
     }
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability will be hidden");
+    ACE_EVENT_PRINT(MT_ACE_FWK_HIDING, 0);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Hide();
     AsyncTaskManager::GetInstance().SetFront(false);
@@ -140,6 +143,7 @@ void JSAbility::TransferToDestroy()
     }
 
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability is exiting");
+    ACE_EVENT_PRINT(MT_ACE_FWK_DESTROYING, 0);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->CleanUp();
     // Reset render flag or low layer task mutex in case we are during the rendering process,
