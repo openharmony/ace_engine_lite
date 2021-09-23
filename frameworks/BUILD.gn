@@ -52,7 +52,6 @@ shared_library("ace_lite") {
     "//base/global/i18n_lite/frameworks/i18n:global_i18n",
     "//base/global/resmgr_lite/frameworks/resmgr_lite:global_resmgr",
     "//build/lite/config/component/cJSON:cjson_shared",
-    "//foundation/ace/napi:ace_napi_jerryscript",
     "//foundation/graphic/surface:lite_surface",
     "//foundation/graphic/ui:lite_ui",
     "//foundation/multimedia/camera_lite/frameworks:camera_lite",
