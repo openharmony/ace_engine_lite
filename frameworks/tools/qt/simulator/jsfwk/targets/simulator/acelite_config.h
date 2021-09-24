@@ -46,7 +46,10 @@
 #define FEATURE_TEST_IMPLEMENTATION
 #endif
 
+#define FEATURE_API_VERSION
+
 #ifndef QT_SIMULATOR
+
 /**
  * enable FeatureAbility API
  */
@@ -140,7 +143,6 @@
 #define SIMULATOR_MEMORY_ANALYSIS
 #endif
 #endif
-
 
 #ifdef _WIN32
 #define PROFILER_ENABLE_FLAG_FILE "..\\profiler_enable"
