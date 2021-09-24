@@ -30,9 +30,9 @@ uint8_t GetBundleInfo(const char *bundleName, int32_t flags, BundleInfo *bundleI
         return UINT8_MAX;
     }
 
-    const uint8_t mockCompatibleApi = 5;
+    const uint8_t mockCompatibleApi = 6;
     bundleInfo->compatibleApi = mockCompatibleApi;
-    const uint8_t mockTargetApi = 4;
+    const uint8_t mockTargetApi = 6;
     bundleInfo->targetApi = mockTargetApi;
 
     return 0;
