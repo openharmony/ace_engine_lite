@@ -64,7 +64,7 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport003, TestSize.Level0)
     /**
      * @tc.steps: step1. pass empty string for handling
      */
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.huawei.test", 0);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.example.test", 0);
     char *resourcePath = JsAppContext::GetInstance()->GetResourcePath("abc.png");
     /**
      * @tc.steps: step2. check if handling failed
