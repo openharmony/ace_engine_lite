@@ -517,7 +517,8 @@ bool CJSONParser::CacheValue(const char *key, cJSON item)
 jerry_value_t CJSONParser::GetValueFromFile(const char *key,
                                             jerry_value_t args,
                                             jerry_size_t argsNum,
-                                            const char *languageFile)
+                                            const char *languageFile,
+                                            bool &nullValueFlag)
 {
     if (languageFile == nullptr || strlen(languageFile) == 0) {
         HILOG_ERROR(HILOG_MODULE_ACE, "invalid language file name");
@@ -551,6 +552,7 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key,
         if (value == nullptr) {
             HILOG_ERROR(HILOG_MODULE_ACE, "get nullptr value after place holder filling, keyLen[%{public}d]",
                         strlen(key));
+            nullValueFlag = true;
             break;
         }
         if (strlen(value) == 0) {
@@ -574,7 +576,12 @@ jerry_value_t CJSONParser::GetValue(const char *key, const jerry_value_t args[],
     if (node == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "warning: get value from cache failed, keyLen[%{public}d]", strlen(key));
         // no node found from cache, searching from current language file then
-        jerry_value_t resultFromFile = GetValueFromFile(key, arg, argsNum, languageFile_);
+        bool nullValueFlag = false;
+        jerry_value_t resultFromFile = GetValueFromFile(key, arg, argsNum, languageFile_, nullValueFlag);
+        if (nullValueFlag) {
+            HILOG_INFO(HILOG_MODULE_ACE, "get undefined value for key[%{public}s]", key);
+            return resultFromFile;
+        }
         if (!IS_UNDEFINED(resultFromFile) && !IS_ERROR_VALUE(resultFromFile)) {
             // found
             return resultFromFile;
@@ -582,7 +589,11 @@ jerry_value_t CJSONParser::GetValue(const char *key, const jerry_value_t args[],
         jerry_release_value(resultFromFile);
         HILOG_ERROR(HILOG_MODULE_ACE, "get error from current language file, try en-US last");
         // failed, get from default language file last
-        resultFromFile = GetValueFromFile(key, arg, argsNum, "en-US.json");
+        resultFromFile = GetValueFromFile(key, arg, argsNum, "en-US.json", nullValueFlag);
+        if (nullValueFlag) {
+            HILOG_INFO(HILOG_MODULE_ACE, "get undefined value for key[%{public}s]", key);
+            return resultFromFile;
+        }
         if (!IS_UNDEFINED(resultFromFile) && !IS_ERROR_VALUE(resultFromFile)) {
             return resultFromFile;
         }
