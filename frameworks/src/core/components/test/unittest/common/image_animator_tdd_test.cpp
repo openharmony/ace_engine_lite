@@ -274,7 +274,7 @@ void ImageAnimatorTddTest::RunTests()
 void ImageAnimatorTddTest::ImageAnimatorTest001()
 {
     TDD_CASE_BEGIN();
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.huawei.test", 0);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.example.test", 0);
     JSValue page = CreatePage(BUNDLE01, strlen(BUNDLE01));
     UIViewGroup *wrapper = reinterpret_cast<UIViewGroup *>(GetViewByRef(page, "animator"));
     EXPECT_TRUE(wrapper != nullptr);
@@ -300,7 +300,7 @@ void ImageAnimatorTddTest::ImageAnimatorTest001()
 void ImageAnimatorTddTest::ImageAnimatorTest002()
 {
     TDD_CASE_BEGIN();
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.huawei.test", 0);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.example.test", 0);
     JSValue page = CreatePage(BUNDLE02, strlen(BUNDLE02));
     UIViewGroup *wrapper = reinterpret_cast<UIViewGroup *>(GetViewByRef(page, "animator"));
     EXPECT_TRUE(wrapper != nullptr);
@@ -331,7 +331,7 @@ void ImageAnimatorTddTest::ImageAnimatorTest002()
 void ImageAnimatorTddTest::ImageAnimatorTest003()
 {
     TDD_CASE_BEGIN();
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.huawei.test", 0);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("app/run/", "com.example.test", 0);
     JSValue page = CreatePage(BUNDLE03, strlen(BUNDLE03));
     UIViewGroup *wrapper = reinterpret_cast<UIViewGroup *>(GetViewByRef(page, "animator"));
     EXPECT_TRUE(wrapper != nullptr);

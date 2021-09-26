@@ -117,14 +117,14 @@ void AppTddTest::AppTddTest01()
     TDD_CASE_BEGIN();
     const uint8_t token = 255;
 #ifdef __LINUX__
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/storage/data", "com.huawei.test", token);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/storage/data", "com.example.test", token);
 #else
-    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/user/data", "com.huawei.test", token);
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("/user/data", "com.example.test", token);
 #endif
     JSValue page = CreatePage(BUNDLE01, strlen(BUNDLE01));
     ClickByRef(page, "btn");
     char *info = JSObject::GetString(page, "info");
-    EXPECT_STREQ(info, "{\"appName\":\"com.huawei.test\",\"versionName\":\"1.0.0\",\"versionCode\":1000000}");
+    EXPECT_STREQ(info, "{\"appName\":\"com.example.test\",\"versionName\":\"1.0.0\",\"versionCode\":1000000}");
     ACE_FREE(info);
     DestroyPage(page);
     TDD_CASE_END();
