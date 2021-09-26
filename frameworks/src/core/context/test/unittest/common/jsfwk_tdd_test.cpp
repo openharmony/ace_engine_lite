@@ -200,7 +200,7 @@ void JSfwkTddTest::ACELiteFrameworkInitialization011()
     /**
      * @tc.steps: step2. call launch
      */
-    constexpr char packageName[] = "com.huawei.test";
+    constexpr char packageName[] = "com.example.test";
     g_targetJSAbility->Launch("user/data/test/", packageName, 0);
 
     /**
@@ -228,7 +228,7 @@ void JSfwkTddTest::ACELiteFrameworkInitialization012()
     /**
      * @tc.steps: step2. call launch
      */
-    constexpr char packageName[] = "com.huawei.test";
+    constexpr char packageName[] = "com.example.test";
     g_targetJSAbility->Launch("user/data/test/", packageName, 0);
 
     /**
