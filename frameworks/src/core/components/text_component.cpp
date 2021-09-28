@@ -42,9 +42,14 @@ bool TextComponent::CreateNativeViews()
 {
     /* set default text OverFlow clip */
     uiLabel_.SetLineBreakMode(overflowMode_);
-    uiLabel_.SetAlign(UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
     const int32_t supportBaseLineApiVersion = 5;
-    uiLabel_.SetSupportBaseLine(JsAppContext::GetInstance()->GetTargetApi() >= supportBaseLineApiVersion);
+    if (JsAppContext::GetInstance()->GetTargetApi() < supportBaseLineApiVersion) {
+        uiLabel_.SetAlign(UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT, UITextLanguageAlignment::TEXT_ALIGNMENT_TOP);
+        uiLabel_.SetSupportBaseLine(false);
+    } else {
+        uiLabel_.SetAlign(UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
+        uiLabel_.SetSupportBaseLine(true);
+    }
     return CopyFontFamily(fontFamily_, ProductAdapter::GetDefaultFontFamilyName());
 }
 
