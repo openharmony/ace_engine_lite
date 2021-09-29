@@ -245,7 +245,12 @@ void TextComponent::SetTextAlign(UILabelTypeWrapper &label, const AppStyleItem *
                        stylePropValue);
             break;
     }
-    label.SetAlign(align, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
+    const int32_t defaultVerticalAlignCenterApiVersion = 5;
+    if (JsAppContext::GetInstance()->GetTargetApi() < defaultVerticalAlignCenterApiVersion) {
+        label.SetAlign(align, UITextLanguageAlignment::TEXT_ALIGNMENT_TOP);
+    } else {
+        label.SetAlign(align, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
+    }
 }
 } // namespace ACELite
 } // namespace OHOS
