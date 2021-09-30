@@ -32,6 +32,7 @@ using AsyncTaskHandler = void (*)(void *);
 
 struct AsyncTask final : public MemoryHeap {
     uint16_t id;
+    const void *fromContext;
     AsyncTaskHandler handler;
     void *data;
     AsyncTask *next;
@@ -49,9 +50,11 @@ public:
 
     virtual void Callback() override;
 
-    uint16_t Dispatch(AsyncTaskHandler handler, void *data);
+    uint16_t Dispatch(AsyncTaskHandler handler, void *data, const void *fromContext = nullptr);
 
     void Cancel(uint16_t taskID);
+
+    void CancelWithContext(const void *context);
 
     void SetFront(bool front);
 
