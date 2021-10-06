@@ -85,7 +85,7 @@ void ThrowError();
 constexpr uint16_t PATH_LENGTH_MAX = 1024;
 constexpr uint8_t NAME_LENGTH_MAX = 255;
 constexpr uint8_t DEVICE_ID_LENGTH_MAX = 65;
-constexpr uint16_t FILE_CONTENT_LENGTH_MAX = 1024 * 30;
+constexpr uint16_t FILE_CONTENT_LENGTH_MAX = 1024 * 48;
 
 // hex code
 constexpr uint8_t DEC = 10;

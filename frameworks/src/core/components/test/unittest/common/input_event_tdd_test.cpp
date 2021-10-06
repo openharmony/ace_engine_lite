@@ -1231,6 +1231,7 @@ HWTEST_F(InputEventTddTest, InputShowTest007, TestSize.Level1)
      * @tc.steps: step3.click the changeButton button
      * @tc.expected: step3.the visiblity of button is true
      */
+    yRate = 0.05;
     ClickPosition(xRate, yRate);
     EXPECT_TRUE((button != nullptr) && (button->IsVisible()));
 
@@ -1247,6 +1248,7 @@ HWTEST_F(InputEventTddTest, InputShowTest007, TestSize.Level1)
      * @tc.steps: step5.click the changeCheckboxButton button
      * @tc.expected: step5.the visibility of checkbox is true
      */
+    yRate = 0.35;
     ClickPosition(xRate, yRate);
     EXPECT_TRUE((checkbox != nullptr) && (checkbox->IsVisible()));
 
@@ -1263,6 +1265,7 @@ HWTEST_F(InputEventTddTest, InputShowTest007, TestSize.Level1)
      * @tc.steps: step7.click the changeRadioShow button
      * @tc.expected: step7.the visibility of radio is true
      */
+    yRate = 0.65;
     ClickPosition(xRate, yRate);
     EXPECT_TRUE((radio != nullptr) && (radio->IsVisible()));
     DestroyPage(page);

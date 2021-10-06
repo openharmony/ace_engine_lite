@@ -78,5 +78,6 @@ shared_library("ace_lite") {
 
   if (enable_ohos_appexecfwk_feature_ability == true) {
     defines += [ "ABILITY_WINDOW_SUPPORT" ]
+    defines += [ "OHOS_APPEXECFWK_BMS_BUNDLEMANAGER" ]
   }
 }

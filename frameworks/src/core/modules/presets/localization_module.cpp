@@ -64,6 +64,7 @@ jerry_value_t LocalizationModule::GetValueByKey(const jerry_value_t *args, const
 #endif
 {
     if (argsNum == 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "GetValueByKey failed: args number error");
         return UNDEFINED;
     }
     LocalizationModule *localization = GetInstance();
@@ -76,6 +77,7 @@ jerry_value_t LocalizationModule::GetValueByKey(const jerry_value_t *args, const
         if (!localization->parser_->Init()) {
             ACE_ERROR_CODE_PRINT(EXCE_ACE_LOCALIZATION_FAILED, EXCE_ACE_LOCALIZATION_SYSTEM_LANGUAGE_NOT_INITIALIZED);
             localization->Clear(); // parser init failed, release the resource of this module
+            HILOG_ERROR(HILOG_MODULE_ACE, "GetValueByKey failed: parser initialize error");
             return UNDEFINED;
         }
     }
@@ -87,11 +89,17 @@ jerry_value_t LocalizationModule::GetValueByKey(const jerry_value_t *args, const
             HILOG_ERROR(HILOG_MODULE_ACE, "cache file failed");
         }
     }
-    char *param = MallocStringOf(args[0]);
-    if (param == nullptr) {
+    uint16_t paramStrLength = 0;
+    char *param = MallocStringOf(args[0], &paramStrLength);
+    if (param == nullptr || paramStrLength == 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "GetValueByKey failed: parse key to string error");
         return UNDEFINED;
     }
     jerry_value_t resultProp = localization->parser_->GetValue(param, args, argsNum);
+    if (!jerry_value_is_string(resultProp) && !jerry_value_is_number(resultProp)) {
+        HILOG_ERROR(HILOG_MODULE_ACE,
+                    "GetValueByKey failed: the final result error, keyLen[%{public}d]", strlen(param));
+    }
     ace_free(param);
     param = nullptr;
     return resultProp;

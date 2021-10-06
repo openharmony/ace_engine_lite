@@ -21,6 +21,12 @@
 #include "js_fwk_common.h"
 #include "non_copyable.h"
 #include "ui_label.h"
+#ifdef FEATURE_EXTRA_TEXT_X_SUPPORT
+#include "ui_label_x.h"
+#define UILabelTypeWrapper UILabelX
+#else
+#define UILabelTypeWrapper UILabel
+#endif // FEATURE_EXTRA_TEXT_X_SUPPORT
 
 namespace OHOS {
 namespace ACELite {
@@ -37,24 +43,24 @@ protected:
     UIView *GetComponentRootView() const override;
     bool SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue) override;
     bool ApplyPrivateStyle(const AppStyleItem* styleItem) override;
-    UILabel* GetUILabelView() const;
+    UILabelTypeWrapper *GetUILabelView() const;
     void OnViewAttached() override;
     void PostUpdate(uint16_t attrKeyId) override;
 
 private:
     // parse js text align style to ui_label
-    void SetTextAlign(UILabel& label, const AppStyleItem* styleItem) const;
+    void SetTextAlign(UILabelTypeWrapper& label, const AppStyleItem* styleItem) const;
     // parse js text size style to fontSize_
     void SetTextSize(const AppStyleItem* styleItem);
     // parse js text color style to ui_label
-    void SetTextColor(UILabel& label, const AppStyleItem* styleItem) const;
+    void SetTextColor(UILabelTypeWrapper& label, const AppStyleItem* styleItem) const;
     // parse js text overflow style to ui_label
-    void SetTextOverflow(UILabel& label, const AppStyleItem* styleItem);
+    void SetTextOverflow(UILabelTypeWrapper& label, const AppStyleItem* styleItem);
     // parse js text letter space style to ui_label
-    void SetTextLetterSpace(UILabel& label, const AppStyleItem* styleItem) const;
+    void SetTextLetterSpace(UILabelTypeWrapper& label, const AppStyleItem* styleItem) const;
     // parse js text line height style to ui_label
-    void SetTextLineHeight(UILabel& label, const AppStyleItem* styleItem) const;
-    UILabel uiLabel_;
+    void SetTextLineHeight(UILabelTypeWrapper& label, const AppStyleItem* styleItem) const;
+    UILabelTypeWrapper uiLabel_;
     uint8_t fontSize_;
     char* fontFamily_;
     char* textValue_;
