@@ -108,7 +108,7 @@ void AsyncTaskManager::Callback()
     }
 }
 
-uint16_t AsyncTaskManager::Dispatch(AsyncTaskHandler handler, void *data)
+uint16_t AsyncTaskManager::Dispatch(AsyncTaskHandler handler, void *data, const void *context)
 {
     if (handler == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "AsyncTaskManager::Dispatch failed: handler is null.");
@@ -128,6 +128,7 @@ uint16_t AsyncTaskManager::Dispatch(AsyncTaskHandler handler, void *data)
     task->handler = handler;
     task->data = data;
     task->id = (++uniqueTaskID_);
+    task->context = context;
     task->next = nullptr;
     if (head_ == nullptr) {
         head_ = task;
@@ -165,6 +166,37 @@ void AsyncTaskManager::Cancel(uint16_t taskID)
         }
         prev = node;
         node = node->next;
+    }
+    TRY_UNLOCK();
+}
+
+void AsyncTaskManager::CancelWithContext(const void *context)
+{
+    if (context == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "AsyncTaskManager::CancelWithContext failed: null context.");
+        return;
+    }
+    TRY_LOCK();
+    AsyncTask *node = head_;
+    AsyncTask *prev = nullptr;
+    AsyncTask *next = nullptr;
+    while (node != nullptr) {
+        next = node->next;
+        if (node->context == context) {
+            if (prev == nullptr) {
+                head_ = head_->next;
+            } else {
+                prev->next = next;
+            }
+            if (node == tail_) {
+                tail_ = prev;
+            }
+            delete node;
+            node = next;
+            continue;
+        }
+        prev = node;
+        node = next;
     }
     TRY_UNLOCK();
 }

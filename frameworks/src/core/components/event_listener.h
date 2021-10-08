@@ -17,6 +17,7 @@
 #define OHOS_ACELITE_EVENT_LISTENER_H
 
 #include "ace_log.h"
+#include "async_task_manager.h"
 #include "event_util.h"
 #include "js_fwk_common.h"
 #include "keys.h"
@@ -93,6 +94,7 @@ public:
 
     ~ViewOnClickListener()
     {
+        AsyncTaskManager::GetInstance().CancelWithContext(this);
         jerry_release_value(fn_);
     }
 
@@ -106,7 +108,7 @@ public:
             return isStopPropagation_;
         }
         JSValue arg = EventUtil::CreateEvent(EventUtil::EVENT_CLICK, view, event);
-        EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg);
+        EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg, this);
 
         return isStopPropagation_;
     }
@@ -130,6 +132,7 @@ public:
 
     ~ViewOnLongPressListener()
     {
+        AsyncTaskManager::GetInstance().CancelWithContext(this);
         jerry_release_value(fn_);
     }
 
@@ -140,7 +143,7 @@ public:
         }
 
         JSValue arg = EventUtil::CreateEvent(EventUtil::EVENT_LONGPRESS, view, event);
-        EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg);
+        EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg, this);
 
         return isStopPropagation_;
     }
@@ -220,6 +223,7 @@ public:
 
     ~ViewOnSwipeListener()
     {
+        AsyncTaskManager::GetInstance().CancelWithContext(this);
         jerry_release_value(fn_);
     }
 
