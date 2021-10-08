@@ -146,7 +146,7 @@ bool ViewOnSwipeListener::OnDragEnd(UIView& view, const DragEvent &event)
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDragEnd received");
 
     JSValue arg = EventUtil::CreateSwipeEvent(view, event);
-    EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg);
+    EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg, this);
 
     return isStopPropagation_;
 }
