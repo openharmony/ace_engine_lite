@@ -46,7 +46,7 @@ public:
     /**
      * @brief Invoke the callback function of event.
      */
-    static void InvokeCallback(JSValue vm, JSValue callback, JSValue event, const void *fromContext = nullptr);
+    static void InvokeCallback(JSValue vm, JSValue callback, JSValue event, const void *context = nullptr);
 
     static const char *EVENT_CLICK;
     static const char *EVENT_LONGPRESS;
