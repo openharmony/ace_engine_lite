@@ -98,7 +98,9 @@ public:
     }
     void LoadApiVersion();
     int32_t GetCompatibleApi() const;
+    void SetCompatibleApi(int32_t compatibleApi);
     int32_t GetTargetApi() const;
+    void SetTargetApi(int32_t targetApi);
 
     const AppStyleManager *GetStyleManager()
     {
