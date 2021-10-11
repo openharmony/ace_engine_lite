@@ -42,7 +42,7 @@ public:
      *
      * @brief Destructor.
      */
-    virtual ~JSAbility() {}
+    virtual ~JSAbility();
 
     /**
      * @fn JSAbility::Launch()

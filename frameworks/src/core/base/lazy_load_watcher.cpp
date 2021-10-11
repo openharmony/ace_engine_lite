@@ -23,7 +23,6 @@ LazyLoadWatcher::LazyLoadWatcher(jerry_value_t nativeElement,
     : nativeElement_(nativeElement),
       attrName_(jerry_acquire_value(attrName)),
       getter_(jerry_acquire_value(getter)),
-      next_(nullptr),
       keyId_(keyId)
 {
 }

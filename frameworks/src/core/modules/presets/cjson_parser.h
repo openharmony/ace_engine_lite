@@ -172,7 +172,11 @@ private:
      * @param languageFile the target json file name
      * @return the js value of target value
      */
-    jerry_value_t GetValueFromFile(const char *key, jerry_value_t args, jerry_size_t argsNum, const char *languageFile);
+    jerry_value_t GetValueFromFile(const char *key,
+                                   jerry_value_t args,
+                                   jerry_size_t argsNum,
+                                   const char *languageFile,
+                                   bool &nullValueFlag);
 
     /**
      * @brief get 4-byte aligned offset

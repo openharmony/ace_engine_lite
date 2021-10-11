@@ -16,6 +16,7 @@
 #ifndef OHOS_ACELITE_LAZY_LOAD_MANAGER_H
 #define OHOS_ACELITE_LAZY_LOAD_MANAGER_H
 
+#include "gfx_utils/list.h"
 #include "lazy_load_watcher.h"
 #include "non_copyable.h"
 
@@ -51,14 +52,14 @@ public:
     void AddLazyLoadWatcher(jerry_value_t nativeElement, jerry_value_t attrName, jerry_value_t getter, uint16_t keyId);
 
     /**
+     * @brief Remove one lazy watcher from pending list by native element value
+     */
+    void RemoveLazyWatcher(jerry_value_t nativeElement);
+
+    /**
      * @brief Render watcher at next TE task
      */
     void RenderLazyLoadWatcher();
-
-    const LazyLoadWatcher *GetLazyWatcher() const
-    {
-        return firstWatcher_;
-    }
 
     void SetState(LazyLoadState state)
     {
@@ -70,8 +71,8 @@ public:
         return state_;
     }
 private:
-    LazyLoadWatcher *firstWatcher_;
-    LazyLoadWatcher *lastWatcher_;
+    void RenderSingleLazyWatcher(const LazyLoadWatcher &watcher) const;
+    List<LazyLoadWatcher *> lazyWatchersList_;
     LazyLoadState state_;
 };
 } // namespace ACELite

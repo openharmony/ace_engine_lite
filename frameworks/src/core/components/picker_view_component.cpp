@@ -20,6 +20,12 @@
 #include "keys.h"
 #include "product_adapter.h"
 #include "ui_font.h"
+#ifdef FEATURE_EXTRA_TEXT_X_SUPPORT
+#include "ui_picker_x.h"
+#define UIPickerTypeWrapper UIPickerX
+#else
+#define UIPickerTypeWrapper UIPicker
+#endif // FEATURE_EXTRA_TEXT_X_SUPPORT
 
 namespace OHOS {
 namespace ACELite {
@@ -144,7 +150,7 @@ bool PickerViewComponent::CreateNativeViews()
 
 bool PickerViewComponent::CreateTextPicker()
 {
-    UIPicker *uiPicker = new UIPicker();
+    UIPickerTypeWrapper *uiPicker = new UIPickerTypeWrapper();
     if (uiPicker == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "PickerViewComponent: create text picker failed!");
         return false;

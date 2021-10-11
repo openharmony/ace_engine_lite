@@ -137,6 +137,18 @@ bool Component::Render()
     }
     STOP_TRACING();
 
+    // The event bubbling mechanism is supported from API version 5, and events are bubbled by default.
+    // However, it should be compatible with the migrated old application (API version 4) 
+    // so that it does not bubble by default.
+    const int32_t supportEventBubbleApiVersion = 5;
+    if (JsAppContext::GetInstance()->GetTargetApi() < supportEventBubbleApiVersion) {
+        UIView *view = GetComponentRootView();
+        if (view != nullptr) {
+            // make events non bubbling by default.
+            view->SetIntercept(true);
+        }
+    }
+
     SetViewExtraMsg();
 
     // step2: binding js object with this component
@@ -190,6 +202,12 @@ void Component::Release()
 {
     // detach self from fatal handler monitoring
     FatalHandler::GetInstance().DetachComponentNode(this);
+#ifdef FEATURE_LAZY_LOADING_MODULE
+    // detach from lazy pending list
+    JsAppContext *context = JsAppContext::GetInstance();
+    LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());
+    lazyLoadManager->RemoveLazyWatcher(nativeElement_);
+#endif // FEATURE_LAZY_LOADING_MODULE
     if (parent_ != nullptr) {
         parent_->RemoveChild(this);
     }
