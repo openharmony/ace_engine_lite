@@ -108,7 +108,8 @@ public:
             return isStopPropagation_;
         }
         JSValue arg = EventUtil::CreateEvent(EventUtil::EVENT_CLICK, view, event);
-        EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg, this);
+        JSValue vm = GetRootAbilitySlice();
+        EventUtil::InvokeCallback(vm, fn_, arg, this);
 
         return isStopPropagation_;
     }
@@ -143,7 +144,8 @@ public:
         }
 
         JSValue arg = EventUtil::CreateEvent(EventUtil::EVENT_LONGPRESS, view, event);
-        EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg, this);
+        JSValue vm = GetRootAbilitySlice();
+        EventUtil::InvokeCallback(vm, fn_, arg, this);
 
         return isStopPropagation_;
     }
