@@ -138,7 +138,10 @@ void ListComponent::OnViewAttached()
     adapter_.UpdateContentAlignParam(listParameter);
     adapter_.SetDirection(list_.GetDirection());
     // Step4. add children to list dynamically.
-    list_.SetAdapter(&adapter_);
+    if (!hasSetAdaptor_) {
+        list_.SetAdapter(&adapter_);
+        hasSetAdaptor_ = true;
+    }
 }
 
 bool ListComponent::UpdateForView()
