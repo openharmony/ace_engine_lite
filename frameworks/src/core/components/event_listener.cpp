@@ -146,8 +146,8 @@ bool ViewOnSwipeListener::OnDragEnd(UIView& view, const DragEvent &event)
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDragEnd received");
 
     JSValue arg = EventUtil::CreateSwipeEvent(view, event);
-    EventUtil::InvokeCallback(JSUndefined::Create(), fn_, arg, this);
-
+    JSValue vm = GetRootAbilitySlice();
+    EventUtil::InvokeCallback(vm, fn_, arg, this);
     return isStopPropagation_;
 }
 } // namespace ACELite
