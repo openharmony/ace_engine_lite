@@ -20,6 +20,7 @@
 #include "js_async_work.h"
 #include "message_queue_utils.h"
 #include "module_manager.h"
+#include "securec.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -58,6 +59,10 @@ static char *g_defaultFontFamilyName = nullptr;
 static uint8_t g_defaultFontSize = 30;
 static uint16_t g_screenWidth = 454;
 static uint16_t g_screenHeight = 454;
+
+// default app private data root path
+const static char *DEFAULT_APP_DATA_PATH = "user/ace/data/";
+static const char *g_defaultDataRootPath = DEFAULT_APP_DATA_PATH;
 
 // indicating if the ace application is on forground
 static bool g_isRenderTickAcceptable = false;
@@ -252,6 +257,23 @@ void ProductAdapter::UnloadExtraPresetModules()
     if (g_extraPresetModulesHooks.unloadingHandler != nullptr) {
         g_extraPresetModulesHooks.unloadingHandler();
     }
+}
+
+void ProductAdapter::ConfigPrivateDataRootPath(const char *appDataRoot)
+{
+    if (appDataRoot == nullptr) {
+        return;
+    }
+    size_t pathLen = strlen(appDataRoot);
+    if (pathLen == 0 || pathLen >= UINT8_MAX) {
+        return;
+    }
+    g_defaultDataRootPath = appDataRoot;
+}
+
+const char *ProductAdapter::GetPrivateDataRootPath()
+{
+    return g_defaultDataRootPath;
 }
 } // namespace ACELite
 } // namespace OHOS

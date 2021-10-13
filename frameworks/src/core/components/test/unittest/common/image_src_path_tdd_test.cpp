@@ -83,11 +83,12 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport004, TestSize.Level0)
     /**
      * @tc.steps: step1. pass empty string for handling
      */
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("", "com.example.test", 0);
     char *resourcePath = JsAppContext::GetInstance()->GetResourcePath("internal://app/abc.png");
     /**
      * @tc.steps: step2. check if handling failed
      */
-    EXPECT_EQ(resourcePath, nullptr);
+    EXPECT_STREQ(resourcePath, "com.example.test/abc.png");
 }
 
 /**
@@ -100,11 +101,12 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport005, TestSize.Level0)
     /**
      * @tc.steps: step1. pass empty string for handling
      */
+    JsAppContext::GetInstance()->SetCurrentAbilityInfo("", "com.example.test", 0);
     char *resourcePath = JsAppContext::GetInstance()->GetResourcePath("internal://app/testa/testb/testc/abc.png");
     /**
      * @tc.steps: step2. check if handling failed
      */
-    EXPECT_EQ(resourcePath, nullptr);
+    EXPECT_STREQ(resourcePath, "com.example.test/testa/testb/testc/abc.png");
 }
 
 /**
