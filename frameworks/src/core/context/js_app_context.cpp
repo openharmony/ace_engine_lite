@@ -367,9 +367,19 @@ int32_t JsAppContext::GetCompatibleApi() const
     return compatibleApi_;
 }
 
+void JsAppContext::SetCompatibleApi(int32_t compatibleApi)
+{
+    compatibleApi_ = compatibleApi;
+}
+
 int32_t JsAppContext::GetTargetApi() const
 {
     return targetApi_;
+}
+
+void JsAppContext::SetTargetApi(int32_t targetApi)
+{
+    targetApi_ = targetApi;
 }
 } // namespace ACELite
 } // namespace OHOS
