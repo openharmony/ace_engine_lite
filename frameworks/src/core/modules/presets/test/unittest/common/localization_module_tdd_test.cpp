@@ -26,9 +26,9 @@ void LocalizationModuleTddTest::SetUp()
 #ifdef TARGET_SIMULATOR
     constexpr char testAppPath[] = "..\\moduletest\\unittest";
 #elif defined(__linux__)
-    constexpr char testAppPath[] = "/storage/nfs";
+    constexpr char testAppPath[] = "/storage/data";
 #else
-    constexpr char testAppPath[] = "/nfs";
+    constexpr char testAppPath[] = "/user/data";
 #endif
     JsAppEnvironment *env = JsAppEnvironment::GetInstance();
     if (env == nullptr) {
