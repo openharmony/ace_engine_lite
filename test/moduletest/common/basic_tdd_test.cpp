@@ -87,6 +87,10 @@ void BasicTddTest::TearDownTestCase(void)
 
 void BasicTddTest::SetUp()
 {
+    JsAppContext *appContext = JsAppContext::GetInstance();
+    const int32_t apiVersion = 6;
+    appContext->SetCompatibleApi(apiVersion);
+    appContext->SetTargetApi(apiVersion);
     JsAppEnvironment::GetInstance()->InitJsFramework();
     EventInjector *injector = EventInjector::GetInstance();
     if (!injector->IsEventInjectorRegistered(EventDataType::POINT_TYPE)) {
