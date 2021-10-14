@@ -165,6 +165,7 @@ private:
      */
     char *EvaluateFile(bool &isSnapshotMode, uint32_t &outLength, char *fullPathPath, size_t fullPathLength) const;
     void CheckSnapshotVersion(const char *bcFileContent, uint32_t contentLength) const;
+    char *ProcessResourcePathByConfiguration(size_t origUriLength, const char *filePath) const;
     char *currentBundleName_ = nullptr;
     char *currentAbilityPath_ = nullptr;
     char *currentJsPath_ = nullptr;
