@@ -1126,7 +1126,7 @@ void Component::ParseAttrs()
 
 void Component::SetClickEventListener(UIView &view, const jerry_value_t eventFunc, bool isStopPropagation)
 {
-    onClickListener_ = new ViewOnClickListener(eventFunc, isStopPropagation);
+    onClickListener_ = new ViewOnClickListener(viewModel_, eventFunc, isStopPropagation);
     if (onClickListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "click listener create failed");
         return;
@@ -1205,7 +1205,7 @@ void Component::SetKeyBoardEventListener(jerry_value_t eventFunc, uint16_t event
 
 void Component::SetLongPressEventListener(UIView &view, const jerry_value_t eventFunc, bool isStopPropagation)
 {
-    onLongPressListener_ = new ViewOnLongPressListener(eventFunc, isStopPropagation);
+    onLongPressListener_ = new ViewOnLongPressListener(viewModel_, eventFunc, isStopPropagation);
     if (onLongPressListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "long press listener create failed");
         return;
@@ -1217,7 +1217,7 @@ void Component::SetLongPressEventListener(UIView &view, const jerry_value_t even
 
 void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    onSwipeListener_ = new ViewOnSwipeListener(eventFunc, isStopPropagation);
+    onSwipeListener_ = new ViewOnSwipeListener(viewModel_, eventFunc, isStopPropagation);
     if (onSwipeListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "swipe listener create failed");
         return;
