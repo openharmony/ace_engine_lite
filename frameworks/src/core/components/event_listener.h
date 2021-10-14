@@ -87,14 +87,16 @@ class ViewOnClickListener final : public UIView::OnClickListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ViewOnClickListener);
 
-    ViewOnClickListener(jerry_value_t fn, bool isStopPropagation)
+    ViewOnClickListener(jerry_value_t vm, jerry_value_t fn, bool isStopPropagation)
         : changeListener_(nullptr),
+          vm_(jerry_acquire_value(vm)),
           fn_(jerry_acquire_value(fn)),
           isStopPropagation_(isStopPropagation) {}
 
     ~ViewOnClickListener()
     {
         AsyncTaskManager::GetInstance().CancelWithContext(this);
+        jerry_release_value(vm_);
         jerry_release_value(fn_);
     }
 
@@ -108,8 +110,7 @@ public:
             return isStopPropagation_;
         }
         JSValue arg = EventUtil::CreateEvent(EventUtil::EVENT_CLICK, view, event);
-        JSValue vm = GetRootAbilitySlice();
-        EventUtil::InvokeCallback(vm, fn_, arg, this);
+        EventUtil::InvokeCallback(vm_, fn_, arg, this);
 
         return isStopPropagation_;
     }
@@ -121,6 +122,7 @@ public:
 
 private:
     StateChangeListener *changeListener_;
+    jerry_value_t vm_;
     jerry_value_t fn_;
     bool isStopPropagation_;
 };
@@ -128,12 +130,13 @@ private:
 class ViewOnLongPressListener final : public UIView::OnLongPressListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ViewOnLongPressListener);
-    ViewOnLongPressListener(jerry_value_t fn, bool isStopPropagation)
-        : fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation) {}
+    ViewOnLongPressListener(jerry_value_t vm, jerry_value_t fn, bool isStopPropagation)
+        : vm_(jerry_acquire_value(vm)), fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation) {}
 
     ~ViewOnLongPressListener()
     {
         AsyncTaskManager::GetInstance().CancelWithContext(this);
+        jerry_release_value(vm_);
         jerry_release_value(fn_);
     }
 
@@ -144,12 +147,12 @@ public:
         }
 
         JSValue arg = EventUtil::CreateEvent(EventUtil::EVENT_LONGPRESS, view, event);
-        JSValue vm = GetRootAbilitySlice();
-        EventUtil::InvokeCallback(vm, fn_, arg, this);
+        EventUtil::InvokeCallback(vm_, fn_, arg, this);
 
         return isStopPropagation_;
     }
     jerry_value_t fn_;
+    jerry_value_t vm_;
     bool isStopPropagation_;
 };
 
@@ -218,14 +221,15 @@ private:
 class ViewOnSwipeListener final : public UIView::OnDragListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ViewOnSwipeListener);
-    ViewOnSwipeListener(jerry_value_t fn, bool isStopPropagation)
-        : fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation)
+    ViewOnSwipeListener(jerry_value_t vm, jerry_value_t fn, bool isStopPropagation)
+        : vm_(vm), fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation)
     {
     }
 
     ~ViewOnSwipeListener()
     {
         AsyncTaskManager::GetInstance().CancelWithContext(this);
+        jerry_release_value(vm_);
         jerry_release_value(fn_);
     }
 
@@ -235,6 +239,7 @@ public:
     bool OnDragEnd(UIView& view, const DragEvent &event) override;
 
 private:
+    jerry_value_t vm_;
     jerry_value_t fn_;
     bool isStopPropagation_;
 };
