@@ -58,13 +58,14 @@ char *StringUtil::Slice(const char *sequence, const int32_t start, const int32_t
         return nullptr;
     }
     uint32_t size = strlen(sequence);
-    if (size == 0) {
+    if (size == 0 || size >= UINT16_MAX) {
         return nullptr;
     }
     int32_t startIdx = (start < 0) ? (start + size) : start;
     startIdx = (startIdx < 0) ? 0 : startIdx;
     int32_t endIdx = (end < 0) ? (end + size) : end;
-    if (startIdx < endIdx || endIdx < 0) {
+    endIdx = (endIdx > static_cast<int32_t>(size)) ? size : endIdx;
+    if (startIdx > endIdx || endIdx < 0) {
         return nullptr;
     }
     int32_t diffSize = endIdx - startIdx;
