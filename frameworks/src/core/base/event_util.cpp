@@ -52,7 +52,6 @@ void CallbackExecutor(void *data)
     JSValue args[argsLength] = {params->arg};
     JSRelease(JSFunction::Call(params->fn, params->vm, args, argsLength));
     JSRelease(params->arg);
-    JSRelease(params->vm);
     delete params;
     params = nullptr;
 }
@@ -127,7 +126,6 @@ void EventUtil::InvokeCallback(JSValue vm, JSValue callback, JSValue event, cons
         HILOG_ERROR(HILOG_MODULE_ACE, "EventUtil::InvokeCallback failed: Async task dispatch failure.");
         delete params;
         params = nullptr;
-        JSRelease(vm);
         JSRelease(event);
     }
 }
