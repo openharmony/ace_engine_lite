@@ -69,7 +69,7 @@ bool InputCheckboxComponent::RegisterPrivateEventListener(uint16_t eventTypeId,
         return true;
     }
     if (eventTypeId == K_CLICK) {
-        clickListener_ = new ViewOnClickListener(funcValue, isStopPropagation);
+        clickListener_ = new ViewOnClickListener(GetViewModel(), funcValue, isStopPropagation);
         if (clickListener_ == nullptr) {
             HILOG_ERROR(HILOG_MODULE_ACE, "create click listener failed");
             return false;
@@ -116,7 +116,7 @@ void InputCheckboxComponent::DealEvent()
 
     if (clickListener_ == nullptr) {
         // trigger changeEvent
-        clickListener_ = new ViewOnClickListener(UNDEFINED, true);
+        clickListener_ = new ViewOnClickListener(GetViewModel(), UNDEFINED, true);
         if (clickListener_ == nullptr) {
             HILOG_ERROR(HILOG_MODULE_ACE, "create click listener failed");
             return;
