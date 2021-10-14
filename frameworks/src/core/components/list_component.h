@@ -43,6 +43,7 @@ private:
     UIList list_;
     ListAdapter adapter_;
     ListEventListener listEventListener_;
+    bool hasSetAdaptor_ = false;
     static const char * const FUNC_SCROLLTO;
     static const char * const INDEX_SCROLLTO;
     static JSValue ListScrollTo(const JSValue func, const JSValue dom, const JSValue args[], const jerry_length_t size);
