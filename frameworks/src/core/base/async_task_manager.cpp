@@ -98,6 +98,7 @@ void AsyncTaskManager::Callback()
 
     while (head_ != nullptr) {
         AsyncTask *task = head_;
+        task->isRunning = true;
         task->handler(task->data);
         if (head_ == tail_) {
             tail_ = nullptr;
@@ -129,6 +130,7 @@ uint16_t AsyncTaskManager::Dispatch(AsyncTaskHandler handler, void *data, const 
     task->data = data;
     task->id = (++uniqueTaskID_);
     task->context = context;
+    task->isRunning = false;
     task->next = nullptr;
     if (head_ == nullptr) {
         head_ = task;
@@ -151,7 +153,7 @@ void AsyncTaskManager::Cancel(uint16_t taskID)
     AsyncTask *node = head_;
     AsyncTask *prev = nullptr;
     while (node != nullptr) {
-        if (node->id == taskID) {
+        if (node->id == taskID && !(node->isRunning)) {
             if (prev == nullptr) {
                 head_ = head_->next;
             } else {
@@ -182,7 +184,7 @@ void AsyncTaskManager::CancelWithContext(const void *context)
     AsyncTask *next = nullptr;
     while (node != nullptr) {
         next = node->next;
-        if (node->context == context) {
+        if ((node->context == context) && !(node->isRunning)) {
             if (prev == nullptr) {
                 head_ = head_->next;
             } else {
