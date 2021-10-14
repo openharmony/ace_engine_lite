@@ -181,8 +181,6 @@ INCLUDEPATH += \
             $${ROOT_PATH}/foundation/aafwk/aafwk_lite/interfaces/kits/ability_lite \
             $${ROOT_PATH}/foundation/aafwk/aafwk_lite/interfaces/kits/want_lite \
             $${ROOT_PATH}/foundation/aafwk/aafwk_lite/interfaces/innerkits/abilitymgr_lite \
-            $${ROOT_PATH}/foundation/appexecfwk/appexecfwk_lite/interfaces/kits/bundle_lite \
-            $${ROOT_PATH}/foundation/appexecfwk/appexecfwk_lite/utils/bundle_lite \
             $${ROOT_PATH}/foundation/communication/ipc_lite/liteipc/include \
             $${ROOT_PATH}/third_party/bounds_checking_function/include \
             $${ROOT_PATH}/foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/async \

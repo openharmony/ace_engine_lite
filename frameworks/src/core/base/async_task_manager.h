@@ -36,6 +36,7 @@ struct AsyncTask final : public MemoryHeap {
     AsyncTaskHandler handler;
     void *data;
     AsyncTask *next;
+    bool isRunning;
 };
 
 constexpr uint16_t DISPATCH_FAILURE = 0;
