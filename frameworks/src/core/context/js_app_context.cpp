@@ -28,6 +28,7 @@
 #include "js_app_environment.h"
 #include "js_profiler.h"
 #include "platform_adapter.h"
+#include "product_adapter.h"
 #include "securec.h"
 #include "string_util.h"
 #include "task_manager.h"
@@ -40,10 +41,6 @@ namespace OHOS {
 namespace ACELite {
 constexpr char URI_PREFIX_DATA[] = "internal://app";
 constexpr uint8_t URI_PREFIX_DATA_LENGTH = 14;
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
-constexpr char APP_DATA_DIR_PATH[] = "app/ace/data/";
-constexpr uint8_t APP_DATA_DIR_PATH_LENGTH = 13;
-#endif
 void JsAppContext::ClearContext()
 {
     // reset current ability path and uuid
@@ -318,30 +315,49 @@ char *JsAppContext::GetResourcePath(const char *uri) const
             return nullptr;
         }
 #ifdef OHOS_ACELITE_PRODUCT_WATCH
-        uint16_t dataPathSize = APP_DATA_DIR_PATH_LENGTH + strlen(currentBundleName_) + size - URI_PREFIX_DATA_LENGTH;
-        char *dataPath = StringUtil::Malloc(dataPathSize);
-        if (dataPath == nullptr) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "fail to get resource path.");
-            ACE_FREE(path);
-            return nullptr;
-        }
-        if (sprintf_s(dataPath, dataPathSize + 1, "%s%s%s", APP_DATA_DIR_PATH, currentBundleName_, path) < 0) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "fail to get resource path.");
-            ACE_FREE(path);
-            ACE_FREE(dataPath);
-            return nullptr;
-        }
+        // no GetDataPath API provided on watch, contact the path by the product configuration insteadly
+        char *relocatedPath = ProcessResourcePathByConfiguration(size, path);
 #else
         const char *dataPath = GetDataPath();
-#endif
+        if (dataPath == nullptr || strlen(dataPath) == 0) {
+            dataPath = currentBundleName_;
+        }
         char *relocatedPath = RelocateResourceFilePath(dataPath, path);
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
-        ACE_FREE(dataPath);
 #endif
         ACE_FREE(path);
         return relocatedPath;
     }
     return RelocateResourceFilePath(currentAbilityPath_, uri);
+}
+
+char *JsAppContext::ProcessResourcePathByConfiguration(size_t origUriLength, const char *slicedFilePath) const
+{
+    const char *appDataRoot = ProductAdapter::GetPrivateDataRootPath();
+    if (appDataRoot == nullptr || origUriLength == 0 || slicedFilePath == nullptr) {
+        return nullptr;
+    }
+    size_t rootPathLen = strlen(appDataRoot);
+    if (rootPathLen == 0) {
+        return nullptr;
+    }
+    size_t dataPathSize = rootPathLen + strlen(currentBundleName_) + origUriLength - URI_PREFIX_DATA_LENGTH + 1;
+    char *dataPath = StringUtil::Malloc(dataPathSize);
+    if (dataPath == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "fail to malloc data path buffer.");
+        return nullptr;
+    }
+    const char *fmtStr = "%s%s";
+    if (appDataRoot[rootPathLen - 1] != RESOURCE_SEPARATOR) {
+        fmtStr = "%s/%s";
+    }
+    if (sprintf_s(dataPath, dataPathSize + 1, fmtStr, appDataRoot, currentBundleName_) < 0) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "fail to get resource path.");
+        ACE_FREE(dataPath);
+        return nullptr;
+    }
+    char *relocatedPath = RelocateResourceFilePath(dataPath, slicedFilePath);
+    ACE_FREE(dataPath);
+    return relocatedPath;
 }
 
 void JsAppContext::LoadApiVersion()
