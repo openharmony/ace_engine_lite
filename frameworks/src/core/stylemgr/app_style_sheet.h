@@ -17,6 +17,7 @@
 #define OHOS_ACELITE_APP_STYLE_SHEET_H
 
 #include "non_copyable.h"
+#include "scope_js_value.h"
 #include "stylemgr/app_style_item.h"
 #include "stylemgr/app_style_list.h"
 
@@ -41,7 +42,11 @@ public:
     AppStyleList* keyFrameSelectors_;
 
 private:
-    void InitSelectors(AppStyleList** selectorsList, jerry_value_t selectorsObj, bool isKeyFrames);
+    void InitNormalSelectors(const jerry_value_t styleSheetObj, bool overwrite = false);
+    void InitMediaSelectors(const jerry_value_t styleSheetObj);
+    void HandleSingleMediaItem(const jerry_value_t mediaItem);
+    void InitSelectors(AppStyleList** selectorsList, jerry_value_t selectorsObj,
+                       bool isKeyFrames, bool overwrite = false);
 };
 } // namespace ACELite
 } // namespace OHOS

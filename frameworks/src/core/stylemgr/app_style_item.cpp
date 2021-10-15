@@ -161,33 +161,41 @@ AppStyleItem *AppStyleItem::CopyFrom(const AppStyleItem *from)
         return nullptr;
     }
 
-    styleItem->propNameId_ = from->propNameId_;
-    styleItem->pseudoClassType_ = from->pseudoClassType_;
-    switch (from->GetValueType()) {
+    styleItem->UpdateValueFrom(*from);
+
+    return styleItem;
+}
+
+void AppStyleItem::UpdateValueFrom(const AppStyleItem &from)
+{
+    if (valueType_ == STYLE_PROP_VALUE_TYPE_STRING) {
+        ACE_FREE(styleValue_.string);
+    }
+    propNameId_ = from.propNameId_;
+    pseudoClassType_ = from.pseudoClassType_;
+    switch (from.GetValueType()) {
         case STYLE_PROP_VALUE_TYPE_STRING: {
-            const char *strValue = from->GetStrValue();
+            const char *strValue = from.GetStrValue();
             if (strValue != nullptr) {
-                styleItem->SetStringValue(strValue);
+                SetStringValue(strValue);
             }
             break;
         }
         case STYLE_PROP_VALUE_TYPE_BOOL:
-            styleItem->SetBoolValue(from->GetBoolValue());
+            SetBoolValue(from.GetBoolValue());
             break;
         case STYLE_PROP_VALUE_TYPE_NUMBER:
-            styleItem->SetNumValue(from->GetNumValue());
+            SetNumValue(from.GetNumValue());
             break;
         case STYLE_PROP_VALUE_TYPE_FLOATING:
-            styleItem->SetFloatingValue(from->GetFloatingValue());
+            SetFloatingValue(from.GetFloatingValue());
             break;
         case STYLE_PROP_VALUE_TYPE_PERCENT:
-            styleItem->SetPercentValue(from->GetPercentValue());
+            SetPercentValue(from.GetPercentValue());
             break;
         default:
             break;
     }
-
-    return styleItem;
 }
 } // namespace ACELite
 } // namespace OHOS

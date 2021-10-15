@@ -14,6 +14,7 @@
  */
 
 #include "ace_mem_base.h"
+#include "ctype.h"
 #include "js_config.h"
 #include "securec.h"
 #include "string_util.h"
@@ -91,6 +92,35 @@ bool StringUtil::StartsWith(const char *sequence, const char *subsequence)
         return true;
     }
     return strncmp(sequence, subsequence, strlen(subsequence)) == 0;
+}
+
+char *StringUtil::Trim(char *sequence)
+{
+    if (sequence == nullptr) {
+        return nullptr;
+    }
+    if (strlen(sequence) == 0) {
+        return sequence;
+    }
+    char *leftP = sequence;
+    char *rightP = sequence;
+    char *endP = sequence;
+    // find the first no-space position
+    while (*leftP != '\0' && isspace(*leftP)) {
+        leftP++;
+    }
+    // copy all charaters one by one from the first no-space position to the start of the buffer
+    while (*leftP != '\0') {
+        *rightP = *leftP;
+        if (!isspace(*rightP)) {
+            // record the next position of the last no-space character
+            endP = rightP + 1;
+        }
+        leftP++;
+        rightP++;
+    }
+    *endP = '\0';
+    return sequence;
 }
 } // namespace ACELite
 } // namespace OHOS

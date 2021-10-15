@@ -33,7 +33,7 @@ public:
         Reset();
     }
 
-    const char* GetStyleName()
+    const char* GetStyleName() const
     {
         return styleName_;
     }
@@ -65,7 +65,7 @@ public:
         next_ = nextStyle;
     }
 
-    const AppStyle* GetNext()
+    const AppStyle* GetNext() const
     {
         return next_;
     }
@@ -75,6 +75,7 @@ public:
     const AppStyleItem* GetStyleItemByName(const char * const stylePropName) const;
     const AppStyleItem* GetStyleItemByNameId(uint16_t stylePropNameId) const;
     static AppStyle* GenerateFromJS(jerry_value_t styleKey, jerry_value_t styleValue, bool isKeyFrames);
+    static void CombineStyles(AppStyle &dest, const AppStyle &source, bool overwrite = false);
 
 private:
     void SetStyleName(const char * const name, size_t nameLen);
