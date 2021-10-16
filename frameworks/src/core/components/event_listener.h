@@ -151,8 +151,8 @@ public:
 
         return isStopPropagation_;
     }
-    jerry_value_t fn_;
     jerry_value_t vm_;
+    jerry_value_t fn_;
     bool isStopPropagation_;
 };
 
@@ -222,7 +222,7 @@ class ViewOnSwipeListener final : public UIView::OnDragListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ViewOnSwipeListener);
     ViewOnSwipeListener(jerry_value_t vm, jerry_value_t fn, bool isStopPropagation)
-        : vm_(vm), fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation)
+        : vm_(jerry_acquire_value(vm)), fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation)
     {
     }
 
