@@ -32,7 +32,8 @@ TextComponent::TextComponent(jerry_value_t options, jerry_value_t children, AppS
       fontSize_(DEFAULT_FONT_SIZE),
       fontFamily_(nullptr),
       textValue_(nullptr),
-      overflowMode_(UILabel::LINE_BREAK_CLIP)
+      overflowMode_(UILabel::LINE_BREAK_CLIP),
+      horizontalAlign_(UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT)
 {
     SetComponentName(K_TEXT);
     fontSize_ = ProductAdapter::GetDefaultFontSize();
@@ -189,6 +190,7 @@ void TextComponent::OnViewAttached()
     if (textValue_ != nullptr && fontFamily_ != nullptr) {
         uiLabel_.SetFont(fontFamily_, fontSize_);
         uiLabel_.SetText(textValue_);
+        UpdateTextAlignToLabel(uiLabel_);
     }
 }
 
@@ -203,6 +205,7 @@ void TextComponent::PostUpdate(uint16_t attrKeyId)
         case K_VALUE:
             if (textValue_ != nullptr) {
                 uiLabel_.SetText(textValue_);
+                UpdateTextAlignToLabel(uiLabel_);
             }
             break;
         case K_FONT_SIZE:
@@ -220,7 +223,7 @@ void TextComponent::PostUpdate(uint16_t attrKeyId)
     }
 }
 
-void TextComponent::SetTextAlign(UILabelTypeWrapper &label, const AppStyleItem *styleItem) const
+void TextComponent::SetTextAlign(UILabelTypeWrapper &label, const AppStyleItem *styleItem)
 {
     if (!IsStyleValueTypeString(styleItem)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "text text align style value is invalid!");
@@ -229,27 +232,31 @@ void TextComponent::SetTextAlign(UILabelTypeWrapper &label, const AppStyleItem *
     // set ui label text align, ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER are support.
     const char * const stylePropValue = GetStyleStrValue(styleItem);
     uint16_t alignId = KeyParser::ParseKeyId(stylePropValue, GetStyleStrValueLen(styleItem));
-    UITextLanguageAlignment align = UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT;
     switch (alignId) {
         case K_LEFT:
-            align = UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT;
+            horizontalAlign_ = UITextLanguageAlignment::TEXT_ALIGNMENT_LEFT;
             break;
         case K_RIGHT:
-            align = UITextLanguageAlignment::TEXT_ALIGNMENT_RIGHT;
+            horizontalAlign_ = UITextLanguageAlignment::TEXT_ALIGNMENT_RIGHT;
             break;
         case K_CENTER:
-            align = UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER;
+            horizontalAlign_ = UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER;
             break;
         default:
             HILOG_WARN(HILOG_MODULE_ACE, "text textAlign style value =%{public}s is invalid, using default instead",
                        stylePropValue);
             break;
     }
+    UpdateTextAlignToLabel(label);
+}
+
+void TextComponent::UpdateTextAlignToLabel(UILabelTypeWrapper& label)
+{
     const int32_t defaultVerticalAlignCenterApiVersion = 5;
     if (JsAppContext::GetInstance()->GetTargetApi() < defaultVerticalAlignCenterApiVersion) {
-        label.SetAlign(align, UITextLanguageAlignment::TEXT_ALIGNMENT_TOP);
+        label.SetAlign(horizontalAlign_, UITextLanguageAlignment::TEXT_ALIGNMENT_TOP);
     } else {
-        label.SetAlign(align, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
+        label.SetAlign(horizontalAlign_, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
     }
 }
 } // namespace ACELite
