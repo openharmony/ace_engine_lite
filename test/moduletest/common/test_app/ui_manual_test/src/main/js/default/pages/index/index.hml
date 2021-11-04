@@ -204,5 +204,14 @@ limitations under the License.
       onclick="changeDialog"
     />
   </list-item>
+  <list-item class="listItem">
+    <input
+      type="button"
+      class="buttonStyle"
+      value="image_view"
+      onclick="changeImageView"
+      />
+  </list-item>
+
   <list-item style="height: 40px; width: 454px;"> </list-item>
 </list>
