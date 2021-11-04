@@ -49,7 +49,8 @@ protected:
 
 private:
     // parse js text align style to ui_label
-    void SetTextAlign(UILabelTypeWrapper& label, const AppStyleItem* styleItem) const;
+    void SetTextAlign(UILabelTypeWrapper& label, const AppStyleItem* styleItem);
+    void UpdateTextAlignToLabel(UILabelTypeWrapper& label);
     // parse js text size style to fontSize_
     void SetTextSize(const AppStyleItem* styleItem);
     // parse js text color style to ui_label
@@ -65,6 +66,7 @@ private:
     char* fontFamily_;
     char* textValue_;
     uint8_t overflowMode_;
+    UITextLanguageAlignment horizontalAlign_;
 };
 } // namespace ACELite
 } // namespace OHOS
