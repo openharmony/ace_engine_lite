@@ -114,6 +114,7 @@ public:
 
     static void SetFatalHandleFunc(FatalHandleFunc isFatalErrorHitted, FatalHandleFunc isAppExiting);
 
+    static void SetEnvStatus(bool envInitialized);
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
     static void SetPostUITaskFunc(PostUITaskFunc postUITask);
 #endif
@@ -130,6 +131,7 @@ private:
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
     static PostUITaskFunc postUITask_;
 #endif
+    static bool isEnvInitialized_;
 };
 } // namespace ACELite
 } // namespace OHOS
