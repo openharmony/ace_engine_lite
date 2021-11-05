@@ -24,15 +24,21 @@ FatalHandleFunc JsAsyncWork::isAppExiting_ = nullptr;
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
 PostUITaskFunc JsAsyncWork::postUITask_ = nullptr;
 #endif
+bool JsAsyncWork::isEnvInitialized_ = false;
 
 void JsAsyncWork::SetAppQueueHandler(const QueueHandler handler)
 {
     appQueuehandler_ = handler;
 }
 
+void JsAsyncWork::SetEnvStatus(bool envInitialized)
+{
+    isEnvInitialized_ = envInitialized;
+}
+
 bool JsAsyncWork::DispatchToLoop(AbilityMsgId msgId, void *data)
 {
-    if (appQueuehandler_ == nullptr) {
+    if (appQueuehandler_ == nullptr || !isEnvInitialized_) {
         HILOG_ERROR(HILOG_MODULE_ACE, "JsAsyncWork:DispatchAsyncWork app not launched yet!");
         return false;
     }
