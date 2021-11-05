@@ -139,7 +139,9 @@
                     "pages/opacity/02/index",
                     "pages/opacity/03/index",
                     "pages/dialog/dialog001/index",
-                    "pages/qrcode/index/index"
+                    "pages/qrcode/index/index",
+                    "pages/imageView/fitObject/index",
+                    "pages/imageView/fitOriginalSize/index"
                 ]
             }
         ],
