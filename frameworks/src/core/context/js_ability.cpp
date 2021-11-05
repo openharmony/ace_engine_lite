@@ -114,6 +114,10 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
     ACE_EVENT_PRINT(MT_ACE_FWK_LAUNCHING, 0);
     FatalHandler::GetInstance().RegisterFatalHandler(this);
     jsAbilityImpl->DeliverCreate(pageInfo);
+#ifndef MOCK_JS_ASYNC_WORK
+    // simulator uses the self-implementation for async work, this interface is not included
+    JsAsyncWork::SetEnvStatus(true);
+#endif
     STOP_TRACING();
     OUTPUT_TRACE();
 }
@@ -156,6 +160,10 @@ void JSAbility::TransferToDestroy()
         return;
     }
 
+#ifndef MOCK_JS_ASYNC_WORK
+    // simulator uses the self-implementation for async work, this interface is not included
+    JsAsyncWork::SetEnvStatus(false);
+#endif
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability is exiting");
     ACE_EVENT_PRINT(MT_ACE_FWK_DESTROYING, 0);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
