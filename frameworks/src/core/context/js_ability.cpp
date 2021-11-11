@@ -110,14 +110,14 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
     // mark the flag in advance to make sure we can take over render tick as soon as possible
     ProductAdapter::UpdateRenderTickAcceptable(true);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
-    jsAbilityImpl->InitEnvironment(abilityPath, bundleName, token);
-    ACE_EVENT_PRINT(MT_ACE_FWK_LAUNCHING, 0);
-    FatalHandler::GetInstance().RegisterFatalHandler(this);
-    jsAbilityImpl->DeliverCreate(pageInfo);
 #ifndef MOCK_JS_ASYNC_WORK
     // simulator uses the self-implementation for async work, this interface is not included
     JsAsyncWork::SetEnvStatus(true);
 #endif
+    jsAbilityImpl->InitEnvironment(abilityPath, bundleName, token);
+    ACE_EVENT_PRINT(MT_ACE_FWK_LAUNCHING, 0);
+    FatalHandler::GetInstance().RegisterFatalHandler(this);
+    jsAbilityImpl->DeliverCreate(pageInfo);
     STOP_TRACING();
     OUTPUT_TRACE();
 }
