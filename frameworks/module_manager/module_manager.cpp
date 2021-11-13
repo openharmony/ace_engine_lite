@@ -36,7 +36,7 @@ JSIValue ModuleManager::RequireModule(const char * const moduleName)
     }
 
     JSIValue moduleObj;
-    if (!strcmp(category, CATEGORY_SYSTEM)) {
+    if (!strcmp(category, CATEGORY_SYSTEM) || !strcmp(category, CATEGORY_OHOS)) {
         uint16_t moduleCount = sizeof(OHOS_MODULES) / sizeof(Module);
         moduleObj = GetModuleObject(name, OHOS_MODULES, moduleCount, requiredSystemModules);
 #ifdef FEATURE_PRODUCT_MODULE
@@ -93,9 +93,8 @@ bool ModuleManager::ParseModuleName(const char * const moduleName, char** catego
         return false;
     }
 
-    // Get name
-    tokenStr = strtok_s(nullptr, ".", &next);
-    if (!CreateString(tokenStr, name)) {
+    // Get the rest as name
+    if (!CreateString(next, name)) {
         ace_free(str);
         str = nullptr;
         ace_free(*category);

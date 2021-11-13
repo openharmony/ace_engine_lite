@@ -46,6 +46,7 @@ public:
     void RequireModuleTest005();
     void RequireModuleTest006();
     void RequireModuleTest007();
+    void RequireModuleTest008();
     void RunTests();
 
 private:

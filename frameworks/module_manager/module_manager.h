@@ -157,6 +157,7 @@ private:
 
     // For different native module type
     const char* CATEGORY_SYSTEM = "system";
+    const char* CATEGORY_OHOS = "ohos";
 
     // JS object for caching modules
     static JSIValue requiredSystemModules;
