@@ -202,6 +202,22 @@ void RequireModuleTddTest::RequireModuleTest007()
     TDD_CASE_END();
 }
 
+void RequireModuleTddTest::RequireModuleTest008()
+{
+    TDD_CASE_BEGIN();
+    /**
+     * @tc.steps: step1. require a module with module name registered which is ohos
+     */
+    constexpr char *moduleName = "ohos.app";
+    JSIValue module = moduleManager_->RequireModule(moduleName);
+    /**
+     * @tc.expected: step1. module is not undefined
+     */
+    EXPECT_FALSE(JSI::ValueIsUndefined(module));
+    JSI::ReleaseValue(module);
+    TDD_CASE_END();
+}
+
 void RequireModuleTddTest::RunTests()
 {
     RequireModuleTest001();
@@ -211,6 +227,7 @@ void RequireModuleTddTest::RunTests()
     RequireModuleTest005();
     RequireModuleTest006();
     RequireModuleTest007();
+    RequireModuleTest008();
 }
 
 #ifdef TDD_ASSERTIONS
@@ -282,6 +299,16 @@ HWTEST_F(RequireModuleTddTest, test006, TestSize.Level1)
 HWTEST_F(RequireModuleTddTest, test007, TestSize.Level1)
 {
     RequireModuleTddTest::RequireModuleTest007();
+}
+
+/**
+ * @tc.name: RequireModuleTest008
+ * @tc.desc: Verify the ohos module importing process.
+ * @tc.require: AR000DSEHC
+ */
+HWTEST_F(RequireModuleTddTest, test008, TestSize.Level1)
+{
+    RequireModuleTddTest::RequireModuleTest008();
 }
 #endif
 } // namespace ACELite
