@@ -55,5 +55,6 @@ shared_library("ace_module_manager") {
     "//third_party/bounds_checking_function:libsec_shared",
     "//third_party/jerryscript/jerry-core:jerry-core_shared",
     "//utils/native/lite/js/builtin:ace_utils_kits",
+    "//foundation/communication/netstack/frameworks/js/builtin:http_lite_shared",
   ]
 }

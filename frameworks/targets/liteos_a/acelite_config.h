@@ -160,4 +160,6 @@
 
 #define RUNTIME_MODE_FILE_PATH "/storage/user/data/js_snapshot_enable"
 
+#define FEATURE_SUPPORT_HTTP
+
 #endif // OHOS_ACELITE_CONFIG_H

@@ -26,6 +26,9 @@ extern void InitSampleModule(JSIValue exports);
 #endif
 extern void InitRouterModule(JSIValue exports);
 extern void InitAppModule(JSIValue exports);
+#ifdef FEATURE_SUPPORT_HTTP
+extern void InitFetchModule(JSIValue exports);
+#endif // FEATURE_SUPPORT_HTTP
 #ifdef FEATURE_MODULE_AUDIO
 extern void InitAudioModule(JSIValue exports);
 #endif // FEATURE_MODULE_AUDIO
@@ -79,6 +82,9 @@ const Module OHOS_MODULES[] = {
     {"sample", InitSampleModule},
 #endif
     {"app", InitAppModule},
+#ifdef FEATURE_SUPPORT_HTTP
+    {"fetch", InitFetchModule},
+#endif // FEATURE_SUPPORT_HTTP
 #ifdef FEATURE_MODULE_AUDIO
     {"audio", InitAudioModule},
 #endif // FEATURE_MODULE_AUDIO
