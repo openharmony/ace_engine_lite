@@ -708,7 +708,7 @@ char *JSI::ValueToStringWithBufferSize(JSIValue value, size_t &size)
 
     size = jerry_get_string_size(jVal);
     if ((size == 0) || (size == UINT32_MAX)) {
-        // Output empty char instead of nullptr, thus caller can free safely
+        // Output nullptr
         size = 0;
         return nullptr;
     } else {
