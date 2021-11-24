@@ -143,6 +143,17 @@ public:
     static void SetStringProperty(JSIValue object, const char * const propName, const char *value);
 
     /**
+     * @brief Set string property to javascript object with given name.
+     *
+     * @param [in] object: host object to set
+     * @param [in] propName: name of the string property to set
+     * @param [in] value: string value of the property to set
+     * @param [in] size: string size of the property to set
+     */
+    static void
+        SetStringPropertyWithBufferSize(JSIValue object, const char *const propName, const char *value, size_t size);
+
+    /**
      * @brief Create javascript function with given native function.
      *
      * @param [in] handler: native function pointer
@@ -159,6 +170,16 @@ public:
      * value returned should be released by caller with ReleaseValue when it won't be used any more
      */
     static JSIValue CreateString(const char * const str);
+
+    /**
+     * @brief Create javascript string object with character string.
+     *
+     * @param [in] str: string source
+     * @param [in] size: string length
+     * @return the string object created
+     * value returned should be released by caller with ReleaseValue when it won't be used any more
+     */
+    static JSIValue CreateStringWithBufferSize(const char * const str, size_t size);
 
     /**
      * @brief Create an undefined object.
@@ -309,6 +330,17 @@ public:
     static char *GetStringProperty(JSIValue object, const char * const propName);
 
     /**
+     * @brief Get string value from the specified object with the given property name.
+     *
+     * @param [in] object: object value
+     * @param [in] propName: the string property name
+     * @param [out] size: the string property size
+     * @return the string value acquired
+     * value returned should be released with ReleaseString(char *&str) when it won't be used any more
+     */
+    static char *GetStringPropertyWithBufferSize(JSIValue object, const char * const propName, size_t &size);
+
+    /**
      * @brief: Release specified API value.
      *
      * @param: value JSI value to release
@@ -445,6 +477,16 @@ public:
      * value returned should be released with ReleaseString(char *&str) when it won't be used any more
      */
     static char *ValueToString(JSIValue value);
+
+    /**
+     * @brief Get the string value of the given JSIValue object.
+     *
+     * @param [in] value: source value
+     * @param [out] size: source size
+     * @return the string value created
+     * value returned should be released with ReleaseString(char *&str) when it won't be used any more
+     */
+    static char *ValueToStringWithBufferSize(JSIValue value, size_t &size);
 
     /**
      * @brief Get the number value of the given JSIValue object.
