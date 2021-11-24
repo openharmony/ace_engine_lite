@@ -113,7 +113,7 @@ void JSI::SetStringProperty(JSIValue object, const char * const propName, const 
 void JSI::SetStringPropertyWithBufferSize(JSIValue object, const char * const propName, const char *value, size_t size)
 {
     if (!ValueIsObject(object)) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "JSI:SetStringProperty failed!");
+        HILOG_ERROR(HILOG_MODULE_ACE, "JSI:SetStringPropertyWithBufferSize failed!");
         return;
     }
     JSIValue strValue = CreateStringWithBufferSize(value, size);
@@ -198,7 +198,7 @@ JSIValue JSI::CreateStringWithBufferSize(const char * const str, size_t size)
 #if defined(ENABLE_JERRY)
     return AS_JSI_VALUE(jerry_create_string_sz(reinterpret_cast<const jerry_char_t *>(str), size));
 #else
-    HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateString has not been implemented in this js engine!");
+    HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateStringWithBufferSize has not been implemented in this js engine!");
     return CreateUndefined();
 #endif
 }
@@ -397,7 +397,7 @@ char *JSI::GetStringProperty(JSIValue object, const char * const propName)
 char *JSI::GetStringPropertyWithBufferSize(JSIValue object, const char * const propName, size_t &size)
 {
     if (!ValueIsObject(object)) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetStringProperty failed!");
+        HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetStringPropertyWithBufferSize failed!");
         return nullptr;
     }
     JSIValue propValue = GetNamedProperty(object, propName);
@@ -701,7 +701,7 @@ char *JSI::ValueToStringWithBufferSize(JSIValue value, size_t &size)
 #if defined(ENABLE_JERRY)
     auto jVal = AS_JERRY_VALUE(value);
     if (!jerry_value_is_string(jVal)) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToString params invalid!");
+        HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToStringWithBufferSize params invalid!");
         size = 0;
         return nullptr;
     }
@@ -714,13 +714,13 @@ char *JSI::ValueToStringWithBufferSize(JSIValue value, size_t &size)
     } else {
         auto *buffer = static_cast<jerry_char_t *>(ace_malloc(sizeof(jerry_char_t) * size));
         if (buffer == nullptr) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToString malloc memory failed!");
+            HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToStringWithBufferSize malloc memory failed!");
             size = 0;
             return nullptr;
         }
         jerry_size_t length = jerry_string_to_char_buffer(jVal, buffer, size);
         if ((length == 0) || (length > size)) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToString jerry string to char buffer failed");
+            HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToStringWithBufferSize jerry string to char buffer failed");
             ace_free(buffer);
             size = 0;
             return nullptr;
@@ -729,7 +729,7 @@ char *JSI::ValueToStringWithBufferSize(JSIValue value, size_t &size)
         return result;
     }
 #else
-    HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToString has not been implemented in this js engine!");
+    HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToStringWithBufferSize has not been implemented in this js engine!");
     size = 0;
     return nullptr;
 #endif
