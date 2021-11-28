@@ -16,7 +16,7 @@
 #ifndef OHOS_ACELITE_VIDEO_PANEL_IMAGE_RES_H
 #define OHOS_ACELITE_VIDEO_PANEL_IMAGE_RES_H
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_VIDEO
+#if (FEATURE_COMPONENT_VIDEO == 1)
 
 #include "gfx_utils/image_info.h"
 namespace OHOS {

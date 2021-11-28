@@ -17,7 +17,7 @@
 
 #include "acelite_config.h"
 #include "non_copyable.h"
-#if (defined(JSFWK_TEST) && defined(OHOS_ACELITE_PRODUCT_WATCH))
+#if ((JSFWK_TEST == 1) && (OHOS_ACELITE_PRODUCT_WATCH == 1))
 #include "presets/preset_module.h"
 namespace OHOS {
 namespace ACELite {
@@ -57,7 +57,7 @@ public:
     ~JsTestModule() = default;
     static void Load()
     {
-#if (defined(JSFWK_TEST) && defined(OHOS_ACELITE_PRODUCT_WATCH))
+#if ((JSFWK_TEST == 1) && (OHOS_ACELITE_PRODUCT_WATCH == 1))
         JSTestModule jsTestModule;
         jsTestModule.Init();
 #endif

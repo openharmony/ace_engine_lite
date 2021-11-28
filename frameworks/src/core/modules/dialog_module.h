@@ -17,7 +17,7 @@
 #define OHOS_ACELITE_DIALOG_MODULE_H
 
 #include "acelite_config.h"
-#ifdef FEATURE_MODULE_DIALOG
+#if (FEATURE_MODULE_DIALOG == 1)
 #include "jsi.h"
 #include "js_fwk_common.h"
 #include "non_copyable.h"

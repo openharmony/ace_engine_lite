@@ -18,7 +18,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_COMPONENT_CANVAS
+#if (FEATURE_COMPONENT_CANVAS == 1)
 #include "component.h"
 #include "non_copyable.h"
 #include "ui_canvas.h"

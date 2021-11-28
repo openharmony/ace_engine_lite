@@ -39,14 +39,14 @@ JSIValue ModuleManager::RequireModule(const char * const moduleName)
     if (!strcmp(category, CATEGORY_SYSTEM) || !strcmp(category, CATEGORY_OHOS)) {
         uint16_t moduleCount = sizeof(OHOS_MODULES) / sizeof(Module);
         moduleObj = GetModuleObject(name, OHOS_MODULES, moduleCount, requiredSystemModules);
-#ifdef FEATURE_PRODUCT_MODULE
+#if (FEATURE_PRODUCT_MODULE == 1)
         if ((JSI::ValueIsUndefined(moduleObj)) && (productModulesGetter_ != nullptr)) {
             uint16_t prodModCount;
             const Module* prodModules = productModulesGetter_(prodModCount);
             moduleObj = GetModuleObject(name, prodModules, prodModCount, requiredSystemModules);
         }
 #endif // FEATURE_PRODUCT_MODULE
-#ifdef FEATURE_PRIVATE_MODULE
+#if (FEATURE_PRIVATE_MODULE == 1)
         if ((JSI::ValueIsUndefined(moduleObj)) && (privateModulesGetter_ != nullptr)) {
             const char * const bundleName = (bundleNameGetter_ != nullptr) ? bundleNameGetter_() : nullptr;
             moduleObj = GetModuleObject(name, nullptr, 0, requiredSystemModules, bundleName);
@@ -149,7 +149,7 @@ JSIValue ModuleManager::GetModuleObject(const char * const moduleName, const Mod
             }
         }
     }
-#ifdef FEATURE_PRIVATE_MODULE
+#if (FEATURE_PRIVATE_MODULE == 1)
     else {
         uint16_t count;
         const PrivateModule *privateModules =

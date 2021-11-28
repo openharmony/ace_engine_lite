@@ -14,7 +14,7 @@
  */
 
 #include "feature_ability_module.h"
-#ifdef FEATURE_FEATURE_ABILITY_MODULE
+#if (FEATURE_FEATURE_ABILITY_MODULE == 1)
 #include "ace_event_error_code.h"
 #include "ace_log.h"
 #include "fatal_handler.h"

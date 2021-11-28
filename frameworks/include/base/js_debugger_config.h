@@ -133,7 +133,7 @@ public:
     void ReleaseJSContext();
 private:
 #if ENABLED(ENGINE_DEBUGGER)
-#ifdef JS_ENGINE_EXTERNAL_CONTEXT
+#if (JS_ENGINE_EXTERNAL_CONTEXT == 1)
     void *engineContext_ = nullptr;
 #endif // JS_ENGINE_EXTERNAL_CONTEXT
     bool debuggerStarted_ = false;

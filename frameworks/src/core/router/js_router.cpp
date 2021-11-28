@@ -16,7 +16,7 @@
 #include "js_router.h"
 
 #include "ace_log.h"
-#if (defined(OHOS_ACELITE_PRODUCT_WATCH) || (defined(FEATURE_CUSTOM_ENTRY_PAGE)))
+#if ((OHOS_ACELITE_PRODUCT_WATCH == 1) || (FEATURE_CUSTOM_ENTRY_PAGE == 1))
 #include "dft_impl.h"
 #endif
 #include "async_task_manager.h"
@@ -98,7 +98,7 @@ void Router::ReplaceSync()
         // above call will move sm into ready state, than let the page show
         currentSm_->ChangeState(SHOW_STATE);
     }
-#if (defined(OHOS_ACELITE_PRODUCT_WATCH) || (defined(FEATURE_CUSTOM_ENTRY_PAGE)))
+#if ((OHOS_ACELITE_PRODUCT_WATCH == 1) || (FEATURE_CUSTOM_ENTRY_PAGE == 1))
     DftImpl::GetInstance()->CallbackPageReplaced(currentSm_->GetCurrentState());
 #endif
     STOP_TRACING();

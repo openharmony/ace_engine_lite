@@ -14,7 +14,7 @@
  */
 
 #include "number_format_module_tdd_test.h"
-#ifdef FEATURE_NUMBER_FORMAT
+#if (FEATURE_NUMBER_FORMAT == 1)
 #include "global.h"
 #include "js_app_context.h"
 #include "js_app_environment.h"

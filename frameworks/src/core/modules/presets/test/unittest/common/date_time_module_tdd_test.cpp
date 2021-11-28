@@ -14,7 +14,7 @@
  */
 
 #include "date_time_module_tdd_test.h"
-#ifdef FEATURE_DATE_FORMAT
+#if (FEATURE_DATE_FORMAT == 1)
 #include "global.h"
 #include "js_app_context.h"
 #include "js_app_environment.h"

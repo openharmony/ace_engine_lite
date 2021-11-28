@@ -105,13 +105,13 @@ constexpr uint32_t TEXT_BLUE_COLOR_MASK = 0x0000ff;
 constexpr int RED_COLOR_START_BIT = 16;
 constexpr int GREEN_COLOR_START_BIT = 8;
 constexpr char ATTR_SRC[] = "src"; // image-animator
-#ifdef FEATURE_COMPONENT_ANALOG_CLOCK
+#if (FEATURE_COMPONENT_ANALOG_CLOCK == 1)
 constexpr char CLOCK_HAND_IS_IMAGE[] = "isImage";
 constexpr char COMMON_STYLE_OPACITY[] = "opacity";
 constexpr char COMMON_STYLE_COLOR[] = "color";
 #endif // FEATURE_COMPONENT_ANALOG_CLOCK
 constexpr uint8_t DEFAULT_FONT_SIZE = 30;
-#ifdef FEATURE_COMPONENT_CANVAS
+#if (FEATURE_COMPONENT_CANVAS == 1)
 constexpr uint8_t DEFAULT_FONT_LETTERSPACE = 2;
 #endif // FEATURE_COMPONENT_CANVAS
 constexpr char DEFAULT_FONT_FAMILY[] = DEFAULT_VECTOR_FONT_FILENAME;
@@ -158,7 +158,7 @@ constexpr char TRANSITION_TRANSFORM_Y[] = "translateY";
 constexpr char CONSTRUCTOR_VIEW_MODEL[] = "ViewModel";
 constexpr char CONSTRUCTOR_ABILITY_SLICE[] = "AbilitySlice";
 
-#ifdef FEATURE_ROTATION_API
+#if (FEATURE_ROTATION_API == 1)
 constexpr char FUNC_ROTATION_NAME[] = "rotation";
 constexpr char ATTR_NAME_FOCUS[] = "focus";
 #endif // FEATURE_ROTATION_API
@@ -280,7 +280,7 @@ JSValue CallWithRootAbilitySlice(JSValue func);
 JSValue CreateWatcher(JSValue getter, JSHandler handler, JSValue options);
 
 void ExpandImagePathMem(char *&imagePath, const int16_t dotPos, const int16_t suffixLen, const int16_t imagePathLen);
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
 void CureImagePath(char *&imagePath);
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 const char *ParseImageSrc(jerry_value_t source);

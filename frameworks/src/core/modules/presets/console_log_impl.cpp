@@ -16,7 +16,7 @@
 #include "console_log_impl.h"
 #if ENABLED(CONSOLE_LOG_OUTPUT)
 #include "js_app_environment.h"
-#ifdef FEATURE_USER_MC_LOG_PRINTF
+#if (FEATURE_USER_MC_LOG_PRINTF == 1)
 #include "product_adapter.h"
 #endif // FEATURE_USER_MC_LOG_PRINTF
 #ifdef FEATURE_ACELITE_HI_LOG_PRINTF
@@ -143,7 +143,7 @@ void LogString(const LogLevel logLevel, const char * const str)
     if (str == nullptr) {
         return;
     }
-#if defined(FEATURE_ACELITE_HI_LOG_PRINTF) || defined(FEATURE_USER_MC_LOG_PRINTF)
+#if ((FEATURE_ACELITE_HI_LOG_PRINTF == 1) || (FEATURE_USER_MC_LOG_PRINTF == 1))
     size_t strLength = strlen(str);
     for (size_t i = 0; i < strLength; i++) {
         LogChar(str[i], logLevel, false);
@@ -169,7 +169,7 @@ void LogChar(char c, const LogLevel logLevel, bool endFlag)
         if (c == '\n' || !endFlag) {
             // this is the newline during the console log, need to append the loglevel prefix,
             // example: console.log("aa\nbb");
-#if !defined(FEATURE_ACELITE_HI_LOG_PRINTF) && !defined(FEATURE_USER_MC_LOG_PRINTF)
+#if ((FEATURE_ACELITE_HI_LOG_PRINTF != 1) && (FEATURE_USER_MC_LOG_PRINTF != 1))
             Output(logLevel, "\n", 1); // hilog will trace our the line separator directly
 #endif
             if (!endFlag) {
@@ -205,7 +205,7 @@ static void OutputToHiLog(const LogLevel logLevel, const char * const str)
             break;
     }
 }
-#elif defined(FEATURE_USER_MC_LOG_PRINTF)
+#elif (FEATURE_USER_MC_LOG_PRINTF == 1)
 static void OutputToHiLog(const LogLevel logLevel, const char * const str)
 {
     switch (logLevel) {
@@ -247,7 +247,7 @@ void Output(const LogLevel logLevel, const char * const str, const uint8_t lengt
     }
     (void)length;
     Debugger::GetInstance().Output(str);
-#if defined(FEATURE_ACELITE_HI_LOG_PRINTF) || defined(FEATURE_USER_MC_LOG_PRINTF)
+#if ((FEATURE_ACELITE_HI_LOG_PRINTF == 1) || (FEATURE_USER_MC_LOG_PRINTF == 1))
     OutputToHiLog(logLevel, str);
 #endif
 #ifdef TDD_ASSERTIONS

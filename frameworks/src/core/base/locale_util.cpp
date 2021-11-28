@@ -14,7 +14,7 @@
  */
 
 #include "locale_util.h"
-#ifdef FEATURE_INTL_MODULE
+#if (FEATURE_INTL_MODULE == 1)
 #include "ace_log.h"
 #include "global.h"
 #include "js_fwk_common.h"

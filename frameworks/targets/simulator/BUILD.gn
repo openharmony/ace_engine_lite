@@ -57,10 +57,10 @@ ohos_static_library("ace_lite") {
     "//third_party/jerryscript:libjerryscript",
   ]
   defines = [
-    "TARGET_SIMULATOR",
-    "JS_ENGINE_EXTERNAL_CONTEXT",
-    "SCREENSIZE_SPECIFIED",
-    "MOCK_JS_ASYNC_WORK",
+    "TARGET_SIMULATOR=1",
+    "JS_ENGINE_EXTERNAL_CONTEXT=1",
+    "SCREENSIZE_SPECIFIED=1",
+    "MOCK_JS_ASYNC_WORK=1",
   ]
   if (is_debug == "debug") {
     defines += [ "JS_PROFILER=1" ]
@@ -68,7 +68,7 @@ ohos_static_library("ace_lite") {
     defines += [ "JS_PROFILER=0" ]
   }
   if (LOSCFG_TEST_JS_BUILD) {
-    defines += [ "JSFWK_TEST" ]
+    defines += [ "JSFWK_TEST=1" ]
   }
   if (enable_ohos_appexecfwk_feature_ability == true) {
     defines += [ "ABILITY_WINDOW_SUPPORT" ]

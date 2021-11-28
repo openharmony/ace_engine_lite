@@ -17,7 +17,7 @@
 #define OHOS_ACELITE_DATE_TIME_FORMAT_MODULE_H
 
 #include "acelite_config.h"
-#ifdef FEATURE_DATE_FORMAT
+#if (FEATURE_DATE_FORMAT == 1)
 #include "js_fwk_common.h"
 #include "date_time_format.h"
 namespace OHOS {

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_VIDEO
+#if (FEATURE_COMPONENT_VIDEO == 1)
 
 #include "panel_view.h"
 #include "graphic_config.h"

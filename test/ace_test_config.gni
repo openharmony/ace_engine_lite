@@ -69,7 +69,7 @@ ace_test_configs = [ "$ace_lite_root/frameworks:ace_lite_config" ]
 ace_test_defines = [
   "TDD_ASSERTIONS",
   "__LITEOS__",
-  "FEATURE_TERMINATE_ABILITY",
+  "FEATURE_TERMINATE_ABILITY=1",
 ]
 
 ace_test_deps = [
@@ -80,6 +80,7 @@ ace_test_deps = [
   "${appexecfwk_lite_path}/frameworks/bundle_lite:bundle",
   "//base/powermgr/battery_lite/frameworks/js:ace_battery_kits",
   "//foundation/ace/ace_engine_lite/frameworks:ace_lite",
+  "//foundation/ace/ace_engine_lite/frameworks/targets",
   "//foundation/communication/ipc_lite:liteipc_adapter",
   "//foundation/distributedschedule/samgr_lite/communication/broadcast",
   "//foundation/distributedschedule/samgr_lite/samgr:samgr",

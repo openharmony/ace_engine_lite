@@ -17,7 +17,7 @@
 
 #include "acelite_config.h"
 #include "non_copyable.h"
-#ifdef FEATURE_TIMER_MODULE
+#if (FEATURE_TIMER_MODULE == 1)
 #include "ace_log.h"
 #include "js_timer_list.h"
 #include "presets/preset_module.h"
@@ -149,14 +149,14 @@ public:
     ~TimersModule() = default;
     static void Load()
     {
-#ifdef FEATURE_TIMER_MODULE
+#if (FEATURE_TIMER_MODULE == 1)
         TimerModule *timerModule = const_cast<TimerModule *>(TimerModule::GetInstance());
         timerModule->Init();
 #endif
     }
     static void Clear()
     {
-#ifdef FEATURE_TIMER_MODULE
+#if (FEATURE_TIMER_MODULE == 1)
         TimerModule *timerModule = const_cast<TimerModule *>(TimerModule::GetInstance());
         timerModule->Clear();
 #endif

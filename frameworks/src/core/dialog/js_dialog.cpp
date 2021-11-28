@@ -14,7 +14,7 @@
  */
 
 #include "acelite_config.h"
-#ifdef FEATURE_MODULE_DIALOG
+#if (FEATURE_MODULE_DIALOG == 1)
 #include "ace_log.h"
 #include "js_async_work.h"
 #include "js_dialog.h"

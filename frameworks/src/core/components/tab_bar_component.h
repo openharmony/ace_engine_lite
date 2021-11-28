@@ -18,7 +18,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_COMPONENT_TABS
+#if (FEATURE_COMPONENT_TABS == 1)
 
 #include "component.h"
 #include "non_copyable.h"

@@ -16,7 +16,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_COMPONENT_QRCODE
+#if (FEATURE_COMPONENT_QRCODE == 1)
 #include "component.h"
 #include "key_parser.h"
 #include "non_copyable.h"

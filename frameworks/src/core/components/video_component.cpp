@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_VIDEO
+#if (FEATURE_COMPONENT_VIDEO == 1)
 #include "video_component.h"
 #include "ace_log.h"
 #include "key_parser.h"
 #include "keys.h"
 
-#ifdef FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
+#if (FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC == 1)
 #include <sys/prctl.h>
 #include "ace_ability.h"
 #endif // FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
@@ -32,7 +32,7 @@ const char * const VideoComponent::FUNC_SET_CURRENT_TIME = "setCurrentTime";
 const char * const VideoComponent::FUNC_SET_Volume = "setVolume";
 List<Component *> VideoComponent::componentNodes_;
 
-#ifdef FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
+#if (FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC == 1)
 pthread_mutex_t VideoComponent::updateLock_ = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t VideoComponent::updateCondition_ = PTHREAD_COND_INITIALIZER;
 #endif // FEATURE_UPDATE_VIDEO_PROGRESS_ASYN
@@ -457,7 +457,7 @@ void VideoComponent::SetComponentReleasingFlag(bool releasing)
     isReleasing_ = releasing;
 }
 
-#ifdef FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
+#if (FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC == 1)
 bool VideoComponent::PrepareProgressUpdatingThread()
 {
     int ret = pthread_mutex_init(&updateLock_, nullptr);

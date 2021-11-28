@@ -21,11 +21,11 @@
 #include "js_async_work.h"
 #include "js_fwk_common.h"
 #include "key_parser.h"
-#if defined(FEATURE_ACELITE_MC_JS_PROFILER)
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
 #include <fcntl.h>
 #include "los_tick.h"
 #include "unistd.h"
-#elif defined(FEATURE_ACELITE_JS_PROFILER)
+#elif (FEATURE_ACELITE_JS_PROFILER == 1)
 #include <sys/time.h>
 #else
 #include <time.h>
@@ -40,7 +40,7 @@ namespace ACELite {
  */
 
 static bool g_isFirst = true;
-#if defined(FEATURE_ACELITE_MC_JS_PROFILER)
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
 static uint16_t g_profiler_msg_index = 0;
 #else
 static constexpr uint8_t PHASE_NAME_LENGTH = 50;
@@ -60,7 +60,7 @@ struct ProfilerPhase {
  * NOTE: Keep this array sync with PerformanceTag definations
  */
 static const ProfilerPhase g_profilerPhaseConfig[] = {
-#if defined(FEATURE_ACELITE_MC_JS_PROFILER)
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     // id, parent
     {P_UNKNOWN, P_UNKNOWN},
     {LAUNCH, P_UNKNOWN},
@@ -157,7 +157,7 @@ static const ProfilerPhase g_profilerPhaseConfig[] = {
 #endif
 };
 
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
 JSProfiler::JSProfiler() : data_(nullptr), dataCount_(0), traceIdSlot_(0), enabled_(false), msg_(nullptr) {}
 #else
 JSProfiler::JSProfiler() : data_(nullptr), dataCount_(0), traceIdSlot_(0), enabled_(false) {}
@@ -176,7 +176,7 @@ JSProfiler *JSProfiler::GetInstance()
 bool JSProfiler::IsEnabled()
 {
     bool isEnabled = enabled_ && (data_ != nullptr);
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     isEnabled = isEnabled && (msg_ != nullptr);
 #endif
     return isEnabled;
@@ -193,7 +193,7 @@ void JSProfiler::PrepareDataBuffer()
         HILOG_ERROR(HILOG_MODULE_ACE, "malloc performance data buffer failed");
         return;
     }
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     msg_ = static_cast<ProfilerMsg *>(ace_malloc(PROFILER_MSG_LENGTH * sizeof(ProfilerMsg)));
     if (msg_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "malloc performance data buffer failed");
@@ -205,7 +205,7 @@ void JSProfiler::PrepareDataBuffer()
     ResetData();
 }
 
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
 void JSProfiler::FlushProfilerMsg(void *data)
 {
     if (data == nullptr) {
@@ -255,7 +255,7 @@ void JSProfiler::FlushProfilerMsg(void *data)
 void JSProfiler::Release()
 {
     ACE_FREE(data_);
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     ACE_FREE(msg_);
 #endif
 }
@@ -270,7 +270,7 @@ void JSProfiler::ResetData()
         }
     }
 
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     if (msg_) {
         if (memset_s(msg_, (PROFILER_MSG_LENGTH * sizeof(ProfilerMsg)), 0,
             (PROFILER_MSG_LENGTH * sizeof(ProfilerMsg))) != 0) {
@@ -351,7 +351,7 @@ void JSProfiler::Output()
             // for too many round details, we just print out bigger than 0 items to save the log IO band width
             continue;
         }
-#if defined(FEATURE_ACELITE_MC_JS_PROFILER)
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
         if (g_profiler_msg_index == 0) {
             if ((data.label != LAUNCH) && (data.label != ROUTER_REPLACE)) {
                 continue;
@@ -381,7 +381,7 @@ void JSProfiler::Output()
                      g_profilerPhaseConfig[g_profilerPhaseConfig[data.label].parentPhase].phaseName);
 #endif
     }
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     JsAsyncWork::DispatchAsyncWork(FlushProfilerMsg, this);
 #else
     // reset all records after output to trace
@@ -391,10 +391,10 @@ void JSProfiler::Output()
 
 uint64_t JSProfiler::GetCurrentClockTick() const
 {
-#if defined(FEATURE_ACELITE_MC_JS_PROFILER)
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     // real device
     return LOS_TickCountGet(); // count in clock ticks, usually is ms
-#elif defined(FEATURE_ACELITE_JS_PROFILER)
+#elif (FEATURE_ACELITE_JS_PROFILER == 1)
     const uint32_t unit = 1000;
     // ipcamera
     struct timeval timeVal;
@@ -414,7 +414,7 @@ uint64_t JSProfiler::CalculateElapsedTime(uint64_t start, uint64_t end) const
     }
 
     uint64_t interval = end - start;
-#if defined(FEATURE_ACELITE_MC_JS_PROFILER) || defined(FEATURE_ACELITE_JS_PROFILER)
+#if ((FEATURE_ACELITE_MC_JS_PROFILER == 1) || (FEATURE_ACELITE_JS_PROFILER == 1))
     // real device
     return interval;
 #else

@@ -16,7 +16,7 @@
 #include "platform_adapter.h"
 #include <cstdlib>
 #include "acelite_config.h"
-#if (defined(__LINUX__) || defined(__LITEOS__))
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
 #include "ace_ability.h"
 #endif
 #include "ace_log.h"
@@ -28,7 +28,7 @@ namespace OHOS {
 namespace ACELite {
 void PrintVersionTrace()
 {
-#ifdef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR == 1)
     // output version trace on simulator
     HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite version: %{public}s", ACEVersion::GetStr());
     HILOG_DEBUG(HILOG_MODULE_ACE, "ACELite commit: %{public}s", ACEVersion::GetCommit());
@@ -38,7 +38,7 @@ void PrintVersionTrace()
 
 void SetEngineSnapshotMode(bool &mode)
 {
-#ifndef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR != 1)
     mode = true;
 #else
     mode = false;
@@ -50,15 +50,15 @@ void SetEngineSnapshotModeManually(bool &mode)
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
     // if not starting debugger, on real device, give a chance to use JS mode manually
     mode = IsFileExisted(RUNTIME_MODE_FILE_PATH);
-#elif !defined(TARGET_SIMULATOR)
+#elif (TARGET_SIMULATOR != 1)
     mode = !(IsFileExisted(RUNTIME_MODE_FILE_PATH));
 #endif
 }
 
 void Terminate(uint16_t token)
 {
-#ifndef TARGET_SIMULATOR // no AMS support on PC simulator
-#ifdef FEATURE_TERMINATE_ABILITY
+#if (TARGET_SIMULATOR != 1) // no AMS support on PC simulator
+#if (FEATURE_TERMINATE_ABILITY == 1)
     ProductAdapter::SendTerminatingRequest(token, false);
 #else
     AceAbility::TerminateSelf();
@@ -68,7 +68,7 @@ void Terminate(uint16_t token)
 
 void Srand(unsigned seed)
 {
-#ifdef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR == 1)
     srand(seed);
 #endif // TARGET_SIMULATOR
 }

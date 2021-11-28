@@ -30,7 +30,7 @@ public:
     ~AppModule() = default;
     static JSIValue GetInfo(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
     static JSIValue Terminate(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
-#ifdef FEATURE_SCREEN_ON_VISIBLE
+#if (FEATURE_SCREEN_ON_VISIBLE == 1)
     static JSIValue ScreenOnVisible(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
 #endif
 
@@ -42,7 +42,7 @@ private:
 
     static cJSON* ReadManifest();
 
-#ifdef FEATURE_SCREEN_ON_VISIBLE
+#if (FEATURE_SCREEN_ON_VISIBLE == 1)
     static const char * const SCREEN_ON_VISIBLE_KEY;
     static const char * const SCREEN_ON_VISIBLE_DATA;
     static const char * const SCREEN_ON_VISIBLE_CODE;
@@ -61,7 +61,7 @@ void InitAppModule(JSIValue exports)
 {
     JSI::SetModuleAPI(exports, "getInfo", AppModule::GetInfo);
     JSI::SetModuleAPI(exports, "terminate", AppModule::Terminate);
-#ifdef FEATURE_SCREEN_ON_VISIBLE
+#if (FEATURE_SCREEN_ON_VISIBLE == 1)
     JSI::SetModuleAPI(exports, "screenOnVisible", AppModule::ScreenOnVisible);
 #endif
 }

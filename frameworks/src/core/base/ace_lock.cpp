@@ -14,7 +14,7 @@
  */
 #include "ace_lock.h"
 
-#if (defined(__LITEOS_M__) || defined(OHOS_ACELITE_PRODUCT_WATCH))
+#if (defined(__LITEOS_M__) || (OHOS_ACELITE_PRODUCT_WATCH == 1))
 #include "los_task.h"
 #endif
 
@@ -62,7 +62,7 @@ AutoLockGuard::AutoLockGuard(LockType &lock) : lock_(lock)
 {
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
     lock_.Lock();
-#elif (defined(__LITEOS_M__) || defined(OHOS_ACELITE_PRODUCT_WATCH))
+#elif (defined(__LITEOS_M__) || (OHOS_ACELITE_PRODUCT_WATCH == 1))
     LOS_TaskLock();
 #else
     (void)lock_;
@@ -73,7 +73,7 @@ AutoLockGuard::~AutoLockGuard()
 {
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
     lock_.Unlock();
-#elif (defined(__LITEOS_M__) || defined(OHOS_ACELITE_PRODUCT_WATCH))
+#elif (defined(__LITEOS_M__) || (OHOS_ACELITE_PRODUCT_WATCH == 1))
     LOS_TaskUnlock();
 #endif
 }

@@ -15,7 +15,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_COMPONENT_ANALOG_CLOCK
+#if (FEATURE_COMPONENT_ANALOG_CLOCK == 1)
 
 #include "ace_log.h"
 #include "analog_clock_component.h"

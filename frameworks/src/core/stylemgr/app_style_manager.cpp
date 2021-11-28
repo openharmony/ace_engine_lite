@@ -187,7 +187,7 @@ void AppStyleManager::HandleDynamicStyle(const jerry_value_t options, Component 
             if (curr.IsFreeze()) {
                 expressionValue = JSFunction::Call(propValue, curr.GetViewModel(), nullptr, 0);
             } else {
-#ifdef FEATURE_LAZY_LOADING_MODULE
+#if (FEATURE_LAZY_LOADING_MODULE == 1)
                 expressionValue = CallJSFunction(propValue, curr.GetNativeElement(), nullptr, 0);
                 JsAppContext *context = JsAppContext::GetInstance();
                 LazyLoadManager *lazyLoadManager = const_cast<LazyLoadManager *>(context->GetLazyLoadManager());

@@ -15,7 +15,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_TIMER_MODULE
+#if (FEATURE_TIMER_MODULE == 1)
 #include "js_timer_list.h"
 #include "presets/timer_module.h"
 #include "ace_mem_base.h"

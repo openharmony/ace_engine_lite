@@ -16,8 +16,8 @@
 #define OHOS_ACELITE_VIDEO_COMPONENT_H
 
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_VIDEO
-#ifdef FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
+#if (FEATURE_COMPONENT_VIDEO == 1)
+#if (FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC == 1)
 #include <pthread.h>
 #include <unistd.h>
 #endif // FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
@@ -384,7 +384,7 @@ private:
     bool isPlaying_;
     bool isReleasing_;
     bool isUpdatingHandlerQuited_;
-#ifdef FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
+#if (FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC == 1)
     static pthread_mutex_t updateLock_;
     static pthread_cond_t updateCondition_;
 #endif // FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC

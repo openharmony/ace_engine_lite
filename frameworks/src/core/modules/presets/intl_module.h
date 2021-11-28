@@ -16,7 +16,7 @@
 #ifndef OHOS_ACELITE_INTL_MODULE_H
 #define OHOS_ACELITE_INTL_MODULE_H
 #include "acelite_config.h"
-#ifdef FEATURE_INTL_MODULE
+#if (FEATURE_INTL_MODULE == 1)
 #include "js_fwk_common.h"
 #include "non_copyable.h"
 #include "locale_info.h"
@@ -55,7 +55,7 @@ public:
 
     static void Load()
     {
-#ifdef FEATURE_INTL_MODULE
+#if (FEATURE_INTL_MODULE == 1)
         IntlModule *intlModule = IntlModule::GetInstance();
         intlModule->Init();
 #endif

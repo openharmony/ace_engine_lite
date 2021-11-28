@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 #include "jstest_module.h"
-#if (defined(JSFWK_TEST) && defined(OHOS_ACELITE_PRODUCT_WATCH))
+#if ((JSFWK_TEST == 1) && (OHOS_ACELITE_PRODUCT_WATCH == 1))
 #include <stdlib.h>
 #include "ace_mem_base.h"
 #include "test_fwk.h"
