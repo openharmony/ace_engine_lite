@@ -64,6 +64,12 @@ static uint16_t g_screenHeight = 454;
 const static char *DEFAULT_APP_DATA_PATH = "user/ace/data/";
 static const char *g_defaultDataRootPath = DEFAULT_APP_DATA_PATH;
 
+// default device info
+const static uint8_t DEVICE_TYPE_STR_LEN = 24;
+const static char *DEFAULT_DEVICE_TYPE_NAME = "smartVision";
+// smartVision as default
+static const char *g_deviceType = DEFAULT_DEVICE_TYPE_NAME;
+
 // indicating if the ace application is on forground
 static bool g_isRenderTickAcceptable = false;
 
@@ -274,6 +280,19 @@ void ProductAdapter::ConfigPrivateDataRootPath(const char *appDataRoot)
 const char *ProductAdapter::GetPrivateDataRootPath()
 {
     return g_defaultDataRootPath;
+}
+
+void ProductAdapter::InitDeviceInfo(const char *deviceType)
+{
+    if (deviceType == nullptr || (strlen(deviceType) == 0) || strlen(deviceType) >= DEVICE_TYPE_STR_LEN) {
+        return;
+    }
+    g_deviceType = deviceType;
+}
+
+const char *ProductAdapter::GetDeviceType()
+{
+    return g_deviceType;
 }
 } // namespace ACELite
 } // namespace OHOS

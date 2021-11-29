@@ -129,6 +129,7 @@
                     "pages/switch/SwitchS01/index",
                     "pages/switch/SwitchS02/index",
                     "pages/style/StyleBaseTest001/index",
+                    "pages/style/MediaQuery/index",
                     "pages/resource/resource005/index",
                     "pages/resource/resource007/index",
                     "pages/data-binding/01/index",

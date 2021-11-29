@@ -166,6 +166,7 @@ public:
     }
 
     bool UpdateNumValToStr();
+    void UpdateValueFrom(const AppStyleItem &from);
     static AppStyleItem *GenerateFromJSValue(jerry_value_t stylePropName, jerry_value_t stylePropValue);
     static AppStyleItem *CreateStyleItem(uint16_t keyId,
                                          const jerry_value_t stylePropValue,

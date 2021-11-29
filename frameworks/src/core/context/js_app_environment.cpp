@@ -34,7 +34,9 @@
 #include "presets/timer_module.h"
 #include "presets/version_module.h"
 #include "product_adapter.h"
+#include "system_info.h"
 #if (JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED == 1)
+
 extern "C" {
 #include "generate-bytecode.h"
 }
@@ -83,6 +85,7 @@ void JsAppEnvironment::InitJsFramework() const
     ProductAdapter::LoadExtraPresetModules();
     LoadFramework();
     LocalModule::Load();
+    SystemInfo::GetInstance().Initialize();
     STOP_TRACING();
 }
 
