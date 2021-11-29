@@ -113,6 +113,7 @@ public:
     static void InitNativeMemPoolHook(NativeMemInfoGetter getter);
     static void InitExtraModulesGetter(ProductModulesGetter productModuleGetter,
                                        PrivateModulesGetter privateModuleGetter);
+    static void InitDeviceInfo(const char *deviceType);
     static void RegTerminatingHandler(TerminateAbilityHandler handler);
     static void RegTEHandlers(const TEHandlingHooks &teHandlingHooks);
     static TEDispatchingResult DispatchTEMessage();
@@ -135,6 +136,7 @@ public:
     static uint8_t GetDefaultFontSize();
     static void UpdateRenderTickAcceptable(bool acceptable);
     static void GetScreenSize(uint16_t &width, uint16_t &height);
+    static const char *GetDeviceType();
     static bool SetScreenOnVisible(bool visible);
     static void LoadExtraPresetModules();
     static void UnloadExtraPresetModules();

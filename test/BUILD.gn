@@ -27,6 +27,7 @@ modules_unittest_root =
 stylemgr_unittest_root =
     "$ace_lite_root/frameworks/src/core/stylemgr/test/unittest"
 router_unittest_root = "$ace_lite_root/frameworks/src/core/router/test/unittest"
+base_unittest_root = "$ace_lite_root/frameworks/src/core/base/test/unittest"
 
 # common config for all test, append extra in self gn
 config("test_common_config") {
@@ -46,6 +47,7 @@ group("unittest") {
   deps = [
     "$ace_lite_root/test/moduletest/common:door_unittest",
     "$async_unittest_root:async_unittest",
+    "$base_unittest_root:base_utils_unittest",
     "$cache_manager_unittest_root:cache_manager_unittest",
     "$components_unittest_root:components_unittest",
     "$context_unittest_root:js_frameworks_unittest",

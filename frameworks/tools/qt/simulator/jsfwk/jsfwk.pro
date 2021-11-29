@@ -63,6 +63,7 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/base/number_parser.cpp \
         $${ACELITE_CORE_PATH}/base/product_adapter.cpp \
         $${ACELITE_CORE_PATH}/base/string_util.cpp \
+        $${ACELITE_CORE_PATH}/base/system_info.cpp \
         $${ACELITE_CORE_PATH}/base/time_util.cpp \
         $${ACELITE_CORE_PATH}/components/analog_clock_component.cpp \
         $${ACELITE_CORE_PATH}/components/camera_component.cpp \
@@ -140,6 +141,7 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/stylemgr/app_style_list.cpp \
         $${ACELITE_CORE_PATH}/stylemgr/app_style_manager.cpp \
         $${ACELITE_CORE_PATH}/stylemgr/app_style_sheet.cpp \
+        $${ACELITE_CORE_PATH}/stylemgr/condition_arbitrator.cpp \
         $${ACELITE_CORE_PATH}/wrapper/js.cpp \
         $${ACELITE_FRAMEWORK_PATH}/targets/platform_adapter.cpp \
         targets/simulator/utils/js_heap_stats_dumper.cpp \

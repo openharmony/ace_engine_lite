@@ -28,6 +28,7 @@ public:
     static char *Slice(const char *sequence, const int32_t start);
     static char *Slice(const char *sequence, const int32_t start, const int32_t end);
     static bool StartsWith(const char *sequence, const char *subsequence);
+    static char *Trim(char *sequence);
 };
 } // namespace ACELite
 } // namespace OHOS

@@ -111,6 +111,7 @@ ace_lite_sources = [
   "$ACE_LITE_PATH/src/core/base/number_parser.cpp",
   "$ACE_LITE_PATH/src/core/base/product_adapter.cpp",
   "$ACE_LITE_PATH/src/core/base/string_util.cpp",
+  "$ACE_LITE_PATH/src/core/base/system_info.cpp",
   "$ACE_LITE_PATH/src/core/base/time_util.cpp",
   "$ACE_LITE_PATH/src/core/components/analog_clock_component.cpp",
   "$ACE_LITE_PATH/src/core/components/camera_component.cpp",
@@ -186,6 +187,7 @@ ace_lite_sources = [
   "$ACE_LITE_PATH/src/core/stylemgr/app_style_list.cpp",
   "$ACE_LITE_PATH/src/core/stylemgr/app_style_manager.cpp",
   "$ACE_LITE_PATH/src/core/stylemgr/app_style_sheet.cpp",
+  "$ACE_LITE_PATH/src/core/stylemgr/condition_arbitrator.cpp",
   "$ACE_LITE_PATH/src/core/wrapper/js.cpp",
   "$ACE_LITE_PATH/targets/platform_adapter.cpp",
 ]

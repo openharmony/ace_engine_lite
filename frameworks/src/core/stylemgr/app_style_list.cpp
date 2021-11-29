@@ -29,20 +29,50 @@ void AppStyleList::Reset()
     lastStyle_ = nullptr;
 }
 
-void AppStyleList::AddStyle(AppStyle* newStyle)
+void AppStyleList::AddStyle(AppStyle *newStyle)
 {
     if (newStyle == nullptr) {
         return;
     }
 
+    // the first one
     if (firstStyle_ == nullptr) {
         firstStyle_ = newStyle;
         lastStyle_ = newStyle;
-    } else {
-        newStyle->SetPre(lastStyle_);
-        lastStyle_->SetNext(newStyle);
-        lastStyle_ = newStyle;
+        return;
     }
+
+    // fresh new one
+    newStyle->SetPre(lastStyle_);
+    lastStyle_->SetNext(newStyle);
+    lastStyle_ = newStyle;
+}
+
+AppStyle *AppStyleList::GetExistStyle(const char *name) const
+{
+    if (firstStyle_ == nullptr) {
+        return nullptr;
+    }
+    if (name == nullptr || strlen(name) == 0) {
+        return nullptr;
+    }
+    const AppStyle *current = firstStyle_;
+    while (current != nullptr) {
+        // point to next immediately
+        const AppStyle *existCurrentStyle = current;
+        current = existCurrentStyle->GetNext();
+        const char *styleName = existCurrentStyle->GetStyleName();
+
+        if (styleName == nullptr || strlen(styleName) == 0) {
+            continue;
+        }
+        if ((strlen(styleName) == strlen(name)) && strcmp(styleName, name) == 0) {
+            // exist
+            return const_cast<AppStyle *>(existCurrentStyle);
+        }
+    }
+
+    return nullptr;
 }
 } // namespace ACELite
 } // namespace OHOS
