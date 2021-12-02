@@ -17,7 +17,7 @@
 #define OHOS_ACELITE_SAMPLE_MODULE_H
 
 #include "acelite_config.h"
-#ifdef ENABLE_MODULE_REQUIRE_TEST
+#if (ENABLE_MODULE_REQUIRE_TEST == 1)
 
 #include "jsi.h"
 #include "non_copyable.h"

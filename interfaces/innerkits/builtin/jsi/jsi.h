@@ -429,7 +429,7 @@ public:
      */
     static JSIValue CreateNull();
 
-#ifdef JS_FWK_SYMBOL
+#if (JS_FWK_SYMBOL == 1)
     /**
      * @brief Create a javascript symbol.
      *
@@ -604,7 +604,7 @@ public:
      */
     static void SetOnTerminate(JSIValue object, JsiCallback callback);
 
-#ifdef JS_FWK_TYPEDARRAY
+#if (JS_FWK_TYPEDARRAY == 1)
     /**
      * @brief Get the properties of the given javascript TypedArray object.
      *

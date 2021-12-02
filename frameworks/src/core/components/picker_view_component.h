@@ -19,7 +19,7 @@
 #include "acelite_config.h"
 #include "component.h"
 #include "non_copyable.h"
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
 #include "ui_date_picker.h"
 #endif // FEATURE_COMPONENT_DATE_PICKER
 #include "ui_time_picker.h"
@@ -30,7 +30,7 @@ static constexpr char TEXT_PICKER_NEW_VALUE[] = "newValue";
 static constexpr char TEXT_PICKER_NEW_SELECTED[] = "newSelected";
 static constexpr char TIME_PICKER_HOUR[] = "hour";
 static constexpr char TIME_PICKER_MINUTE[] = "minute";
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
 static constexpr char DATE_PICKER_YEAR[] = "year";
 static constexpr char DATE_PICKER_MONTH[] = "month";
 static constexpr char DATE_PICKER_DAY[] = "day";
@@ -92,7 +92,7 @@ private:
     jerry_value_t timeCallback_;
 };
 
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
 /**
  * @brief listener class for date picker onchange event.
  */
@@ -147,7 +147,7 @@ protected:
         UNKNOWN,
         TEXT,
         TIME,
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
         DATE,
 #endif // FEATURE_COMPONENT_DATE_PICKER
         TYPE_MAX
@@ -158,7 +158,7 @@ private:
     PickerType GetPickerType() const;
     bool CreateTextPicker();
     bool CreateTimePicker();
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
     bool CreateDatePicker();
 #endif // FEATURE_COMPONENT_DATE_PICKER
     bool SetPickerSelected(jerry_value_t selectedValue);
@@ -184,7 +184,7 @@ private:
     uint16_t textArraySize_;
     TextPickerListener* textPickerListener_;
 
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
     // date picker-view attributes
     char* dateSelected_;
     char* dateStart_;

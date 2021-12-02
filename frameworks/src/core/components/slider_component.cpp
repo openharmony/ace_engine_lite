@@ -30,7 +30,7 @@ SliderComponent::SliderComponent(jerry_value_t options, jerry_value_t children, 
       direction_(UISlider::Direction::DIR_LEFT_TO_RIGHT)
 {
     SetComponentName(K_SLIDER);
-#ifdef FEATURE_ROTATION_API
+#if (FEATURE_ROTATION_API == 1)
     RegisterNamedFunction(FUNC_ROTATION_NAME, HandleRotationRequest);
 #endif // FEATURE_ROTATION_API
 }

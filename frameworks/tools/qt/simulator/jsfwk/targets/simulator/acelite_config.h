@@ -27,14 +27,14 @@
 #define OHOS_ACELITE_SIMULATOR_WIN // NOTE: DO NOT use this macro directly
 
 #ifndef JSFWK_TEST
-#define JSFWK_TEST
+#define JSFWK_TEST 1
 #endif
 
 /**
  * The macro is used to distingush the real device and simulator.
  */
 #ifndef TARGET_SIMULATOR
-#define TARGET_SIMULATOR
+#define TARGET_SIMULATOR 1
 #endif
 
 /**
@@ -43,37 +43,37 @@
 #ifdef FEATURE_TEST_IMPLEMENTATION
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_TEST_IMPLEMENTATION
+#define FEATURE_TEST_IMPLEMENTATION 1
 #endif
 
-#define FEATURE_API_VERSION
+#define FEATURE_API_VERSION 1
 
-#ifndef QT_SIMULATOR
+#if (QT_SIMULATOR != 1)
 
 /**
  * enable FeatureAbility API
  */
-#define FEATURE_FEATURE_ABILITY_MODULE
+#define FEATURE_FEATURE_ABILITY_MODULE 1
 
 /**
  * support device API for JS
  */
-#define FEATURE_MODULE_DEVICE
+#define FEATURE_MODULE_DEVICE 1
 
 /**
  * support geo location API for JS
  */
-#define FEATURE_MODULE_GEO
+#define FEATURE_MODULE_GEO 1
 
 /**
  * support sensor API for JS
  */
-#define FEATURE_MODULE_SENSOR
+#define FEATURE_MODULE_SENSOR 1
 
 /**
  * support brightness API for JS
  */
-#define FEATURE_MODULE_BRIGHTNESS
+#define FEATURE_MODULE_BRIGHTNESS 1
 
 /**
  * support battery API for JS
@@ -83,33 +83,33 @@
 /**
  * support configuration API for JS
  */
-#define FEATURE_MODULE_CONFIGURATION
+#define FEATURE_MODULE_CONFIGURATION 1
 
 /**
  * support storage API for JS
  */
-#define FEATURE_MODULE_STORAGE
+#define FEATURE_MODULE_STORAGE 1
 
 #endif // QT_SIMULATOR
 
 /**
  * localization module
  */
-#define FEATURE_LOCALIZATION_MODULE
+#define FEATURE_LOCALIZATION_MODULE 1
 
-#define FEATURE_LAZY_LOADING_MODULE
+#define FEATURE_LAZY_LOADING_MODULE 1
 
 /**
  * enable fatal error handling
  */
-#define FEATURE_FATAL_ERROR_HANDLING
+#define FEATURE_FATAL_ERROR_HANDLING 1
 
 /**
  * timer module
  */
-#define FEATURE_TIMER_MODULE
+#define FEATURE_TIMER_MODULE 1
 
-#define FEATURE_CUSTOM_ENTRY_PAGE
+#define FEATURE_CUSTOM_ENTRY_PAGE 1
 
 /**
  * module require test
@@ -117,7 +117,7 @@
 #ifdef ENABLE_MODULE_REQUIRE_TEST
 #error "must keep the global configuration unique"
 #else
-#define ENABLE_MODULE_REQUIRE_TEST
+#define ENABLE_MODULE_REQUIRE_TEST 1
 #endif
 
 /**
@@ -130,17 +130,19 @@
 /**
  * enable Canvas component Feature API on simulator
  */
-#define FEATURE_COMPONENT_CANVAS
+#ifndef FEATURE_COMPONENT_CANVAS
+#define FEATURE_COMPONENT_CANVAS 1
+#endif
 
-#ifdef FEATURE_COMPONENT_QRCODE
+#if (FEATURE_COMPONENT_QRCODE == 1)
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_COMPONENT_QRCODE
+#define FEATURE_COMPONENT_QRCODE 1
 #endif
 
 #ifdef _WIN32
 // support memory analysis, only on win
-#ifndef QT_SIMULATOR
+#if (QT_SIMULATOR != 1)
 #define SIMULATOR_MEMORY_ANALYSIS
 #endif
 #endif
@@ -160,11 +162,11 @@
 /**
  * Rotation API feature
  */
-#if (defined(ENABLE_ROTATE_INPUT) && (ENABLE_ROTATE_INPUT == 1))
+#if (ENABLE_ROTATE_INPUT == 1)
 // low layer supports
 #ifndef FEATURE_ROTATION_API
-#define FEATURE_ROTATION_API
+#define FEATURE_ROTATION_API 1
 #endif
-#endif // (defined(ENABLE_ROTATE_INPUT) && (ENABLE_ROTATE_INPUT == 1))
+#endif // (ENABLE_ROTATE_INPUT == 1)
 
 #endif // OHOS_ACELITE_CONFIG_H

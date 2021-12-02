@@ -469,7 +469,7 @@ protected:
      */
     bool HandleBackgroundImg(const AppStyleItem &styleItem, char *&pressedImage, char *&normalImage) const;
 
-#ifdef FEATURE_ROTATION_API
+#if (FEATURE_ROTATION_API == 1)
     /**
      * @brief the rotation API handling function, the child component can register it for rotation API supporting
      * @param func function object

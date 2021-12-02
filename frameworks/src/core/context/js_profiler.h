@@ -120,7 +120,7 @@ struct PerformanceData {
     uint8_t component;
 };
 
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
 static constexpr uint8_t MSG_LENGTH = 20;
 
 struct ProfilerMsg {
@@ -157,7 +157,7 @@ public:
      */
     void Release();
 
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     /**
      * @brief Flush output to file.
      */
@@ -236,7 +236,7 @@ private:
     uint16_t dataCount_ = 0;
     uint16_t traceIdSlot_ = 0;
     bool enabled_ = false;
-#ifdef FEATURE_ACELITE_MC_JS_PROFILER
+#if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
     static constexpr uint8_t PROFILER_MSG_LENGTH = 128;
     static constexpr uint8_t TEXT_LENGTH = 30;
     ProfilerMsg *msg_ = nullptr;

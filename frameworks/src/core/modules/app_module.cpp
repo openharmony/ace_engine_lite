@@ -16,7 +16,7 @@
 #include "app_module.h"
 #include "ace_log.h"
 #include "js_app_context.h"
-#ifdef FEATURE_SCREEN_ON_VISIBLE
+#if (FEATURE_SCREEN_ON_VISIBLE == 1)
 #include "js_async_work.h"
 #include "product_adapter.h"
 #endif
@@ -28,7 +28,7 @@ const char * const AppModule::KEY_APP_NAME = "appName";
 const char * const AppModule::KEY_VERSION_NAME = "versionName";
 const char * const AppModule::KEY_VERSION_CODE = "versionCode";
 
-#ifdef FEATURE_SCREEN_ON_VISIBLE
+#if (FEATURE_SCREEN_ON_VISIBLE == 1)
 const char * const AppModule::SCREEN_ON_VISIBLE_KEY = "visible";
 const char * const AppModule::SCREEN_ON_VISIBLE_DATA = "data";
 const char * const AppModule::SCREEN_ON_VISIBLE_CODE = "code";
@@ -128,7 +128,7 @@ JSIValue AppModule::Terminate(const JSIValue thisVal, const JSIValue *args, uint
     return JSI::CreateUndefined();
 }
 
-#ifdef FEATURE_SCREEN_ON_VISIBLE
+#if (FEATURE_SCREEN_ON_VISIBLE == 1)
 JSIValue AppModule::ScreenOnVisible(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum)
 {
     JSIValue undefValue = JSI::CreateUndefined();

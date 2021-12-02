@@ -14,7 +14,7 @@
  */
 
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_CAMERA
+#if (FEATURE_COMPONENT_CAMERA == 1)
 
 #include "camera_component.h"
 #include <climits>

@@ -35,7 +35,8 @@
 #include "presets/version_module.h"
 #include "product_adapter.h"
 #include "system_info.h"
-#ifdef JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED
+#if (JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED == 1)
+
 extern "C" {
 #include "generate-bytecode.h"
 }
@@ -64,17 +65,17 @@ void JsAppEnvironment::LoadAceBuiltInModules() const
 void JsAppEnvironment::InitJsFramework() const
 {
     START_TRACING(ENGINE_INIT);
-#ifdef JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED
+#if (JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED == 1)
     js_task_context_init();
 #endif
-#ifndef JERRY_PORTING_DEPENDENCY
+#if (JERRY_PORTING_DEPENDENCY == 0)
     Srand((unsigned)jerry_port_get_current_time());
 #endif
     Debugger::GetInstance().SetupJSContext();
     jerry_init(JERRY_INIT_EMPTY);
     STOP_TRACING();
     START_TRACING(FWK_INIT);
-#ifdef JSFWK_TEST
+#if (JSFWK_TEST == 1)
     jerry_value_t globalThis = jerry_get_global_object();
     jerry_release_value(jerryx_set_property_str(globalThis, "globalThis", globalThis));
     jerry_release_value(globalThis);
@@ -126,7 +127,7 @@ void JsAppEnvironment::Cleanup()
     jerry_cleanup();
     // free the external JS context, only can be called after clean up engine
     Debugger::GetInstance().ReleaseJSContext();
-#ifdef JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED
+#if (JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED == 1)
     jerry_port_default_remove_current_context_record();
 #endif
 }

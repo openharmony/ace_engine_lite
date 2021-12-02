@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 #include "localization_module_tdd_test.h"
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
 #include "ace_log.h"
 #include "global.h"
 #include "js_app_context.h"
@@ -23,7 +23,7 @@ namespace OHOS {
 namespace ACELite {
 void LocalizationModuleTddTest::SetUp()
 {
-#ifdef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR == 1)
     constexpr char testAppPath[] = "..\\moduletest\\unittest";
 #elif defined(__linux__)
     constexpr char testAppPath[] = "/storage/data";

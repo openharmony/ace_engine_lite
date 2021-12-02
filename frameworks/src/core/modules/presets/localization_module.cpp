@@ -15,7 +15,7 @@
 
 #include "localization_module.h"
 #include "ace_event_error_code.h"
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
 #include "ace_log.h"
 #include "js_fwk_common.h"
 #include <stdlib.h>

@@ -16,7 +16,7 @@
 #ifndef OHOS_ACELITE_LOCALE_UTIL_H
 #define OHOS_ACELITE_LOCALE_UTIL_H
 #include "acelite_config.h"
-#ifdef FEATURE_INTL_MODULE
+#if (FEATURE_INTL_MODULE == 1)
 #include "locale_info.h"
 #include "non_copyable.h"
 namespace OHOS {

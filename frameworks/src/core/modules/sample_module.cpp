@@ -14,8 +14,8 @@
  */
 
 #include "sample_module.h"
-#ifdef ENABLE_MODULE_REQUIRE_TEST
-#ifndef TARGET_SIMULATOR
+#if (ENABLE_MODULE_REQUIRE_TEST == 1)
+#if (TARGET_SIMULATOR != 1)
 #include "js_async_work.h"
 #endif
 #include "ace_log.h"
@@ -60,7 +60,7 @@ JSIValue SampleModule::TestStandardCallback(const JSIValue thisVal, const JSIVal
     return undefValue;
 }
 
-#ifndef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR != 1)
 struct AsyncParams : public MemoryHeap {
     AsyncParams() : result(nullptr), callback(nullptr), context(nullptr) {}
 
@@ -102,7 +102,7 @@ JSIValue SampleModule::TestCallbackWithArgs(const JSIValue thisVal, const JSIVal
         JSI::SetStringProperty(result, "param2", str);
         JSI::ReleaseString(str);
     }
-#ifndef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR != 1)
     AsyncParams *params = new AsyncParams();
     if (params == nullptr) {
         JSI::ReleaseValueList(result, callback);

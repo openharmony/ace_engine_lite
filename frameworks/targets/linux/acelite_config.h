@@ -21,7 +21,6 @@
  *                 hi3516_linux config for hmf
  * ================================================================================================
  */
-#define OHOS_ACELITE_LINUX // NOTE: DO NOT use this macro directly
 
 /**
  * Compile all test entry for hmf
@@ -29,7 +28,7 @@
 #ifdef FEATURE_TEST_IMPLEMENTATION
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_TEST_IMPLEMENTATION
+#define FEATURE_TEST_IMPLEMENTATION 1
 #endif
 
 /**
@@ -38,7 +37,7 @@
 #ifdef FEATURE_ACELITE_HI_LOG_PRINTF
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_ACELITE_HI_LOG_PRINTF
+#define FEATURE_ACELITE_HI_LOG_PRINTF 1
 #endif
 
 /**
@@ -47,7 +46,7 @@
 #ifdef FEATURE_ROOTVIEW_CUSTOM_BACKGROUND_COLOR
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_ROOTVIEW_CUSTOM_BACKGROUND_COLOR
+#define FEATURE_ROOTVIEW_CUSTOM_BACKGROUND_COLOR 1
 #endif
 
 /**
@@ -56,7 +55,7 @@
 #ifdef FEATURE_ACELITE_SYSTEM_CAPABILITY
 #error "must keep the system capability unique"
 #else
-#define FEATURE_ACELITE_SYSTEM_CAPABILITY
+#define FEATURE_ACELITE_SYSTEM_CAPABILITY 1
 #endif
 
 /**
@@ -65,68 +64,68 @@
 #ifdef FEATURE_ACELITE_JS_PROFILER
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_ACELITE_JS_PROFILER
+#define FEATURE_ACELITE_JS_PROFILER 1
 #endif
 
 /**
  * support audio API for JS
  */
-#define FEATURE_MODULE_AUDIO
+#define FEATURE_MODULE_AUDIO 1
 
 /**
  * switch for cipher module
  */
-#define ENABLE_MODULE_CIPHER
+#define ENABLE_MODULE_CIPHER 1
 
 /**
  * support storage and file API for JS
  */
-#define FEATURE_MODULE_STORAGE
+#define FEATURE_MODULE_STORAGE 1
 
 /**
  * support device API for JS
  */
-#define FEATURE_MODULE_DEVICE
+#define FEATURE_MODULE_DEVICE 1
 
 /**
  * timer module
  */
-#define FEATURE_TIMER_MODULE
+#define FEATURE_TIMER_MODULE 1
 
 /**
  * support lite ace dfx module
  */
-#define FEATURE_ACELITE_DFX_MODULE
+#define FEATURE_ACELITE_DFX_MODULE 1
 
-#define FEATURE_ACELITE_LITE_DFX_MODULE
+#define FEATURE_ACELITE_LITE_DFX_MODULE 1
 
-#define FEATURE_API_VERSION
+#define FEATURE_API_VERSION 1
 
 /**
  * enable Canvas component Feature API on ipcamera real devices
  */
-#define FEATURE_COMPONENT_CANVAS
+#define FEATURE_COMPONENT_CANVAS 1
 
-#define FEATURE_LOCALIZATION_MODULE
+#define FEATURE_LOCALIZATION_MODULE 1
 
 #ifdef FEATURE_COMPONENT_CAMERA
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_COMPONENT_CAMERA
+#define FEATURE_COMPONENT_CAMERA 1
 #endif
 
 #ifdef FEATURE_COMPONENT_VIDEO
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_COMPONENT_VIDEO
+#define FEATURE_COMPONENT_VIDEO 1
 #endif
 
-#define FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC
+#define FEATURE_UPDATE_VIDEO_PROGRESS_ASYNC 1
 
 #ifdef FEATURE_MODULE_DIALOG
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_MODULE_DIALOG
+#define FEATURE_MODULE_DIALOG 1
 #endif
 
 #define DEFAULT_PROFILER_MSG_PATH "/user/data/"

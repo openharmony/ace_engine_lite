@@ -15,7 +15,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_COMPONENT_CANVAS
+#if (FEATURE_COMPONENT_CANVAS == 1)
 #include "canvas_component.h"
 #include "js_fwk_common.h"
 #include "product_adapter.h"

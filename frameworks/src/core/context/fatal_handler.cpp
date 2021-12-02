@@ -17,7 +17,7 @@
 #include "ace_event_error_code.h"
 #include "ace_log.h"
 #include "async_task_manager.h"
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
 #include "cmsis_os2.h"
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "jerryscript-port-default.h"
@@ -52,7 +52,7 @@ bool FatalHandler::IsAppExitingWrapper()
 
 static void HandleFatal(int errorCode)
 {
-#ifdef FEATURE_FATAL_ERROR_HANDLING
+#if (FEATURE_FATAL_ERROR_HANDLING == 1)
     HILOG_ERROR(HILOG_MODULE_ACE, "hitted by fatal error[%{public}d]", errorCode);
     if (FatalHandler::GetInstance().IsFatalErrorHitted()) {
         // fatal hitted again during one fatal handing, return to avoid dead loop
@@ -69,7 +69,7 @@ static void HandleFatal(int errorCode)
     const uint32_t sleepTime = 3000;
     uint8_t maxRetryCount = 20;
     while (maxRetryCount > 0) {
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
         osDelay(sleepTime);
 #endif // OHOS_ACELITE_PRODUCT_WATCH
         maxRetryCount--;
@@ -177,7 +177,7 @@ void FatalHandler::ResetRendering()
         TaskManager::GetInstance()->ResetTaskHandlerMutex();
         SetTEHandlingFlag(false);
     }
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
     ProductAdapter::NotifyRenderEnd();
 #endif
 }

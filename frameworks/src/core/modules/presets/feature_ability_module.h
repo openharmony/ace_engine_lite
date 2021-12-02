@@ -19,7 +19,7 @@
 #include "acelite_config.h"
 #include "non_copyable.h"
 
-#ifdef FEATURE_FEATURE_ABILITY_MODULE
+#if (FEATURE_FEATURE_ABILITY_MODULE == 1)
 #include "ability_kit.h"
 #include "presets/preset_module.h"
 namespace OHOS {
@@ -201,14 +201,14 @@ public:
     ~FeaAbilityModule() = default;
     static void Load()
     {
-#ifdef FEATURE_FEATURE_ABILITY_MODULE
+#if (FEATURE_FEATURE_ABILITY_MODULE == 1)
         FeatureAbilityModule featureAbilityModule;
         featureAbilityModule.Init();
 #endif
     }
     static void Release()
     {
-#ifdef FEATURE_FEATURE_ABILITY_MODULE
+#if (FEATURE_FEATURE_ABILITY_MODULE == 1)
         FeatureAbilityModule::Release();
 #endif
     }

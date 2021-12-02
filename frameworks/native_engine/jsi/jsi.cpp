@@ -16,7 +16,7 @@
 
 #include <cstdarg>
 #include <cstring>
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
 #include "securec.h"
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "ace_log.h"
@@ -27,7 +27,7 @@ namespace OHOS {
 namespace ACELite {
 JSIValue JSI::GetGlobalObject()
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_get_global_object());
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetGlobalObject has not been implemented in this js engine!");
@@ -37,7 +37,7 @@ JSIValue JSI::GetGlobalObject()
 
 JSIValue JSI::CreateObject()
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_object());
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateObject has not been implemented in this js engine!");
@@ -51,7 +51,7 @@ void JSI::SetProperty(JSIValue object, JSIValue key, JSIValue value)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:SetProperty failed!");
         return;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jObject = AS_JERRY_VALUE(object);
     jerry_value_t jKey = AS_JERRY_VALUE(key);
     jerry_value_t jVal = AS_JERRY_VALUE(value);
@@ -68,7 +68,7 @@ void JSI::SetNamedProperty(JSIValue object, const char * const propName, JSIValu
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:SetNamedProperty failed!");
         return;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jKey = jerry_create_string((const jerry_char_t *)propName);
     SetProperty(object, AS_JSI_VALUE(jKey), value);
     jerry_release_value(jKey);
@@ -121,7 +121,7 @@ void JSI::SetStringPropertyWithBufferSize(JSIValue object, const char * const pr
     ReleaseValue(strValue);
 }
 
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
 /**
  * @brief: CreateJerryFuncHelper is used to create jerry function
  *         along with JSI::CreateFunction, for internal use only.
@@ -166,7 +166,7 @@ JSIValue JSI::CreateFunction(JSIFunctionHandler handler)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateFunction failed!");
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jFunc = jerry_create_external_function(CreateJerryFuncHelper);
     void *nativePointer = reinterpret_cast<void *>(handler);
     jerry_set_object_native_pointer(jFunc, nativePointer, nullptr);
@@ -182,7 +182,7 @@ JSIValue JSI::CreateString(const char * const str)
     if (str == nullptr) {
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_string(reinterpret_cast<const jerry_char_t *>(str)));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateString has not been implemented in this js engine!");
@@ -195,7 +195,7 @@ JSIValue JSI::CreateStringWithBufferSize(const char * const str, size_t size)
     if (str == nullptr) {
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_string_sz(reinterpret_cast<const jerry_char_t *>(str), size));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateStringWithBufferSize has not been implemented in this js engine!");
@@ -205,7 +205,7 @@ JSIValue JSI::CreateStringWithBufferSize(const char * const str, size_t size)
 
 JSIValue JSI::CreateUndefined()
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_undefined());
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateUndefined has not been implemented in this js engine!");
@@ -215,7 +215,7 @@ JSIValue JSI::CreateUndefined()
 
 bool JSI::ValueIsFunction(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_function(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsFunction has not been implemented in this js engine!");
@@ -225,7 +225,7 @@ bool JSI::ValueIsFunction(JSIValue value)
 
 bool JSI::ValueIsUndefined(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_undefined(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsUndefined has not been implemented in this js engine!");
@@ -235,7 +235,7 @@ bool JSI::ValueIsUndefined(JSIValue value)
 
 bool JSI::ValueIsNumber(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_number(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsNumber has not been implemented in this js engine!");
@@ -245,7 +245,7 @@ bool JSI::ValueIsNumber(JSIValue value)
 
 bool JSI::ValueIsString(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_string(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsString has not been implemented in this js engine!");
@@ -255,7 +255,7 @@ bool JSI::ValueIsString(JSIValue value)
 
 bool JSI::ValueIsBoolean(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_boolean(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsBoolean has not been implemented in this js engine!");
@@ -265,7 +265,7 @@ bool JSI::ValueIsBoolean(JSIValue value)
 
 bool JSI::ValueIsNull(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_null(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsNull has not been implemented in this js engine!");
@@ -275,7 +275,7 @@ bool JSI::ValueIsNull(JSIValue value)
 
 bool JSI::ValueIsObject(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_object(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsObject has not been implemented in this js engine!");
@@ -285,7 +285,7 @@ bool JSI::ValueIsObject(JSIValue value)
 
 bool JSI::ValueIsError(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_error(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsError has not been implemented in this js engine!");
@@ -299,7 +299,7 @@ char *JSI::JsonStringify(JSIValue value)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:JsonStringify failed!");
         return nullptr;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t stringified = jerry_json_stringify(AS_JERRY_VALUE(value));
     char *res = ValueToString(AS_JSI_VALUE(stringified));
     jerry_release_value(stringified);
@@ -316,7 +316,7 @@ JSIValue JSI::JsonParse(const char * const str)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:JsonParse failed!");
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = jerry_json_parse(reinterpret_cast<const jerry_char_t *>(str), strlen(str));
     return AS_JSI_VALUE(jVal);
 #else
@@ -331,7 +331,7 @@ JSIValue JSI::GetProperty(JSIValue object, JSIValue key)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetProperty failed!");
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jObject = AS_JERRY_VALUE(object);
     jerry_value_t jKey = AS_JERRY_VALUE(key);
     return AS_JSI_VALUE(jerry_get_property(jObject, jKey));
@@ -347,7 +347,7 @@ JSIValue JSI::GetNamedProperty(JSIValue object, const char * const propName)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetNamedProperty failed!");
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jKey = jerry_create_string(reinterpret_cast<const jerry_char_t *>(propName));
     JSIValue result = GetProperty(object, AS_JSI_VALUE(jKey));
     jerry_release_value(jKey);
@@ -408,7 +408,7 @@ char *JSI::GetStringPropertyWithBufferSize(JSIValue object, const char * const p
 
 void JSI::ReleaseValue(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     if (value != ARGS_END) {
         jerry_release_value(AS_JERRY_VALUE(value));
     }
@@ -431,7 +431,7 @@ void JSI::CallFunction(JSIValue funcObj, JSIValue thisVal, const JSIValue *argv,
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CallFunction failed!");
         return;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jFunc = AS_JERRY_VALUE(funcObj);
     jerry_value_t jThis = AS_JERRY_VALUE(thisVal);
     if ((argv == nullptr) || argc == 0) {
@@ -465,7 +465,7 @@ void JSI::CallFunction(JSIValue funcObj, JSIValue thisVal, const JSIValue *argv,
 
 JSIValue JSI::CreateNumber(double value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_number(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateNumber has not been implemented in this js engine!");
@@ -475,7 +475,7 @@ JSIValue JSI::CreateNumber(double value)
 
 JSIValue JSI::CreateNumberNaN()
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_number_nan());
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateNumberNan has not been implemented in this js engine!");
@@ -483,7 +483,7 @@ JSIValue JSI::CreateNumberNaN()
 #endif
 }
 
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
 static jerry_error_t GetJerryErrorType(JsiErrorType jsiType)
 {
     jerry_error_t jerryType;
@@ -556,7 +556,7 @@ JSIValue JSI::CreateError(JsiErrorType type, const char * const errorMsg)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateError parameters invalid!");
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_error_t jerryType = GetJerryErrorType(type);
     jerry_value_t jError = jerry_create_error(jerryType, reinterpret_cast<const jerry_char_t *>(errorMsg));
     return AS_JSI_VALUE(jError);
@@ -571,7 +571,7 @@ JsiErrorType JSI::GetErrorType(JSIValue errorValue)
     if (!ValueIsError(errorValue)) {
         return JsiErrorType::JSI_ERROR_INVALID;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jError = AS_JERRY_VALUE(errorValue);
     jerry_error_t jerryType = jerry_get_error_type(jError);
     return GetJsiErrorType(jerryType);
@@ -583,7 +583,7 @@ JsiErrorType JSI::GetErrorType(JSIValue errorValue)
 
 JSIValue JSI::CreateBoolean(bool value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_boolean(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateBoolean has not been implemented in this js engine!");
@@ -593,7 +593,7 @@ JSIValue JSI::CreateBoolean(bool value)
 
 JSIValue JSI::CreateNull()
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_null());
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateNull has not been implemented in this js engine!");
@@ -601,10 +601,10 @@ JSIValue JSI::CreateNull()
 #endif
 }
 
-#if defined(JS_FWK_SYMBOL)
+#if (JS_FWK_SYMBOL == 1)
 JSIValue JSI::CreateSymbol(JSIValue description)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jDsc = AS_JERRY_VALUE(description);
     return AS_JSI_VALUE(jerry_create_symbol(jDsc));
 #else
@@ -615,7 +615,7 @@ JSIValue JSI::CreateSymbol(JSIValue description)
 
 bool JSI::ValueIsSymbol(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_symbol(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsSymbol has not been implemented in this js engine!");
@@ -626,7 +626,7 @@ bool JSI::ValueIsSymbol(JSIValue value)
 
 JSIValue JSI::CreateArray(uint32_t length)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return AS_JSI_VALUE(jerry_create_array(length));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:CreateArray has not been implemented in this js engine!");
@@ -636,7 +636,7 @@ JSIValue JSI::CreateArray(uint32_t length)
 
 bool JSI::SetPropertyByIndex(JSIValue object, uint32_t index, JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jObject = AS_JERRY_VALUE(object);
     jerry_value_t jVal = AS_JERRY_VALUE(value);
 
@@ -655,7 +655,7 @@ bool JSI::SetPropertyByIndex(JSIValue object, uint32_t index, JSIValue value)
 
 char *JSI::ValueToString(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     char *result = nullptr;
     jerry_value_t jVal = AS_JERRY_VALUE(value);
     if (!jerry_value_is_string(jVal)) {
@@ -698,7 +698,7 @@ char *JSI::ValueToString(JSIValue value)
 
 char *JSI::ValueToStringWithBufferSize(JSIValue value, size_t &size)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     auto jVal = AS_JERRY_VALUE(value);
     if (!jerry_value_is_string(jVal)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToStringWithBufferSize params invalid!");
@@ -737,7 +737,7 @@ char *JSI::ValueToStringWithBufferSize(JSIValue value, size_t &size)
 
 double JSI::ValueToNumber(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(value);
     if (!jerry_value_is_number(jVal)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToNumber params invalid!");
@@ -752,7 +752,7 @@ double JSI::ValueToNumber(JSIValue value)
 
 bool JSI::ValueToBoolean(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(value);
     if (!jerry_value_is_boolean(jVal)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueToBoolean params invalid!");
@@ -767,7 +767,7 @@ bool JSI::ValueToBoolean(JSIValue value)
 
 uint32_t JSI::GetArrayLength(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(value);
     if (!jerry_value_is_array(jVal)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetArrayLength params invalid!");
@@ -782,7 +782,7 @@ uint32_t JSI::GetArrayLength(JSIValue value)
 
 JSIValue JSI::GetPropertyByIndex(JSIValue object, uint32_t index)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(object);
     return AS_JSI_VALUE(jerry_get_property_by_index(jVal, index));
 #else
@@ -797,7 +797,7 @@ JSIValue JSI::GetObjectKeys(JSIValue object)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetObjectKeys failed!");
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(object);
     return AS_JSI_VALUE(jerry_get_object_keys(jVal));
 #else
@@ -808,7 +808,7 @@ JSIValue JSI::GetObjectKeys(JSIValue object)
 
 bool JSI::GetJSHeapStatus(JSHeapStatus &heapStatus)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_heap_stats_t stats = {0};
     if (!jerry_get_memory_stats(&stats)) {
         return false;
@@ -825,7 +825,7 @@ bool JSI::GetJSHeapStatus(JSHeapStatus &heapStatus)
 
 bool JSI::ValueIsArray(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_array(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsArray has not been implemented in this js engine!");
@@ -835,7 +835,7 @@ bool JSI::ValueIsArray(JSIValue value)
 
 JSIValue JSI::AcquireValue(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(value);
     return AS_JSI_VALUE(jerry_acquire_value(jVal));
 #else
@@ -861,7 +861,7 @@ void JSI::SetOnDestroy(JSIValue object, NativeCallback callback)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:SetOnDestroy failed!");
         return;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     void *nativePtr = reinterpret_cast<void *>(callback);
     jerry_set_object_native_pointer(AS_JERRY_VALUE(object), nativePtr, nullptr);
 #else
@@ -897,7 +897,7 @@ void JSI::SetNamedPointer(JSIValue object, const char * const name, JsiCallback 
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:SetNamedPointer failed!");
         return;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     JSIValue funObj = JSI::CreateObject();
     void *nativePtr = reinterpret_cast<void *>(callback);
     jerry_set_object_native_pointer(AS_JERRY_VALUE(funObj), nativePtr, nullptr);
@@ -908,8 +908,8 @@ void JSI::SetNamedPointer(JSIValue object, const char * const name, JsiCallback 
 #endif
 }
 
-#if defined(JS_FWK_TYPEDARRAY)
-#if defined(ENABLE_JERRY)
+#if (JS_FWK_TYPEDARRAY == 1)
+#if (ENABLE_JERRY == 1)
 // Helper function for JSI TypedArray type convert
 TypedArrayType GetJsiArrayType(jerry_typedarray_type_t jerryType)
 {
@@ -960,7 +960,7 @@ uint8_t *JSI::GetTypedArrayInfo(JSIValue typedArray,
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetTypedArrayInfo failed!");
         return nullptr;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(typedArray);
     jerry_typedarray_type_t jType = jerry_get_typedarray_type(jVal);
     type = GetJsiArrayType(jType);
@@ -980,7 +980,7 @@ uint8_t *JSI::GetTypedArrayInfo(JSIValue typedArray,
 #endif
 }
 
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
 // Helper function for jerry TypedArray type convert
 jerry_typedarray_type_t GetJerryArrayType(TypedArrayType jsiType)
 {
@@ -1023,7 +1023,7 @@ jerry_typedarray_type_t GetJerryArrayType(TypedArrayType jsiType)
 
 JSIValue JSI::CreateTypedArray(TypedArrayType type, size_t length, JSIValue arrayBuffer, size_t byteOffset)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_typedarray_type_t jType = GetJerryArrayType(type);
     jerry_value_t jArrayBuffer = AS_JERRY_VALUE(arrayBuffer);
     jerry_value_t jVal = jerry_create_typedarray_for_arraybuffer_sz(jType, jArrayBuffer, (jerry_length_t)byteOffset,
@@ -1041,7 +1041,7 @@ uint8_t *JSI::GetArrayBufferInfo(JSIValue arrayBuffer, size_t &byteLength)
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:GetArrayBufferInfo failed!");
         return nullptr;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = AS_JERRY_VALUE(arrayBuffer);
     jerry_length_t len = jerry_get_arraybuffer_byte_length(jVal);
 
@@ -1058,7 +1058,7 @@ JSIValue JSI::CreateArrayBuffer(size_t byteLength, uint8_t *&buffPtr)
     if (byteLength == 0) {
         return CreateUndefined();
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t jVal = jerry_create_arraybuffer((jerry_length_t)byteLength);
     buffPtr = jerry_get_arraybuffer_pointer(jVal);
     return AS_JSI_VALUE(jVal);
@@ -1070,7 +1070,7 @@ JSIValue JSI::CreateArrayBuffer(size_t byteLength, uint8_t *&buffPtr)
 
 bool JSI::ValueIsArrayBuffer(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_arraybuffer(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsArrayBuffer has not been implemented in this js engine!");
@@ -1080,7 +1080,7 @@ bool JSI::ValueIsArrayBuffer(JSIValue value)
 
 bool JSI::ValueIsTypedArray(JSIValue value)
 {
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     return jerry_value_is_typedarray(AS_JERRY_VALUE(value));
 #else
     HILOG_ERROR(HILOG_MODULE_ACE, "JSI:ValueIsTypedArray has not been implemented in this js engine!");
@@ -1095,7 +1095,7 @@ bool JSI::DefineProperty(JSIValue object, JSIValue propName, JSPropertyDescripto
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:DefineProperty failed!");
         return false;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_property_descriptor_t jerryDesc;
     jerry_init_property_descriptor_fields(&jerryDesc);
 
@@ -1130,7 +1130,7 @@ bool JSI::DefineNamedProperty(JSIValue object, const char * const propNameStr, J
         HILOG_ERROR(HILOG_MODULE_ACE, "JSI:DefineNamedProperty failed!");
         return false;
     }
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
     jerry_value_t propName = jerry_create_string(reinterpret_cast<const jerry_char_t *>(propNameStr));
     bool res = DefineProperty(object, AS_JSI_VALUE(propName), descriptor);
     jerry_release_value(propName);

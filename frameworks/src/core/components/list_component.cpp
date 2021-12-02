@@ -30,7 +30,7 @@ ListComponent::ListComponent(JSValue options, JSValue children, AppStyleManager 
 {
     SetComponentName(K_LIST);
     RegisterNamedFunction(FUNC_SCROLLTO, ListScrollTo);
-#ifdef FEATURE_ROTATION_API
+#if (FEATURE_ROTATION_API == 1)
     RegisterNamedFunction(FUNC_ROTATION_NAME, HandleRotationRequest);
 #endif // FEATURE_ROTATION_API
 }

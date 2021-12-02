@@ -16,7 +16,7 @@
 #define OHOS_ACELITE_CJSON_PARSER_H
 #include "acelite_config.h"
 
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
 #include <cJSON.h>
 #include <jerryscript.h>
 #ifdef __LITEOS_A__

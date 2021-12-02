@@ -16,7 +16,7 @@
 #include "ace_log.h"
 #include <stdarg.h>
 #include <stdio.h>
-#ifdef TARGET_SIMULATOR
+#if (TARGET_SIMULATOR == 1)
 #include <string>
 
 namespace OHOS {

@@ -18,7 +18,7 @@
 
 #include "acelite_config.h"
 
-#if defined(FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT)
+#if (FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT == 1)
 #include "ace_event_id.h"
 #include "memory_heap.h"
 #include "non_copyable.h"
@@ -35,7 +35,7 @@
 #define ACE_ERROR_CODE_PRINT(info2, rfu)
 #endif // ENABLED(FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT)
 
-#if defined(FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT)
+#if (FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT == 1)
 namespace OHOS {
 namespace ACELite {
 class EventErrorCodePrint final : public MemoryHeap {

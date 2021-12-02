@@ -16,7 +16,7 @@
 #include "message_queue_utils.h"
 #include "ace_log.h"
 #include "acelite_config.h"
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
 #include "cmsis_os2.h"
 #endif
 
@@ -28,7 +28,7 @@ QueueHandler MessageQueueUtils::CreateMessageQueue(uint32_t capacity, uint32_t m
         HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:CreateMessageQueue parameters invalid!");
         return nullptr;
     }
-#if (defined(__LINUX__) || defined(__LITEOS__))
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
     HILOG_WARN(HILOG_MODULE_ACE, "todo call linux createMessageQueue interface here!");
     return nullptr;
 #else
@@ -43,7 +43,7 @@ int8_t MessageQueueUtils::DeleteMessageQueue(QueueHandler handler)
         HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:DeleteMessageQueue parameters invalid!");
         return MSGQ_FAIL;
     }
-#if (defined(__LINUX__) || defined(__LITEOS__))
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
     HILOG_WARN(HILOG_MODULE_ACE, "todo call linux deleteMessageQueue interface here!");
     return MSGQ_FAIL;
 #else
@@ -62,7 +62,7 @@ int8_t MessageQueueUtils::PutMessage(QueueHandler handler, const void* msgPtr, u
         HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:PutMessage parameters invalid!");
         return MSGQ_FAIL;
     }
-#if (defined(__LINUX__) || defined(__LITEOS__))
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
     HILOG_WARN(HILOG_MODULE_ACE, "todo call linux putmsg interface here!");
     return MSGQ_FAIL;
 #else
@@ -82,7 +82,7 @@ int8_t MessageQueueUtils::GetMessage(QueueHandler handler, void* msgPtr, uint32_
         HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:GetMessage parameters invalid!");
         return MSGQ_FAIL;
     }
-#if (defined(__LINUX__) || defined(__LITEOS__))
+#if (defined(__LINUX__) || defined(__LITEOS_A__))
     HILOG_WARN(HILOG_MODULE_ACE, "todo call linux getmsg interface here!");
     return MSGQ_FAIL;
 #else

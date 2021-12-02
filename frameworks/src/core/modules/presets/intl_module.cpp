@@ -14,7 +14,7 @@
  */
 
 #include "intl_module.h"
-#ifdef FEATURE_INTL_MODULE
+#if (FEATURE_INTL_MODULE == 1)
 #include "ace_log.h"
 #include "date_time_format_module.h"
 #include "global.h"
@@ -27,10 +27,10 @@ void IntlModule::Init()
 {
     jerry_value_t globalObj = jerry_get_global_object();
     jerry_value_t baseObj = jerry_create_object();
-#ifdef FEATURE_NUMBER_FORMAT
+#if (FEATURE_NUMBER_FORMAT == 1)
     NumberFormatModule::Init(baseObj);
 #endif
-#ifdef FEATURE_DATE_FORMAT
+#if (FEATURE_DATE_FORMAT == 1)
     DateTimeFormatModule::Init(baseObj);
 #endif
     JerrySetNamedProperty(globalObj, "Intl", baseObj);

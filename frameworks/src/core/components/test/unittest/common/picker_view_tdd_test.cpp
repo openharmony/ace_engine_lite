@@ -20,7 +20,7 @@
 #include "root_view.h"
 #include "stylemgr/app_style_item.h"
 #include "stylemgr/app_style_manager.h"
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
 #include "ui_date_picker.h"
 #endif
 #include "ui_picker.h"
@@ -137,7 +137,7 @@ void PickerViewTddTest::ComponentPickerviewAttributeSetTest001()
     EXPECT_TRUE(pickerComponent != nullptr);
     UIPicker* textPicker = reinterpret_cast<UIPicker *>(pickerComponent->GetComponentRootView());
     UITimePicker* timePicker = reinterpret_cast<UITimePicker *>(pickerComponent->GetComponentRootView());
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
     UIDatePicker* datePicker = reinterpret_cast<UIDatePicker *>(pickerComponent->GetComponentRootView());
 #endif
 
@@ -145,7 +145,7 @@ void PickerViewTddTest::ComponentPickerviewAttributeSetTest001()
      * @tc.expected: step1. native picker object is nullptr
      */
     if (!textPicker && !timePicker
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
         && !datePicker
 #endif
         ) {
@@ -154,7 +154,7 @@ void PickerViewTddTest::ComponentPickerviewAttributeSetTest001()
         printf("ComponentPickerviewAttributeSetTest001 fail\n");
     }
     EXPECT_TRUE((textPicker == nullptr) && (timePicker == nullptr)
-#ifdef FEATURE_COMPONENT_DATE_PICKER
+#if (FEATURE_COMPONENT_DATE_PICKER == 1)
     && (datePicker != nullptr)
 #endif
     );

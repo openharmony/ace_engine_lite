@@ -9,11 +9,11 @@ DESTDIR = ../libs
 
 DEFINES  -= UNICODE
 DEFINES  -= FEATURE_TIMER_MODULE
-DEFINES += TARGET_SIMULATOR
-DEFINES += JS_ENGINE_EXTERNAL_CONTEXT
-DEFINES += SCREENSIZE_SPECIFIED
+DEFINES += TARGET_SIMULATOR=1
+DEFINES += JS_ENGINE_EXTERNAL_CONTEXT=1
+DEFINES += SCREENSIZE_SPECIFIED=1
 DEFINES += JS_PROFILER=0
-DEFINES += QT_SIMULATOR
+DEFINES += QT_SIMULATOR=1
 
 # Following defines are copied from libui.pro, as jsfwk depends the ui defines, and there is no way to
 # share those macros. But graphic module might consider to setup them in one C header file, which can
@@ -31,7 +31,7 @@ eval(is_debug == release) {
 }
 
 LOSCFG_TEST_JS_BUILD {
-    DEFINES += JSFWK_TEST
+    DEFINES += JSFWK_TEST=1
 }
 
 ROOT_PATH = ../../../../../../../..

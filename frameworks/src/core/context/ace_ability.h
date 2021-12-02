@@ -22,7 +22,7 @@
 #include "ability_loader.h"
 #include "js_ability.h"
 
-#ifdef OHOS_ACELITE_PRODUCT_WATCH
+#if (OHOS_ACELITE_PRODUCT_WATCH == 1)
 #error AceAbility only be used for L1 upper
 #endif
 

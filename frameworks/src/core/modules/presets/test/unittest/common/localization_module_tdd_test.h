@@ -15,7 +15,7 @@
 #ifndef LOCALIZATION_MODULE_TEST_H
 #define LOCALIZATION_MODULE_TEST_H
 #include "acelite_config.h"
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
 #include "basic_tdd_test.h"
 #include "test_common.h"
 #include "js_fwk_common.h"

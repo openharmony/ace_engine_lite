@@ -17,14 +17,14 @@
 #define OHOS_ACELITE_JSI_INTERNAL_H
 
 #include "jsi_config.h"
-#if defined(ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
 #include "jerryscript.h"
 #endif
 
 /**
  * Macros for conversions between jsi-values and jerry-values.
  */
-#if defined (ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
 #define AS_JERRY_VALUE(jsiValue) (jerry_value_t)(uintptr_t) jsiValue
 #define AS_JLENGTH_VALUE(jsiValue) (jerry_length_t)(uintptr_t) jsiValue
 #define AS_JSI_VALUE(jValue) (JSIValue)(uintptr_t) jValue
@@ -33,7 +33,7 @@
 /**
  * A convenience macro to create jerry-values.
  */
-#if defined (ENABLE_JERRY)
+#if (ENABLE_JERRY == 1)
 #define JERRY_CREATE(var, create) jerry_value_t var = (create);
 #endif
 

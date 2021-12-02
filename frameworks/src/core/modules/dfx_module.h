@@ -26,7 +26,7 @@ namespace ACELite {
 class DfxModule final : public MemoryHeap {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(DfxModule);
-#ifdef FEATURE_ACELITE_DFX_MODULE
+#if (FEATURE_ACELITE_DFX_MODULE == 1)
     static JSIValue Screenshot(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
 #endif
     static JSIValue InjectEvent(const JSIValue thisVal, const JSIValue *args, uint8_t argsNum);
@@ -49,7 +49,7 @@ private:
 
 void InitDfxModule(JSIValue exports)
 {
-#ifdef FEATURE_ACELITE_DFX_MODULE
+#if (FEATURE_ACELITE_DFX_MODULE == 1)
     JSI::SetModuleAPI(exports, "screenshotToFile", DfxModule::Screenshot);
 #endif // FEATURE_ACELITE_DFX_MODULE
     JSI::SetModuleAPI(exports, "injectEvent", DfxModule::InjectEvent);

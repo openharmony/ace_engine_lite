@@ -17,7 +17,7 @@
 #define OHOS_ACELITE_CAMERA_COMPONENT_H
 
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_CAMERA
+#if (FEATURE_COMPONENT_CAMERA == 1)
 
 #include "component.h"
 #include "camera_kit.h"

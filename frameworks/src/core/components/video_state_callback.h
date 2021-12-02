@@ -16,7 +16,7 @@
 #define OHOS_ACELITE_VIDEO_STATE_CALLBACK_H
 
 #include "acelite_config.h"
-#ifdef FEATURE_COMPONENT_VIDEO
+#if (FEATURE_COMPONENT_VIDEO == 1)
 
 #include <cstdint>
 

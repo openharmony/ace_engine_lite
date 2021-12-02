@@ -21,108 +21,108 @@
 
 namespace OHOS {
 namespace ACELite {
-#ifdef ENABLE_MODULE_REQUIRE_TEST
+#if (ENABLE_MODULE_REQUIRE_TEST == 1)
 extern void InitSampleModule(JSIValue exports);
 #endif
 extern void InitRouterModule(JSIValue exports);
 extern void InitAppModule(JSIValue exports);
-#ifdef FEATURE_SUPPORT_HTTP
+#if (FEATURE_SUPPORT_HTTP == 1)
 extern void InitFetchModule(JSIValue exports);
 #endif // FEATURE_SUPPORT_HTTP
-#ifdef FEATURE_MODULE_AUDIO
+#if (FEATURE_MODULE_AUDIO == 1)
 extern void InitAudioModule(JSIValue exports);
 #endif // FEATURE_MODULE_AUDIO
-#ifdef FEATURE_ACELITE_DFX_MODULE
+#if (FEATURE_ACELITE_DFX_MODULE == 1)
 extern void InitDfxModule(JSIValue exports);
 #endif // FEATURE_ACELITE_DFX_MODULE
-#ifdef ENABLE_MODULE_CIPHER
+#if (ENABLE_MODULE_CIPHER == 1)
 extern void InitCipherModule(JSIValue exports);
 #endif
-#ifdef FEATURE_MODULE_DIALOG
+#if (FEATURE_MODULE_DIALOG == 1)
 extern void InitDialogModule(JSIValue exports);
 #endif // FEATURE_MODULE_DIALOG
 
-#ifdef FEATURE_MODULE_STORAGE
+#if (FEATURE_MODULE_STORAGE == 1)
 extern void InitNativeApiFs(JSIValue exports);
 extern void InitNativeApiKv(JSIValue exports);
 #endif
 
-#ifdef FEATURE_MODULE_DEVICE
+#if (FEATURE_MODULE_DEVICE == 1)
 extern void InitDeviceModule(JSIValue exports);
 #endif
 
-#ifdef FEATURE_MODULE_GEO
+#if (FEATURE_MODULE_GEO == 1)
 extern void InitLocationModule(JSIValue exports);
 #endif
 
-#ifdef FEATURE_MODULE_SENSOR
+#if (FEATURE_MODULE_SENSOR == 1)
 extern void InitVibratorModule(JSIValue exports);
 extern void InitSensorModule(JSIValue exports);
 #endif
 
-#ifdef FEATURE_MODULE_BRIGHTNESS
+#if (FEATURE_MODULE_BRIGHTNESS == 1)
 extern void InitBrightnessModule(JSIValue exports);
 #endif
 
-#ifdef FEATURE_MODULE_BATTERY
+#if (FEATURE_MODULE_BATTERY == 1)
 extern void InitBatteryModule(JSIValue exports);
 #endif
 
-#ifdef FEATURE_MODULE_CONFIGURATION
+#if (FEATURE_MODULE_CONFIGURATION == 1)
 extern void InitLocaleModule(JSIValue exports);
 #endif
 
-#ifdef FEATURE_ACELITE_SYSTEM_CAPABILITY
+#if (FEATURE_ACELITE_SYSTEM_CAPABILITY == 1)
 extern void InitCapabilityModule(JSIValue exports);
 #endif
 
 // Config information for built-in JS modules of OHOS platform
 const Module OHOS_MODULES[] = {
-#ifdef ENABLE_MODULE_REQUIRE_TEST
+#if (ENABLE_MODULE_REQUIRE_TEST == 1)
     {"sample", InitSampleModule},
 #endif
     {"app", InitAppModule},
-#ifdef FEATURE_SUPPORT_HTTP
+#if (FEATURE_SUPPORT_HTTP == 1)
     {"fetch", InitFetchModule},
 #endif // FEATURE_SUPPORT_HTTP
-#ifdef FEATURE_MODULE_AUDIO
+#if (FEATURE_MODULE_AUDIO == 1)
     {"audio", InitAudioModule},
 #endif // FEATURE_MODULE_AUDIO
-#ifdef FEATURE_ACELITE_DFX_MODULE
+#if (FEATURE_ACELITE_DFX_MODULE == 1)
     {"dfx", InitDfxModule},
 #endif // FEATURE_ACELITE_DFX_MODULE
     {"router", InitRouterModule},
-#ifdef ENABLE_MODULE_CIPHER
+#if (ENABLE_MODULE_CIPHER == 1)
     {"cipher", InitCipherModule},
 #endif
-#ifdef FEATURE_MODULE_DIALOG
+#if (FEATURE_MODULE_DIALOG == 1)
     {"prompt", InitDialogModule},
 #endif // FEATURE_MODULE_DIALOG
 
-#ifdef FEATURE_MODULE_STORAGE
+#if (FEATURE_MODULE_STORAGE == 1)
     {"file", InitNativeApiFs},
     {"storage", InitNativeApiKv},
 #endif
-#ifdef FEATURE_MODULE_DEVICE
+#if (FEATURE_MODULE_DEVICE == 1)
     {"device", InitDeviceModule},
 #endif
-#ifdef FEATURE_MODULE_GEO
+#if (FEATURE_MODULE_GEO == 1)
     {"geolocation", InitLocationModule},
 #endif
-#ifdef FEATURE_MODULE_SENSOR
+#if (FEATURE_MODULE_SENSOR == 1)
     {"vibrator", InitVibratorModule},
     {"sensor", InitSensorModule},
 #endif
-#ifdef FEATURE_MODULE_BRIGHTNESS
+#if (FEATURE_MODULE_BRIGHTNESS == 1)
     {"brightness", InitBrightnessModule},
 #endif
-#ifdef FEATURE_MODULE_BATTERY
+#if (FEATURE_MODULE_BATTERY == 1)
     {"battery", InitBatteryModule},
 #endif
-#ifdef FEATURE_MODULE_CONFIGURATION
+#if (FEATURE_MODULE_CONFIGURATION == 1)
     {"configuration", InitLocaleModule},
 #endif
-#ifdef FEATURE_ACELITE_SYSTEM_CAPABILITY
+#if (FEATURE_ACELITE_SYSTEM_CAPABILITY == 1)
     {"capability", InitCapabilityModule},
 #endif
 };

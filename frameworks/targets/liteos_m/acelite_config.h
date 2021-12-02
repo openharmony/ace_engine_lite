@@ -19,6 +19,9 @@
 // some features depend on the low layer configuration
 #include "graphic_config.h"
 
+#if (ENABLE_OHOS_ACELITE_PRODUCT_CONFIG == 1)
+#include "product_acelite_config.h"
+#endif
 /**
  * ================================================================================================
  *                 config for wearable
@@ -27,77 +30,109 @@
 /**
  * the flag indicating watch product
  */
-#define OHOS_ACELITE_PRODUCT_WATCH
+#ifndef OHOS_ACELITE_PRODUCT_WATCH
+#define OHOS_ACELITE_PRODUCT_WATCH 1
+#endif
 
 // delete this after jerry porting is ready
-#define JERRY_PORTING_DEPENDENCY
+#ifndef JERRY_PORTING_DEPENDENCY
+#define JERRY_PORTING_DEPENDENCY 1
+#endif
 
 /**
  * enable Canvas component Feature API on ipcamera real devices
  */
-#define FEATURE_COMPONENT_CANVAS
+#ifndef FEATURE_COMPONENT_CANVAS
+#define FEATURE_COMPONENT_CANVAS 1
+#endif
 
 /**
  * enable QRcode component
  */
-#define FEATURE_COMPONENT_QRCODE
+#ifndef FEATURE_COMPONENT_QRCODE
+#define FEATURE_COMPONENT_QRCODE 1
+#endif
 
 /**
  * support terminate() API from JS
  */
-#define FEATURE_TERMINATE_ABILITY
+#ifndef FEATURE_TERMINATE_ABILITY
+#define FEATURE_TERMINATE_ABILITY 1
+#endif
 
 /**
  * support screenOnVisible() API from JS
  */
-#define FEATURE_SCREEN_ON_VISIBLE
+#ifndef FEATURE_SCREEN_ON_VISIBLE
+#define FEATURE_SCREEN_ON_VISIBLE 1
+#endif
 
-#ifdef ACELITE_DEPENDENCY_IS_READY
 /**
  * enable FeatureAbility API
  */
-#define FEATURE_FEATURE_ABILITY_MODULE
-#endif // ACELITE_DEPENDENCY_IS_READY
+#ifndef FEATURE_FEATURE_ABILITY_MODULE
+#define FEATURE_FEATURE_ABILITY_MODULE 1
+#endif
 
 /**
  * enable timer JS API
  */
-#define FEATURE_TIMER_MODULE
+#ifndef FEATURE_TIMER_MODULE
+#define FEATURE_TIMER_MODULE 1
+#endif
 
 /**
  * enable localization feature
  */
-#define FEATURE_LOCALIZATION_MODULE
+#ifndef FEATURE_LOCALIZATION_MODULE
+#define FEATURE_LOCALIZATION_MODULE 1
+#endif
+
+#ifndef FEATURE_ACELITE_HI_LOG_PRINTF
+#define FEATURE_ACELITE_HI_LOG_PRINTF 1
+#endif
 
 /**
  * support mc ace log module trace
  */
-#define FEATURE_ACELITE_MC_LOG_PRINTF
+#ifndef FEATURE_ACELITE_MC_LOG_PRINTF
+#define FEATURE_ACELITE_MC_LOG_PRINTF 1
+#endif
 
 /**
  * support mc ace event and error code print
  */
-#define FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT
+#ifndef FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT
+#define FEATURE_ACELITE_MC_EVENT_ERROR_CODE_PRINT 1
+#endif
 
 /**
  * support mc console log
  */
-#define FEATURE_USER_MC_LOG_PRINTF
+#ifndef FEATURE_USER_MC_LOG_PRINTF
+#define FEATURE_USER_MC_LOG_PRINTF 1
+#endif
 
 /**
  * support config for product JS modules
  */
-#define FEATURE_PRODUCT_MODULE
+#ifndef FEATURE_PRODUCT_MODULE
+#define FEATURE_PRODUCT_MODULE 1
+#endif
 
 /**
  * support config for private JS modules
  */
-#define FEATURE_PRIVATE_MODULE
+#ifndef FEATURE_PRIVATE_MODULE
+#define FEATURE_PRIVATE_MODULE 1
+#endif
 
 /**
  * support using memory pool from product side
  */
-#define FEATURE_ACELITE_PRODUCT_MEMORY_POOL
+#ifndef FEATURE_ACELITE_PRODUCT_MEMORY_POOL
+#define FEATURE_ACELITE_PRODUCT_MEMORY_POOL 1
+#endif
 
 /**
  * define the max length of user's console log
@@ -106,65 +141,126 @@
 #define CONSOLE_LOG_LINE_MAX_LENGTH (96)
 #endif
 
-#ifdef ACELITE_DEPENDENCY_IS_READY
+#ifndef ACELITE_DEPENDENCY_IS_READY
+#define ACELITE_DEPENDENCY_IS_READY 1
+#endif
 /**
  * support mc ace dfx module
  */
-#define FEATURE_ACELITE_DFX_MODULE
+#ifndef FEATURE_ACELITE_DFX_MODULE
+#define FEATURE_ACELITE_DFX_MODULE 1
+#endif
 
-#define FEATURE_ACELITE_LITE_DFX_MODULE
+#ifndef FEATURE_ACELITE_LITE_DFX_MODULE
+#define FEATURE_ACELITE_LITE_DFX_MODULE 1
 #endif
 
 /**
  * support mc lazy loading
  */
-#define FEATURE_LAZY_LOADING_MODULE
+#ifndef FEATURE_LAZY_LOADING_MODULE
+#define FEATURE_LAZY_LOADING_MODULE 1
+#endif
 
 /**
  * support fatal error handling on device which not support process
  */
 #ifndef FEATURE_FATAL_ERROR_HANDLING
-#define FEATURE_FATAL_ERROR_HANDLING
+#define FEATURE_FATAL_ERROR_HANDLING 1
 #endif
 
 /**
  * support intl module
  */
-#define FEATURE_INTL_MODULE
+#ifndef FEATURE_INTL_MODULE
+#define FEATURE_INTL_MODULE 1
+#endif
 
 /**
  * supoort number format module
  */
-#define FEATURE_NUMBER_FORMAT
+#ifndef FEATURE_NUMBER_FORMAT
+#define FEATURE_NUMBER_FORMAT 1
+#endif
 
 /**
  * date time module
  */
-#define FEATURE_DATE_FORMAT
+#ifndef FEATURE_DATE_FORMAT
+#define FEATURE_DATE_FORMAT 1
+#endif
 
-#define FEATURE_API_VERSION
+#ifndef FEATURE_API_VERSION
+#define FEATURE_API_VERSION 1
+#endif
 
-#define JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED
+#ifndef JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED
+#define JS_ENGINE_STATIC_MULTI_CONTEXTS_ENABLED 1
+#endif
+
+#ifndef FEATURE_MODULE_STORAGE
+#define FEATURE_MODULE_STORAGE 0
+#endif
+
+#ifndef FEATURE_MODULE_AUDIO
+#define FEATURE_MODULE_AUDIO 0
+#endif
+
+#ifndef FEATURE_MODULE_DEVICE
+#define FEATURE_MODULE_DEVICE 0
+#endif
+
+#ifndef FEATURE_SUPPORT_HTTP
+#define FEATURE_SUPPORT_HTTP 0
+#endif
+
+#ifndef FEATURE_MODULE_GEO
+#define FEATURE_MODULE_GEO 0
+#endif
+
+#ifndef FEATURE_MODULE_SENSOR
+#define FEATURE_MODULE_SENSOR 0
+#endif
+
+#ifndef FEATURE_MODULE_BRIGHTNESS
+#define FEATURE_MODULE_BRIGHTNESS 0
+#endif
+
+#ifndef FEATURE_MODULE_BATTERY
+#define FEATURE_MODULE_BATTERY 0
+#endif
+
+#ifndef FEATURE_MODULE_CONFIGURATION
+#define FEATURE_MODULE_CONFIGURATION 0
+#endif
 
 /**
  * support js profiler
  */
-#define FEATURE_ACELITE_MC_JS_PROFILER
+#ifndef FEATURE_ACELITE_MC_JS_PROFILER
+#define FEATURE_ACELITE_MC_JS_PROFILER 1
+#endif
 
+#ifndef DEFAULT_PROFILER_MSG_PATH
 #define DEFAULT_PROFILER_MSG_PATH "user/log/"
+#endif
 
+#ifndef PROFILER_ENABLE_FLAG_FILE
 #define PROFILER_ENABLE_FLAG_FILE "user/data/profiler_enable"
+#endif
 
+#ifndef RUNTIME_MODE_FILE_PATH
 #define RUNTIME_MODE_FILE_PATH "user/data/jsparser_enable"
+#endif
 
 /**
  * Rotation API feature
  */
-#if (defined(ENABLE_ROTATE_INPUT) && (ENABLE_ROTATE_INPUT == 1))
+#if (ENABLE_ROTATE_INPUT == 1)
 // low layer supports
 #ifndef FEATURE_ROTATION_API
-#define FEATURE_ROTATION_API
+#define FEATURE_ROTATION_API 1
 #endif
-#endif // (defined(ENABLE_ROTATE_INPUT) && (ENABLE_ROTATE_INPUT == 1))
+#endif // (ENABLE_ROTATE_INPUT == 1)
 
 #endif // OHOS_ACELITE_CONFIG_H

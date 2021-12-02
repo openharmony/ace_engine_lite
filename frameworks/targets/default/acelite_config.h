@@ -29,7 +29,7 @@
 #ifdef FEATURE_TEST_IMPLEMENTATION
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_TEST_IMPLEMENTATION
+#define FEATURE_TEST_IMPLEMENTATION 1
 #endif
 
 /**
@@ -38,7 +38,7 @@
 #ifdef FEATURE_ACELITE_HI_LOG_PRINTF
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_ACELITE_HI_LOG_PRINTF
+#define FEATURE_ACELITE_HI_LOG_PRINTF 1
 #endif
 
 /**
@@ -47,7 +47,7 @@
 #ifdef FEATURE_ACELITE_MEMORY_POOL
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_ACELITE_MEMORY_POOL
+#define FEATURE_ACELITE_MEMORY_POOL 1
 #endif
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@
 #ifdef FEATURE_COMPONENT_ANALOG_CLOCK
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_COMPONENT_ANALOG_CLOCK
+#define FEATURE_COMPONENT_ANALOG_CLOCK 1
 #endif
 
 /**
@@ -71,7 +71,7 @@
 #ifdef FEATURE_COMPONENT_TABS
 #error "must keep the global configuration unique"
 #else
-#define FEATURE_COMPONENT_TABS
+#define FEATURE_COMPONENT_TABS 1
 #endif
 
 /**

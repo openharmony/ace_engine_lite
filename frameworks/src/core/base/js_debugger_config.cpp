@@ -81,7 +81,7 @@ void Debugger::FlushOutput()
     fflush(stdout);
 }
 
-#ifdef JS_ENGINE_EXTERNAL_CONTEXT
+#if (JS_ENGINE_EXTERNAL_CONTEXT == 1)
 static void *AllocEngineContext(size_t size, void *cbDataP)
 {
     (void)(cbDataP);
@@ -91,7 +91,7 @@ static void *AllocEngineContext(size_t size, void *cbDataP)
 
 void Debugger::SetupJSContext()
 {
-#ifdef JS_ENGINE_EXTERNAL_CONTEXT
+#if (JS_ENGINE_EXTERNAL_CONTEXT == 1)
     if (engineContext_ != nullptr) {
         // do not repeat the setup process
         return;
@@ -112,7 +112,7 @@ void Debugger::SetupJSContext()
 
 void Debugger::ReleaseJSContext()
 {
-#ifdef JS_ENGINE_EXTERNAL_CONTEXT
+#if (JS_ENGINE_EXTERNAL_CONTEXT == 1)
     if (engineContext_ == nullptr) {
         return;
     }

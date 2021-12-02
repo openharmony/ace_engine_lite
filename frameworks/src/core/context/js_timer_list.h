@@ -19,7 +19,7 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_TIMER_MODULE
+#if (FEATURE_TIMER_MODULE == 1)
 #include <jerryscript.h>
 #include <cstdint>
 #include "memory_heap.h"

@@ -22,7 +22,7 @@
 #endif
 
 #include "acelite_config.h"
-#ifdef FEATURE_NUMBER_FORMAT
+#if (FEATURE_NUMBER_FORMAT == 1)
 #include "test_common.h"
 #include "js_fwk_common.h"
 namespace OHOS {

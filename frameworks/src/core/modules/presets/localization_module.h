@@ -17,7 +17,7 @@
 
 #include "acelite_config.h"
 #include "non_copyable.h"
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
 #include "cjson_parser.h"
 #include "presets/preset_module.h"
 namespace OHOS {
@@ -85,14 +85,14 @@ public:
     ~LocalModule() = default;
     static void Load()
     {
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
         LocalizationModule *localizationModule = LocalizationModule::GetInstance();
         localizationModule->Init();
 #endif
     }
     static void Clear()
     {
-#ifdef FEATURE_LOCALIZATION_MODULE
+#if (FEATURE_LOCALIZATION_MODULE == 1)
         LocalizationModule *localization = LocalizationModule::GetInstance();
         localization->Clear();
 #endif

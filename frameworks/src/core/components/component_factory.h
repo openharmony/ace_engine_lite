@@ -17,14 +17,14 @@
 
 #include "acelite_config.h"
 
-#ifdef FEATURE_COMPONENT_ANALOG_CLOCK
+#if (FEATURE_COMPONENT_ANALOG_CLOCK == 1)
 #include "analog_clock_component.h"
 #include "clock_hand_component.h"
 #endif // FEATURE_COMPONENT_ANALOG_CLOCK
-#ifdef FEATURE_COMPONENT_CAMERA
+#if (FEATURE_COMPONENT_CAMERA == 1)
 #include "camera_component.h"
 #endif // FEATURE_COMPONENT_CAMERA
-#ifdef FEATURE_COMPONENT_CANVAS
+#if (FEATURE_COMPONENT_CANVAS == 1)
 #include "canvas_component.h"
 #endif // FEATURE_COMPONENT_CANVAS
 #include "chart_component.h"
@@ -45,14 +45,14 @@
 #include "marquee_component.h"
 #include "non_copyable.h"
 #include "picker_view_component.h"
-#ifdef FEATURE_COMPONENT_QRCODE
+#if (FEATURE_COMPONENT_QRCODE == 1)
 #include "qrcode_component.h"
 #endif
 #include "slider_component.h"
 #include "stack_component.h"
 #include "swiper_component.h"
 #include "switch_component.h"
-#ifdef FEATURE_COMPONENT_TABS
+#if (FEATURE_COMPONENT_TABS == 1)
 #include "tab_bar_component.h"
 #include "tab_content_component.h"
 #include "tabs_component.h"
@@ -80,12 +80,12 @@ public:
 
         Component* component;
         switch (componentNameId) {
-#ifdef FEATURE_COMPONENT_CAMERA
+#if (FEATURE_COMPONENT_CAMERA == 1)
             case K_CAMERA:
                 component = new CameraComponent(options, children, styleManager);
                 break;
 #endif
-#ifdef FEATURE_COMPONENT_CANVAS
+#if (FEATURE_COMPONENT_CANVAS == 1)
             case K_CANVAS:
                 component = new CanvasComponent(options, children, styleManager);
                 break;
@@ -112,7 +112,7 @@ public:
                 }
                 break;
             }
-#ifdef FEATURE_COMPONENT_TABS
+#if (FEATURE_COMPONENT_TABS == 1)
             case K_TAB_BAR:
                 component = new TabBarComponent(options, children, styleManager);
                 break;
@@ -141,7 +141,7 @@ public:
             case K_LIST_ITEM:
                 component = new DivComponent(options, children, styleManager);
                 break;
-#ifdef FEATURE_COMPONENT_ANALOG_CLOCK
+#if (FEATURE_COMPONENT_ANALOG_CLOCK == 1)
             case K_CLOCK_HAND:
                 component = new ClockHandComponent(options, children, styleManager);
                 break;
@@ -170,12 +170,12 @@ public:
             case K_PICKER_VIEW:
                 component = new PickerViewComponent(options, children, styleManager);
                 break;
-#ifdef FEATURE_COMPONENT_QRCODE
+#if (FEATURE_COMPONENT_QRCODE == 1)
             case K_QRCODE:
                 component = new QrcodeComponent(options, children, styleManager);
                 break;
 #endif // FEATURE_COMPONENT_QRCODE
-#ifdef FEATURE_COMPONENT_VIDEO
+#if (FEATURE_COMPONENT_VIDEO == 1)
             case K_VIDEO:
                 component = new VideoComponent(options, children, styleManager);
                 break;
