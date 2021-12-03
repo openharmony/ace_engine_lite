@@ -541,7 +541,6 @@ jerry_value_t CJSONParser::GetValueFromFile(const char *key,
     jerry_value_t result = UNDEFINED;
     do {
         if (curJsonItem == nullptr) {
-            result = jerry_create_string(reinterpret_cast<const jerry_char_t *>(key));
             break;
         }
         if (cJSON_IsNumber(curJsonItem)) {
