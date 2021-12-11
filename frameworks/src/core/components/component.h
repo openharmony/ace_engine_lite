@@ -174,6 +174,10 @@ public:
         UNUSED(child);
     }
     /**
+     * @brief OnVisibleChanged the component can be notified if the visibility status is changed
+     */
+    virtual void OnVisibilityChanged(bool isVisible) {}
+    /**
      * @brief OnViewAttached called when the native view is attached to the tree
      */
     virtual void OnViewAttached() {}

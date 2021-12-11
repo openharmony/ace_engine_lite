@@ -137,6 +137,7 @@ void JSAbilityImpl::Show() const
         return;
     }
     router_->Show();
+    FatalHandler::GetInstance().NotifyVisibleStatusChange(true);
 }
 
 void JSAbilityImpl::Hide() const
@@ -146,6 +147,7 @@ void JSAbilityImpl::Hide() const
         return;
     }
     router_->Hide();
+    FatalHandler::GetInstance().NotifyVisibleStatusChange(false);
 }
 
 void JSAbilityImpl::NotifyBackPressed() const
