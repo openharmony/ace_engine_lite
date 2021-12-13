@@ -52,6 +52,7 @@ public:
     void SetCurrentPageRootView(UIView *pageRoot);
     void DumpFatalTrace(int errorCode) const;
     uint16_t GetComponentCount() const;
+    void NotifyVisibleStatusChange(bool isVisible) const;
     // define all fatal error below, please note the jerry fatal defines, avoid conflicts
     static const int ERR_INVALID = 0;
     static const int ERR_NATIVE_OUT_OF_MEMORY = 200;

@@ -362,5 +362,16 @@ uint16_t FatalHandler::GetComponentCount() const
 {
     return componentNodes_.Size();
 }
+
+void FatalHandler::NotifyVisibleStatusChange(bool isVisible) const
+{
+    ListNode<Component *> *node = componentNodes_.Begin();
+    while (node != componentNodes_.End()) {
+        if (node->data_ != nullptr) {
+            node->data_->OnVisibilityChanged(isVisible);
+        }
+        node = node->next_;
+    }
+}
 } // namespace ACELite
 } // namespace OHOS

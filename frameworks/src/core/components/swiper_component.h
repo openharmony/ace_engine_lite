@@ -38,6 +38,7 @@ protected:
     bool ProcessChildren() override;
     bool RegisterPrivateEventListener(uint16_t eventTypeId, jerry_value_t funcValue, bool isStopPropagation) override;
     void AttachView(const Component *child) override;
+    void OnVisibilityChanged(bool isVisible) override;
 
 private:
     class ChangeListener : public UISwipeView::OnSwipeListener {
