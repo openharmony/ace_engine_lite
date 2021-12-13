@@ -105,6 +105,22 @@ void SwiperComponent::AttachView(const Component *child)
     SetPageIndex();
 }
 
+void SwiperComponent::OnVisibilityChanged(bool isVisible)
+{
+    if (changeListener_ == nullptr) {
+        return;
+    }
+    if (!isVisible) {
+        swiperView_.SetOnSwipeListener(nullptr);
+        return;
+    }
+    // component will be visible
+    if (swiperView_.GetOnSwipeListener() != nullptr) {
+        return;
+    }
+    swiperView_.SetOnSwipeListener(changeListener_);
+}
+
 bool SwiperComponent::RegisterPrivateEventListener(uint16_t eventTypeId,
                                                    jerry_value_t funcValue,
                                                    bool isStopPropagation)
