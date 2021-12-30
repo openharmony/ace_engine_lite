@@ -896,7 +896,7 @@ void ArcTddTest::ComponentProgressStyleSetTest013()
     /**
     * @tc.steps: step2. set unnormal style lineColor = 2147483648
     */
-    int32_t lineColorBoundary = 2147483648;
+    int64_t lineColorBoundary = 2147483648;
     UpdateNumAttributeOrStyleValue(circleComponent, styleName, lineColorBoundary, false);
 
     /**

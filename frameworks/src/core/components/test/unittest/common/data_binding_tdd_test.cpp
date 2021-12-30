@@ -17,7 +17,7 @@
 
 namespace OHOS {
 namespace ACELite {
-constexpr char *BUNDLE_OF_ATTR_BINDING =
+const char *BUNDLE_OF_ATTR_BINDING =
     "(function(){\n"
     "  return new ViewModel({\n"
     "    render: function(vm) {\n"

@@ -342,7 +342,7 @@ HWTEST_F(PercentTddTest, PercentParse010, TestSize.Level1)
     /**
      * @tc.steps: step2. check the value is correct
      */
-    float correctValue = 123456789012345;
+    int64_t correctValue = 123456789012345;
     EXPECT_EQ(percentValue, correctValue);
 }
 
@@ -364,7 +364,7 @@ HWTEST_F(PercentTddTest, PercentParse011, TestSize.Level1)
     /**
      * @tc.steps: step2. check the value is correct
      */
-    float correctValue = -12345678901234;
+    int64_t correctValue = -12345678901234;
     EXPECT_EQ(percentValue, correctValue);
 }
 

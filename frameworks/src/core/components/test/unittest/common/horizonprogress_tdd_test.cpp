@@ -467,7 +467,7 @@ void HorizonProgressTddTest::HorizonProgressTest013()
      */
     jerry_value_t colorKey = jerry_create_string((const jerry_char_t*)"color");
     // 2147483648(0x80000000)
-    const int32_t percentNum = 2147483648;
+    const int64_t percentNum = 2147483648;
     const int32_t redNum = 0x00;
     const int32_t greenNum = 0x00;
     const int32_t blueNum = 0x00;
@@ -535,7 +535,7 @@ void HorizonProgressTddTest::HorizonProgressTest014()
      * @tc.expected: step1. get strokeWidth=0.
      */
     UIBoxProgress* progressView = reinterpret_cast<UIBoxProgress *>(component->GetComponentRootView());
-    if (progressView->GetValidHeight() == strokeWidth) {
+    if (static_cast<int32_t>(progressView->GetValidHeight()) == strokeWidth) {
         printf("[Test Case] [HorizonProgressTest014] PASSED\n");
     } else {
         printf("[Test Case] [HorizonProgressTest014] FAILED\n");
@@ -617,12 +617,12 @@ void HorizonProgressTddTest::HorizonProgressTest016()
      * @tc.expected: step1. progress component will not crash.
      */
     UIBoxProgress* progressView = reinterpret_cast<UIBoxProgress *>(component->GetComponentRootView());
-    if (progressView->GetValidHeight() != strokeWidth) {
+    if (static_cast<int32_t>(progressView->GetValidHeight()) != strokeWidth) {
         printf("[Test Case] [HorizonProgressTest016] PASSED\n");
     } else {
         printf("[Test Case] [HorizonProgressTest016] FAILED\n");
     }
-    EXPECT_TRUE(progressView->GetValidHeight() != strokeWidth);
+    EXPECT_TRUE(static_cast<int32_t>(progressView->GetValidHeight()) != strokeWidth);
     component->Release();
     delete component;
     component = nullptr;

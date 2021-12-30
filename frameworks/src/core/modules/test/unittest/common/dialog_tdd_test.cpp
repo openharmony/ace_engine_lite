@@ -504,7 +504,7 @@ void DialogTddTest::DialogTest005()
 
     // step2: set dialog window id and click
     const int16_t position = 10;
-    constexpr char *dismissiontVal = "HelloAce";
+    const char *dismissiontVal = "HelloAce";
     Window *window = RootView::GetInstance()->GetBoundWindow();
     EventInjector::GetInstance()->SetWindowId(window->GetWindowId() + 1);
     Click(position, position);

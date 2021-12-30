@@ -350,7 +350,7 @@ void StyleMgrTddTest::ACELiteStyleManagerInlineStyle003()
      * @tc.steps: step2. prepare valid style sheet
      */
     constexpr char id[] = "idSelectors";
-    constexpr char *sample = "sample";
+    const char *sample = "sample";
     constexpr char heightKey[] = "height";
     constexpr int32_t heightValue = 50;
     JSValue styleSheetObj = PrepareStyleSheet(id, sample, heightKey, heightValue);
@@ -412,7 +412,7 @@ void StyleMgrTddTest::ACELiteStyleManagerInlineStyle004()
      * @tc.steps: step2. prepare valid style sheet with class selector
      */
     constexpr char classSelector[] = "classSelectors";
-    constexpr char *sample = "sampleClass";
+    const char *sample = "sampleClass";
     constexpr char widthKey[] = "width";
     constexpr int32_t widthValue = 200;
     JSValue styleSheetObj = PrepareStyleSheet(classSelector, sample, widthKey, widthValue);
