@@ -467,7 +467,7 @@ void HorizonProgressTddTest::HorizonProgressTest013()
      */
     jerry_value_t colorKey = jerry_create_string((const jerry_char_t*)"color");
     // 2147483648(0x80000000)
-    const int64_t percentNum = 2147483648;
+    const int32_t percentNum = static_cast<int32_t>(2147483648);
     const int32_t redNum = 0x00;
     const int32_t greenNum = 0x00;
     const int32_t blueNum = 0x00;
