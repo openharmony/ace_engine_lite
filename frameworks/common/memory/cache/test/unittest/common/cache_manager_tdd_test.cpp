@@ -56,7 +56,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute001, TestSize.Level1)
     size_t localicationBufSize = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
     const uintptr_t targetPos = startAddr + MAGIC_NUMBER_LENGTH;
     const size_t unit = 1024;
-    const uint8_t magicNumberCount = MAGIC_NUMBER_COUNT;
     const uint8_t localicationMin = 16;
     const size_t targetLength = localicationMin * unit;
     EXPECT_EQ(localicationPos, targetPos);
@@ -169,7 +168,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute004, TestSize.Level1)
     size_t bufLength = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
     uint32_t headMagicNumber = *(uint32_t *)(bufStartPos - MAGIC_NUMBER_LENGTH);
     EXPECT_EQ(headMagicNumber, CACHE_MEM_MAGIC_NUMBER);
-    const uint8_t magicNumberCount = MAGIC_NUMBER_COUNT;
     uint32_t tailMagicNumber = *(uint32_t *)(bufStartPos + bufLength);
     EXPECT_EQ(tailMagicNumber, CACHE_MEM_MAGIC_NUMBER);
     ace_free(buffer);

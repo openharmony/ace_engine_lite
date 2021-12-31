@@ -42,7 +42,7 @@ void RequireModuleTddTest::RequireModuleTest001()
     /**
      * @tc.steps: step1. require a module with module name registered
      */
-    constexpr char *moduleName = "system.app";
+    const char *moduleName = "system.app";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is not undefined
@@ -58,7 +58,7 @@ void RequireModuleTddTest::RequireModuleTest002()
     /**
      * @tc.steps: step1. require a module with module name unregistered
      */
-    constexpr char *moduleName = "system.unregistered";
+    const char *moduleName = "system.unregistered";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is undefined
@@ -74,7 +74,7 @@ void RequireModuleTddTest::RequireModuleTest003()
     /**
      * @tc.steps: step1. require a module with incorrect category
      */
-    constexpr char *moduleName = "service.app";
+    const char *moduleName = "service.app";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is undefined
@@ -90,7 +90,7 @@ void RequireModuleTddTest::RequireModuleTest004()
     /**
      * @tc.steps: step1. require a module with illegal module name
      */
-    constexpr char *moduleName = "illegal";
+    const char *moduleName = "illegal";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is undefined
@@ -106,7 +106,7 @@ void RequireModuleTddTest::RequireModuleTest005()
     /**
      * @tc.steps: step1. require app module
      */
-    constexpr char *moduleName = "system.app";
+    const char *moduleName = "system.app";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is not undefined
@@ -115,7 +115,7 @@ void RequireModuleTddTest::RequireModuleTest005()
     /**
      * @tc.steps: step2. get "getInfo" property of moduleRequired
      */
-    constexpr char *funcName = "getInfo";
+    const char *funcName = "getInfo";
     JSIValue jFunc = JSI::GetNamedProperty(moduleRequired, funcName);
     /**
      * @tc.expected: step2. jFunc is not undefined
@@ -140,7 +140,7 @@ void RequireModuleTddTest::RequireModuleTest006()
     /**
      * @tc.steps: step1. require app module
      */
-    constexpr char *moduleName = "system.app";
+    const char *moduleName = "system.app";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is not undefined
@@ -149,7 +149,7 @@ void RequireModuleTddTest::RequireModuleTest006()
     /**
      * @tc.steps: step2. get "terminate" property of moduleRequired
      */
-    constexpr char *funcName = "terminate";
+    const char *funcName = "terminate";
     JSIValue jFunc = JSI::GetNamedProperty(moduleRequired, funcName);
     /**
      * @tc.expected: step2. jFunc is not undefined
@@ -174,7 +174,7 @@ void RequireModuleTddTest::RequireModuleTest007()
     /**
      * @tc.steps: step1. require router module
      */
-    constexpr char *moduleName = "system.router";
+    const char *moduleName = "system.router";
     JSIValue moduleRequired = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. moduleRequired is not undefined
@@ -183,7 +183,7 @@ void RequireModuleTddTest::RequireModuleTest007()
     /**
      * @tc.steps: step2. get "replace" property of moduleRequired
      */
-    constexpr char *funcName = "replace";
+    const char *funcName = "replace";
     JSIValue jFunc = JSI::GetNamedProperty(moduleRequired, funcName);
     /**
      * @tc.expected: step2. jFunc is not undefined
@@ -208,7 +208,7 @@ void RequireModuleTddTest::RequireModuleTest008()
     /**
      * @tc.steps: step1. require a module with module name registered which is ohos
      */
-    constexpr char *moduleName = "ohos.app";
+    const char *moduleName = "ohos.app";
     JSIValue module = moduleManager_->RequireModule(moduleName);
     /**
      * @tc.expected: step1. module is not undefined
