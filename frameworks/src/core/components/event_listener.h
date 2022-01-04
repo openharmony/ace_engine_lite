@@ -241,14 +241,14 @@ class ListEventListener final : public ListScrollListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ListEventListener);
     ListEventListener()
-        : bindScrollStartFunc_(UNDEFINED), bindScrollEndFunc_(UNDEFINED), bindScrollSelectedFunc_(UNDEFINED), 
-        bindScrollTopFunc_(UNDEFINED), bindScrollBottomFunc_(UNDEFINED)
+        : bindScrollStartFunc_(UNDEFINED), bindScrollEndFunc_(UNDEFINED), bindScrollSelectedFunc_(UNDEFINED),
+            bindScrollTopFunc_(UNDEFINED), bindScrollBottomFunc_(UNDEFINED)
     {
     }
     ~ListEventListener()
     {
-        ReleaseJerryValue(bindScrollStartFunc_, bindScrollEndFunc_, bindScrollSelectedFunc_, bindScrollTopFunc_, 
-        bindScrollBottomFunc_, VA_ARG_END_FLAG);
+        ReleaseJerryValue(bindScrollStartFunc_, bindScrollEndFunc_, bindScrollSelectedFunc_, bindScrollTopFunc_,
+            bindScrollBottomFunc_, VA_ARG_END_FLAG);
     }
 
     void EventExcute(const int16_t index, jerry_value_t bindScrollFunc) const
