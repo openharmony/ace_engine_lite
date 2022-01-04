@@ -14,7 +14,7 @@
  */
 
 #include "key_parser.h"
-#include <string.h>
+#include <cstring>
 #include "acelite_config.h"
 #include "js_config.h"
 #include "keys.h"
@@ -569,7 +569,7 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "crollstart")) {
                 return K_SCROLLSTART;
             }
-             if (!strcmp(s, "crolltop")) {
+            if (!strcmp(s, "crolltop")) {
                 return K_SCROLLTOP;
             }
             if (!strcmp(s, "crollbottom")) {

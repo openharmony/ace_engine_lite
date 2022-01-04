@@ -1177,7 +1177,7 @@ void Component::SetLongPressEventListener(UIView &view, const jerry_value_t even
 
 void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if(onDragListener_ == nullptr)
+    if (onDragListener_ == nullptr)
         onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
     if (onDragListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
@@ -1193,7 +1193,7 @@ void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, boo
 
 void Component::SetDragStartEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if(onDragListener_ == nullptr)
+    if (onDragListener_ == nullptr)
         onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
     if (onDragListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragStart listener create failed");
@@ -1210,7 +1210,7 @@ void Component::SetDragStartEventListener(UIView &view, jerry_value_t eventFunc,
 
 void Component::SetDragEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if(onDragListener_ == nullptr)
+    if (onDragListener_ == nullptr)
         onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
     if (onDragListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Drag listener create failed");
@@ -1226,7 +1226,7 @@ void Component::SetDragEventListener(UIView &view, jerry_value_t eventFunc, bool
 
 void Component::SetDragEndEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if(onDragListener_ == nullptr)
+    if (onDragListener_ == nullptr)
         onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
     if (onDragListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
