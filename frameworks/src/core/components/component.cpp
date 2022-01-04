@@ -71,12 +71,9 @@ Component::Component(jerry_value_t options, jerry_value_t children, AppStyleMana
       children_(UNDEFINED),
       onClickListener_(nullptr),
       onLongPressListener_(nullptr),
-      onSwipeListener_(nullptr),
+      onDragListener_(nullptr),
 #ifdef JS_TOUCH_EVENT_SUPPORT
-      onTouchStartListener_(nullptr),
-      onTouchMoveListener_(nullptr),
       onTouchCancelListener_(nullptr),
-      onTouchEndListener_(nullptr),
       keyBoardEventListener_(nullptr),
 #endif
       viewId_(nullptr),
@@ -424,8 +421,8 @@ void Component::AlignDimensions(const ConstrainedParameter &param)
 
 void Component::EnableTransmitSwipe()
 {
-    if (onSwipeListener_ != nullptr) {
-        onSwipeListener_->SetStopPropagation(false);
+    if (onDragListener_ != nullptr) {
+        onDragListener_->SetStopPropagation(false);
     }
 }
 
@@ -1137,31 +1134,6 @@ void Component::SetClickEventListener(UIView &view, const jerry_value_t eventFun
 }
 
 #ifdef JS_TOUCH_EVENT_SUPPORT
-void Component::SetTouchStartEventListener(UIView &view, jerry_value_t eventFunc, uint16_t eventTypeId)
-{
-    onTouchStartListener_ = new ViewOnTouchStartListener(eventFunc, eventTypeId);
-    if (onTouchStartListener_ == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "touch move event listener create failed");
-        return;
-    }
-
-    view.SetOnTouchListener(onTouchStartListener_);
-    view.SetTouchable(true);
-}
-
-void Component::SetTouchMoveEventListener(UIView &view, jerry_value_t eventFunc, uint16_t eventTypeId)
-{
-    onTouchMoveListener_ = new ViewOnTouchMoveListener(eventFunc, eventTypeId);
-    if (onTouchMoveListener_ == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "touch start event listener create failed");
-        return;
-    }
-
-    view.SetOnDragListener(onTouchMoveListener_);
-    view.SetTouchable(true);
-    view.SetDraggable(true);
-}
-
 void Component::SetTouchCancelEventListener(UIView &view, jerry_value_t eventFunc, uint16_t eventTypeId)
 {
     onTouchCancelListener_ = new ViewOnTouchCancelListener(eventFunc, eventTypeId);
@@ -1173,18 +1145,6 @@ void Component::SetTouchCancelEventListener(UIView &view, jerry_value_t eventFun
     view.SetOnTouchListener(onTouchCancelListener_);
     view.SetTouchable(true);
     view.SetDraggable(true);
-}
-
-void Component::SetTouchEndEventListener(UIView &view, jerry_value_t eventFunc, uint16_t eventTypeId)
-{
-    onTouchEndListener_ = new ViewOnTouchEndListener(eventFunc, eventTypeId);
-    if (onTouchEndListener_ == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "touch end event listener create failed");
-        return;
-    }
-
-    view.SetOnTouchListener(onTouchEndListener_);
-    view.SetTouchable(true);
 }
 
 void Component::SetKeyBoardEventListener(jerry_value_t eventFunc, uint16_t eventTypeId)
@@ -1217,15 +1177,67 @@ void Component::SetLongPressEventListener(UIView &view, const jerry_value_t even
 
 void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    onSwipeListener_ = new ViewOnSwipeListener(viewModel_, eventFunc, isStopPropagation);
-    if (onSwipeListener_ == nullptr) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "swipe listener create failed");
+    if(onDragListener_ == nullptr)
+        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
+    if (onDragListener_ == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
         return;
     }
 
-    view.SetOnDragListener(onSwipeListener_);
+    view.SetOnDragListener(onDragListener_);
     view.SetDraggable(true);
     view.SetTouchable(true);
+
+    onDragListener_->SetBindSwipeFuncName(eventFunc);
+}
+
+void Component::SetDragStartEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
+{
+    if(onDragListener_ == nullptr)
+        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
+    if (onDragListener_ == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "DragStart listener create failed");
+        return;
+    }
+
+    view.SetOnDragListener(onDragListener_);
+    
+    view.SetDraggable(true);
+    view.SetTouchable(true);
+
+    onDragListener_->SetBindDragStartFuncName(eventFunc);
+}
+
+void Component::SetDragEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
+{
+    if(onDragListener_ == nullptr)
+        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
+    if (onDragListener_ == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "Drag listener create failed");
+        return;
+    }
+
+    view.SetOnDragListener(onDragListener_);
+    view.SetDraggable(true);
+    view.SetTouchable(true);
+
+    onDragListener_->SetBindDragFuncName(eventFunc);
+}
+
+void Component::SetDragEndEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
+{
+    if(onDragListener_ == nullptr)
+        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
+    if (onDragListener_ == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
+        return;
+    }
+
+    view.SetOnDragListener(onDragListener_);
+    view.SetDraggable(true);
+    view.SetTouchable(true);
+
+    onDragListener_->SetBindDragEndFuncName(eventFunc);
 }
 
 // default implementation
@@ -1268,25 +1280,26 @@ bool Component::RegisterCommonEventListener(UIView &view,
             SetSwipeEventListener(view, funcValue, isStopPropagation);
             break;
         }
+        case K_TOUCHSTART: {
+            SetDragStartEventListener(view, funcValue, isStopPropagation);
+            break;
+        }
+        case K_TOUCHMOVE: {
+            SetDragEventListener(view, funcValue, isStopPropagation);
+            break;
+        }
+        case K_TOUCHEND: {
+            SetDragEndEventListener(view, funcValue, isStopPropagation);
+            break;
+        }
+
 #ifdef JS_TOUCH_EVENT_SUPPORT
         case K_KEY: {
             SetKeyBoardEventListener(funcValue, eventTypeId);
             break;
         }
-        case K_TOUCHSTART: {
-            SetTouchStartEventListener(view, funcValue, eventTypeId);
-            break;
-        }
         case K_TOUCHCANCEL: {
             SetTouchCancelEventListener(view, funcValue, eventTypeId);
-            break;
-        }
-        case K_TOUCHMOVE: {
-            SetTouchMoveEventListener(view, funcValue, eventTypeId);
-            break;
-        }
-        case K_TOUCHEND: {
-            SetTouchEndEventListener(view, funcValue, eventTypeId);
             break;
         }
 #endif
@@ -1303,12 +1316,9 @@ void Component::ReleaseCommonEventListeners()
     ACE_DELETE(onLongPressListener_);
 #ifdef JS_TOUCH_EVENT_SUPPORT
     ACE_DELETE(keyBoardEventListener_);
-    ACE_DELETE(onTouchStartListener_);
     ACE_DELETE(onTouchCancelListener_);
-    ACE_DELETE(onTouchMoveListener_);
-    ACE_DELETE(onTouchEndListener_);
 #endif
-    ACE_DELETE(onSwipeListener_);
+    ACE_DELETE(onDragListener_);
 }
 
 void Component::AppendDescriptorOrElements(Component *parent, const JSValue descriptorOrElements)

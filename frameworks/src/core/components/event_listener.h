@@ -157,53 +157,6 @@ public:
 };
 
 #ifdef JS_TOUCH_EVENT_SUPPORT
-class ViewOnTouchStartListener final : public UIView::OnTouchListener {
-public:
-    ACE_DISALLOW_COPY_AND_MOVE(ViewOnTouchStartListener);
-    ViewOnTouchStartListener(jerry_value_t fn, const uint16_t id);
-    ~ViewOnTouchStartListener();
-    bool OnPress(UIView &view, const PressEvent &event) override;
-
-private:
-    jerry_value_t fn_;
-    uint16_t id_;
-};
-
-class ViewOnTouchMoveListener final : public UIView::OnDragListener {
-public:
-    ACE_DISALLOW_COPY_AND_MOVE(ViewOnTouchMoveListener);
-    ViewOnTouchMoveListener(jerry_value_t fn, const uint16_t id);
-    ~ViewOnTouchMoveListener();
-    bool OnDrag(UIView &view, const DragEvent &event) override;
-
-private:
-    jerry_value_t fn_;
-    uint16_t id_;
-};
-
-class ViewOnTouchEndListener final : public UIView::OnTouchListener {
-public:
-    ACE_DISALLOW_COPY_AND_MOVE(ViewOnTouchEndListener);
-    ViewOnTouchEndListener(jerry_value_t fn, const uint16_t id);
-    ~ViewOnTouchEndListener();
-    bool OnRelease(UIView &view, const ReleaseEvent &event) override;
-
-private:
-    jerry_value_t fn_;
-    uint16_t id_;
-};
-
-class ViewOnTouchCancelListener final : public UIView::OnTouchListener {
-public:
-    ACE_DISALLOW_COPY_AND_MOVE(ViewOnTouchCancelListener);
-    ViewOnTouchCancelListener(jerry_value_t fn, const uint16_t id);
-    ~ViewOnTouchCancelListener();
-    bool OnCancel(UIView &view, const CancelEvent &event) override;
-
-private:
-    jerry_value_t fn_;
-    uint16_t id_;
-};
 
 class KeyBoardEventListener final : public RootView::OnKeyActListener {
 public:
@@ -218,29 +171,39 @@ private:
 };
 #endif
 
-class ViewOnSwipeListener final : public UIView::OnDragListener {
+class ViewOnDragListener final : public UIView::OnDragListener {
 public:
-    ACE_DISALLOW_COPY_AND_MOVE(ViewOnSwipeListener);
-    ViewOnSwipeListener(jerry_value_t vm, jerry_value_t fn, bool isStopPropagation)
-        : vm_(jerry_acquire_value(vm)), fn_(jerry_acquire_value(fn)), isStopPropagation_(isStopPropagation)
+    ACE_DISALLOW_COPY_AND_MOVE(ViewOnDragListener);
+    ViewOnDragListener(jerry_value_t vm, bool isStopPropagation)
+        : vm_(jerry_acquire_value(vm)), isStopPropagation_(isStopPropagation)
     {
     }
 
-    ~ViewOnSwipeListener()
+    ~ViewOnDragListener()
     {
         AsyncTaskManager::GetInstance().CancelWithContext(this);
         jerry_release_value(vm_);
-        jerry_release_value(fn_);
+        jerry_release_value(bindDragStartFunc_);
+        jerry_release_value(bindDragFunc_);
+        jerry_release_value(bindDragEndFunc_);
+
     }
 
     void SetStopPropagation(bool isStopPropogation);
     bool OnDragStart(UIView& view, const DragEvent& event) override;
     bool OnDrag(UIView& view, const DragEvent& event) override;
     bool OnDragEnd(UIView& view, const DragEvent &event) override;
+    void SetBindDragStartFuncName(jerry_value_t bindDragStartFunc);
+    void SetBindDragFuncName(jerry_value_t bindDragFunc);
+    void SetBindDragEndFuncName(jerry_value_t bindDragEndFunc);
+    void SetBindSwipeFuncName(jerry_value_t bindSwipeFunc);
 
 private:
     jerry_value_t vm_;
-    jerry_value_t fn_;
+    jerry_value_t bindDragStartFunc_;
+    jerry_value_t bindDragFunc_;
+    jerry_value_t bindDragEndFunc_;
+    jerry_value_t bindSwipeFunc_;
     bool isStopPropagation_;
 };
 
@@ -279,12 +242,12 @@ class ListEventListener final : public ListScrollListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ListEventListener);
     ListEventListener()
-        : bindScrollStartFunc_(UNDEFINED), bindScrollEndFunc_(UNDEFINED), bindScrollSelectedFunc_(UNDEFINED)
+        : bindScrollStartFunc_(UNDEFINED), bindScrollEndFunc_(UNDEFINED), bindScrollSelectedFunc_(UNDEFINED), bindScrollTopFunc_(UNDEFINED), bindScrollBottomFunc_(UNDEFINED)
     {
     }
     ~ListEventListener()
     {
-        ReleaseJerryValue(bindScrollStartFunc_, bindScrollEndFunc_, bindScrollSelectedFunc_, VA_ARG_END_FLAG);
+        ReleaseJerryValue(bindScrollStartFunc_, bindScrollEndFunc_, bindScrollSelectedFunc_, bindScrollTopFunc_, bindScrollBottomFunc_, VA_ARG_END_FLAG);
     }
 
     void EventExcute(const int16_t index, jerry_value_t bindScrollFunc) const
@@ -337,11 +300,37 @@ public:
         }
     }
 
+    void OnScrollTop(int16_t index, UIView* view) override
+    {
+        EventExcute(index, bindScrollTopFunc_);
+    }
+
+    void SetBindScrollTopFuncName(jerry_value_t bindScrollTopFunc)
+    {
+        if (!jerry_value_is_undefined(bindScrollTopFunc)) {
+            bindScrollTopFunc_ = jerry_acquire_value(bindScrollTopFunc);
+        }
+    }
+
+    void OnScrollBottom(int16_t index, UIView* view) override
+    {
+        EventExcute(index, bindScrollBottomFunc_);
+    }
+
+    void SetBindScrollBottomFuncName(jerry_value_t bindScrollBottomFunc)
+    {
+        if (!jerry_value_is_undefined(bindScrollBottomFunc)) {
+            bindScrollBottomFunc_ = jerry_acquire_value(bindScrollBottomFunc);
+        }
+    }
+
 private:
     static constexpr int8_t ARGS_LEN = 2;
     jerry_value_t bindScrollStartFunc_;
     jerry_value_t bindScrollEndFunc_;
     jerry_value_t bindScrollSelectedFunc_;
+    jerry_value_t bindScrollTopFunc_;
+    jerry_value_t bindScrollBottomFunc_;
 };
 } // namespace ACELite
 } // namespace OHOS

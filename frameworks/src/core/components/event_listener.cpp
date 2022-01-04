@@ -44,61 +44,6 @@ bool KeyBoardEventListener::OnKeyAct(UIView &view, const KeyEvent &event)
     return true;
 }
 
-ViewOnTouchStartListener::ViewOnTouchStartListener(jerry_value_t fn, uint16_t id)
-{
-    fn_ = jerry_acquire_value(fn);
-    id_ = id;
-}
-
-ViewOnTouchStartListener::~ViewOnTouchStartListener()
-{
-    jerry_release_value(fn_);
-}
-
-bool ViewOnTouchStartListener::OnPress(UIView &view, const PressEvent &event)
-{
-    return CallBaseEvent(fn_, event, id_);
-}
-
-ViewOnTouchMoveListener::ViewOnTouchMoveListener(jerry_value_t fn, uint16_t id)
-{
-    fn_ = jerry_acquire_value(fn);
-    id_ = id;
-}
-
-ViewOnTouchMoveListener::~ViewOnTouchMoveListener()
-{
-    jerry_release_value(fn_);
-}
-
-bool ViewOnTouchMoveListener::OnDrag(UIView &view, const DragEvent &event)
-{
-    if (jerry_value_is_undefined(fn_)) {
-        return false;
-    }
-
-    jerry_value_t *args = ConvertDragEventInfo(event, id_);
-    jerry_release_value(CallJSFunctionOnRoot(fn_, args, 1));
-    ClearEventListener(args, 1);
-    return true;
-}
-
-ViewOnTouchEndListener::ViewOnTouchEndListener(jerry_value_t fn, uint16_t id)
-{
-    fn_ = jerry_acquire_value(fn);
-    id_ = id;
-}
-
-ViewOnTouchEndListener::~ViewOnTouchEndListener()
-{
-    jerry_release_value(fn_);
-}
-
-bool ViewOnTouchEndListener::OnRelease(UIView &view, const ReleaseEvent &event)
-{
-    return CallBaseEvent(fn_, event, id_);
-}
-
 ViewOnTouchCancelListener::ViewOnTouchCancelListener(jerry_value_t fn, uint16_t id)
 {
     fn_ = jerry_acquire_value(fn);
@@ -115,38 +60,82 @@ bool ViewOnTouchCancelListener::OnCancel(UIView &view, const CancelEvent &event)
 }
 #endif // JS_TOUCH_EVENT_SUPPORT
 
-void ViewOnSwipeListener::SetStopPropagation(bool isStopPropogation)
+void ViewOnDragListener::SetBindDragStartFuncName(jerry_value_t bindDragStartFunc)
+{
+    if (!jerry_value_is_undefined(bindDragStartFunc)) {
+        bindDragStartFunc_ = jerry_acquire_value(bindDragStartFunc);
+    }
+}
+
+void ViewOnDragListener::SetBindDragFuncName(jerry_value_t bindDragFunc)
+{
+    if (!jerry_value_is_undefined(bindDragFunc)) {
+        bindDragFunc_ = jerry_acquire_value(bindDragFunc);
+    }
+}
+
+
+void ViewOnDragListener::SetBindDragEndFuncName(jerry_value_t bindDragEndFunc)
+{
+    if (!jerry_value_is_undefined(bindDragEndFunc)) {
+        bindDragEndFunc_ = jerry_acquire_value(bindDragEndFunc);
+    }
+}
+
+void ViewOnDragListener::SetBindSwipeFuncName(jerry_value_t bindSwipeFunc)
+{
+    if (!jerry_value_is_undefined(bindSwipeFunc)) {
+        bindSwipeFunc_ = jerry_acquire_value(bindSwipeFunc);
+    }
+}
+
+void ViewOnDragListener::SetStopPropagation(bool isStopPropogation)
 {
     isStopPropagation_ = isStopPropogation;
 }
 
-bool ViewOnSwipeListener::OnDragStart(UIView& view, const DragEvent &event)
+bool ViewOnDragListener::OnDragStart(UIView& view, const DragEvent &event)
 {
-    UNUSED(view);
-    UNUSED(event);
+    if (JSUndefined::Is(bindDragStartFunc_)) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "OnDragStart received, but no JS function to call");
+        return isStopPropagation_;
+    }
+
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDragStart received");
+
+    JSValue arg = EventUtil::CreateDragEvent(view, event);
+    EventUtil::InvokeCallback(vm_, bindDragStartFunc_, arg, this);
     return isStopPropagation_;
 }
 
-bool ViewOnSwipeListener::OnDrag(UIView& view, const DragEvent& event)
+bool ViewOnDragListener::OnDrag(UIView& view, const DragEvent& event)
 {
-    UNUSED(view);
-    UNUSED(event);
+    if (JSUndefined::Is(bindDragFunc_)) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "OnDrag received, but no JS function to call");
+        return isStopPropagation_;
+    }
+
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDrag received");
+
+    JSValue arg = EventUtil::CreateDragEvent(view, event);
+    EventUtil::InvokeCallback(vm_, bindDragFunc_, arg, this);
     return isStopPropagation_;
 }
 
-bool ViewOnSwipeListener::OnDragEnd(UIView& view, const DragEvent &event)
+bool ViewOnDragListener::OnDragEnd(UIView& view, const DragEvent &event)
 {
-    if (JSUndefined::Is(fn_)) {
+    if (JSUndefined::Is(bindDragEndFunc_)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "OnDragEnd received, but no JS function to call");
         return isStopPropagation_;
     }
 
     HILOG_DEBUG(HILOG_MODULE_ACE, "OnDragEnd received");
 
-    JSValue arg = EventUtil::CreateSwipeEvent(view, event);
-    EventUtil::InvokeCallback(vm_, fn_, arg, this);
+    JSValue argSwipe = EventUtil::CreateSwipeEvent(view, event);
+    EventUtil::InvokeCallback(vm_, bindSwipeFunc_, argSwipe, this);
+
+    JSValue argDragEnd = EventUtil::CreateDragEvent(view, event);
+    EventUtil::InvokeCallback(vm_, bindDragEndFunc_, argDragEnd, this);
     return isStopPropagation_;
 }
 } // namespace ACELite
