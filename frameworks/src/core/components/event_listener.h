@@ -241,10 +241,10 @@ class ListEventListener final : public ListScrollListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ListEventListener);
     ListEventListener()
-        : bindScrollStartFunc_(UNDEFINED), 
-          bindScrollEndFunc_(UNDEFINED), 
+        : bindScrollStartFunc_(UNDEFINED),
+          bindScrollEndFunc_(UNDEFINED),
           bindScrollSelectedFunc_(UNDEFINED),
-          bindScrollTopFunc_(UNDEFINED), 
+          bindScrollTopFunc_(UNDEFINED),
           bindScrollBottomFunc_(UNDEFINED)
     {
     }
