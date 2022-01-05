@@ -45,9 +45,9 @@ public:
 
     /**
      * @brief Create a JAVASCRIPT plain object that is used as the input parameter of
-     * the callback function for drag event.
+     * the callback function for touch event.
      */
-    static JSValue CreateDragEvent(UIView &view, const DragEvent &event);
+    static JSValue CreateTouchEvent(UIView &view, const DragEvent &event);
 
     /**
      * @brief Invoke the callback function of event.

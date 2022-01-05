@@ -156,7 +156,7 @@ public:
     bool isStopPropagation_;
 };
 
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
 
 class KeyBoardEventListener final : public RootView::OnKeyActListener {
 public:
@@ -171,37 +171,38 @@ private:
 };
 #endif
 
-class ViewOnDragListener final : public UIView::OnDragListener {
+class ViewOnTouchListener final : public UIView::OnDragListener {
 public:
-    ACE_DISALLOW_COPY_AND_MOVE(ViewOnDragListener);
-    ViewOnDragListener(jerry_value_t vm, bool isStopPropagation)
+    ACE_DISALLOW_COPY_AND_MOVE(ViewOnTouchListener);
+    ViewOnTouchListener(jerry_value_t vm, bool isStopPropagation)
         : vm_(jerry_acquire_value(vm)), isStopPropagation_(isStopPropagation)
     {
     }
 
-    ~ViewOnDragListener()
+    ~ViewOnTouchListener()
     {
         AsyncTaskManager::GetInstance().CancelWithContext(this);
         jerry_release_value(vm_);
-        jerry_release_value(bindDragStartFunc_);
-        jerry_release_value(bindDragFunc_);
-        jerry_release_value(bindDragEndFunc_);
+        jerry_release_value(bindTouchStartFunc_);
+        jerry_release_value(bindTouchMoveFunc_);
+        jerry_release_value(bindTouchEndFunc_);
+        jerry_release_value(bindSwipeFunc_);
     }
 
     void SetStopPropagation(bool isStopPropogation);
     bool OnDragStart(UIView& view, const DragEvent& event) override;
     bool OnDrag(UIView& view, const DragEvent& event) override;
     bool OnDragEnd(UIView& view, const DragEvent &event) override;
-    void SetBindDragStartFuncName(jerry_value_t bindDragStartFunc);
-    void SetBindDragFuncName(jerry_value_t bindDragFunc);
-    void SetBindDragEndFuncName(jerry_value_t bindDragEndFunc);
+    void SetBindTouchStartFuncName(jerry_value_t bindTouchStartFunc);
+    void SetBindTouchMoveFuncName(jerry_value_t bindTouchMoveFunc);
+    void SetBindTouchEndFuncName(jerry_value_t bindTouchEndFunc);
     void SetBindSwipeFuncName(jerry_value_t bindSwipeFunc);
 
 private:
     jerry_value_t vm_;
-    jerry_value_t bindDragStartFunc_;
-    jerry_value_t bindDragFunc_;
-    jerry_value_t bindDragEndFunc_;
+    jerry_value_t bindTouchStartFunc_;
+    jerry_value_t bindTouchMoveFunc_;
+    jerry_value_t bindTouchEndFunc_;
     jerry_value_t bindSwipeFunc_;
     bool isStopPropagation_;
 };

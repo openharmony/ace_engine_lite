@@ -110,7 +110,7 @@ JSValue EventUtil::CreateSwipeEvent(UIView &view, const DragEvent &event)
     }
     return arg;
 }
-JSValue EventUtil::CreateDragEvent(UIView &view, const DragEvent &event)
+JSValue EventUtil::CreateTouchEvent(UIView &view, const DragEvent &event)
 {
     // create a JAVASCRIPT plain object that is used as the input parameter of
     // the event callback function.

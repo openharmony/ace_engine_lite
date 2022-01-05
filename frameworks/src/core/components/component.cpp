@@ -71,8 +71,8 @@ Component::Component(jerry_value_t options, jerry_value_t children, AppStyleMana
       children_(UNDEFINED),
       onClickListener_(nullptr),
       onLongPressListener_(nullptr),
-      onDragListener_(nullptr),
-#ifdef JS_TOUCH_EVENT_SUPPORT
+      onTouchListener_(nullptr),
+#ifdef JS_EXTRA_EVENT_SUPPORT
       onTouchCancelListener_(nullptr),
       keyBoardEventListener_(nullptr),
 #endif
@@ -421,8 +421,8 @@ void Component::AlignDimensions(const ConstrainedParameter &param)
 
 void Component::EnableTransmitSwipe()
 {
-    if (onDragListener_ != nullptr) {
-        onDragListener_->SetStopPropagation(false);
+    if (onTouchListener_ != nullptr) {
+        onTouchListener_->SetStopPropagation(false);
     }
 }
 
@@ -1133,7 +1133,7 @@ void Component::SetClickEventListener(UIView &view, const jerry_value_t eventFun
     view.SetTouchable(true);
 }
 
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
 void Component::SetTouchCancelEventListener(UIView &view, jerry_value_t eventFunc, uint16_t eventTypeId)
 {
     onTouchCancelListener_ = new ViewOnTouchCancelListener(eventFunc, eventTypeId);
@@ -1177,67 +1177,68 @@ void Component::SetLongPressEventListener(UIView &view, const jerry_value_t even
 
 void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onDragListener_ == nullptr)
-        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
-    if (onDragListener_ == nullptr) {
+    if (onTouchListener_ == nullptr)
+        onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
         return;
     }
 
-    view.SetOnDragListener(onDragListener_);
+    view.SetOnDragListener(onTouchListener_);
     view.SetDraggable(true);
     view.SetTouchable(true);
 
-    onDragListener_->SetBindSwipeFuncName(eventFunc);
+    onTouchListener_->SetBindSwipeFuncName(eventFunc);
 }
 
-void Component::SetDragStartEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
+void Component::SetTouchStartEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onDragListener_ == nullptr)
-        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
-    if (onDragListener_ == nullptr) {
+    if (onTouchListener_ == nullptr)
+        onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragStart listener create failed");
         return;
     }
 
-    view.SetOnDragListener(onDragListener_);
+    view.SetOnDragListener(onTouchListener_);
     
     view.SetDraggable(true);
     view.SetTouchable(true);
 
-    onDragListener_->SetBindDragStartFuncName(eventFunc);
+    onTouchListener_->SetBindTouchStartFuncName(eventFunc);
 }
 
-void Component::SetDragEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
+void Component::SetTouchMoveEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onDragListener_ == nullptr)
-        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
-    if (onDragListener_ == nullptr) {
+    if (onTouchListener_ == nullptr)
+        onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Drag listener create failed");
         return;
     }
 
-    view.SetOnDragListener(onDragListener_);
+    view.SetOnDragListener(onTouchListener_);
     view.SetDraggable(true);
     view.SetTouchable(true);
 
-    onDragListener_->SetBindDragFuncName(eventFunc);
+    onTouchListener_->SetBindTouchMoveFuncName(eventFunc);
 }
 
-void Component::SetDragEndEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
+void Component::SetTouchEndEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onDragListener_ == nullptr)
-        onDragListener_ = new ViewOnDragListener(viewModel_, isStopPropagation);
-    if (onDragListener_ == nullptr) {
+    if (onTouchListener_ == nullptr)
+        onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    if (onTouchListener_ == nullptr) 
+    {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
         return;
     }
 
-    view.SetOnDragListener(onDragListener_);
+    view.SetOnDragListener(onTouchListener_);
     view.SetDraggable(true);
     view.SetTouchable(true);
 
-    onDragListener_->SetBindDragEndFuncName(eventFunc);
+    onTouchListener_->SetBindTouchEndFuncName(eventFunc);
 }
 
 // default implementation
@@ -1281,19 +1282,19 @@ bool Component::RegisterCommonEventListener(UIView &view,
             break;
         }
         case K_TOUCHSTART: {
-            SetDragStartEventListener(view, funcValue, isStopPropagation);
+            SetTouchStartEventListener(view, funcValue, isStopPropagation);
             break;
         }
         case K_TOUCHMOVE: {
-            SetDragEventListener(view, funcValue, isStopPropagation);
+            SetTouchMoveEventListener(view, funcValue, isStopPropagation);
             break;
         }
         case K_TOUCHEND: {
-            SetDragEndEventListener(view, funcValue, isStopPropagation);
+            SetTouchEndEventListener(view, funcValue, isStopPropagation);
             break;
         }
 
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
         case K_KEY: {
             SetKeyBoardEventListener(funcValue, eventTypeId);
             break;
@@ -1314,11 +1315,11 @@ void Component::ReleaseCommonEventListeners()
 {
     ACE_DELETE(onClickListener_);
     ACE_DELETE(onLongPressListener_);
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
     ACE_DELETE(keyBoardEventListener_);
     ACE_DELETE(onTouchCancelListener_);
 #endif
-    ACE_DELETE(onDragListener_);
+    ACE_DELETE(onTouchListener_);
 }
 
 void Component::AppendDescriptorOrElements(Component *parent, const JSValue descriptorOrElements)
