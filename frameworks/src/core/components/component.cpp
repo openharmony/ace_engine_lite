@@ -1228,8 +1228,7 @@ void Component::SetTouchEndEventListener(UIView &view, jerry_value_t eventFunc, 
 {
     if (onTouchListener_ == nullptr)
         onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
-    if (onTouchListener_ == nullptr) 
-    {
+    if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
         return;
     }
