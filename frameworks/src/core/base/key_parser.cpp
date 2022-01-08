@@ -358,7 +358,7 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
                 return K_JUSTIFY_CONTENT;
             }
             break;
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
         case 'k':
             if (!strcmp(s, "ey")) {
                 return K_KEY;
@@ -693,7 +693,7 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "ouchstart")) {
                 return K_TOUCHSTART;
             }
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
             if (!strcmp(s, "ouchcancel")) {
                 return K_TOUCHCANCEL;
             }

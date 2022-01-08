@@ -147,7 +147,7 @@ enum {
     KEYWORD(ITEM_SELECTED, itemselected) // scroll item selected event listener
     KEYWORD(ITERATION, iteration) // image-animator attribute
     KEYWORD(JUSTIFY_CONTENT, justifyContent) // layout style
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
     KEYWORD(KEY, key) // onkey event
 #endif
     KEYWORD(LABELS, labels) // chart labels
@@ -275,7 +275,7 @@ enum {
     KEYWORD(TOUCHSTART, touchStart) // touch event listener
     KEYWORD(TOUCHMOVE, touchmove) // touchmove event listener
     KEYWORD(TOUCHEND, touchEnd) // touchend event listener
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
     KEYWORD(TOUCHCANCEL, touchcancel) // ontouchcancel event
 #endif
     KEYWORD(TRANSLATE_X, translateX) // animation transform x
