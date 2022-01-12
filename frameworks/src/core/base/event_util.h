@@ -44,6 +44,12 @@ public:
     static JSValue CreateSwipeEvent(UIView &view, const DragEvent &event);
 
     /**
+     * @brief Create a JAVASCRIPT plain object that is used as the input parameter of
+     * the callback function for touch event.
+     */
+    static JSValue CreateTouchEvent(UIView &view, const DragEvent &event);
+
+    /**
      * @brief Invoke the callback function of event.
      */
     static void InvokeCallback(JSValue vm, JSValue callback, JSValue event, const void *context = nullptr);
@@ -51,6 +57,7 @@ public:
     static const char *EVENT_CLICK;
     static const char *EVENT_LONGPRESS;
     static const char *EVENT_SWIPE;
+    static const char *EVENT_TOUCH;
 
 private:
     EventUtil() {}
