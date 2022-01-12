@@ -14,7 +14,7 @@
  */
 
 #include "presets/console_module.h"
-#if JS_ENABLED(CONSOLE_LOG_OUTPUT)
+#if IS_ENABLED(CONSOLE_LOG_OUTPUT)
 #include "presets/console_log_impl.h"
 #endif // ENABLED(CONSOLE_LOG_OUTPUT)
 
@@ -22,11 +22,11 @@ namespace OHOS {
 namespace ACELite {
 void ConsoleModule::Init()
 {
-    const char *const debug = "debug";
-    const char *const info = "info";
-    const char *const warn = "warn";
-    const char *const log = "log";
-    const char *const error = "error";
+    const char * const debug = "debug";
+    const char * const info = "info";
+    const char * const warn = "warn";
+    const char * const log = "log";
+    const char * const error = "error";
     CreateNamedFunction(debug, LogDebug);
     CreateNamedFunction(info, LogInfo);
     CreateNamedFunction(warn, LogWarn);
@@ -39,7 +39,7 @@ jerry_value_t ConsoleModule::LogDebug(const jerry_value_t func,
                                       const jerry_value_t *args,
                                       const jerry_length_t length)
 {
-#if JS_DISABLED(CONSOLE_LOG_OUTPUT)
+#if IS_DISABLED(CONSOLE_LOG_OUTPUT)
     return UNDEFINED;
 #else
     return LogNative(LOG_LEVEL_DEBUG, func, context, args, length);
@@ -51,7 +51,7 @@ jerry_value_t ConsoleModule::LogInfo(const jerry_value_t func,
                                      const jerry_value_t *args,
                                      const jerry_length_t length)
 {
-#if JS_DISABLED(CONSOLE_LOG_OUTPUT)
+#if IS_DISABLED(CONSOLE_LOG_OUTPUT)
     return UNDEFINED;
 #else
     return LogNative(LOG_LEVEL_INFO, func, context, args, length);
@@ -63,7 +63,7 @@ jerry_value_t ConsoleModule::LogWarn(const jerry_value_t func,
                                      const jerry_value_t *args,
                                      const jerry_length_t length)
 {
-#if JS_DISABLED(CONSOLE_LOG_OUTPUT)
+#if IS_DISABLED(CONSOLE_LOG_OUTPUT)
     return UNDEFINED;
 #else
     return LogNative(LOG_LEVEL_WARN, func, context, args, length);
@@ -75,7 +75,7 @@ jerry_value_t ConsoleModule::Log(const jerry_value_t func,
                                  const jerry_value_t *args,
                                  const jerry_length_t length)
 {
-#if JS_DISABLED(CONSOLE_LOG_OUTPUT)
+#if IS_DISABLED(CONSOLE_LOG_OUTPUT)
     return UNDEFINED;
 #else
     return LogNative(LOG_LEVEL_NONE, func, context, args, length);
@@ -87,7 +87,7 @@ jerry_value_t ConsoleModule::LogError(const jerry_value_t func,
                                       const jerry_value_t *args,
                                       const jerry_length_t length)
 {
-#if JS_DISABLED(CONSOLE_LOG_OUTPUT)
+#if IS_DISABLED(CONSOLE_LOG_OUTPUT)
     return UNDEFINED;
 #else
     return LogNative(LOG_LEVEL_ERR, func, context, args, length);

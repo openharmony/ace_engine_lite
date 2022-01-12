@@ -17,7 +17,7 @@
 
 #include "js_profiler.h"
 #include "non_copyable.h"
-#if JS_ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
 #include "presets/preset_module.h"
 namespace OHOS {
 namespace ACELite {
@@ -82,7 +82,7 @@ public:
     ~PerformaceProfilerModule() = default;
     static void Load()
     {
-#if JS_ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
         ProfilerModule profilerModule;
         profilerModule.Init();
 #endif

@@ -19,7 +19,7 @@
 #include "acelite_config.h"
 #include "js_config.h"
 
-#if JS_ENABLED(CONSOLE_LOG_OUTPUT)
+#if IS_ENABLED(CONSOLE_LOG_OUTPUT)
 
 #include "jerryscript.h"
 
@@ -50,7 +50,7 @@ void RegisterJSLogOutputHandler(JSLogOutputExtraHandler extraHandler);
  * @param logLevel the log level
  * @param str the string to print out
  */
-void LogString(const LogLevel logLevel, const char *const str);
+void LogString(const LogLevel logLevel, const char * const str);
 
 /**
  * @brief: Output given string into stdout or the log file.
@@ -59,7 +59,7 @@ void LogString(const LogLevel logLevel, const char *const str);
  * @param str the string to print
  * @param length the string's length
  */
-void Output(const LogLevel logLevel, const char *const str, const uint8_t length);
+void Output(const LogLevel logLevel, const char * const str, const uint8_t length);
 
 /**
  * @brief: Flush the output.

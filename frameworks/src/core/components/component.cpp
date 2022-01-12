@@ -269,7 +269,7 @@ bool Component::UpdateView(uint16_t attrKeyId, jerry_value_t attrValue)
 
     return updateResult;
 }
-void Component::RegisterNamedFunction(const char *const name, jerry_external_handler_t handler) const
+void Component::RegisterNamedFunction(const char * const name, jerry_external_handler_t handler) const
 {
     JerrySetFuncProperty(nativeElement_, name, handler);
 }
@@ -742,7 +742,7 @@ void Component::SetAnimationKeyFrames(const UIView &view, const AppStyleItem *st
         }
     }
 
-    const char *const value = GetStyleStrValue(styleItem);
+    const char * const value = GetStyleStrValue(styleItem);
     if (value == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "animation name is not string value");
         return;
@@ -777,7 +777,7 @@ void Component::SetAnimationKeyFrames(const AppStyleItem *item)
 
     isAnimationKeyFramesSet_ = false;
     while (item) {
-        const char *const itemValue = item->GetStrValue();
+        const char * const itemValue = item->GetStrValue();
 
         if ((itemValue == nullptr) || (strlen(itemValue) == 0)) {
             return;
@@ -876,7 +876,7 @@ void Component::SetAnimationStyle(const UIView &view, const AppStyleItem *styleI
         }
     }
 
-    const char *const strValue = GetStyleStrValue(styleItem);
+    const char * const strValue = GetStyleStrValue(styleItem);
     const size_t strLen = GetStyleStrValueLen(styleItem);
     if (strValue == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "animation style item is null");
@@ -1431,7 +1431,7 @@ void Component::SetVisible(UIView &view, const AppStyleItem *styleItem) const
         HILOG_ERROR(HILOG_MODULE_ACE, "Visible style value is invalid!");
         return;
     }
-    const char *const strValue = GetStyleStrValue(styleItem);
+    const char * const strValue = GetStyleStrValue(styleItem);
     if (strValue == nullptr) {
         return;
     }
@@ -1927,7 +1927,7 @@ bool Component::HandleBackgroundImg(const AppStyleItem &styleItem, char *&presse
 {
     bool result = false;
     if (styleItem.GetValueType() == STYLE_PROP_VALUE_TYPE_STRING) {
-        const char *const url = styleItem.GetStrValue();
+        const char * const url = styleItem.GetStrValue();
         char *filePath = CreatePathStrFromUrl(url);
         if (filePath != nullptr) {
             char *imagePath = JsAppContext::GetInstance()->GetResourcePath(filePath);

@@ -15,7 +15,7 @@
 
 #include "js_profiler.h"
 // invoked into compiling only if performance measurement enabled
-#if JS_ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
 #include "ace_log.h"
 #include "ace_mem_base.h"
 #include "js_async_work.h"

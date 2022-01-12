@@ -377,7 +377,7 @@ void JsiInterfaceTddTest::JSIInterfaceTest010()
     TDD_CASE_END();
 }
 
-#if JS_ENABLED(JS_FWK_SYMBOL)
+#if IS_ENABLED(JS_FWK_SYMBOL)
 void JsiInterfaceTddTest::JSIInterfaceTest011()
 {
     TDD_CASE_BEGIN();
@@ -597,7 +597,7 @@ void JsiInterfaceTddTest::JSIInterfaceTest017()
     TDD_CASE_END();
 }
 
-#if JS_ENABLED(JS_FWK_TYPEDARRAY)
+#if IS_ENABLED(JS_FWK_TYPEDARRAY)
 void JsiInterfaceTddTest::JSIInterfaceTest018()
 {
     TDD_CASE_BEGIN();
@@ -870,7 +870,7 @@ void JsiInterfaceTddTest::RunTests()
     JSIInterfaceTest008();
     JSIInterfaceTest009();
     JSIInterfaceTest010();
-#if JS_ENABLED(JS_FWK_SYMBOL)
+#if IS_ENABLED(JS_FWK_SYMBOL)
     JSIInterfaceTest011();
 #endif // ENABLED(JS_FWK_SYMBOL)
     JSIInterfaceTest012();
@@ -879,7 +879,7 @@ void JsiInterfaceTddTest::RunTests()
     JSIInterfaceTest015();
     JSIInterfaceTest016();
     JSIInterfaceTest017();
-#if JS_ENABLED(JS_FWK_TYPEDARRAY)
+#if IS_ENABLED(JS_FWK_TYPEDARRAY)
     JSIInterfaceTest018();
     JSIInterfaceTest019();
 #endif // ENABLED(JS_FWK_TYPEDARRAY)
@@ -990,7 +990,7 @@ HWTEST_F(JsiInterfaceTddTest, test010, TestSize.Level1)
     JsiInterfaceTddTest::JSIInterfaceTest010();
 }
 
-#if JS_ENABLED(JS_FWK_SYMBOL)
+#if IS_ENABLED(JS_FWK_SYMBOL)
 /**
  * @tc.name: JSIInterfaceTest011
  * @tc.desc: Verify JSI interface related to Symbol object.
@@ -1062,7 +1062,7 @@ HWTEST_F(JsiInterfaceTddTest, test017, TestSize.Level1)
     JsiInterfaceTddTest::JSIInterfaceTest017();
 }
 
-#if JS_ENABLED(JS_FWK_TYPEDARRAY)
+#if IS_ENABLED(JS_FWK_TYPEDARRAY)
 /**
  * @tc.name: JSIInterfaceTest018
  * @tc.desc: Verify JSI interface related to JS ArrayBuffer.

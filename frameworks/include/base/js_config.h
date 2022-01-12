@@ -23,8 +23,8 @@
  *     #if DISABLED(LOG_OUTPUT)
  *     #if ENABLED(LOG_OUTPUT)
  */
-#define JS_ENABLED(CONFIGURATION) ((CONFIGURATION) == 1)
-#define JS_DISABLED(CONFIGURATION) ((CONFIGURATION) != 1)
+#define IS_ENABLED(CONFIGURATION) ((CONFIGURATION) == 1)
+#define IS_DISABLED(CONFIGURATION) ((CONFIGURATION) != 1)
 
 /**
  * Enable/Disable JS framework runtime performance measurement.

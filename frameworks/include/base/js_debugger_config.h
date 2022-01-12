@@ -26,9 +26,15 @@
 namespace OHOS {
 namespace ACELite {
 // the protocol type the engine supports
-enum DebugProtocol : uint8_t { TCP, SERIAL };
+enum DebugProtocol : uint8_t {
+    TCP,
+    SERIAL
+};
 // the protocol channel type the engine supports
-enum DebugChannel : uint8_t { WEBSOCKET, RAWPACKET };
+enum DebugChannel : uint8_t {
+    WEBSOCKET,
+    RAWPACKET
+};
 const uint16_t DEFAULT_PORT = 5001; // default port
 struct DebuggerConfig : public MemoryHeap {
     DebugProtocol protocol;   // use tcp as default
@@ -127,7 +133,7 @@ public:
     void ReleaseJSContext();
 
 private:
-#if JS_ENABLED(ENGINE_DEBUGGER)
+#if IS_ENABLED(ENGINE_DEBUGGER)
 #if (JS_ENGINE_EXTERNAL_CONTEXT == 1)
     void *engineContext_ = nullptr;
 #endif // JS_ENGINE_EXTERNAL_CONTEXT

@@ -29,7 +29,7 @@ Debugger &Debugger::GetInstance()
     return instance;
 }
 
-#if JS_ENABLED(ENGINE_DEBUGGER)
+#if IS_ENABLED(ENGINE_DEBUGGER)
 bool Debugger::IsDebuggerEnabled()
 {
     return debuggerConfig_.startDebuggerServer;
@@ -70,7 +70,7 @@ void Debugger::TearDownDebugger()
     debuggerStarted_ = false;
 }
 
-void Debugger::Output(const char *const str)
+void Debugger::Output(const char * const str)
 {
     // print out the log into stdout anyway
     printf("%s", str);
@@ -135,7 +135,7 @@ void Debugger::StartDebugger() {}
 
 void Debugger::TearDownDebugger() {}
 
-void Debugger::Output(const char *const str)
+void Debugger::Output(const char * const str)
 {
     UNUSED(str);
 }

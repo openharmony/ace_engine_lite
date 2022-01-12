@@ -31,7 +31,7 @@
 #include "js_app_context.h"
 #include "js_app_environment.h"
 #include "js_profiler.h"
-#if JS_ENABLED(CONSOLE_LOG_OUTPUT)
+#if IS_ENABLED(CONSOLE_LOG_OUTPUT)
 #include "presets/console_module.h"
 #endif
 #include "presets/console_log_impl.h"
@@ -49,33 +49,33 @@
 
 namespace OHOS {
 namespace ACELite {
-void JerrySetNamedProperty(jerry_value_t object, const char *const name, jerry_value_t propValue)
+void JerrySetNamedProperty(jerry_value_t object, const char * const name, jerry_value_t propValue)
 {
     jerry_release_value(jerryx_set_property_str(object, name, propValue));
 }
 
-void JerrySetNumberProperty(jerry_value_t object, const char *const name, double value)
+void JerrySetNumberProperty(jerry_value_t object, const char * const name, double value)
 {
     jerry_value_t numValue = jerry_create_number(value);
     JerrySetNamedProperty(object, name, numValue);
     jerry_release_value(numValue);
 }
 
-void JerrySetStringProperty(jerry_value_t object, const char *const name, const char *const value)
+void JerrySetStringProperty(jerry_value_t object, const char * const name, const char * const value)
 {
     jerry_value_t strValue = jerry_create_string(reinterpret_cast<const jerry_char_t *>(value));
     JerrySetNamedProperty(object, name, strValue);
     jerry_release_value(strValue);
 }
 
-void JerrySetStringProperty(jerry_value_t object, const char *const name, const char *const value, uint32_t length)
+void JerrySetStringProperty(jerry_value_t object, const char * const name, const char * const value, uint32_t length)
 {
     jerry_value_t strValue = jerry_create_string_sz_from_utf8(reinterpret_cast<const jerry_char_t *>(value), length);
     JerrySetNamedProperty(object, name, strValue);
     jerry_release_value(strValue);
 }
 
-char *JerryMallocStringProperty(const jerry_value_t object, const char *const name, uint16_t &length)
+char *JerryMallocStringProperty(const jerry_value_t object, const char * const name, uint16_t &length)
 {
     jerry_value_t propValue = jerryx_get_property_str(object, name);
     char *res = MallocStringOf(propValue, &length);
@@ -83,7 +83,7 @@ char *JerryMallocStringProperty(const jerry_value_t object, const char *const na
     return res;
 }
 
-int16_t JerryGetIntegerProperty(jerry_value_t object, const char *const name)
+int16_t JerryGetIntegerProperty(jerry_value_t object, const char * const name)
 {
     jerry_value_t value = jerryx_get_property_str(object, name);
     int16_t result = IntegerOf(value);
@@ -91,7 +91,7 @@ int16_t JerryGetIntegerProperty(jerry_value_t object, const char *const name)
     return result;
 }
 
-bool JerryGetBoolProperty(jerry_value_t object, const char *const name, bool &outValue)
+bool JerryGetBoolProperty(jerry_value_t object, const char * const name, bool &outValue)
 {
     jerry_value_t value = jerryx_get_property_str(object, name);
     if (!jerry_value_is_boolean(value)) {
@@ -104,7 +104,7 @@ bool JerryGetBoolProperty(jerry_value_t object, const char *const name, bool &ou
     return true;
 }
 
-void JerrySetFuncProperty(jerry_value_t object, const char *const name, jerry_external_handler_t handler)
+void JerrySetFuncProperty(jerry_value_t object, const char * const name, jerry_external_handler_t handler)
 {
     if (name == nullptr || !strlen(name)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Failed to set function property cause by empty name.");
@@ -256,7 +256,7 @@ void PrintErrorMessage(const jerry_value_t errorValue)
     DfxAssist dfxAssist;
     dfxAssist.DumpErrorCode(errorValue);
     dfxAssist.DumpErrorMessage(errorValue);
-#if JS_ENABLED(ENGINE_DEBUGGER)
+#if IS_ENABLED(ENGINE_DEBUGGER)
     FlushOutput();
 #endif
 }
@@ -304,7 +304,7 @@ jerry_value_t CallJSWatcher(jerry_value_t arg1,
 {
     jerry_value_t globalObject = jerry_get_global_object();
     jerry_value_t appViewModel = jerryx_get_property_str(globalObject, ATTR_ROOT);
-    const char *const attrWatch = "$watch";
+    const char * const attrWatch = "$watch";
     jerry_value_t watchFunction = jerryx_get_property_str(appViewModel, attrWatch);
     jerry_value_t callbackFunc = jerry_create_external_function(watcherCB);
     jerry_value_t args[ARG_LENGTH_WATCHER] = {arg1, callbackFunc, arg3};
@@ -381,7 +381,7 @@ void ClearEventListener(const jerry_value_t args[], const uint8_t argc)
  * only used in this file, caller must make sure the target buffer is big enough.
  * return the copied byte count.
  */
-static size_t AppendTwoPath(char *const first, uint8_t startIndex, const char *const sec, const uint16_t destSize)
+static size_t AppendTwoPath(char * const first, uint8_t startIndex, const char * const sec, const uint16_t destSize)
 {
     if ((first == nullptr) || (sec == nullptr) || (strlen(sec) == 0)) {
         return 0;
@@ -475,18 +475,18 @@ char *RelocateFilePath(const char *appRootPath, const char *subPath, const char 
 }
 
 // judge absolute path or relative path (start with . is absolute otherwise relative)
-static bool PathIsRelative(const char *const resPath)
+static bool PathIsRelative(const char * const resPath)
 {
     return strncmp(PATH_PREFIX, resPath, strlen(PATH_PREFIX)) == 0;
 }
 
-char *RelocateFilePathRelative(const char *const appRootPath, const char *const resFileName)
+char *RelocateFilePathRelative(const char * const appRootPath, const char * const resFileName)
 {
-    const char *const jsPath = JsAppContext::GetInstance()->GetCurrentJsPath();
+    const char * const jsPath = JsAppContext::GetInstance()->GetCurrentJsPath();
     if (jsPath == nullptr) {
         return nullptr;
     }
-    const char *const ret = strrchr(jsPath, RESOURCE_SEPARATOR);
+    const char * const ret = strrchr(jsPath, RESOURCE_SEPARATOR);
     if (ret == nullptr) {
         return nullptr;
     }
@@ -526,7 +526,7 @@ char *RelocateFilePathRelative(const char *const appRootPath, const char *const 
 
 // relocate file name to appRootPath/common/fileName
 // e.x. /system/app/73709738-2d9d-4947-ac63-9858dcae7ccb/common/right.png
-char *RelocateResourceFilePath(const char *const appRootPath, const char *const resFileName)
+char *RelocateResourceFilePath(const char * const appRootPath, const char * const resFileName)
 {
     if (PathIsRelative(resFileName)) {
         // deal with relative path
@@ -540,12 +540,12 @@ char *RelocateResourceFilePath(const char *const appRootPath, const char *const 
 // relocate file name to appRootPath/src/fileName
 // e.x. /system/app/73709738-2d9d-4947-ac63-9858dcae7ccb/src/index.js
 // NOTE: srcFileName must be the relative path to src folder
-char *RelocateJSSourceFilePath(const char *const appRootPath, const char *const srcFileName)
+char *RelocateJSSourceFilePath(const char * const appRootPath, const char * const srcFileName)
 {
     return RelocateFilePath(appRootPath, SRC_SUB_FOLDER_NAME, srcFileName);
 }
 
-char *ReadJSFile(const char *const appPath, const char *const jsFileName)
+char *ReadJSFile(const char * const appPath, const char * const jsFileName)
 {
     uint32_t contentLength = 0;
     return ReadJSFile(appPath, jsFileName, contentLength);
@@ -554,7 +554,7 @@ char *ReadJSFile(const char *const appPath, const char *const jsFileName)
 /**
  * Check if the given file exists or not.
  */
-bool IsFileExisted(const char *const filePath)
+bool IsFileExisted(const char * const filePath)
 {
     if (filePath == nullptr) {
         return false;
@@ -569,7 +569,7 @@ bool IsFileExisted(const char *const filePath)
 /**
  * Whether file existed and 0 represents file not existed.
  */
-int32_t GetFileSize(const char *const filePath)
+int32_t GetFileSize(const char * const filePath)
 {
     if (filePath == nullptr) {
         return 0;
@@ -582,7 +582,7 @@ int32_t GetFileSize(const char *const filePath)
     return info.st_size;
 }
 
-static int32_t OpenFileInternal(const char *const orgFullPath, bool binary = false)
+static int32_t OpenFileInternal(const char * const orgFullPath, bool binary = false)
 {
     const char *path = orgFullPath;
 #if (QT_SIMULATOR != 1)
@@ -604,7 +604,7 @@ static int32_t OpenFileInternal(const char *const orgFullPath, bool binary = fal
     return open(path, O_RDONLY);
 }
 
-static void OutputFileMaxLimitationTrace(const char *const fullPath, size_t limitation)
+static void OutputFileMaxLimitationTrace(const char * const fullPath, size_t limitation)
 {
     if (fullPath == nullptr || strlen(fullPath) == 0) {
         return;
@@ -631,7 +631,7 @@ static void OutputFileMaxLimitationTrace(const char *const fullPath, size_t limi
 /**
  * Check if the file length is under MAX limitation.
  */
-static bool CheckFileLength(const char *const fullPath, int32_t &outFileSize)
+static bool CheckFileLength(const char * const fullPath, int32_t &outFileSize)
 {
     outFileSize = 0;
     int32_t fileSize = GetFileSize(fullPath);
@@ -652,7 +652,7 @@ static bool CheckFileLength(const char *const fullPath, int32_t &outFileSize)
  * Read file content from one give full file path.
  * Return value must be freed by caller.
  */
-char *ReadFile(const char *const fullPath, uint32_t &fileSize, const bool binary)
+char *ReadFile(const char * const fullPath, uint32_t &fileSize, const bool binary)
 {
     UNUSED(binary);
     char *scriptBuffer = nullptr;
@@ -707,7 +707,7 @@ char *ReadFile(const char *const fullPath, uint32_t &fileSize, const bool binary
  * give app path, such as /system/app/uuid/, read script string from /system/app/uuid/src/index.js,
  * return value must be freed by caller.
  */
-char *ReadJSFile(const char *const appPath, const char *const jsFileName, uint32_t &fileSize)
+char *ReadJSFile(const char * const appPath, const char * const jsFileName, uint32_t &fileSize)
 {
     fileSize = 0;
     // RelocateFilePath() will check the input parameters
@@ -730,7 +730,7 @@ char *ReadJSFile(const char *const appPath, const char *const jsFileName, uint32
     return fileBuffer;
 }
 
-static void CalculatePathPosFromUri(const char *const url, const size_t length, size_t *start, size_t *pathLength)
+static void CalculatePathPosFromUri(const char * const url, const size_t length, size_t *start, size_t *pathLength)
 {
     const uint8_t minLength = 4;
     if ((url == nullptr) || (length <= minLength)) {
@@ -770,7 +770,7 @@ static void CalculatePathPosFromUri(const char *const url, const size_t length, 
  *
  * @return the url itself, "common/logo.png"
  */
-char *CreatePathStrFromUrl(const char *const url)
+char *CreatePathStrFromUrl(const char * const url)
 {
     if (url == nullptr) {
         return nullptr;
@@ -942,15 +942,15 @@ bool StartWith(const char *sequence, const char *prefix)
     return true;
 }
 
-bool IsHexColor(const char *const target)
+bool IsHexColor(const char * const target)
 {
     return StartWith(target, PREFIX_HEX_COLOR);
 }
-bool IsRgbColor(const char *const target)
+bool IsRgbColor(const char * const target)
 {
     return StartWith(target, PREFIX_RGB_COLOR);
 }
-bool IsRgbaColor(const char *const target)
+bool IsRgbaColor(const char * const target)
 {
     return StartWith(target, PREFIX_RGBA_COLOR);
 }
@@ -967,7 +967,7 @@ constexpr uint8_t IDX_ARGB_ALPHA_END = 2;
 constexpr uint8_t IDX_ARGB_COLOR_BEGIN = 3;
 constexpr uint8_t BITS_PER_BYTE = 8;
 
-bool ParseHexColor(const char *const source, uint32_t &color, uint8_t &alpha)
+bool ParseHexColor(const char * const source, uint32_t &color, uint8_t &alpha)
 {
     if ((source == nullptr) || (strlen(source) <= 1)) {
         return false;
@@ -1006,7 +1006,7 @@ bool ParseHexColor(const char *const source, uint32_t &color, uint8_t &alpha)
     return false;
 }
 
-bool ParseRgbaColor(const char *const source, uint32_t &color, uint8_t &alpha)
+bool ParseRgbaColor(const char * const source, uint32_t &color, uint8_t &alpha)
 {
     uint8_t idxOpenBrace = 0;
     uint8_t idxCloseBrace = 0;
@@ -1071,7 +1071,7 @@ bool ParseRgbaColor(const char *const source, uint32_t &color, uint8_t &alpha)
     return true;
 }
 
-bool ParseColor(const char *const source, uint32_t &color, uint8_t &alpha)
+bool ParseColor(const char * const source, uint32_t &color, uint8_t &alpha)
 {
     if (source == nullptr) {
         return false;
@@ -1187,7 +1187,7 @@ void CureImagePath(char *&imagePath)
     int16_t dotPos = -1;
     const int16_t suffixLen = 3;
     const size_t imagePathLen = strlen(imagePath);
-    const char *const suffixName = "bin";
+    const char * const suffixName = "bin";
 
     if (imagePathLen >= PATH_LENGTH_MAX) {
         return;
@@ -1268,7 +1268,7 @@ const char *ParseImageSrc(jerry_value_t source)
     return imageSrc;
 }
 
-bool CopyFontFamily(char *&destination, const char *const fontFamily, uint32_t fontFamilyNameLen)
+bool CopyFontFamily(char *&destination, const char * const fontFamily, uint32_t fontFamilyNameLen)
 {
     // unused parameter for now, added for clean up warning
     UNUSED(fontFamilyNameLen);
