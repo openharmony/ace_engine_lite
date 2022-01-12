@@ -14,7 +14,7 @@
  */
 
 #include "key_parser.h"
-#include <string.h>
+#include <cstring>
 #include "acelite_config.h"
 #include "js_config.h"
 #include "keys.h"
@@ -358,7 +358,7 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
                 return K_JUSTIFY_CONTENT;
             }
             break;
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
         case 'k':
             if (!strcmp(s, "ey")) {
                 return K_KEY;
@@ -569,6 +569,12 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "crollstart")) {
                 return K_SCROLLSTART;
             }
+            if (!strcmp(s, "crolltop")) {
+                return K_SCROLLTOP;
+            }
+            if (!strcmp(s, "crollbottom")) {
+                return K_SCROLLBOTTOM;
+            }
 #if (FEATURE_COMPONENT_ANALOG_CLOCK == 1)
             if (!strcmp(s, "ec")) {
                 return K_SEC;
@@ -678,10 +684,6 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "otalAngle")) {
                 return K_TOTAL_ANGLE;
             }
-#ifdef JS_TOUCH_EVENT_SUPPORT
-            if (!strcmp(s, "ouchcancel")) {
-                return K_TOUCHCANCEL;
-            }
             if (!strcmp(s, "ouchend")) {
                 return K_TOUCHEND;
             }
@@ -690,6 +692,10 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             }
             if (!strcmp(s, "ouchstart")) {
                 return K_TOUCHSTART;
+            }
+#ifdef JS_EXTRA_EVENT_SUPPORT
+            if (!strcmp(s, "ouchcancel")) {
+                return K_TOUCHCANCEL;
             }
 #endif
             if (!strcmp(s, "ext")) {
