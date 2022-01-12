@@ -24,6 +24,7 @@
 #include "dft_impl.h"
 #endif // OHOS_ACELITE_PRODUCT_WATCH
 #include "fatal_handler.h"
+#include "components/root_view.h"
 #include "js_ability_impl.h"
 #include "js_async_work.h"
 #include "js_profiler.h"
@@ -117,6 +118,7 @@ void JSAbility::Launch(const char * const abilityPath, const char * const bundle
     jsAbilityImpl->InitEnvironment(abilityPath, bundleName, token);
     ACE_EVENT_PRINT(MT_ACE_FWK_LAUNCHING, 0);
     FatalHandler::GetInstance().RegisterFatalHandler(this);
+    RootView::GetInstance()->AddUITask();
     jsAbilityImpl->DeliverCreate(pageInfo);
     STOP_TRACING();
     OUTPUT_TRACE();
@@ -129,6 +131,7 @@ void JSAbility::Show()
         return;
     }
 
+    RootView::GetInstance()->AddUITask();
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability will be shown");
     ACE_EVENT_PRINT(MT_ACE_FWK_ACTIVING, 0);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
@@ -148,6 +151,7 @@ void JSAbility::Hide()
     ACE_EVENT_PRINT(MT_ACE_FWK_HIDING, 0);
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->Hide();
+    RootView::GetInstance()->RemoveUITask();
     AsyncTaskManager::GetInstance().SetFront(false);
     ProductAdapter::UpdateRenderTickAcceptable(false);
     isActived_ = false;
@@ -166,6 +170,7 @@ void JSAbility::TransferToDestroy()
 #endif
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability is exiting");
     ACE_EVENT_PRINT(MT_ACE_FWK_DESTROYING, 0);
+    RootView::GetInstance()->RemoveUITask();
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->CleanUp();
     // Reset render flag or low layer task mutex in case we are during the rendering process,
