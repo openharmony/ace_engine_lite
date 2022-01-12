@@ -56,7 +56,7 @@ public:
     void JSIInterfaceTest008();
     void JSIInterfaceTest009();
     void JSIInterfaceTest010();
-#if ENABLED(JS_FWK_SYMBOL)
+#if JS_ENABLED(JS_FWK_SYMBOL)
     void JSIInterfaceTest011();
 #endif // ENABLED(JS_FWK_SYMBOL)
     void JSIInterfaceTest012();
@@ -65,7 +65,7 @@ public:
     void JSIInterfaceTest015();
     void JSIInterfaceTest016();
     void JSIInterfaceTest017();
-#if ENABLED(JS_FWK_TYPEDARRAY)
+#if JS_ENABLED(JS_FWK_TYPEDARRAY)
     void JSIInterfaceTest018();
     void JSIInterfaceTest019();
 #endif // ENABLED(JS_FWK_TYPEDARRAY)

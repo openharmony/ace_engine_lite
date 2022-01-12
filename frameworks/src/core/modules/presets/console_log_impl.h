@@ -19,7 +19,7 @@
 #include "acelite_config.h"
 #include "js_config.h"
 
-#if ENABLED(CONSOLE_LOG_OUTPUT)
+#if JS_ENABLED(CONSOLE_LOG_OUTPUT)
 
 #include "jerryscript.h"
 
@@ -29,13 +29,13 @@ namespace ACELite {
  * The log level definations.
  */
 enum LogLevel : uint8_t {
-    LOG_LEVEL_NONE = 0,    // console.log
-    LOG_LEVEL_DEBUG = 1,   // console.debug
-    LOG_LEVEL_INFO = 2,    // console.info
-    LOG_LEVEL_WARN = 3,    // console.warn
-    LOG_LEVEL_ERR = 4,     // console.error
-    LOG_LEVEL_FATAL = 5,   // fatal, no console.fatal
-    LOG_LEVEL_TRACE = 6,   // console.trace
+    LOG_LEVEL_NONE = 0,  // console.log
+    LOG_LEVEL_DEBUG = 1, // console.debug
+    LOG_LEVEL_INFO = 2,  // console.info
+    LOG_LEVEL_WARN = 3,  // console.warn
+    LOG_LEVEL_ERR = 4,   // console.error
+    LOG_LEVEL_FATAL = 5, // fatal, no console.fatal
+    LOG_LEVEL_TRACE = 6, // console.trace
 };
 
 #ifdef TDD_ASSERTIONS
@@ -50,7 +50,7 @@ void RegisterJSLogOutputHandler(JSLogOutputExtraHandler extraHandler);
  * @param logLevel the log level
  * @param str the string to print out
  */
-void LogString(const LogLevel logLevel, const char * const str);
+void LogString(const LogLevel logLevel, const char *const str);
 
 /**
  * @brief: Output given string into stdout or the log file.
@@ -59,7 +59,7 @@ void LogString(const LogLevel logLevel, const char * const str);
  * @param str the string to print
  * @param length the string's length
  */
-void Output(const LogLevel logLevel, const char * const str, const uint8_t length);
+void Output(const LogLevel logLevel, const char *const str, const uint8_t length);
 
 /**
  * @brief: Flush the output.
@@ -80,7 +80,7 @@ void FlushOutput();
 jerry_value_t LogNative(const LogLevel logLevel,
                         const jerry_value_t func,
                         const jerry_value_t context,
-                        const jerry_value_t* args,
+                        const jerry_value_t *args,
                         const jerry_length_t length);
 
 /**

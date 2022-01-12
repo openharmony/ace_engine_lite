@@ -14,16 +14,17 @@
  */
 
 #include "jsi_interface_tdd_test.h"
-#include <cstdio>
-#include <cstring>
 #include "acelite_config.h"
 #include "js_debugger_config.h"
+#include <cstdio>
+#include <cstring>
+
 
 namespace OHOS {
 namespace ACELite {
 static int8_t g_descValue = 0;
 
-JsiInterfaceTddTest::JsiInterfaceTddTest(){}
+JsiInterfaceTddTest::JsiInterfaceTddTest() {}
 
 void JsiInterfaceTddTest::SetUp()
 {
@@ -377,7 +378,7 @@ void JsiInterfaceTddTest::JSIInterfaceTest010()
     TDD_CASE_END();
 }
 
-#if ENABLED(JS_FWK_SYMBOL)
+#if JS_ENABLED(JS_FWK_SYMBOL)
 void JsiInterfaceTddTest::JSIInterfaceTest011()
 {
     TDD_CASE_BEGIN();
@@ -471,14 +472,12 @@ void JsiInterfaceTddTest::JSIInterfaceTest013()
     /**
      * @tc.expected: step2. jsonStr = "{\"key1\":\"value1\",\"key2\":\"value2\"}"
      */
-    if ((jsonStr != nullptr) &&
-        !strcmp(jsonStr, "{\"key1\":\"value1\",\"key2\":\"value2\"}")) {
+    if ((jsonStr != nullptr) && !strcmp(jsonStr, "{\"key1\":\"value1\",\"key2\":\"value2\"}")) {
         printf("JSIInterfaceTest013 pass\n");
     } else {
         printf("JSIInterfaceTest013 fail\n");
     }
-    EXPECT_TRUE((jsonStr != nullptr) &&
-        !strcmp(jsonStr, "{\"key1\":\"value1\",\"key2\":\"value2\"}"));
+    EXPECT_TRUE((jsonStr != nullptr) && !strcmp(jsonStr, "{\"key1\":\"value1\",\"key2\":\"value2\"}"));
     JSI::ReleaseValue(jsonValue);
     JSI::ReleaseString(jsonStr);
     TDD_CASE_END();
@@ -599,7 +598,7 @@ void JsiInterfaceTddTest::JSIInterfaceTest017()
     TDD_CASE_END();
 }
 
-#if ENABLED(JS_FWK_TYPEDARRAY)
+#if JS_ENABLED(JS_FWK_TYPEDARRAY)
 void JsiInterfaceTddTest::JSIInterfaceTest018()
 {
     TDD_CASE_BEGIN();
@@ -702,14 +701,13 @@ void JsiInterfaceTddTest::JSIInterfaceTest019()
      * @tc.expected: step3-step5. res1 = true, res2 = false, typedArray params are correct
      */
     if (res1 && !res2 && (type == TypedArrayType::JSI_UINT8_ARRAY) && (length == byteLength) &&
-        (offset == initOffset) && ptr2 != nullptr && (ptr2[offset] == value1) &&
-        (ptr2[offset + 1] == value2)) {
+        (offset == initOffset) && ptr2 != nullptr && (ptr2[offset] == value1) && (ptr2[offset + 1] == value2)) {
         printf("JSIInterfaceTest019 pass\n");
     } else {
         printf("JSIInterfaceTest019 fail\n");
     }
     EXPECT_TRUE(res1 && !res2 && (type == TypedArrayType::JSI_UINT8_ARRAY) && (length == byteLength) &&
-        (offset == initOffset) && ptr2 != nullptr && (ptr2[offset] == value1) && (ptr2[offset + 1] == value2));
+                (offset == initOffset) && ptr2 != nullptr && (ptr2[offset] == value1) && (ptr2[offset + 1] == value2));
 
     JSI::ReleaseValueList(typedArray, undef, arrayBuffer);
     TDD_CASE_END();
@@ -780,15 +778,14 @@ void JsiInterfaceTddTest::JSIInterfaceTest021()
     /**
      * @tc.expected: step2. keyAcquired1 = key1, num1 = 0, keyAcquired2 = key2, num1 = 1
      */
-    if (keyAcquired1 != nullptr && !strcmp(keyAcquired1, key1) &&
-        num1 == 0 && keyAcquired2 != nullptr &&
+    if (keyAcquired1 != nullptr && !strcmp(keyAcquired1, key1) && num1 == 0 && keyAcquired2 != nullptr &&
         !strcmp(keyAcquired2, key2) && num2 == 1) {
         printf("JSIInterfaceTest021 pass\n");
     } else {
         printf("JSIInterfaceTest021 fail\n");
     }
-    EXPECT_TRUE(keyAcquired1 != nullptr && !strcmp(keyAcquired1, key1) && num1 == 0 &&
-        keyAcquired2 != nullptr && !strcmp(keyAcquired2, key2) && num2 == 1);
+    EXPECT_TRUE(keyAcquired1 != nullptr && !strcmp(keyAcquired1, key1) && num1 == 0 && keyAcquired2 != nullptr &&
+                !strcmp(keyAcquired2, key2) && num2 == 1);
 
     JSI::ReleaseValueList(object, keys, keyValue1, keyValue2);
     JSI::ReleaseString(keyAcquired1);
@@ -874,7 +871,7 @@ void JsiInterfaceTddTest::RunTests()
     JSIInterfaceTest008();
     JSIInterfaceTest009();
     JSIInterfaceTest010();
-#if ENABLED(JS_FWK_SYMBOL)
+#if JS_ENABLED(JS_FWK_SYMBOL)
     JSIInterfaceTest011();
 #endif // ENABLED(JS_FWK_SYMBOL)
     JSIInterfaceTest012();
@@ -883,7 +880,7 @@ void JsiInterfaceTddTest::RunTests()
     JSIInterfaceTest015();
     JSIInterfaceTest016();
     JSIInterfaceTest017();
-#if ENABLED(JS_FWK_TYPEDARRAY)
+#if JS_ENABLED(JS_FWK_TYPEDARRAY)
     JSIInterfaceTest018();
     JSIInterfaceTest019();
 #endif // ENABLED(JS_FWK_TYPEDARRAY)
@@ -994,7 +991,7 @@ HWTEST_F(JsiInterfaceTddTest, test010, TestSize.Level1)
     JsiInterfaceTddTest::JSIInterfaceTest010();
 }
 
-#if ENABLED(JS_FWK_SYMBOL)
+#if JS_ENABLED(JS_FWK_SYMBOL)
 /**
  * @tc.name: JSIInterfaceTest011
  * @tc.desc: Verify JSI interface related to Symbol object.
@@ -1066,7 +1063,7 @@ HWTEST_F(JsiInterfaceTddTest, test017, TestSize.Level1)
     JsiInterfaceTddTest::JSIInterfaceTest017();
 }
 
-#if ENABLED(JS_FWK_TYPEDARRAY)
+#if JS_ENABLED(JS_FWK_TYPEDARRAY)
 /**
  * @tc.name: JSIInterfaceTest018
  * @tc.desc: Verify JSI interface related to JS ArrayBuffer.
@@ -1128,5 +1125,5 @@ HWTEST_F(JsiInterfaceTddTest, test023, TestSize.Level0)
     JsiInterfaceTddTest::JSIInterfaceTest023();
 }
 #endif
-}
-}
+} // namespace ACELite
+} // namespace OHOS

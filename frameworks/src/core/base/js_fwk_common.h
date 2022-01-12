@@ -70,7 +70,7 @@ struct Watcher : public MemoryHeap {
 
 void ThrowError();
 
-#if ENABLED(JS_PROFILER)
+#if JS_ENABLED(JS_PROFILER)
 #ifndef LOG_PROFILER_TRACE
 #define LOG_PROFILER(format, ...) printf(format "\n", ##__VA_ARGS__)
 #define LOG_PROFILER_TRACE(format, ...) printf("[PERFORMANCE]:" format "\n", ##__VA_ARGS__)
@@ -169,13 +169,13 @@ uint16_t GetHorizontalResolution();
 uint16_t GetVerticalResolution();
 
 // global functions
-void JerrySetNamedProperty(jerry_value_t object, const char * const name, jerry_value_t propValue);
-void JerrySetNumberProperty(jerry_value_t object, const char * const name, double value);
-void JerrySetStringProperty(jerry_value_t object, const char * const name, const char * const value);
-void JerrySetStringProperty(jerry_value_t object, const char * const name, const char * const value, uint32_t length);
+void JerrySetNamedProperty(jerry_value_t object, const char *const name, jerry_value_t propValue);
+void JerrySetNumberProperty(jerry_value_t object, const char *const name, double value);
+void JerrySetStringProperty(jerry_value_t object, const char *const name, const char *const value);
+void JerrySetStringProperty(jerry_value_t object, const char *const name, const char *const value, uint32_t length);
 // value returned should be freed by caller when it's not nullptr and won't be used any more
-char *JerryMallocStringProperty(const jerry_value_t object, const char * const name, uint16_t &length);
-int16_t JerryGetIntegerProperty(jerry_value_t object, const char * const name);
+char *JerryMallocStringProperty(const jerry_value_t object, const char *const name, uint16_t &length);
+int16_t JerryGetIntegerProperty(jerry_value_t object, const char *const name);
 /**
  * @brief try to parse bool property from one JS object, caller should check the returned result before using outValue.
  * @param object the given object
@@ -183,8 +183,8 @@ int16_t JerryGetIntegerProperty(jerry_value_t object, const char * const name);
  * @param outValue the target property value
  * @return true if the parse successfully
  */
-bool JerryGetBoolProperty(jerry_value_t object, const char * const name, bool &outValue);
-void JerrySetFuncProperty(jerry_value_t object, const char * const name, jerry_external_handler_t handler);
+bool JerryGetBoolProperty(jerry_value_t object, const char *const name, bool &outValue);
+void JerrySetFuncProperty(jerry_value_t object, const char *const name, jerry_external_handler_t handler);
 char *MallocStringOf(jerry_value_t source);
 // convert one jerry string value to char*, and return the string length
 char *MallocStringOf(jerry_value_t source, uint16_t *strLength);
@@ -196,22 +196,22 @@ char *RelocateFilePath(const char *appRootPath, const char *subPath, const char 
 
 // relocate file name to appRootPath/dirA/dirB/fileName
 // e.x. /system/app/73709738-2d9d-4947-ac63-9858dcae7ccb/pages/index/right.png
-char *RelocateFilePathRelative(const char * const appRootPath, const char * const resFileName);
+char *RelocateFilePathRelative(const char *const appRootPath, const char *const resFileName);
 
 // returned value must be freed by caller
-char *RelocateResourceFilePath(const char * const appRootPath, const char * const resFileName);
+char *RelocateResourceFilePath(const char *const appRootPath, const char *const resFileName);
 // returned value must be freed by caller
-char *RelocateJSSourceFilePath(const char * const appRootPath, const char * const srcFileName);
+char *RelocateJSSourceFilePath(const char *const appRootPath, const char *const srcFileName);
 // read from src file, return value must be freed by caller
-char *ReadJSFile(const char * const appPath, const char * const jsFileName);
+char *ReadJSFile(const char *const appPath, const char *const jsFileName);
 // read the given file and return the whole file content
-char *ReadJSFile(const char * const appPath, const char * const jsFileName, uint32_t &fileSize);
+char *ReadJSFile(const char *const appPath, const char *const jsFileName, uint32_t &fileSize);
 // read the given file and return the whole file content
-char *ReadFile(const char * const fullPath, uint32_t &fileSize, const bool binary);
+char *ReadFile(const char *const fullPath, uint32_t &fileSize, const bool binary);
 // check whether the given file exists
-bool IsFileExisted(const char * const filePath);
+bool IsFileExisted(const char *const filePath);
 // Whether file existed and return the file size. 0 represents file not existed.
-int32_t GetFileSize(const char * const filePath);
+int32_t GetFileSize(const char *const filePath);
 
 /**
  * @brief give out the path string from an url pattern, "url(common/logo.png)".
@@ -220,7 +220,7 @@ int32_t GetFileSize(const char * const filePath);
  *
  * @return the url itself, "common/logo.png"
  */
-char *CreatePathStrFromUrl(const char * const url);
+char *CreatePathStrFromUrl(const char *const url);
 /**
  * @brief Call jerry_has_property and return the result
  *
@@ -305,13 +305,13 @@ constexpr char DELIMITER[] = ",";
 constexpr char RESOURCE_SEPARATOR = '/';
 
 bool StartWith(const char *sequence, const char *prefix);
-bool IsHexColor(const char * const target);
-bool IsRgbColor(const char * const target);
-bool IsRgbaColor(const char * const target);
-bool ParseHexColor(const char * const source, uint32_t &color, uint8_t &alpha);
-bool ParseRgbaColor(const char * const source, uint32_t &color, uint8_t &alpha);
-bool ParseColor(const char * const source, uint32_t &color, uint8_t &alpha);
-bool CopyFontFamily(char *&destination, const char * const fontFamily, uint32_t fontFamilyNameLen = 0);
+bool IsHexColor(const char *const target);
+bool IsRgbColor(const char *const target);
+bool IsRgbaColor(const char *const target);
+bool ParseHexColor(const char *const source, uint32_t &color, uint8_t &alpha);
+bool ParseRgbaColor(const char *const source, uint32_t &color, uint8_t &alpha);
+bool ParseColor(const char *const source, uint32_t &color, uint8_t &alpha);
+bool CopyFontFamily(char *&destination, const char *const fontFamily, uint32_t fontFamilyNameLen = 0);
 
 #if (defined(_WIN32) || defined(_WIN64))
 constexpr char PATH_SEPARATOR = '\\';

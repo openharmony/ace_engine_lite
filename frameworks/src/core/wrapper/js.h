@@ -30,7 +30,7 @@ void JSRelease(JSValue value);
 
 class JSString final : public MemoryHeap {
 public:
-    static JSValue Create(const char * const value);
+    static JSValue Create(const char *const value);
     static bool Is(JSValue target);
     static char *Value(JSValue value);
 };
@@ -47,18 +47,18 @@ public:
     static JSValue Create();
     static JSValue Keys(JSValue target);
     static JSValue Get(JSValue target, JSValue key);
-    static JSValue Get(JSValue target, const char * const prop);
-    static char *GetString(JSValue target, const char * const prop);
-    static double GetNumber(JSValue target, const char * const prop);
-    static bool GetBoolean(JSValue target, const char * const prop);
-    static void Set(JSValue target, const char * const prop, JSValue value);
-    static void SetString(JSValue target, const char * const prop, const char * const value);
-    static void SetNumber(JSValue target, const char * const prop, const double value);
-    static void SetBoolean(JSValue target, const char * const prop, const bool value);
-    static void Set(JSValue target, const char * const prop, JSHandler handler);
-    static bool Del(JSValue target, const char * const prop);
-    static JSValue Call(JSValue target, const char * const prop, JSValue args[], JSSize size);
-    static JSValue Call(JSValue target, const char * const prop);
+    static JSValue Get(JSValue target, const char *const prop);
+    static char *GetString(JSValue target, const char *const prop);
+    static double GetNumber(JSValue target, const char *const prop);
+    static bool GetBoolean(JSValue target, const char *const prop);
+    static void Set(JSValue target, const char *const prop, JSValue value);
+    static void SetString(JSValue target, const char *const prop, const char *const value);
+    static void SetNumber(JSValue target, const char *const prop, const double value);
+    static void SetBoolean(JSValue target, const char *const prop, const bool value);
+    static void Set(JSValue target, const char *const prop, JSHandler handler);
+    static bool Del(JSValue target, const char *const prop);
+    static JSValue Call(JSValue target, const char *const prop, JSValue args[], JSSize size);
+    static JSValue Call(JSValue target, const char *const prop);
     static bool GetNativePointer(JSValue target, void **nativePointer);
     static void SetNativePointer(JSValue target, void *nativePointer);
     static bool DelNativePointer(JSValue target);
@@ -69,11 +69,11 @@ public:
 class JSGlobal final : public MemoryHeap {
 public:
     static JSValue Get();
-    static JSValue Get(const char * const prop);
-    static void Set(const char * const prop, JSValue value);
-    static void Del(const char * const props);
-    static JSValue Call(const char * const prop, JSValue args[], JSSize size);
-    static JSValue Call(const char * const prop);
+    static JSValue Get(const char *const prop);
+    static void Set(const char *const prop, JSValue value);
+    static void Del(const char *const props);
+    static JSValue Call(const char *const prop, JSValue args[], JSSize size);
+    static JSValue Call(const char *const prop);
 };
 
 class JSUndefined final : public MemoryHeap {
@@ -84,7 +84,7 @@ public:
 
 class JSNumber final : public MemoryHeap {
 public:
-    static JSValue Create(uint32_t number);
+    static JSValue Create(double number);
     static bool Is(JSValue target);
     static double Value(JSValue value);
 };

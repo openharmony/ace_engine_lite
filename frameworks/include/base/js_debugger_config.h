@@ -15,10 +15,10 @@
 
 #ifndef OHOS_ACELITE_JS_DEBUGGER_CONFIG_H
 #define OHOS_ACELITE_JS_DEBUGGER_CONFIG_H
-#include <cstdio>
-#include <cstdint>
 #include "js_config.h"
 #include "memory_heap.h"
+#include <cstdint>
+#include <cstdio>
 
 /**
  * For now DEBUGGER is only supported in Simulator
@@ -26,15 +26,9 @@
 namespace OHOS {
 namespace ACELite {
 // the protocol type the engine supports
-enum DebugProtocol : uint8_t {
-    TCP,
-    SERIAL
-};
+enum DebugProtocol : uint8_t { TCP, SERIAL };
 // the protocol channel type the engine supports
-enum DebugChannel : uint8_t {
-    WEBSOCKET,
-    RAWPACKET
-};
+enum DebugChannel : uint8_t { WEBSOCKET, RAWPACKET };
 const uint16_t DEFAULT_PORT = 5001; // default port
 struct DebuggerConfig : public MemoryHeap {
     DebugProtocol protocol;   // use tcp as default
@@ -131,8 +125,9 @@ public:
      * @brief Release jerry external context
      */
     void ReleaseJSContext();
+
 private:
-#if ENABLED(ENGINE_DEBUGGER)
+#if JS_ENABLED(ENGINE_DEBUGGER)
 #if (JS_ENGINE_EXTERNAL_CONTEXT == 1)
     void *engineContext_ = nullptr;
 #endif // JS_ENGINE_EXTERNAL_CONTEXT

@@ -24,7 +24,7 @@
 /*
  * Wrapper macro, use directly in code after including this header file.
  */
-#if ENABLED(JS_PROFILER)
+#if JS_ENABLED(JS_PROFILER)
 // start tracing for one given phase, and return a traceId which will be used when calling STOP_TRACING
 #define START_TRACING(traceTag) JSProfiler::GetInstance()->PushTrace(traceTag, 0, 0)
 // start tracing for one given phase, and provids the component name together
@@ -44,7 +44,7 @@
 #endif // ENABLED(JS_PROFILER)
 
 // invoked into compiling only if performance measurement enabled
-#if ENABLED(JS_PROFILER)
+#if JS_ENABLED(JS_PROFILER)
 namespace OHOS {
 namespace ACELite {
 /**

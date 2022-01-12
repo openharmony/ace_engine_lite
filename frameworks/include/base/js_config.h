@@ -23,8 +23,8 @@
  *     #if DISABLED(LOG_OUTPUT)
  *     #if ENABLED(LOG_OUTPUT)
  */
-#define ENABLED(CONFIGURATION) ((CONFIGURATION) == 1)
-#define DISABLED(CONFIGURATION) ((CONFIGURATION) != 1)
+#define JS_ENABLED(CONFIGURATION) ((CONFIGURATION) == 1)
+#define JS_DISABLED(CONFIGURATION) ((CONFIGURATION) != 1)
 
 /**
  * Enable/Disable JS framework runtime performance measurement.
@@ -36,7 +36,7 @@
  * Default: 1
  */
 #ifndef JS_PROFILER
-#define JS_PROFILER 1
+#define JS_PROFILER 0
 #endif
 
 /**

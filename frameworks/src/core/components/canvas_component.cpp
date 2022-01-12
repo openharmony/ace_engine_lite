@@ -24,55 +24,45 @@
 namespace OHOS {
 namespace ACELite {
 // default fill style color=black
-const char * const CanvasComponent::DEFAULT_FILLSTYLE = "#000000";
+const char *const CanvasComponent::DEFAULT_FILLSTYLE = "#000000";
 // default stroke style color=black
-const char * const CanvasComponent::DEFAULT_STROKESTYLE = "#000000";
+const char *const CanvasComponent::DEFAULT_STROKESTYLE = "#000000";
 // default text align=left
-const char * const CanvasComponent::DEFAULT_TEXTALIGN = "left";
+const char *const CanvasComponent::DEFAULT_TEXTALIGN = "left";
 
 // API-attribute
-const char * const CanvasComponent::ATTR_FILLSTYLE = "fillStyle";
-const char * const CanvasComponent::ATTR_STROKESTYLE = "strokeStyle";
-const char * const CanvasComponent::ATTR_LINEWIDTH = "lineWidth";
-const char * const CanvasComponent::ATTR_FONT = "font";
-const char * const CanvasComponent::ATTR_TEXTALIGN = "textAlign";
+const char *const CanvasComponent::ATTR_FILLSTYLE = "fillStyle";
+const char *const CanvasComponent::ATTR_STROKESTYLE = "strokeStyle";
+const char *const CanvasComponent::ATTR_LINEWIDTH = "lineWidth";
+const char *const CanvasComponent::ATTR_FONT = "font";
+const char *const CanvasComponent::ATTR_TEXTALIGN = "textAlign";
 
 // API-method
-const char * const CanvasComponent::FUNC_GETCONTEXT = "getContext";
-const char * const CanvasComponent::FUNC_FILLRECT = "fillRect";
-const char * const CanvasComponent::FUNC_STROKERECT = "strokeRect";
-const char * const CanvasComponent::FUNC_FILLTEXT = "fillText";
-const char * const CanvasComponent::FUNC_BEGINPATH = "beginPath";
-const char * const CanvasComponent::FUNC_MOVETO = "moveTo";
-const char * const CanvasComponent::FUNC_LINETO = "lineTo";
-const char * const CanvasComponent::FUNC_RECT = "rect";
-const char * const CanvasComponent::FUNC_ARC = "arc";
-const char * const CanvasComponent::FUNC_CLOSEPATH = "closePath";
-const char * const CanvasComponent::FUNC_STROKE = "stroke";
+const char *const CanvasComponent::FUNC_GETCONTEXT = "getContext";
+const char *const CanvasComponent::FUNC_FILLRECT = "fillRect";
+const char *const CanvasComponent::FUNC_STROKERECT = "strokeRect";
+const char *const CanvasComponent::FUNC_FILLTEXT = "fillText";
+const char *const CanvasComponent::FUNC_BEGINPATH = "beginPath";
+const char *const CanvasComponent::FUNC_MOVETO = "moveTo";
+const char *const CanvasComponent::FUNC_LINETO = "lineTo";
+const char *const CanvasComponent::FUNC_RECT = "rect";
+const char *const CanvasComponent::FUNC_ARC = "arc";
+const char *const CanvasComponent::FUNC_CLOSEPATH = "closePath";
+const char *const CanvasComponent::FUNC_STROKE = "stroke";
 
 // create canvas draw attribute-callback mapping
-const AttrMap CanvasComponent::attrMap_[] = {
-    {ATTR_FILLSTYLE, FillStyleSetter, FillStyleGetter},
-    {ATTR_STROKESTYLE, StrokeStyleSetter, StrokeStyleGetter},
-    {ATTR_LINEWIDTH, LineWidthSetter, LineWidthGetter},
-    {ATTR_FONT, FontSetter, FontGetter},
-    {ATTR_TEXTALIGN, TextAlignSetter, TextAlignGetter}
-};
+const AttrMap CanvasComponent::attrMap_[] = {{ATTR_FILLSTYLE, FillStyleSetter, FillStyleGetter},
+                                             {ATTR_STROKESTYLE, StrokeStyleSetter, StrokeStyleGetter},
+                                             {ATTR_LINEWIDTH, LineWidthSetter, LineWidthGetter},
+                                             {ATTR_FONT, FontSetter, FontGetter},
+                                             {ATTR_TEXTALIGN, TextAlignSetter, TextAlignGetter}};
 
 // create canvas draw method-callback mapping
 const MethodMap CanvasComponent::methodMap_[] = {
-    {FUNC_GETCONTEXT, GetContext},
-    {FUNC_FILLRECT, FillRect},
-    {FUNC_STROKERECT, StrokeRect},
-    {FUNC_FILLTEXT, FillText},
-    {FUNC_BEGINPATH, BeginPath},
-    {FUNC_MOVETO, MoveTo},
-    {FUNC_LINETO, LineTo},
-    {FUNC_RECT, Rect},
-    {FUNC_ARC, Arc},
-    {FUNC_CLOSEPATH, ClosePath},
-    {FUNC_STROKE, Stroke}
-};
+    {FUNC_GETCONTEXT, GetContext}, {FUNC_FILLRECT, FillRect},   {FUNC_STROKERECT, StrokeRect},
+    {FUNC_FILLTEXT, FillText},     {FUNC_BEGINPATH, BeginPath}, {FUNC_MOVETO, MoveTo},
+    {FUNC_LINETO, LineTo},         {FUNC_RECT, Rect},           {FUNC_ARC, Arc},
+    {FUNC_CLOSEPATH, ClosePath},   {FUNC_STROKE, Stroke}};
 
 CanvasComponent::CanvasComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager)
     : Component(options, children, styleManager),
@@ -345,8 +335,7 @@ jerry_value_t CanvasComponent::FontSetter(const jerry_value_t func,
     (void)func;
     if (argsNum != ArgsCount::NUM_1) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: font value error!");
-        return jerry_create_error(JERRY_ERROR_TYPE,
-                                  reinterpret_cast<const jerry_char_t *>("font value error"));
+        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("font value error"));
     }
 
     CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
@@ -439,8 +428,7 @@ jerry_value_t CanvasComponent::TextAlignSetter(const jerry_value_t func,
     (void)func;
     if (argsNum != ArgsCount::NUM_1) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: textAlign value error!");
-        return jerry_create_error(JERRY_ERROR_TYPE,
-                                  reinterpret_cast<const jerry_char_t *>("textAlign value error"));
+        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("textAlign value error"));
     }
 
     CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
@@ -891,8 +879,8 @@ bool CanvasComponent::FormatArcAngle(double sAngle,
         return false;
     }
 
-    startAngle = DEGREES_180 * sAngle / UI_PI;
-    endAngle = DEGREES_180 * eAngle / UI_PI;
+    startAngle = static_cast<uint32_t>(DEGREES_180 * sAngle / UI_PI);
+    endAngle = static_cast<uint32_t>(DEGREES_180 * eAngle / UI_PI);
 
     if (!counterClockwise) {
         // reset end-angle degrees when (endAngle - startAngle) > 360

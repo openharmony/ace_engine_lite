@@ -135,7 +135,7 @@ bool Component::Render()
     STOP_TRACING();
 
     // The event bubbling mechanism is supported from API version 5, and events are bubbled by default.
-    // However, it should be compatible with the migrated old application (API version 4) 
+    // However, it should be compatible with the migrated old application (API version 4)
     // so that it does not bubble by default.
     const int32_t supportEventBubbleApiVersion = 5;
     if (JsAppContext::GetInstance()->GetTargetApi() < supportEventBubbleApiVersion) {
@@ -269,7 +269,7 @@ bool Component::UpdateView(uint16_t attrKeyId, jerry_value_t attrValue)
 
     return updateResult;
 }
-void Component::RegisterNamedFunction(const char * const name, jerry_external_handler_t handler) const
+void Component::RegisterNamedFunction(const char *const name, jerry_external_handler_t handler) const
 {
     JerrySetFuncProperty(nativeElement_, name, handler);
 }
@@ -742,7 +742,7 @@ void Component::SetAnimationKeyFrames(const UIView &view, const AppStyleItem *st
         }
     }
 
-    const char * const value = GetStyleStrValue(styleItem);
+    const char *const value = GetStyleStrValue(styleItem);
     if (value == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "animation name is not string value");
         return;
@@ -777,7 +777,7 @@ void Component::SetAnimationKeyFrames(const AppStyleItem *item)
 
     isAnimationKeyFramesSet_ = false;
     while (item) {
-        const char * const itemValue = item->GetStrValue();
+        const char *const itemValue = item->GetStrValue();
 
         if ((itemValue == nullptr) || (strlen(itemValue) == 0)) {
             return;
@@ -876,7 +876,7 @@ void Component::SetAnimationStyle(const UIView &view, const AppStyleItem *styleI
         }
     }
 
-    const char * const strValue = GetStyleStrValue(styleItem);
+    const char *const strValue = GetStyleStrValue(styleItem);
     const size_t strLen = GetStyleStrValueLen(styleItem);
     if (strValue == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "animation style item is null");
@@ -1177,8 +1177,9 @@ void Component::SetLongPressEventListener(UIView &view, const jerry_value_t even
 
 void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onTouchListener_ == nullptr)
+    if (onTouchListener_ == nullptr) {
         onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    }
     if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
         return;
@@ -1193,15 +1194,16 @@ void Component::SetSwipeEventListener(UIView &view, jerry_value_t eventFunc, boo
 
 void Component::SetTouchStartEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onTouchListener_ == nullptr)
+    if (onTouchListener_ == nullptr) {
         onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    }
     if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragStart listener create failed");
         return;
     }
 
     view.SetOnDragListener(onTouchListener_);
-    
+
     view.SetDraggable(true);
     view.SetTouchable(true);
 
@@ -1210,8 +1212,9 @@ void Component::SetTouchStartEventListener(UIView &view, jerry_value_t eventFunc
 
 void Component::SetTouchMoveEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onTouchListener_ == nullptr)
+    if (onTouchListener_ == nullptr) {
         onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    }
     if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Drag listener create failed");
         return;
@@ -1226,8 +1229,9 @@ void Component::SetTouchMoveEventListener(UIView &view, jerry_value_t eventFunc,
 
 void Component::SetTouchEndEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation)
 {
-    if (onTouchListener_ == nullptr)
+    if (onTouchListener_ == nullptr) {
         onTouchListener_ = new ViewOnTouchListener(viewModel_, isStopPropagation);
+    }
     if (onTouchListener_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "DragEnd listener create failed");
         return;
@@ -1427,7 +1431,7 @@ void Component::SetVisible(UIView &view, const AppStyleItem *styleItem) const
         HILOG_ERROR(HILOG_MODULE_ACE, "Visible style value is invalid!");
         return;
     }
-    const char * const strValue = GetStyleStrValue(styleItem);
+    const char *const strValue = GetStyleStrValue(styleItem);
     if (strValue == nullptr) {
         return;
     }
@@ -1461,7 +1465,7 @@ void Component::SetOpacity(UIView &view, const AppStyleItem &styleItem) const
     } else if (opacity > opacityMax) {
         opacity = opacityMax;
     }
-    view.SetOpaScale(opacity * OPA_OPAQUE);
+    view.SetOpaScale(static_cast<uint8_t>(opacity * OPA_OPAQUE));
 }
 
 void Component::SetMargin(UIView &view) const
@@ -1923,7 +1927,7 @@ bool Component::HandleBackgroundImg(const AppStyleItem &styleItem, char *&presse
 {
     bool result = false;
     if (styleItem.GetValueType() == STYLE_PROP_VALUE_TYPE_STRING) {
-        const char * const url = styleItem.GetStrValue();
+        const char *const url = styleItem.GetStrValue();
         char *filePath = CreatePathStrFromUrl(url);
         if (filePath != nullptr) {
             char *imagePath = JsAppContext::GetInstance()->GetResourcePath(filePath);

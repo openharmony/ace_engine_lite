@@ -86,7 +86,7 @@ void StateMachine::SetCurrentState(int8_t newState)
     currentState_ = newState;
 }
 
-int StateMachine::GenerateJsPagePath(const char * const uri)
+int StateMachine::GenerateJsPagePath(const char *const uri)
 {
     size_t uriLen = strlen(uri);
     if (uriLen >= PATH_LENGTH_MAX) {
@@ -107,7 +107,7 @@ int StateMachine::GenerateJsPagePath(const char * const uri)
         len = strlen(JS_INDEX_FILE_PATH);
     }
 #endif
-    const char * const sourceFileSuffix = (JsAppEnvironment::GetInstance()->IsSnapshotMode()) ? ".bc" : ".js";
+    const char *const sourceFileSuffix = (JsAppEnvironment::GetInstance()->IsSnapshotMode()) ? ".bc" : ".js";
     len += strlen(sourceFileSuffix);
     // add ending character:'\0'
     len += 1;
@@ -133,7 +133,7 @@ int StateMachine::GenerateJsPagePath(const char * const uri)
     return SUCCESS;
 }
 
-void StateMachine::RegisterUriAndParamsToPage(const char * const uri, jerry_value_t params)
+void StateMachine::RegisterUriAndParamsToPage(const char *const uri, jerry_value_t params)
 {
     jerry_value_t globalObject = jerry_get_global_object();
     if (!IS_UNDEFINED(params)) {
@@ -199,8 +199,8 @@ bool StateMachine::BindUri(jerry_value_t &jsRes)
         ace_free(uri_);
         uri_ = nullptr;
         HILOG_ERROR(HILOG_MODULE_ACE, "statemachine init failed as uri is empty.");
-        jsRes = jerry_create_error(JERRY_ERROR_URI,
-                                   reinterpret_cast<const jerry_char_t *>("uri value can't be empty."));
+        jsRes =
+            jerry_create_error(JERRY_ERROR_URI, reinterpret_cast<const jerry_char_t *>("uri value can't be empty."));
         return false;
     }
     int result = GenerateJsPagePath(uri_);
@@ -246,7 +246,7 @@ bool StateMachine::CheckJSSourceFile() const
             break;
         }
 
-        const char * const anotherSuffix = (JsAppEnvironment::GetInstance()->IsSnapshotMode()) ? ".js" : ".bc";
+        const char *const anotherSuffix = (JsAppEnvironment::GetInstance()->IsSnapshotMode()) ? ".js" : ".bc";
         // change file suffix to another mode file
         if (strcpy_s((fullPath + (pathLength - fileSuffixLength)), (fileSuffixLength + 1), anotherSuffix) != EOK) {
             break;
@@ -324,7 +324,7 @@ static void ForceGC(void *data)
 {
     static_cast<void>(data);
     jerry_gc(jerry_gc_mode_t::JERRY_GC_PRESSURE_HIGH);
-#if ENABLED(JS_PROFILER)
+#if JS_ENABLED(JS_PROFILER)
     if (JSProfiler::GetInstance()->IsEnabled()) {
         // dump the JS heap status
         JSHeapStatus heapStatus;
@@ -340,7 +340,7 @@ void StateMachine::RenderPage()
 {
     START_TRACING(RENDER);
     // if not in init state, reset all watchers of previous page at first
-    LazyLoadManager* lazy = const_cast<LazyLoadManager *>(appContext_->GetLazyLoadManager());
+    LazyLoadManager *lazy = const_cast<LazyLoadManager *>(appContext_->GetLazyLoadManager());
     if (lazy != nullptr) {
         lazy->ResetWatchers();
     }
@@ -388,7 +388,7 @@ void StateMachine::HidePage() const
     JsAsyncWork::DispatchAsyncWork(ForceGC, nullptr);
 }
 
-void StateMachine::InvokePageLifeCycleCallback(const char * const name) const
+void StateMachine::InvokePageLifeCycleCallback(const char *const name) const
 {
     if (FatalHandler::GetInstance().IsJSRuntimeFatal()) {
         // can not continue to involve any JS object creating on engine in case runtime fatal

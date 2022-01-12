@@ -14,7 +14,7 @@
  */
 
 #include "console_log_impl.h"
-#if ENABLED(CONSOLE_LOG_OUTPUT)
+#if JS_ENABLED(CONSOLE_LOG_OUTPUT)
 #include "js_app_environment.h"
 #if (FEATURE_USER_MC_LOG_PRINTF == 1)
 #include "product_adapter.h"
@@ -48,7 +48,7 @@ jerry_value_t LogNative(const LogLevel logLevel,
     // print out log level if needed
     LogOutLevel(logLevel);
 
-    const char * const nullStr = "\\u0000";
+    const char *const nullStr = "\\u0000";
     jerry_value_t retVal = jerry_create_undefined();
 
     for (jerry_length_t argIndex = 0; argIndex < argc; argIndex++) {
@@ -138,7 +138,7 @@ void LogOutLevel(const LogLevel logLevel)
  *
  * @param str the string to print out
  */
-void LogString(const LogLevel logLevel, const char * const str)
+void LogString(const LogLevel logLevel, const char *const str)
 {
     if (str == nullptr) {
         return;
@@ -180,7 +180,7 @@ void LogChar(char c, const LogLevel logLevel, bool endFlag)
 }
 
 #ifdef FEATURE_ACELITE_HI_LOG_PRINTF
-static void OutputToHiLog(const LogLevel logLevel, const char * const str)
+static void OutputToHiLog(const LogLevel logLevel, const char *const str)
 {
     switch (logLevel) {
         case LOG_LEVEL_ERR:
@@ -206,7 +206,7 @@ static void OutputToHiLog(const LogLevel logLevel, const char * const str)
     }
 }
 #elif (FEATURE_USER_MC_LOG_PRINTF == 1)
-static void OutputToHiLog(const LogLevel logLevel, const char * const str)
+static void OutputToHiLog(const LogLevel logLevel, const char *const str)
 {
     switch (logLevel) {
         case LOG_LEVEL_ERR:
@@ -240,7 +240,7 @@ void RegisterJSLogOutputHandler(JSLogOutputExtraHandler extraHandler)
 }
 #endif // TDD_ASSERTIONS
 
-void Output(const LogLevel logLevel, const char * const str, const uint8_t length)
+void Output(const LogLevel logLevel, const char *const str, const uint8_t length)
 {
     if (str == nullptr) {
         return;

@@ -25,7 +25,7 @@ void JSRelease(JSValue value)
     return jerry_release_value(value);
 }
 
-JSValue JSString::Create(const char * const value)
+JSValue JSString::Create(const char *const value)
 {
     return jerry_create_string(reinterpret_cast<const jerry_char_t *>(value));
 }
@@ -116,7 +116,7 @@ JSValue JSObject::Get(JSValue target, JSValue key)
     return jerry_get_property(target, key);
 }
 
-JSValue JSObject::Get(JSValue target, const char * const prop)
+JSValue JSObject::Get(JSValue target, const char *const prop)
 {
     JSValue key = JSString::Create(prop);
     JSValue value = jerry_get_property(target, key);
@@ -124,63 +124,63 @@ JSValue JSObject::Get(JSValue target, const char * const prop)
     return value;
 }
 
-char *JSObject::GetString(JSValue target, const char * const prop)
+char *JSObject::GetString(JSValue target, const char *const prop)
 {
     JSValue value = JSObject::Get(target, prop);
     char *content = JSString::Value(value);
     JSRelease(value);
     return content;
 }
-double JSObject::GetNumber(JSValue target, const char * const prop)
+double JSObject::GetNumber(JSValue target, const char *const prop)
 {
     JSValue value = JSObject::Get(target, prop);
     double number = JSNumber::Value(value);
     JSRelease(value);
     return number;
 }
-bool JSObject::GetBoolean(JSValue target, const char * const prop)
+bool JSObject::GetBoolean(JSValue target, const char *const prop)
 {
     JSValue value = JSObject::Get(target, prop);
     bool flag = JSBoolean::Value(value);
     JSRelease(value);
     return flag;
 }
-void JSObject::Set(JSValue target, const char * const prop, JSValue value)
+void JSObject::Set(JSValue target, const char *const prop, JSValue value)
 {
     JSValue key = JSString::Create(prop);
     jerry_release_value(jerry_set_property(target, key, value));
     JSRelease(key);
 }
 
-void JSObject::SetString(JSValue target, const char * const prop, const char * const value)
+void JSObject::SetString(JSValue target, const char *const prop, const char *const value)
 {
     JSValue attr = JSString::Create(value);
     JSObject::Set(target, prop, attr);
     JSRelease(attr);
 }
 
-void JSObject::SetNumber(JSValue target, const char * const prop, const double value)
+void JSObject::SetNumber(JSValue target, const char *const prop, const double value)
 {
     JSValue attr = JSNumber::Create(value);
     JSObject::Set(target, prop, attr);
     JSRelease(attr);
 }
 
-void JSObject::SetBoolean(JSValue target, const char * const prop, const bool value)
+void JSObject::SetBoolean(JSValue target, const char *const prop, const bool value)
 {
     JSValue attr = JSBoolean::Create(value);
     JSObject::Set(target, prop, attr);
     JSRelease(attr);
 }
 
-void JSObject::Set(JSValue target, const char * const prop, JSHandler handler)
+void JSObject::Set(JSValue target, const char *const prop, JSHandler handler)
 {
     JSValue func = JSFunction::Create(handler);
     JSObject::Set(target, prop, func);
     JSRelease(func);
 }
 
-bool JSObject::Del(JSValue target, const char * const prop)
+bool JSObject::Del(JSValue target, const char *const prop)
 {
     JSValue key = JSString::Create(prop);
     bool result = jerry_delete_property(target, key);
@@ -203,7 +203,7 @@ bool JSObject::DelNativePointer(JSValue target)
     return jerry_delete_object_native_pointer(target, nullptr);
 }
 
-JSValue JSObject::Call(JSValue target, const char * const prop, JSValue args[], JSSize size)
+JSValue JSObject::Call(JSValue target, const char *const prop, JSValue args[], JSSize size)
 {
     JSValue func = Get(target, prop);
     JSValue value = JSFunction::Call(func, target, args, size);
@@ -211,7 +211,7 @@ JSValue JSObject::Call(JSValue target, const char * const prop, JSValue args[], 
     return value;
 }
 
-JSValue JSObject::Call(JSValue target, const char * const prop)
+JSValue JSObject::Call(JSValue target, const char *const prop)
 {
     return JSObject::Call(target, prop, nullptr, 0);
 }
@@ -231,7 +231,7 @@ JSValue JSGlobal::Get()
     return jerry_get_global_object();
 }
 
-JSValue JSGlobal::Get(const char * const prop)
+JSValue JSGlobal::Get(const char *const prop)
 {
     JSValue global = JSGlobal::Get();
     JSValue result = JSObject::Get(global, prop);
@@ -239,27 +239,27 @@ JSValue JSGlobal::Get(const char * const prop)
     return result;
 }
 
-void JSGlobal::Set(const char * const prop, JSValue value)
+void JSGlobal::Set(const char *const prop, JSValue value)
 {
     JSValue global = JSGlobal::Get();
     JSObject::Set(global, prop, value);
     JSRelease(global);
 }
 
-void JSGlobal::Del(const char * const props)
+void JSGlobal::Del(const char *const props)
 {
     JSValue global = JSGlobal::Get();
     JSObject::Del(global, props);
     JSRelease(global);
 }
-JSValue JSGlobal::Call(const char * const prop, JSValue args[], JSSize size)
+JSValue JSGlobal::Call(const char *const prop, JSValue args[], JSSize size)
 {
     JSValue global = JSGlobal::Get();
     JSValue result = JSObject::Call(global, prop, args, size);
     JSRelease(global);
     return result;
 }
-JSValue JSGlobal::Call(const char * const prop)
+JSValue JSGlobal::Call(const char *const prop)
 {
     return JSGlobal::Call(prop, nullptr, 0);
 }
@@ -274,7 +274,7 @@ bool JSUndefined::Is(JSValue value)
     return jerry_value_is_undefined(value);
 }
 
-JSValue JSNumber::Create(uint32_t number)
+JSValue JSNumber::Create(double number)
 {
     return jerry_create_number(number);
 }

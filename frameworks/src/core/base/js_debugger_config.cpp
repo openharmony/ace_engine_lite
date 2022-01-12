@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 #include "js_debugger_config.h"
-#include <cstring>
 #include "ace_log.h"
 #include "debugger.h"
 #include "handler.h"
 #include "jerryscript-port-default.h"
 #include "jerryscript-port.h"
 #include "js_fwk_common.h"
+#include <cstring>
 
 namespace OHOS {
 namespace ACELite {
@@ -29,7 +29,7 @@ Debugger &Debugger::GetInstance()
     return instance;
 }
 
-#if ENABLED(ENGINE_DEBUGGER)
+#if JS_ENABLED(ENGINE_DEBUGGER)
 bool Debugger::IsDebuggerEnabled()
 {
     return debuggerConfig_.startDebuggerServer;
@@ -70,7 +70,7 @@ void Debugger::TearDownDebugger()
     debuggerStarted_ = false;
 }
 
-void Debugger::Output(const char * const str)
+void Debugger::Output(const char *const str)
 {
     // print out the log into stdout anyway
     printf("%s", str);
@@ -120,7 +120,7 @@ void Debugger::ReleaseJSContext()
     engineContext_ = nullptr;
 #endif // JS_ENGINE_EXTERNAL_CONTEXT
 }
-#else // ENABLED(ENGINE_DEBUGGER)
+#else  // ENABLED(ENGINE_DEBUGGER)
 bool Debugger::IsDebuggerEnabled()
 {
     return true;
@@ -131,30 +131,20 @@ void Debugger::ConfigEngineDebugger(DebuggerConfig &config)
     UNUSED(config);
 }
 
-void Debugger::StartDebugger()
-{
-}
+void Debugger::StartDebugger() {}
 
-void Debugger::TearDownDebugger()
-{
-}
+void Debugger::TearDownDebugger() {}
 
-void Debugger::Output(const char * const str)
+void Debugger::Output(const char *const str)
 {
     UNUSED(str);
 }
 
-void Debugger::FlushOutput()
-{
-}
+void Debugger::FlushOutput() {}
 
-void Debugger::SetupJSContext()
-{
-}
+void Debugger::SetupJSContext() {}
 
-void Debugger::ReleaseJSContext()
-{
-}
+void Debugger::ReleaseJSContext() {}
 #endif // ENABLED(ENGINE_DEBUGGER)
 } // namespace ACELite
 } // namespace OHOS

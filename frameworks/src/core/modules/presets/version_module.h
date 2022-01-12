@@ -19,7 +19,7 @@
 #include "acelite_config.h"
 #include "js_config.h"
 #include "non_copyable.h"
-#if ENABLED(ACE_LITE_VERSION_JS_API)
+#if JS_ENABLED(ACE_LITE_VERSION_JS_API)
 #include "presets/preset_module.h"
 namespace OHOS {
 namespace ACELite {
@@ -70,7 +70,7 @@ public:
     ~AceVersionModule() = default;
     static void Load()
     {
-#if ENABLED(ACE_LITE_VERSION_JS_API)
+#if JS_ENABLED(ACE_LITE_VERSION_JS_API)
         VersionModule versionModule;
         versionModule.Init();
 #endif
