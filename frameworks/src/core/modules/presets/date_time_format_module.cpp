@@ -14,12 +14,12 @@
  */
 #include "date_time_format_module.h"
 #if (FEATURE_DATE_FORMAT == 1)
-#include "ace_log.h"
-#include "key_parser.h"
-#include "keys.h"
-#include "locale_util.h"
-#include "string_util.h"
 #include <cstring>
+#include "ace_log.h"
+#include "locale_util.h"
+#include "keys.h"
+#include "key_parser.h"
+#include "string_util.h"
 
 namespace OHOS {
 namespace ACELite {
@@ -568,8 +568,9 @@ DateTimeFormatModule::StyleState DateTimeFormatModule::GetMonthStyle(jerry_value
     return monthStyleState;
 }
 
-DateTimeFormatModule::StyleState
-    DateTimeFormatModule::GetStyle(jerry_value_t style, const char *attrName, const uint8_t index)
+DateTimeFormatModule::StyleState DateTimeFormatModule::GetStyle(jerry_value_t style,
+                                                                const char *attrName,
+                                                                const uint8_t index)
 {
     if (!jerryx_has_property_str(style, attrName)) {
         return StyleState::UNKNOWN;

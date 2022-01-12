@@ -14,13 +14,12 @@
  */
 
 #include "transition_impl.h"
+#include <stdlib.h>
 #include "ace_log.h"
 #include "ace_mem_base.h"
 #include "easing_equation.h"
 #include "root_view.h"
 #include "securec.h"
-#include <stdlib.h>
-
 
 namespace OHOS {
 namespace ACELite {

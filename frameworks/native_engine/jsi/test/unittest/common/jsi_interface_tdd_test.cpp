@@ -14,11 +14,10 @@
  */
 
 #include "jsi_interface_tdd_test.h"
-#include "acelite_config.h"
-#include "js_debugger_config.h"
 #include <cstdio>
 #include <cstring>
-
+#include "acelite_config.h"
+#include "js_debugger_config.h"
 
 namespace OHOS {
 namespace ACELite {

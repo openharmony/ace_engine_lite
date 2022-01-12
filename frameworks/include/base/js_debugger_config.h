@@ -15,10 +15,10 @@
 
 #ifndef OHOS_ACELITE_JS_DEBUGGER_CONFIG_H
 #define OHOS_ACELITE_JS_DEBUGGER_CONFIG_H
-#include "js_config.h"
-#include "memory_heap.h"
 #include <cstdint>
 #include <cstdio>
+#include "js_config.h"
+#include "memory_heap.h"
 
 /**
  * For now DEBUGGER is only supported in Simulator

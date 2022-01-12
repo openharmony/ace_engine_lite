@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 #include "js_debugger_config.h"
+#include <cstring>
 #include "ace_log.h"
 #include "debugger.h"
 #include "handler.h"
 #include "jerryscript-port-default.h"
 #include "jerryscript-port.h"
 #include "js_fwk_common.h"
-#include <cstring>
 
 namespace OHOS {
 namespace ACELite {

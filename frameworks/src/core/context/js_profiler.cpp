@@ -22,9 +22,9 @@
 #include "js_fwk_common.h"
 #include "key_parser.h"
 #if (FEATURE_ACELITE_MC_JS_PROFILER == 1)
+#include <fcntl.h>
 #include "los_tick.h"
 #include "unistd.h"
-#include <fcntl.h>
 
 #elif (FEATURE_ACELITE_JS_PROFILER == 1)
 #include <sys/time.h>
