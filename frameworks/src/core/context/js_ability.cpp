@@ -170,9 +170,9 @@ void JSAbility::TransferToDestroy()
 #endif
     HILOG_INFO(HILOG_MODULE_ACE, "LIFECYCLE: JS Ability is exiting");
     ACE_EVENT_PRINT(MT_ACE_FWK_DESTROYING, 0);
-    RootView::GetInstance()->RemoveUITask();
     JSAbilityImpl *jsAbilityImpl = CastAbilityImpl(jsAbilityImpl_);
     jsAbilityImpl->CleanUp();
+    RootView::GetInstance()->RemoveUITask();
     // Reset render flag or low layer task mutex in case we are during the rendering process,
     // this situation might happen if the destroy function is called outside of JS thread, such as AMS.
     ProductAdapter::UpdateRenderTickAcceptable(false);
