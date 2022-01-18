@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 #include "profiler_module.h"
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
 namespace OHOS {
 namespace ACELite {
 /**
@@ -33,10 +33,10 @@ void ProfilerModule::Init()
 
 jerry_value_t ProfilerModule::StartTracing(const jerry_value_t func,
                                            const jerry_value_t context,
-                                           const jerry_value_t* args,
+                                           const jerry_value_t *args,
                                            const jerry_length_t argsNum)
 {
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
     if ((args == nullptr) || (argsNum < 1)) {
         return UNDEFINED;
     }
@@ -61,10 +61,10 @@ jerry_value_t ProfilerModule::StartTracing(const jerry_value_t func,
 
 jerry_value_t ProfilerModule::StopTracing(const jerry_value_t func,
                                           const jerry_value_t context,
-                                          const jerry_value_t* args,
+                                          const jerry_value_t *args,
                                           const jerry_length_t argsNum)
 {
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
     STOP_TRACING();
 #endif
     return UNDEFINED;

@@ -20,20 +20,22 @@
 #include "keys.h"
 #include "key_parser.h"
 #include "string_util.h"
+
 namespace OHOS {
 namespace ACELite {
 using namespace I18N;
 jerry_object_native_info_t DateTimeFormatModule::GC_CALLBACK = {.free_cb = DateTimeFormatModule::DeleteDateFormat};
 
-DateTimeFormatModule::DateTimeFormatModule(): dateFormat_(nullptr),
-    info_(nullptr),
-    timePattern_(I18N::AvailableDateTimeFormatPattern::SHORT),
-    datePattern_(I18N::AvailableDateTimeFormatPattern::SHORT),
-    weekStyle_(StyleState::UNKNOWN),
-    monthStyle_(StyleState::UNKNOWN),
-    numArray_(nullptr),
-    isSetTime_(false),
-    isSetDate_(false)
+DateTimeFormatModule::DateTimeFormatModule()
+    : dateFormat_(nullptr),
+      info_(nullptr),
+      timePattern_(I18N::AvailableDateTimeFormatPattern::SHORT),
+      datePattern_(I18N::AvailableDateTimeFormatPattern::SHORT),
+      weekStyle_(StyleState::UNKNOWN),
+      monthStyle_(StyleState::UNKNOWN),
+      numArray_(nullptr),
+      isSetTime_(false),
+      isSetDate_(false)
 {
     if (memset_s(digitArray_, TIME_NUMBER_LEN, 0, TIME_NUMBER_LEN) != EOK) {
         HILOG_ERROR(HILOG_MODULE_ACE, "init digit array failed");
@@ -103,13 +105,13 @@ jerry_value_t DateTimeFormatModule::CreateDateTimeFormat(const jerry_value_t fun
                                                          const jerry_length_t argsNum)
 {
     if (!jerry_value_is_constructor(func)) {
-        return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>
-                ("use new to create number format"));
+        return jerry_create_error(JERRY_ERROR_EVAL,
+                                  reinterpret_cast<const jerry_char_t *>("use new to create number format"));
     }
     DateTimeFormatModule *dateModel = new DateTimeFormatModule();
     if (dateModel == nullptr) {
-        return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>
-                ("create date format model failed"));
+        return jerry_create_error(JERRY_ERROR_EVAL,
+                                  reinterpret_cast<const jerry_char_t *>("create date format model failed"));
     }
     char *value = nullptr;
     if (argsNum >= 1) {
@@ -121,15 +123,15 @@ jerry_value_t DateTimeFormatModule::CreateDateTimeFormat(const jerry_value_t fun
         HILOG_ERROR(HILOG_MODULE_ACE, "create LocaleInfo failed");
         delete dateModel;
         dateModel = nullptr;
-        return jerry_create_error(JERRY_ERROR_COMMON, reinterpret_cast<const jerry_char_t*>("lack of memory"));
+        return jerry_create_error(JERRY_ERROR_COMMON, reinterpret_cast<const jerry_char_t *>("lack of memory"));
     }
     // set the default format pattern year(numeric)-month(numeric)-day(numeric)
     dateModel->dateFormat_ = new DateTimeFormat(AvailableDateTimeFormatPattern::SHORT, *dateModel->info_);
     if ((dateModel->dateFormat_ == nullptr) || (!dateModel->InitNumArray(*dateModel->info_))) {
         delete dateModel;
         dateModel = nullptr;
-        return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>
-                ("create dateTimeFormat failed"));
+        return jerry_create_error(JERRY_ERROR_EVAL,
+                                  reinterpret_cast<const jerry_char_t *>("create dateTimeFormat failed"));
     }
     if (argsNum > 1) {
         // deal the year month day style
@@ -141,8 +143,9 @@ jerry_value_t DateTimeFormatModule::CreateDateTimeFormat(const jerry_value_t fun
             delete dateModel;
             dateModel = nullptr;
             const char *result = (dateRes != nullptr) ? dateRes : timeRes;
-            return (result == nullptr) ? jerry_create_null() :
-                    jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>(result));
+            return (result == nullptr)
+                       ? jerry_create_null()
+                       : jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>(result));
         }
     }
     jerry_set_object_native_pointer(context, dateModel, &GC_CALLBACK);
@@ -164,7 +167,7 @@ jerry_value_t DateTimeFormatModule::Format(const jerry_value_t func,
                                            const jerry_length_t argsNum)
 {
     if (!jerry_is_feature_enabled(JERRY_FEATURE_DATE)) {
-        return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t*>("the date is not enabled"));
+        return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>("the date is not enabled"));
     }
     if (argsNum < 1) {
         return jerry_create_error(JERRY_ERROR_EVAL, reinterpret_cast<const jerry_char_t *>("date is invalid"));
@@ -176,7 +179,7 @@ jerry_value_t DateTimeFormatModule::Format(const jerry_value_t func,
         return UNDEFINED;
     }
     const uint16_t msToSec = 1000;
-    time_t dateTime = formatter->GetTimeVal(args[0], "getTime") / msToSec;
+    time_t dateTime = static_cast<time_t>(formatter->GetTimeVal(args[0], "getTime") / msToSec);
     formatter->ConvertLocalToGMT(dateTime);
     if (formatter->isSetDate_ || formatter->isSetTime_) {
         uint8_t maxSize = 128;
@@ -199,7 +202,7 @@ jerry_value_t DateTimeFormatModule::Format(const jerry_value_t func,
     }
     // the style group is not support, format the lonely support style week or month
     if (formatter->weekStyle_ != StyleState::UNKNOWN) {
-        int8_t weekIndex = formatter->GetTimeVal(args[0], "getDay");
+        int8_t weekIndex = static_cast<int8_t>(formatter->GetTimeVal(args[0], "getDay"));
         DateTimeDataType type = (formatter->weekStyle_ == StyleState::LONG) ? FORMAT_WIDE : FORMAT_ABBR;
         std::string weekName = formatter->dateFormat_->GetWeekName(weekIndex, type);
         return jerry_create_string(reinterpret_cast<const jerry_char_t *>(weekName.c_str()));
@@ -218,7 +221,7 @@ jerry_value_t DateTimeFormatModule::Format(const jerry_value_t func,
 
 jerry_value_t DateTimeFormatModule::GetMonthVal(jerry_value_t time) const
 {
-    int month = GetTimeVal(time, "getMonth");
+    int month = static_cast<int>(GetTimeVal(time, "getMonth"));
     // format the long style ans short month style
     if ((monthStyle_ == StyleState::LONG) || (monthStyle_ == StyleState::SHORT)) {
         DateTimeDataType type = (monthStyle_ == StyleState::LONG) ? FORMAT_WIDE : FORMAT_ABBR;
@@ -294,7 +297,7 @@ void DateTimeFormatModule::FormatDate(time_t time, char *res, const uint8_t resS
         }
         isMonthFirst = (GetNumberEnd(check.c_str(), 0) < 0);
     }
-    const uint8_t dayStyleIndex = 2; // the day number style index
+    const uint8_t dayStyleIndex = 2;   // the day number style index
     const uint8_t monthStyleIndex = 1; // the month style index
     uint8_t firstFormatIndex = dayStyleIndex;
     int16_t formatIndex = 0;
@@ -310,8 +313,8 @@ void DateTimeFormatModule::FormatDate(time_t time, char *res, const uint8_t resS
             HILOG_ERROR(HILOG_MODULE_ACE, "format the first number in date str failed");
             return;
         }
-        formatIndex = FormatDigit(dateStr + formatIndex, res, resSize,
-                                  start, digitArray_[secondFormatIndex]) + formatIndex;
+        formatIndex =
+            FormatDigit(dateStr + formatIndex, res, resSize, start, digitArray_[secondFormatIndex]) + formatIndex;
     } else {
         // format the day digit or year digit
         formatIndex = FormatDigit(dateStr, res, resSize, start, digitArray_[dayStyleIndex]);
@@ -670,8 +673,7 @@ bool DateTimeFormatModule::SetDatePattern(StyleState weekdayStyle,
                                           StyleState dayStyle)
 {
     // the pattern support is (weekday)-year-month-day
-    if ((yearStyle == StyleState::UNKNOWN) ||
-        (dayStyle == StyleState::UNKNOWN) ||
+    if ((yearStyle == StyleState::UNKNOWN) || (dayStyle == StyleState::UNKNOWN) ||
         (monthStyle == StyleState::UNKNOWN)) {
         return false;
     }
@@ -691,17 +693,14 @@ bool DateTimeFormatModule::SetDatePattern(StyleState weekdayStyle,
         }
         default: {
             result = SetMonthPattern(monthStyle, AvailableDateTimeFormatPattern::YEAR_WIDE_MONTH_DAY,
-                                     AvailableDateTimeFormatPattern::MEDIUM,
-                                     AvailableDateTimeFormatPattern::SHORT);
+                                     AvailableDateTimeFormatPattern::MEDIUM, AvailableDateTimeFormatPattern::SHORT);
             break;
         }
     }
     return result;
 }
 
-bool DateTimeFormatModule::GetTimePattern(StyleState hourStyle,
-                                          StyleState minuteStyle,
-                                          StyleState secondStyle)
+bool DateTimeFormatModule::GetTimePattern(StyleState hourStyle, StyleState minuteStyle, StyleState secondStyle)
 {
     // the support pattern is hour-minute-(second)
     if ((hourStyle == StyleState::UNKNOWN) || (minuteStyle == StyleState::UNKNOWN)) {
@@ -710,18 +709,18 @@ bool DateTimeFormatModule::GetTimePattern(StyleState hourStyle,
     bool result = true;
     switch (hourStyle) {
         case StyleState::HOUR12: {
-            timePattern_ = (secondStyle == StyleState::UNKNOWN) ? AvailableDateTimeFormatPattern::HOUR12_MINUTE :
-                            AvailableDateTimeFormatPattern::HOUR12_MINUTE_SECOND;
+            timePattern_ = (secondStyle == StyleState::UNKNOWN) ? AvailableDateTimeFormatPattern::HOUR12_MINUTE
+                                                                : AvailableDateTimeFormatPattern::HOUR12_MINUTE_SECOND;
             break;
         }
         case StyleState::HOUR24: {
-            timePattern_ = (secondStyle == StyleState::UNKNOWN) ? AvailableDateTimeFormatPattern::HOUR24_MINUTE :
-                            AvailableDateTimeFormatPattern::HOUR24_MINUTE_SECOND;
+            timePattern_ = (secondStyle == StyleState::UNKNOWN) ? AvailableDateTimeFormatPattern::HOUR24_MINUTE
+                                                                : AvailableDateTimeFormatPattern::HOUR24_MINUTE_SECOND;
             break;
         }
         case StyleState::HOUR: {
-            timePattern_ = (secondStyle == StyleState::UNKNOWN) ? AvailableDateTimeFormatPattern::HOUR_MINUTE :
-                            HOUR_MINUTE_SECOND;
+            timePattern_ =
+                (secondStyle == StyleState::UNKNOWN) ? AvailableDateTimeFormatPattern::HOUR_MINUTE : HOUR_MINUTE_SECOND;
             break;
         }
         default: {
@@ -731,6 +730,6 @@ bool DateTimeFormatModule::GetTimePattern(StyleState hourStyle,
     }
     return result;
 }
-}
-}
+} // namespace ACELite
+} // namespace OHOS
 #endif

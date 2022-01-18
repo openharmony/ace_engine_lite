@@ -31,7 +31,7 @@
 #include "js_app_context.h"
 #include "js_app_environment.h"
 #include "js_profiler.h"
-#if ENABLED(CONSOLE_LOG_OUTPUT)
+#if IS_ENABLED(CONSOLE_LOG_OUTPUT)
 #include "presets/console_module.h"
 #endif
 #include "presets/console_log_impl.h"
@@ -256,7 +256,7 @@ void PrintErrorMessage(const jerry_value_t errorValue)
     DfxAssist dfxAssist;
     dfxAssist.DumpErrorCode(errorValue);
     dfxAssist.DumpErrorMessage(errorValue);
-#if ENABLED(ENGINE_DEBUGGER)
+#if IS_ENABLED(ENGINE_DEBUGGER)
     FlushOutput();
 #endif
 }
@@ -439,8 +439,8 @@ char *RelocateFilePath(const char *appRootPath, const char *subPath, const char 
 {
     size_t appRootPathLength = 0;
     size_t fileNameLength = 0;
-    if ((appRootPath == nullptr) || ((appRootPathLength = strlen(appRootPath)) == 0) ||
-        (fileName == nullptr) || ((fileNameLength = strlen(fileName)) == 0)) {
+    if ((appRootPath == nullptr) || ((appRootPathLength = strlen(appRootPath)) == 0) || (fileName == nullptr) ||
+        ((fileNameLength = strlen(fileName)) == 0)) {
         HILOG_ERROR(HILOG_MODULE_ACE, "input path or fileName is invalid");
         return nullptr;
     }
@@ -976,15 +976,13 @@ bool ParseHexColor(const char * const source, uint32_t &color, uint8_t &alpha)
     // Parse HEX color like #ABC
     if (length == LENGTH_RGB) {
         // #ABC equals to #AABBCC
-        char buffer[LENGTH_RRGGBB + 1] = {
-            source[IDX_RGB_RED],
-            source[IDX_RGB_RED],
-            source[IDX_RGB_GREEN],
-            source[IDX_RGB_GREEN],
-            source[IDX_RGB_BLUE],
-            source[IDX_RGB_BLUE],
-            0
-        };
+        char buffer[LENGTH_RRGGBB + 1] = {source[IDX_RGB_RED],
+                                          source[IDX_RGB_RED],
+                                          source[IDX_RGB_GREEN],
+                                          source[IDX_RGB_GREEN],
+                                          source[IDX_RGB_BLUE],
+                                          source[IDX_RGB_BLUE],
+                                          0};
         color = strtol(buffer, nullptr, HEX);
         alpha = ALPHA_MAX;
         return true;

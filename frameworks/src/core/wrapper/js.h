@@ -84,7 +84,7 @@ public:
 
 class JSNumber final : public MemoryHeap {
 public:
-    static JSValue Create(uint32_t number);
+    static JSValue Create(double number);
     static bool Is(JSValue target);
     static double Value(JSValue value);
 };

@@ -199,8 +199,8 @@ bool StateMachine::BindUri(jerry_value_t &jsRes)
         ace_free(uri_);
         uri_ = nullptr;
         HILOG_ERROR(HILOG_MODULE_ACE, "statemachine init failed as uri is empty.");
-        jsRes = jerry_create_error(JERRY_ERROR_URI,
-                                   reinterpret_cast<const jerry_char_t *>("uri value can't be empty."));
+        jsRes =
+            jerry_create_error(JERRY_ERROR_URI, reinterpret_cast<const jerry_char_t *>("uri value can't be empty."));
         return false;
     }
     int result = GenerateJsPagePath(uri_);
@@ -324,7 +324,7 @@ static void ForceGC(void *data)
 {
     static_cast<void>(data);
     jerry_gc(jerry_gc_mode_t::JERRY_GC_PRESSURE_HIGH);
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
     if (JSProfiler::GetInstance()->IsEnabled()) {
         // dump the JS heap status
         JSHeapStatus heapStatus;
@@ -340,7 +340,7 @@ void StateMachine::RenderPage()
 {
     START_TRACING(RENDER);
     // if not in init state, reset all watchers of previous page at first
-    LazyLoadManager* lazy = const_cast<LazyLoadManager *>(appContext_->GetLazyLoadManager());
+    LazyLoadManager *lazy = const_cast<LazyLoadManager *>(appContext_->GetLazyLoadManager());
     if (lazy != nullptr) {
         lazy->ResetWatchers();
     }

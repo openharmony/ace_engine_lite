@@ -29,7 +29,7 @@ Debugger &Debugger::GetInstance()
     return instance;
 }
 
-#if ENABLED(ENGINE_DEBUGGER)
+#if IS_ENABLED(ENGINE_DEBUGGER)
 bool Debugger::IsDebuggerEnabled()
 {
     return debuggerConfig_.startDebuggerServer;
@@ -120,7 +120,7 @@ void Debugger::ReleaseJSContext()
     engineContext_ = nullptr;
 #endif // JS_ENGINE_EXTERNAL_CONTEXT
 }
-#else // ENABLED(ENGINE_DEBUGGER)
+#else  // ENABLED(ENGINE_DEBUGGER)
 bool Debugger::IsDebuggerEnabled()
 {
     return true;
@@ -131,30 +131,20 @@ void Debugger::ConfigEngineDebugger(DebuggerConfig &config)
     UNUSED(config);
 }
 
-void Debugger::StartDebugger()
-{
-}
+void Debugger::StartDebugger() {}
 
-void Debugger::TearDownDebugger()
-{
-}
+void Debugger::TearDownDebugger() {}
 
 void Debugger::Output(const char * const str)
 {
     UNUSED(str);
 }
 
-void Debugger::FlushOutput()
-{
-}
+void Debugger::FlushOutput() {}
 
-void Debugger::SetupJSContext()
-{
-}
+void Debugger::SetupJSContext() {}
 
-void Debugger::ReleaseJSContext()
-{
-}
+void Debugger::ReleaseJSContext() {}
 #endif // ENABLED(ENGINE_DEBUGGER)
 } // namespace ACELite
 } // namespace OHOS
