@@ -274,7 +274,7 @@ bool JSUndefined::Is(JSValue value)
     return jerry_value_is_undefined(value);
 }
 
-JSValue JSNumber::Create(uint32_t number)
+JSValue JSNumber::Create(double number)
 {
     return jerry_create_number(number);
 }

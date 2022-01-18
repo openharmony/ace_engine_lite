@@ -35,7 +35,7 @@ void TransitionImpl::Init()
     }
 }
 
-void TransitionImpl::Callback(UIView* view)
+void TransitionImpl::Callback(UIView *view)
 {
     (void)(view);
     if (animator_ == nullptr) {
@@ -154,7 +154,7 @@ void TransitionImpl::InitTransitionParamsEasing()
     }
 }
 
-void TransitionImpl::GetRGB(const uint32_t color, uint8_t& r, uint8_t& g, uint8_t& b) const
+void TransitionImpl::GetRGB(const uint32_t color, uint8_t &r, uint8_t &g, uint8_t &b) const
 {
     r = uint8_t((color & TEXT_RED_COLOR_MASK) >> RED_COLOR_START_BIT);
     g = uint8_t((color & TEXT_GREEN_COLOR_MASK) >> GREEN_COLOR_START_BIT);
@@ -278,7 +278,7 @@ void TransitionImpl::PerformTransitionBgColorLinear(int32_t elapsedTime)
 void TransitionImpl::PerformTransition(int16_t from,
                                        int16_t to,
                                        TransitionType transitionType,
-                                       int16_t& updateAttrValue,
+                                       int16_t &updateAttrValue,
                                        int32_t elapsedTime)
 {
     if (timeArrivaled_) {
@@ -313,10 +313,10 @@ void TransitionImpl::PerformTransition(int16_t from,
             break;
         case TransitionType::OPACITY: {
             double rate = (double)updateAttrValue / ALPHA_MAX;
-            view_->SetStyle(STYLE_BACKGROUND_OPA, viewStatus_.rectOpacity * rate);
-            view_->SetStyle(STYLE_IMAGE_OPA, viewStatus_.imageOpacity * rate);
-            view_->SetStyle(STYLE_LINE_OPA, viewStatus_.lineOpacity * rate);
-            view_->SetStyle(STYLE_TEXT_OPA, viewStatus_.textOpacity * rate);
+            view_->SetStyle(STYLE_BACKGROUND_OPA, static_cast<int64_t>(viewStatus_.rectOpacity * rate));
+            view_->SetStyle(STYLE_IMAGE_OPA, static_cast<int64_t>(viewStatus_.imageOpacity * rate));
+            view_->SetStyle(STYLE_LINE_OPA, static_cast<int64_t>(viewStatus_.lineOpacity * rate));
+            view_->SetStyle(STYLE_TEXT_OPA, static_cast<int64_t>(viewStatus_.textOpacity * rate));
             break;
         }
         default:
@@ -327,7 +327,7 @@ void TransitionImpl::PerformTransition(int16_t from,
     invalidatedArea.Join(invalidatedArea, view_->GetRect());
     view_->InvalidateRect(invalidatedArea);
 }
-int8_t TransitionImpl::GetNumIterations(const char* iterations)
+int8_t TransitionImpl::GetNumIterations(const char *iterations)
 {
     int8_t min = 1;
     int8_t max = 127;
@@ -345,7 +345,7 @@ int8_t TransitionImpl::GetNumIterations(const char* iterations)
     return (int8_t)value;
 }
 
-bool TransitionImpl::IsEndWith(const char* src, const char* end)
+bool TransitionImpl::IsEndWith(const char *src, const char *end)
 {
     if ((src == nullptr) || (end == nullptr)) {
         return false;
@@ -385,9 +385,9 @@ void TransitionImpl::ResetRepeatParam()
     if (animator_ != nullptr) {
         animator_->SetRunTime(0); // reset animation executing time
     }
-    timeArrivaled_ = false;   // reset timeArrivaled flag
-    bgcolorTimeSrc_ = 0;      // reset bg-color last update time
-    count_ = 1;               // reset bg-color update number of times
+    timeArrivaled_ = false; // reset timeArrivaled flag
+    bgcolorTimeSrc_ = 0;    // reset bg-color last update time
+    count_ = 1;             // reset bg-color update number of times
 }
 
 void TransitionImpl::RecordViewStatus()
@@ -410,7 +410,7 @@ void TransitionImpl::RecoveryViewStatus(Rect invalidatedAreaBefore) const
     view_->SetY(viewStatus_.y);
     view_->SetHeight(viewStatus_.height);
     view_->SetWidth(viewStatus_.width);
-    TransformMap& transMap = view_->GetTransformMap();
+    TransformMap &transMap = view_->GetTransformMap();
     Polygon polygon(Rect(0, 0, 0, 0));
     transMap.SetPolygon(polygon);
     view_->SetStyle(STYLE_BACKGROUND_COLOR, viewStatus_.background_color.full);

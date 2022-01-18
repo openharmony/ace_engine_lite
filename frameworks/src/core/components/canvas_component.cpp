@@ -51,13 +51,11 @@ const char * const CanvasComponent::FUNC_CLOSEPATH = "closePath";
 const char * const CanvasComponent::FUNC_STROKE = "stroke";
 
 // create canvas draw attribute-callback mapping
-const AttrMap CanvasComponent::attrMap_[] = {
-    {ATTR_FILLSTYLE, FillStyleSetter, FillStyleGetter},
-    {ATTR_STROKESTYLE, StrokeStyleSetter, StrokeStyleGetter},
-    {ATTR_LINEWIDTH, LineWidthSetter, LineWidthGetter},
-    {ATTR_FONT, FontSetter, FontGetter},
-    {ATTR_TEXTALIGN, TextAlignSetter, TextAlignGetter}
-};
+const AttrMap CanvasComponent::attrMap_[] = {{ATTR_FILLSTYLE, FillStyleSetter, FillStyleGetter},
+                                             {ATTR_STROKESTYLE, StrokeStyleSetter, StrokeStyleGetter},
+                                             {ATTR_LINEWIDTH, LineWidthSetter, LineWidthGetter},
+                                             {ATTR_FONT, FontSetter, FontGetter},
+                                             {ATTR_TEXTALIGN, TextAlignSetter, TextAlignGetter}};
 
 // create canvas draw method-callback mapping
 const MethodMap CanvasComponent::methodMap_[] = {
@@ -345,8 +343,7 @@ jerry_value_t CanvasComponent::FontSetter(const jerry_value_t func,
     (void)func;
     if (argsNum != ArgsCount::NUM_1) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: font value error!");
-        return jerry_create_error(JERRY_ERROR_TYPE,
-                                  reinterpret_cast<const jerry_char_t *>("font value error"));
+        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("font value error"));
     }
 
     CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
@@ -439,8 +436,7 @@ jerry_value_t CanvasComponent::TextAlignSetter(const jerry_value_t func,
     (void)func;
     if (argsNum != ArgsCount::NUM_1) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: textAlign value error!");
-        return jerry_create_error(JERRY_ERROR_TYPE,
-                                  reinterpret_cast<const jerry_char_t *>("textAlign value error"));
+        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("textAlign value error"));
     }
 
     CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
@@ -891,8 +887,8 @@ bool CanvasComponent::FormatArcAngle(double sAngle,
         return false;
     }
 
-    startAngle = DEGREES_180 * sAngle / UI_PI;
-    endAngle = DEGREES_180 * eAngle / UI_PI;
+    startAngle = static_cast<uint32_t>(DEGREES_180 * sAngle / UI_PI);
+    endAngle = static_cast<uint32_t>(DEGREES_180 * eAngle / UI_PI);
 
     if (!counterClockwise) {
         // reset end-angle degrees when (endAngle - startAngle) > 360
