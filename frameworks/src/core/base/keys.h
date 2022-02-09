@@ -143,7 +143,7 @@ enum {
     KEYWORD(ITEM_SELECTED, itemselected) // scroll item selected event listener
     KEYWORD(ITERATION, iteration) // image-animator attribute
     KEYWORD(JUSTIFY_CONTENT, justifyContent) // layout style
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
     KEYWORD(KEY, key) // onkey event
 #endif
     KEYWORD(LABELS, labels) // chart labels
@@ -212,9 +212,11 @@ enum {
     KEYWORD(ROW, row) // layout style
     KEYWORD(ROW_REVERSE, row-reverse) // layout style
     KEYWORD(SCROLLAMOUNT, scrollamount) // marquee scroll speed
+    KEYWORD(SCROLLBOTTOM, scrollbottom) // scroll bottom event listener
     KEYWORD(SCROLLDELAY, scrolldelay) // marquee scroll delay
     KEYWORD(SCROLLEND, scrollend) // scroll end event listener
     KEYWORD(SCROLLSTART, scrollstart) // scroll start event listener
+    KEYWORD(SCROLLTOP, scrolltop) // scroll top event listener
 #ifdef FEATURE_COMPONENT_ANALOG_CLOCK
     KEYWORD(SEC, sec) // analog-clock second
 #endif // FEATURE_COMPONENT_ANALOG_CLOCK
@@ -264,11 +266,11 @@ enum {
 #endif // FEATURE_COMPONENT_VIDEO
     KEYWORD(TOP, top)
     KEYWORD(TOTAL_ANGLE, total-angle) // circle progress style
-#ifdef JS_TOUCH_EVENT_SUPPORT
+    KEYWORD(TOUCHSTART, touchStart) // touch event listener
+    KEYWORD(TOUCHMOVE, touchmove) // touchmove event listener
+    KEYWORD(TOUCHEND, touchEnd) // touchend event listener
+#ifdef JS_EXTRA_EVENT_SUPPORT
     KEYWORD(TOUCHCANCEL, touchcancel) // ontouchcancel event
-    KEYWORD(TOUCHEND, touchend) // ontouchend event
-    KEYWORD(TOUCHMOVE, touchmove) // ontouchmove event
-    KEYWORD(TOUCHSTART, touchstart) // ontouchstart event
 #endif
     KEYWORD(TRANSLATE_X, translateX) // animation transform x
     KEYWORD(TRANSLATE_Y, translateY) // animation transform y
