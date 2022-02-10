@@ -33,6 +33,7 @@ constexpr char ATTR_DIRECTION_DOWN[] = "down";
 const char *EventUtil::EVENT_CLICK = "click";
 const char *EventUtil::EVENT_LONGPRESS = "longpress";
 const char *EventUtil::EVENT_SWIPE = "swipe";
+const char *EventUtil::EVENT_TOUCH = "touch";
 
 void CallbackExecutor(void *data)
 {
@@ -107,6 +108,14 @@ JSValue EventUtil::CreateSwipeEvent(UIView &view, const DragEvent &event)
             break;
         }
     }
+    return arg;
+}
+JSValue EventUtil::CreateTouchEvent(UIView &view, const DragEvent &event)
+{
+    // create a JAVASCRIPT plain object that is used as the input parameter of
+    // the event callback function.
+    JSValue arg = EventUtil::CreateEvent(EVENT_TOUCH, view, event);
+
     return arg;
 }
 void EventUtil::InvokeCallback(JSValue vm, JSValue callback, JSValue event, const void *context)

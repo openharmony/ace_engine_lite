@@ -103,6 +103,12 @@ bool ListComponent::RegisterPrivateEventListener(uint16_t eventTypeId, JSValue f
         case K_SCROLLEND:
             listEventListener_.SetBindScrollEndFuncName(funcValue);
             break;
+        case K_SCROLLTOP:
+            listEventListener_.SetBindScrollTopFuncName(funcValue);
+            break;
+        case K_SCROLLBOTTOM:
+            listEventListener_.SetBindScrollBottomFuncName(funcValue);
+            break;
         default:
             return false;
     }

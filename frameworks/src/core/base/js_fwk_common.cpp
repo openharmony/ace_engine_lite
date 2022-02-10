@@ -313,7 +313,7 @@ jerry_value_t CallJSWatcher(jerry_value_t arg1,
     return watcher;
 }
 
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
 bool CallBaseEvent(const jerry_value_t func, const Event &event, const uint16_t id)
 {
     if (!jerry_value_is_function(func)) {
