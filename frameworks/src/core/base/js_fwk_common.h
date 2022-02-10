@@ -19,7 +19,7 @@
 #include "handler.h"
 #include "js_config.h"
 #include "non_copyable.h"
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
 #include "root_view.h"
 #endif
 #include "graphic_config.h"
@@ -267,7 +267,7 @@ jerry_value_t ListForWatcherCallbackFunc(const jerry_value_t func,
                                          const jerry_value_t context,
                                          const jerry_value_t *args,
                                          const jerry_length_t argsLength);
-#ifdef JS_TOUCH_EVENT_SUPPORT
+#ifdef JS_EXTRA_EVENT_SUPPORT
 jerry_value_t *ConvertBaseEventInfo(const Event &event, const uint16_t id);
 bool CallBaseEvent(const jerry_value_t func, const Event &event, const uint16_t id);
 jerry_value_t *ConvertDragEventInfo(const DragEvent &event, const uint16_t id);

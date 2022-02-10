@@ -535,10 +535,10 @@ private:
     void SetClickEventListener(UIView& view, const jerry_value_t eventFunc, bool isStopPropagation);
     void SetLongPressEventListener(UIView& view, const jerry_value_t eventFunc, bool isStopPropagation);
     void SetSwipeEventListener(UIView& view, jerry_value_t eventFunc, bool isStopPropagation);
-#ifdef JS_TOUCH_EVENT_SUPPORT
-    void SetTouchStartEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation);
-    void SetTouchMoveEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation);
-    void SetTouchEndEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation);
+    void SetTouchStartEventListener(UIView& view, jerry_value_t eventFunc, bool isStopPropagation);
+    void SetTouchMoveEventListener(UIView& view, jerry_value_t eventFunc, bool isStopPropagation);
+    void SetTouchEndEventListener(UIView& view, jerry_value_t eventFunc, bool isStopPropagation);
+#ifdef JS_EXTRA_EVENT_SUPPORT
     void SetTouchCancelEventListener(UIView &view, jerry_value_t eventFunc, bool isStopPropagation);
     void SetKeyBoardEventListener(jerry_value_t eventFunc, bool isStopPropagation);
 #endif
@@ -613,12 +613,9 @@ private:
     jerry_value_t children_;
     ViewOnClickListener *onClickListener_;
     ViewOnLongPressListener *onLongPressListener_;
-    ViewOnSwipeListener *onSwipeListener_;
-#ifdef JS_TOUCH_EVENT_SUPPORT
-    ViewOnTouchStartListener *onTouchStartListener_;
-    ViewOnTouchMoveListener *onTouchMoveListener_;
+    ViewOnTouchListener *onTouchListener_;
+#ifdef JS_EXTRA_EVENT_SUPPORT
     ViewOnTouchCancelListener *onTouchCancelListener_;
-    ViewOnTouchEndListener *onTouchEndListener_;
     KeyBoardEventListener *keyBoardEventListener_;
 #endif
     /**
