@@ -76,6 +76,10 @@ extern void InitLocaleModule(JSIValue exports);
 extern void InitCapabilityModule(JSIValue exports);
 #endif
 
+#if (ENABLE_MODULE_DM_LITE == 1)
+extern void InitDeviceManagerModule(JSIValue exports);
+#endif
+
 // Config information for built-in JS modules of OHOS platform
 const Module OHOS_MODULES[] = {
 #if (ENABLE_MODULE_REQUIRE_TEST == 1)
@@ -124,6 +128,9 @@ const Module OHOS_MODULES[] = {
 #endif
 #if (FEATURE_ACELITE_SYSTEM_CAPABILITY == 1)
     {"capability", InitCapabilityModule},
+#endif
+#if (ENABLE_MODULE_DM_LITE == 1)
+    {"devicemanager", InitDeviceManagerModule},
 #endif
 };
 } // namespace ACELite
