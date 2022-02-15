@@ -24,12 +24,20 @@
 
 namespace OHOS {
 namespace ACELite {
+struct ImageAttrMap {
+    ACE_DISALLOW_COPY_AND_MOVE(ImageAttrMap);
+    const char *attrName;
+    jerry_external_handler_t setterName;
+    jerry_external_handler_t getterName;
+};
+
 class ImageComponent final : public Component {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(ImageComponent);
     ImageComponent() = delete;
     ImageComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager);
     ~ImageComponent() override {}
+    const char *GetSrc();
 
 protected:
     bool CreateNativeViews() override;

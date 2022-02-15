@@ -24,6 +24,19 @@ DEFINES += "ENABLE_SHAPING=0" \
     "ENABLE_BITMAP_FONT=0" \
     "ENABLE_MULTI_FONT=0" \
     "ENABLE_STATIC_FONT=0" \
+    "GRAPHIC_ENABLE_LINECAP_FLAG=1" \
+    "GRAPHIC_ENABLE_LINEJOIN_FLAG=1" \
+    "GRAPHIC_ENABLE_ELLIPSE_FLAG=1" \
+    "GRAPHIC_ENABLE_BEZIER_ARC_FLAG=1" \
+    "GRAPHIC_ENABLE_ARC_FLAG=1" \
+    "GRAPHIC_ENABLE_ROUNDEDRECT_FLAG=1" \
+    "GRAPHIC_ENABLE_DASH_GENERATE_FLAG=1" \
+    "GRAPHIC_ENABLE_BLUR_EFFECT_FLAG=1" \
+    "GRAPHIC_ENABLE_SHADOW_EFFECT_FLAG=1" \
+    "GRAPHIC_ENABLE_GRADIENT_FILL_FLAG=1" \
+    "GRAPHIC_ENABLE_PATTERN_FILL_FLAG=1" \
+    "GRAPHIC_ENABLE_DRAW_IMAGE_FLAG=1" \
+    "GRAPHIC_ENABLE_DRAW_TEXT_FLAG=1" \
     "DEFAULT_ANIMATION=1"
 
 eval(is_debug == release) {
@@ -123,6 +136,7 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/modules/presets/intl_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/localization_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/number_format_module.cpp \
+        $${ACELITE_CORE_PATH}/modules/presets/image_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/preset_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/profiler_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/render_module.cpp \
@@ -174,6 +188,7 @@ INCLUDEPATH += \
             $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/font \
             $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/layout \
             $${ROOT_PATH}/foundation/graphic/ui/interfaces/kits/themes \
+            $${ROOT_PATH}/foundation/graphic/ui/frameworks \
             $${ROOT_PATH}/foundation/graphic/utils/frameworks/windows \
             $${ROOT_PATH}/foundation/graphic/utils/interfaces/innerkits \
             $${ROOT_PATH}/foundation/graphic/utils/interfaces/kits \
@@ -223,6 +238,7 @@ INCLUDEPATH += \
             $${ROOT_PATH}/third_party/jerryscript/jerry-ext/include/jerryscript-ext \
             $${ROOT_PATH}//third_party/jerryscript/jerry-port/default/include \
             $${ROOT_PATH}/third_party/cJSON \
+            $${ROOT_PATH}/third_party/giflib \
             $${ROOT_PATH}/utils/native/lite/timer_task/include/ \
             $${ROOT_PATH}/third_party/freetype/include \
             $${ROOT_PATH}/base/global/resmgr_lite/interfaces/innerkits/include \
