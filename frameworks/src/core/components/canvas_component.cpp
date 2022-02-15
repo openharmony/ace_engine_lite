@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,10 @@
 #include "js_fwk_common.h"
 #include "product_adapter.h"
 #include "securec.h"
+#include "jerryscript.h"
+#include "modules/presets/image_module.h"
+#include "image_component.h"
+#include <sstream>
 
 namespace OHOS {
 namespace ACELite {
@@ -29,6 +33,14 @@ const char * const CanvasComponent::DEFAULT_FILLSTYLE = "#000000";
 const char * const CanvasComponent::DEFAULT_STROKESTYLE = "#000000";
 // default text align=left
 const char * const CanvasComponent::DEFAULT_TEXTALIGN = "left";
+// default line lineCap
+const char * const CanvasComponent::DEFAULT_LINECAP = "butt";
+// default line lineJoin
+const char * const CanvasComponent::DEFAULT_LINEJOIN = "miter";
+// default line lineJoin
+const int16_t CanvasComponent::DEFAULT_MITERLIMIT = 10;
+// default lineDashOffset
+const int16_t CanvasComponent::DEFAULT_LINEDASHOFFSET = 0;
 
 // API-attribute
 const char * const CanvasComponent::ATTR_FILLSTYLE = "fillStyle";
@@ -36,9 +48,9 @@ const char * const CanvasComponent::ATTR_STROKESTYLE = "strokeStyle";
 const char * const CanvasComponent::ATTR_LINEWIDTH = "lineWidth";
 const char * const CanvasComponent::ATTR_FONT = "font";
 const char * const CanvasComponent::ATTR_TEXTALIGN = "textAlign";
-
+const char * const CanvasComponent::ATTR_GLOBALALPHA = "globalAlpha";
 // API-method
-const char * const CanvasComponent::FUNC_GETCONTEXT = "getContext";
+const char * const CanvasComponent::FUNC_GETdom = "getDom";
 const char * const CanvasComponent::FUNC_FILLRECT = "fillRect";
 const char * const CanvasComponent::FUNC_STROKERECT = "strokeRect";
 const char * const CanvasComponent::FUNC_FILLTEXT = "fillText";
@@ -49,17 +61,30 @@ const char * const CanvasComponent::FUNC_RECT = "rect";
 const char * const CanvasComponent::FUNC_ARC = "arc";
 const char * const CanvasComponent::FUNC_CLOSEPATH = "closePath";
 const char * const CanvasComponent::FUNC_STROKE = "stroke";
-
+const char * const CanvasComponent::FUNC_FILL = "fill";
+const char * const CanvasComponent::FUNC_SETLINEDASH = "setLineDash";
+const char * const CanvasComponent::FUNC_GETLINEDASH = "getLineDash";
+const char * const CanvasComponent::FUNC_ROTATE = "rotate";
+const char * const CanvasComponent::FUNC_SCALE = "scale";
+const char * const CanvasComponent::FUNC_TRANSLATE = "translate";
+const char * const CanvasComponent::FUNC_TRANFORM = "transform";
+const char * const CanvasComponent::FUNC_SETTRANFORM = "setTransform";
+const char * const CanvasComponent::FUNC_SAVE = "save";
+const char * const CanvasComponent::FUNC_RESTORE = "restore";
+const char * const CanvasComponent::FUNC_DRAWCIRCLE = "drawCircle";
 // create canvas draw attribute-callback mapping
-const AttrMap CanvasComponent::attrMap_[] = {{ATTR_FILLSTYLE, FillStyleSetter, FillStyleGetter},
-                                             {ATTR_STROKESTYLE, StrokeStyleSetter, StrokeStyleGetter},
-                                             {ATTR_LINEWIDTH, LineWidthSetter, LineWidthGetter},
-                                             {ATTR_FONT, FontSetter, FontGetter},
-                                             {ATTR_TEXTALIGN, TextAlignSetter, TextAlignGetter}};
+const AttrMap CanvasComponent::attrMap_[] = {
+    {ATTR_FILLSTYLE, FillStyleSetter, FillStyleGetter},
+    {ATTR_STROKESTYLE, StrokeStyleSetter, StrokeStyleGetter},
+    {ATTR_LINEWIDTH, LineWidthSetter, LineWidthGetter},
+    {ATTR_FONT, FontSetter, FontGetter},
+    {ATTR_TEXTALIGN, TextAlignSetter, TextAlignGetter},
+    {ATTR_GLOBALALPHA, GlobalAlphaSetter, GlobalAlphaGetter}
+};
 
 // create canvas draw method-callback mapping
 const MethodMap CanvasComponent::methodMap_[] = {
-    {FUNC_GETCONTEXT, GetContext},
+    {FUNC_GETdom, GetDom},
     {FUNC_FILLRECT, FillRect},
     {FUNC_STROKERECT, StrokeRect},
     {FUNC_FILLTEXT, FillText},
@@ -69,17 +94,34 @@ const MethodMap CanvasComponent::methodMap_[] = {
     {FUNC_RECT, Rect},
     {FUNC_ARC, Arc},
     {FUNC_CLOSEPATH, ClosePath},
-    {FUNC_STROKE, Stroke}
+    {FUNC_STROKE, Stroke},
+    {FUNC_FILL, Fill},
+    {FUNC_ROTATE, Rotate},
+    {FUNC_SCALE, Scale},
+    {FUNC_TRANSLATE, Translate},
+    {FUNC_TRANFORM, Transform},
+    {FUNC_SETTRANFORM, SetTransform},
+    {FUNC_SAVE, Save},
+    {FUNC_RESTORE, Restore},
+    {FUNC_DRAWCIRCLE, DrawCircle}
 };
 
 CanvasComponent::CanvasComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager)
     : Component(options, children, styleManager),
-      context_(UNDEFINED),
+      dom_(UNDEFINED),
+      dashArray_(UNDEFINED),
+      measureTextObject_(UNDEFINED),
+      measureTextWidthString_(UNDEFINED),
       fillStyleValue_(nullptr),
       strokeStyleValue_(nullptr),
       fontValue_(nullptr),
       textAlignValue_(nullptr),
-      lineWidthValue_(1)
+      lineWidthValue_(1),
+      lineCapValue_(nullptr),
+      lineJoinValue_(nullptr),
+      miterLimitValue_(DEFAULT_MITERLIMIT),
+      lineDashOffsetValue_(0),
+      colorStopValue_(nullptr)
 {
     SetComponentName(K_CANVAS);
     // set default paint pattern
@@ -96,7 +138,6 @@ CanvasComponent::CanvasComponent(jerry_value_t options, jerry_value_t children, 
     CopyFontFamily(defaultFontName, ProductAdapter::GetDefaultFontFamilyName());
     fontStyle_.fontName = defaultFontName;
     fontStyle_.letterSpace = DEFAULT_FONT_LETTERSPACE;
-
     RegisterNamedFunction(methodMap_[0].methodName, methodMap_[0].callbackName);
 }
 
@@ -112,17 +153,36 @@ void CanvasComponent::ReleaseNativeViews()
     ACE_FREE(strokeStyleValue_);
     ACE_FREE(fontValue_);
     ACE_FREE(textAlignValue_);
+    ACE_FREE(lineCapValue_);
+    ACE_FREE(lineJoinValue_);
     // free fontStyle_.fontName memory which malloc in FontSetter method.
     if (fontStyle_.fontName != nullptr) {
         ace_free(const_cast<char *>(fontStyle_.fontName));
         fontStyle_.fontName = nullptr;
     }
-    if (!IS_UNDEFINED(context_)) {
-        bool deleted = jerry_delete_object_native_pointer(context_, nullptr);
+    if (!IS_UNDEFINED(dom_)) {
+        bool deleted = jerry_delete_object_native_pointer(dom_, nullptr);
         if (!deleted) {
-            HILOG_WARN(HILOG_MODULE_ACE, "canvas_component: delete object native pointer context_ failed!");
+            HILOG_WARN(HILOG_MODULE_ACE, "canvas_component: delete object native pointer dom_ failed!");
         }
-        jerry_release_value(context_);
+        jerry_release_value(dom_);
+    }
+    if (!IS_UNDEFINED(dashArray_)) {
+        uint32_t length = jerry_get_array_length(dashArray_);
+        for (uint32_t i = 0; i < length; i++) {
+            jerry_value_t val = jerry_get_property_by_index(dashArray_, i);
+            jerry_release_value(val);
+        }
+        jerry_release_value(dashArray_);
+    }
+    if (!IS_UNDEFINED(jerry_get_property(measureTextObject_, measureTextWidthString_))) {
+        jerry_release_value(jerry_get_property(measureTextObject_, measureTextWidthString_));
+    }
+    if (!IS_UNDEFINED(measureTextWidthString_)) {
+        jerry_release_value(measureTextWidthString_);
+    }
+    if (!IS_UNDEFINED(measureTextObject_)) {
+        jerry_release_value(measureTextObject_);
     }
 }
 
@@ -131,53 +191,53 @@ UIView *CanvasComponent::GetComponentRootView() const
     return (const_cast<UICanvas *>(&canvas_));
 }
 
-jerry_value_t CanvasComponent::GetContext(const jerry_value_t func,
-                                          const jerry_value_t context,
-                                          const jerry_value_t args[],
-                                          const jerry_length_t argsNum)
+jerry_value_t CanvasComponent::GetDom(const jerry_value_t func,
+                                      const jerry_value_t dom,
+                                      const jerry_value_t args[],
+                                      const jerry_length_t argsNum)
 {
     (void)func;
     (void)args;
     if (argsNum != ArgsCount::NUM_1) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of getContext method parameter error!");
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of getdom method parameter error!");
         return jerry_create_error(JERRY_ERROR_TYPE,
-                                  reinterpret_cast<const jerry_char_t *>("getContext method parameter error"));
+                                  reinterpret_cast<const jerry_char_t *>("getdom method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
                                   reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
     }
 
-    if (IS_UNDEFINED(component->context_)) {
-        component->context_ = jerry_create_object();
-        jerry_set_object_native_pointer(component->context_, component, nullptr);
+    if (IS_UNDEFINED(component->dom_)) {
+        component->dom_ = jerry_create_object();
+        jerry_set_object_native_pointer(component->dom_, component, nullptr);
 
         // register fillStyle, strokeStyle, lineWidth, font, textAlign attribute
         uint16_t attrMapLength = sizeof(attrMap_) / sizeof(attrMap_[0]);
         for (uint16_t index = 0; index < attrMapLength; index++) {
-            RegisterAttributeFunc(component->context_, attrMap_[index].attrName, attrMap_[index].setterName,
+            RegisterAttributeFunc(component->dom_, attrMap_[index].attrName, attrMap_[index].setterName,
                                   attrMap_[index].getterName);
         }
 
         // register fillRect, strokeRect, fillText, beginPath, moveTo, lineTo, rect, arc, closePath, stroke method
         uint16_t methodMapLength = sizeof(methodMap_) / sizeof(methodMap_[0]);
         for (uint16_t index = 1; index < methodMapLength; index++) {
-            RegisterDrawMethodFunc(component->context_, methodMap_[index].methodName, methodMap_[index].callbackName);
+            RegisterDrawMethodFunc(component->dom_, methodMap_[index].methodName, methodMap_[index].callbackName);
         }
     }
 
     // BeginPath function need to be called after getting canvas API object
     component->canvas_.BeginPath();
 
-    jerry_acquire_value(component->context_);
-    return component->context_;
+    jerry_acquire_value(component->dom_);
+    return component->dom_;
 }
 
 jerry_value_t CanvasComponent::FillStyleSetter(const jerry_value_t func,
-                                               const jerry_value_t context,
+                                               const jerry_value_t dom,
                                                const jerry_value_t args[],
                                                const jerry_length_t argsNum)
 {
@@ -187,7 +247,7 @@ jerry_value_t CanvasComponent::FillStyleSetter(const jerry_value_t func,
         return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("fillStyle value error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -195,8 +255,8 @@ jerry_value_t CanvasComponent::FillStyleSetter(const jerry_value_t func,
     }
 
     ACE_FREE(component->fillStyleValue_);
-
-    component->fillStyleValue_ = MallocStringOf(args[ArgsIndex::IDX_0]);
+    uint16_t fillStyleLength = 0;
+    component->fillStyleValue_ = MallocStringOf(args[ArgsIndex::IDX_0], &fillStyleLength);
     if (component->fillStyleValue_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: fillStyle value error!");
         return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("fillStyle value erro!"));
@@ -204,9 +264,11 @@ jerry_value_t CanvasComponent::FillStyleSetter(const jerry_value_t func,
 
     uint32_t color = 0;
     uint8_t alpha = OPA_OPAQUE;
-    ParseColor(component->fillStyleValue_, color, alpha);
-    component->paint_.SetFillColor(component->GetRGBColor(color));
-    component->paint_.SetOpacity(alpha);
+    uint16_t fillStyleId = KeyParser::ParseKeyId(component->fillStyleValue_, fillStyleLength);
+    if (ParseColor(component->fillStyleValue_, color, alpha)) {
+        component->paint_.SetFillColor(component->GetRGBColor(color));
+        component->paint_.SetOpacity(alpha);
+    }
     return UNDEFINED;
 }
 
@@ -236,7 +298,7 @@ jerry_value_t CanvasComponent::FillStyleGetter(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::StrokeStyleSetter(const jerry_value_t func,
-                                                 const jerry_value_t context,
+                                                 const jerry_value_t dom,
                                                  const jerry_value_t args[],
                                                  const jerry_length_t argsNum)
 {
@@ -247,7 +309,7 @@ jerry_value_t CanvasComponent::StrokeStyleSetter(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("the value of strokeStyle is null"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -255,8 +317,8 @@ jerry_value_t CanvasComponent::StrokeStyleSetter(const jerry_value_t func,
     }
 
     ACE_FREE(component->strokeStyleValue_);
-
-    component->strokeStyleValue_ = MallocStringOf(args[ArgsIndex::IDX_0]);
+    uint16_t strokeStyleLength = 0;
+    component->strokeStyleValue_ = MallocStringOf(args[ArgsIndex::IDX_0], &strokeStyleLength);
     if (component->strokeStyleValue_ == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: strokeStyle value error");
         return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("strokeStyle value error"));
@@ -264,9 +326,11 @@ jerry_value_t CanvasComponent::StrokeStyleSetter(const jerry_value_t func,
 
     uint32_t color = 0;
     uint8_t alpha = OPA_OPAQUE;
-    ParseColor(component->strokeStyleValue_, color, alpha);
-    component->paint_.SetStrokeColor(component->GetRGBColor(color));
-    component->paint_.SetOpacity(alpha);
+    uint16_t strokeStyleId = KeyParser::ParseKeyId(component->strokeStyleValue_, strokeStyleLength);
+    if (ParseColor(component->strokeStyleValue_, color, alpha)) {
+        component->paint_.SetStrokeColor(component->GetRGBColor(color));
+        component->paint_.SetOpacity(alpha);
+    }
     return UNDEFINED;
 }
 
@@ -296,7 +360,7 @@ jerry_value_t CanvasComponent::StrokeStyleGetter(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::LineWidthSetter(const jerry_value_t func,
-                                               const jerry_value_t context,
+                                               const jerry_value_t dom,
                                                const jerry_value_t args[],
                                                const jerry_length_t argsNum)
 {
@@ -306,7 +370,7 @@ jerry_value_t CanvasComponent::LineWidthSetter(const jerry_value_t func,
         return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("lineWidth value error!"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -336,17 +400,18 @@ jerry_value_t CanvasComponent::LineWidthGetter(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::FontSetter(const jerry_value_t func,
-                                          const jerry_value_t context,
+                                          const jerry_value_t dom,
                                           const jerry_value_t args[],
                                           const jerry_length_t argsNum)
 {
     (void)func;
     if (argsNum != ArgsCount::NUM_1) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: font value error!");
-        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("font value error"));
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("font value error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -429,17 +494,18 @@ jerry_value_t CanvasComponent::FontGetter(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::TextAlignSetter(const jerry_value_t func,
-                                               const jerry_value_t context,
+                                               const jerry_value_t dom,
                                                const jerry_value_t args[],
                                                const jerry_length_t argsNum)
 {
     (void)func;
-    if (argsNum != ArgsCount::NUM_1) {
+    if (argsNum < ArgsCount::NUM_1) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: textAlign value error!");
-        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("textAlign value error"));
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("textAlign value error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -493,8 +559,48 @@ jerry_value_t CanvasComponent::TextAlignGetter(const jerry_value_t func,
     return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("textAlign value error"));
 }
 
+jerry_value_t CanvasComponent::GlobalAlphaSetter(const jerry_value_t func,
+                                                 const jerry_value_t dom,
+                                                 const jerry_value_t args[],
+                                                 const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_1) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: lineWidth value error!");
+        return jerry_create_error(JERRY_ERROR_TYPE, reinterpret_cast<const jerry_char_t *>("lineWidth value error!"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    double globalAlpha = jerry_get_number_value(args[ArgsIndex::IDX_0]);
+    component->paint_.SetGlobalAlpha(globalAlpha);
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::GlobalAlphaGetter(const jerry_value_t func,
+                                                 const jerry_value_t dom,
+                                                 const jerry_value_t args[],
+                                                 const jerry_length_t argsNum)
+{
+    (void)func;
+    (void)args;
+    (void)argsNum;
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+    return jerry_create_number(component->paint_.GetGlobalAlpha());
+}
+
 jerry_value_t CanvasComponent::FillRect(const jerry_value_t func,
-                                        const jerry_value_t context,
+                                        const jerry_value_t dom,
                                         const jerry_value_t args[],
                                         const jerry_length_t argsNum)
 {
@@ -505,7 +611,7 @@ jerry_value_t CanvasComponent::FillRect(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("fillRect method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -528,7 +634,7 @@ jerry_value_t CanvasComponent::FillRect(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::StrokeRect(const jerry_value_t func,
-                                          const jerry_value_t context,
+                                          const jerry_value_t dom,
                                           const jerry_value_t args[],
                                           const jerry_length_t argsNum)
 {
@@ -539,7 +645,7 @@ jerry_value_t CanvasComponent::StrokeRect(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("strokeRect method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -557,12 +663,12 @@ jerry_value_t CanvasComponent::StrokeRect(const jerry_value_t func,
     Point startPoint;
     startPoint.x = startX;
     startPoint.y = startY;
-    component->canvas_.DrawRect(startPoint, height, width, component->paint_);
+    component->canvas_.StrokeRect(startPoint, height, width, component->paint_);
     return UNDEFINED;
 }
 
 jerry_value_t CanvasComponent::FillText(const jerry_value_t func,
-                                        const jerry_value_t context,
+                                        const jerry_value_t dom,
                                         const jerry_value_t args[],
                                         const jerry_length_t argsNum)
 {
@@ -573,7 +679,7 @@ jerry_value_t CanvasComponent::FillText(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("fillText method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -613,15 +719,218 @@ jerry_value_t CanvasComponent::FillText(const jerry_value_t func,
     return UNDEFINED;
 }
 
+jerry_value_t CanvasComponent::Rotate(const jerry_value_t func,
+                                      const jerry_value_t dom,
+                                      const jerry_value_t args[],
+                                      const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_1) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of rotate method parameter error!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("rotate method parameter error"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    double angle = jerry_get_number_value(args[ArgsIndex::IDX_0]);
+    component->paint_.Rotate(angle);
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::Scale(const jerry_value_t func,
+                                     const jerry_value_t dom,
+                                     const jerry_value_t args[],
+                                     const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_2) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of scale method parameter error!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("scale method parameter error"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    double scaleX = jerry_get_number_value(args[ArgsIndex::IDX_0]);
+    double scaleY = jerry_get_number_value(args[ArgsIndex::IDX_1]);
+    component->paint_.Scale(scaleX, scaleY);
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::Translate(const jerry_value_t func,
+                                         const jerry_value_t dom,
+                                         const jerry_value_t args[],
+                                         const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_2) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of translate method parameter error!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("translate method parameter error"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    int16_t positionX = IntegerOf(args[ArgsIndex::IDX_0]);
+    int16_t positionY = IntegerOf(args[ArgsIndex::IDX_1]);
+
+    component->paint_.Translate(positionX, positionY);
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::Transform(const jerry_value_t func,
+                                         const jerry_value_t dom,
+                                         const jerry_value_t args[],
+                                         const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_6) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of rotate method parameter error!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("rotate method parameter error"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    double scaleX = jerry_get_number_value(args[ArgsIndex::IDX_0]);
+    double shearX = jerry_get_number_value(args[ArgsIndex::IDX_1]);
+    double shearY = jerry_get_number_value(args[ArgsIndex::IDX_2]);
+    double scaleY = jerry_get_number_value(args[ArgsIndex::IDX_3]);
+    double translateX = jerry_get_number_value(args[ArgsIndex::IDX_4]);
+    double translateY = jerry_get_number_value(args[ArgsIndex::IDX_5]);
+    component->paint_.Transform(scaleX, shearX, shearY, scaleY, translateX, translateY);
+    return UNDEFINED;
+}
+
+
+jerry_value_t CanvasComponent::SetTransform(const jerry_value_t func,
+                                            const jerry_value_t dom,
+                                            const jerry_value_t args[],
+                                            const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_6) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of rotate method parameter error!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("rotate method parameter error"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    double scaleX = jerry_get_number_value(args[ArgsIndex::IDX_0]);
+    double shearX = jerry_get_number_value(args[ArgsIndex::IDX_1]);
+    double shearY = jerry_get_number_value(args[ArgsIndex::IDX_2]);
+    double scaleY = jerry_get_number_value(args[ArgsIndex::IDX_3]);
+    double translateX = jerry_get_number_value(args[ArgsIndex::IDX_4]);
+    double translateY = jerry_get_number_value(args[ArgsIndex::IDX_5]);
+    component->paint_.SetTransform(scaleX, shearX, shearY, scaleY, translateX, translateY);
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::Save(const jerry_value_t func,
+                                    const jerry_value_t dom,
+                                    const jerry_value_t args[],
+                                    const jerry_length_t argsNum)
+{
+    (void)func;
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    component->canvas_.Save(component->paint_);
+
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::Restore(const jerry_value_t func,
+                                       const jerry_value_t dom,
+                                       const jerry_value_t args[],
+                                       const jerry_length_t argsNum)
+{
+    (void)func;
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    component->paint_ = component->canvas_.Restore();
+    return UNDEFINED;
+}
+
+
+jerry_value_t CanvasComponent::DrawCircle(const jerry_value_t func,
+                                          const jerry_value_t dom,
+                                          const jerry_value_t args[],
+                                          const jerry_length_t argsNum)
+{
+    (void)func;
+    if (argsNum != ArgsCount::NUM_3) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: the number of arc method parameter error!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("arc method parameter error"));
+    }
+
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+
+    int16_t centerX = IntegerOf(args[ArgsIndex::IDX_0]);
+    int16_t centerY = IntegerOf(args[ArgsIndex::IDX_1]);
+    int16_t radius = IntegerOf(args[ArgsIndex::IDX_2]);
+
+    Point centerPoint;
+    centerPoint.x = centerX;
+    centerPoint.y = centerY;
+
+    component->canvas_.DrawCircle(centerPoint, radius, component->paint_);
+    return UNDEFINED;
+}
+
 jerry_value_t CanvasComponent::BeginPath(const jerry_value_t func,
-                                         const jerry_value_t context,
+                                         const jerry_value_t dom,
                                          const jerry_value_t args[],
                                          const jerry_length_t argsNum)
 {
     (void)func;
     (void)args;
     (void)argsNum;
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -633,7 +942,7 @@ jerry_value_t CanvasComponent::BeginPath(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::MoveTo(const jerry_value_t func,
-                                      const jerry_value_t context,
+                                      const jerry_value_t dom,
                                       const jerry_value_t args[],
                                       const jerry_length_t argsNum)
 {
@@ -644,7 +953,7 @@ jerry_value_t CanvasComponent::MoveTo(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("moveTo method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -662,7 +971,7 @@ jerry_value_t CanvasComponent::MoveTo(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::LineTo(const jerry_value_t func,
-                                      const jerry_value_t context,
+                                      const jerry_value_t dom,
                                       const jerry_value_t args[],
                                       const jerry_length_t argsNum)
 {
@@ -673,7 +982,7 @@ jerry_value_t CanvasComponent::LineTo(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("lineTo method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -691,7 +1000,7 @@ jerry_value_t CanvasComponent::LineTo(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::Rect(const jerry_value_t func,
-                                    const jerry_value_t context,
+                                    const jerry_value_t dom,
                                     const jerry_value_t args[],
                                     const jerry_length_t argsNum)
 {
@@ -702,7 +1011,7 @@ jerry_value_t CanvasComponent::Rect(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("rect method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -722,7 +1031,7 @@ jerry_value_t CanvasComponent::Rect(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::Arc(const jerry_value_t func,
-                                   const jerry_value_t context,
+                                   const jerry_value_t dom,
                                    const jerry_value_t args[],
                                    const jerry_length_t argsNum)
 {
@@ -733,7 +1042,7 @@ jerry_value_t CanvasComponent::Arc(const jerry_value_t func,
                                   reinterpret_cast<const jerry_char_t *>("arc method parameter error"));
     }
 
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -781,14 +1090,14 @@ jerry_value_t CanvasComponent::Arc(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::ClosePath(const jerry_value_t func,
-                                         const jerry_value_t context,
+                                         const jerry_value_t dom,
                                          const jerry_value_t args[],
                                          const jerry_length_t argsNum)
 {
     (void)func;
     (void)args;
     (void)argsNum;
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
@@ -800,21 +1109,38 @@ jerry_value_t CanvasComponent::ClosePath(const jerry_value_t func,
 }
 
 jerry_value_t CanvasComponent::Stroke(const jerry_value_t func,
-                                      const jerry_value_t context,
+                                      const jerry_value_t dom,
                                       const jerry_value_t args[],
                                       const jerry_length_t argsNum)
 {
     (void)func;
     (void)args;
     (void)argsNum;
-    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(context));
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
         return jerry_create_error(JERRY_ERROR_TYPE,
                                   reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
     }
-
     component->canvas_.DrawPath(component->paint_);
+    return UNDEFINED;
+}
+
+jerry_value_t CanvasComponent::Fill(const jerry_value_t func,
+                                    const jerry_value_t dom,
+                                    const jerry_value_t args[],
+                                    const jerry_length_t argsNum)
+{
+    (void)func;
+    (void)args;
+    (void)argsNum;
+    CanvasComponent *component = static_cast<CanvasComponent *>(ComponentUtils::GetComponentFromBindingObject(dom));
+    if (component == nullptr) {
+        HILOG_ERROR(HILOG_MODULE_ACE, "canvas_component: get canvas component from js object failed!");
+        return jerry_create_error(JERRY_ERROR_TYPE,
+                                  reinterpret_cast<const jerry_char_t *>("get canvas component from js object failed"));
+    }
+    component->canvas_.FillPath(component->paint_);
     return UNDEFINED;
 }
 
@@ -927,7 +1253,7 @@ bool CanvasComponent::FormatArcAngle(double sAngle,
     return true;
 }
 
-void CanvasComponent::RegisterAttributeFunc(jerry_value_t canvas2dContext,
+void CanvasComponent::RegisterAttributeFunc(jerry_value_t canvas2ddom,
                                             const char *attributeName,
                                             jerry_external_handler_t setterHandler,
                                             jerry_external_handler_t getterHandler)
@@ -940,16 +1266,16 @@ void CanvasComponent::RegisterAttributeFunc(jerry_value_t canvas2dContext,
     desc.setter = jerry_create_external_function(setterHandler);
     desc.is_get_defined = true;
     desc.getter = jerry_create_external_function(getterHandler);
-    jerry_value_t returnValue = jerry_define_own_property(canvas2dContext, propName, &desc);
+    jerry_value_t returnValue = jerry_define_own_property(canvas2ddom, propName, &desc);
     jerry_free_property_descriptor_fields(&desc);
     ReleaseJerryValue(propName, returnValue, VA_ARG_END_FLAG);
 }
 
-void CanvasComponent::RegisterDrawMethodFunc(jerry_value_t canvas2dContext,
+void CanvasComponent::RegisterDrawMethodFunc(jerry_value_t canvas2ddom,
                                              const char *drawMethodName,
                                              jerry_external_handler_t handler)
 {
-    JerrySetFuncProperty(canvas2dContext, drawMethodName, handler);
+    JerrySetFuncProperty(canvas2ddom, drawMethodName, handler);
 }
 } // namespace ACELite
 } // namespace OHOS

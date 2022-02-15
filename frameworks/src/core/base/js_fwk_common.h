@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,6 @@
 #endif
 #include "graphic_config.h"
 #include "wrapper/js.h"
-
 namespace OHOS {
 namespace ACELite {
 struct Watcher : public MemoryHeap {
@@ -312,6 +311,13 @@ bool ParseHexColor(const char * const source, uint32_t &color, uint8_t &alpha);
 bool ParseRgbaColor(const char * const source, uint32_t &color, uint8_t &alpha);
 bool ParseColor(const char * const source, uint32_t &color, uint8_t &alpha);
 bool CopyFontFamily(char *&destination, const char * const fontFamily, uint32_t fontFamilyNameLen = 0);
+
+constexpr int16_t BUTT_VALUE = 0;
+constexpr int16_t SQUARE_VALUE = 1;
+constexpr int16_t ROUND_VALUE = 2;
+constexpr int16_t LINEJOIN_MITER_VALUE = 0;
+constexpr int16_t LINEJOIN_ROUND_VALUE = 1;
+constexpr int16_t LINEJOIN_BEVEL_VALUE = 2;
 
 #if (defined(_WIN32) || defined(_WIN64))
 constexpr char PATH_SEPARATOR = '\\';
