@@ -16,7 +16,7 @@ import { goPage, routePage } from "../../../../../common/js/general";
 import { changeStatus, changeIf } from "../../../../../common/js/input";
 export default {
   data: {
-    show: true,
+    showAttr: true,
     status: true,
     ifStatus: true,
     listData: [true, false]

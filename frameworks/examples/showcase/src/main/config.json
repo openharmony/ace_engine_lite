@@ -244,7 +244,11 @@
           "pages/component/canvas/canvas6/index",
           "pages/component/canvas/canvas7/index",
           "pages/component/canvas/canvas8/index",
-          "pages/component/canvas/canvas9/index"
+          "pages/component/canvas/canvas9/index",
+          "pages/component/qrcode/index/index",
+          "pages/component/qrcode/attr/attr",
+          "pages/component/qrcode/style/style",
+          "pages/component/qrcode/event/event"
         ],
         "name": "default"
       }

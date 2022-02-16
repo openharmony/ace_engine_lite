@@ -15,7 +15,7 @@
 import { goPage, routePage } from "../../../../../common/js/general";
 export default {
   data: {
-    show: "false",
+    showAttr: "false",
     name: "show",
     status: true
   },

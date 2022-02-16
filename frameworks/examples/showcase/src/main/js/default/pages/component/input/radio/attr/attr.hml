@@ -46,7 +46,7 @@ limitations under the License.
     </div>
     <div class="attribute-right-div">
       <input type="radio" class="radio" onchange="changeChecked" />
-      <text class="text">值为{{ show }}</text>
+      <text class="text">值为{{ showAttr }}</text>
     </div>
   </list-item>
   <list-item class="separatorContainerStyle"> </list-item>
