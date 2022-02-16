@@ -14,7 +14,7 @@ limitations under the License.
 -->
 
 <list class="list">
-  <list-item style="width: 454px; height: 60px"> </list-item>
+  <list-item style="height: 60px; width: 454px"> </list-item>
   <list-item class="item-title">
     <input type="button" style="margin-left: 85px; width: 130px; height: 60px" onclick="goHome" value="首页" />
     <input type="button" style="margin-left: 20px; width: 130px; height: 60px" onclick="goPrevious" value="上一页" />
@@ -25,36 +25,39 @@ limitations under the License.
   </list-item>
   <list-item class="separatorContainerStyle"> </list-item>
   <list-item class="item-attribute">
-    <input type="button" class="text" style="margin-left: 30px" onclick="changeStatus" value="show" />
-    <progress type="horizontal" show="{{ status }}" percent="{{ showAttr }}" class="horizontal-progress"></progress>
-  </list-item>
-  <list-item class="item-attribute">
-    <input type="button" class="text" style="margin-left: 30px" onclick="changeStatusIf" value="if" />
-    <progress type="horizontal" if="{{ ifStatus }}" percent="{{ showAttr }}" class="horizontal-progress"></progress>
-  </list-item>
-  <list-item class="item-attribute">
     <div class="attribute-div">
-      <text style="width: 100px; height: 50px; margin-left: 30px">for</text>
-      <div style="width: 200px; height: 100px; flex-direction: column">
-        <progress
-          for="{{ listData }}"
-          type="horizontal"
-          percent="{{ showAttr }}"
-          style="width: 100px; height: 50px; stroke-width: 5px"
-        ></progress>
-      </div>
+      <input type="button" class="text" style="margin-left: 30px" onclick="changeShow" value="show" />
     </div>
-  </list-item>
-  <list-item class="separatorContainerStyle"> </list-item>
-  <list-item class="item-types">
-    <text class="whole-text">特有属性</text>
+    <div class="attribute-div-if-text">
+      <qrcode value='value' show="{{ showStatus }}" style="width: 100px; height: 50px"> </qrcode>
+    </div>
   </list-item>
   <list-item class="separatorContainerStyle"> </list-item>
   <list-item class="item-attribute">
     <div class="attribute-div">
-      <text class="left-text" style="margin-left: 30px">percent</text>
-      <progress type="horizontal" percent="{{ showAttr }}" class="horizontal-progress"></progress>
+      <input type="button" class="text" style="margin-left: 30px" onclick="changeStatusIf" value="if" />
+    </div>
+    <div class="attribute-div-if-text">
+      <qrcode value='value' if="{{ ifStatus }}"  style="width: 100px; height: 50px"> </qrcode>
     </div>
   </list-item>
-  <list-item style="width: 454px; height: 60px"> </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="item-attribute">
+    <div class="attribute-div">
+      <input type="button" class="text" style="margin-left: 30px" value="for" />
+    </div>
+    <div class="attribute-div-if-text">
+      <qrcode style="width: 100px; height: 30px;margin-top:10px" value='item' for="{{ textfor }}"></qrcode>
+    </div>
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="item-attribute">
+    <div class="attribute-div">
+      <input type="button" class="text" style="margin-left: 30px" value="type" />
+    </div>
+    <div class="attribute-div-if-text">
+      <qrcode style="width: 80px; height: 80px" value='value' type="{{type}}" onclick="changeType" ></qrcode>
+    </div>
+  </list-item>
+  <list-item style="height: 60px; width: 454px"> </list-item>
 </list>

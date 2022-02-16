@@ -14,10 +14,8 @@
  */
 import { backPage, routePage } from "../../../../common/js/general";
 export default {
-  ...backPage("pages/index/index"),
-  changeDiv: routePage("pages/component/div/index/index").changePage,
-  changeList: routePage("pages/component/list/index/index").changePage,
-  changeListItem: routePage("pages/component/list/list-item/index/index").changePage,
-  changeStack: routePage("pages/component/stack/index/index").changePage,
-  changeSwiper: routePage("pages/component/swiper/index/index").changePage
+  ...backPage("pages/component/index/baseIndex/index"),
+  changePage1: routePage("pages/component/qrcode/attr/attr").changePage,
+  changePage2: routePage("pages/component/qrcode/style/style").changePage,
+  changePage3: routePage("pages/component/qrcode/event/event").changePage
 };
