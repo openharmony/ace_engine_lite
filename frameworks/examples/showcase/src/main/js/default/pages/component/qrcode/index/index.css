@@ -12,12 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { backPage, routePage } from "../../../../common/js/general";
-export default {
-  ...backPage("pages/index/index"),
-  changeDiv: routePage("pages/component/div/index/index").changePage,
-  changeList: routePage("pages/component/list/index/index").changePage,
-  changeListItem: routePage("pages/component/list/list-item/index/index").changePage,
-  changeStack: routePage("pages/component/stack/index/index").changePage,
-  changeSwiper: routePage("pages/component/swiper/index/index").changePage
-};
+.separatorContainerStyle {
+  width: 454px;
+  height: 4px;
+  background-color: #8b8b7a;
+}
+
+.titleContainerStyle {
+  width: 454px;
+  height: 70px;
+}
+
+.titleTextStyle {
+  width: 454px;
+  height: 50px;
+  margin-left: 195px;
+  margin-top: 0px;
+}
+
+.buttonContainerStyle {
+  width: 454px;
+  height: 80px;
+}
+
+.buttonStyle {
+  width: 200px;
+  height: 60px;
+  margin-left: 130px;
+}

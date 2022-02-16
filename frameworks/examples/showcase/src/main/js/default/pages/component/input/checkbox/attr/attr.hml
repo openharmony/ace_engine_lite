@@ -69,7 +69,7 @@ limitations under the License.
     </div>
     <div class="attribute-right-div">
       <input type="checkbox" class="checkbox" checked="true" onchange="changeStatus" />
-      <text class="text">值为{{ show }}</text>
+      <text class="text">值为{{ showAttr }}</text>
     </div>
   </list-item>
   <list-item style="width: 454px; height: 60px"> </list-item>
