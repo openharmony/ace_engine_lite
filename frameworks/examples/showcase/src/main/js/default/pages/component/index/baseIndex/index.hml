@@ -24,19 +24,7 @@ limitations under the License.
   </list-item>
   <list-item class="separatorContainerStyle"> </list-item>
   <list-item class="buttonContainerStyle">
-    <input type="button" class="buttonStyle" value="image" onclick="changeImage" />
-  </list-item>
-  <list-item class="separatorContainerStyle"> </list-item>
-  <list-item class="buttonContainerStyle">
-    <input type="button" class="buttonStyle" value="progress" onclick="changeProgress" />
-  </list-item>
-  <list-item class="separatorContainerStyle"> </list-item>
-  <list-item class="buttonContainerStyle">
-    <input type="button" class="buttonStyle" value="text" onclick="changeText" />
-  </list-item>
-  <list-item class="separatorContainerStyle"> </list-item>
-  <list-item class="buttonContainerStyle">
-    <input type="button" class="buttonStyle" value="marquee" onclick="changeMarquee" />
+    <input type="button" class="buttonStyle" value="canvas" onclick="changeCanvas" />
   </list-item>
   <list-item class="separatorContainerStyle"> </list-item>
   <list-item class="buttonContainerStyle">
@@ -44,7 +32,43 @@ limitations under the License.
   </list-item>
   <list-item class="separatorContainerStyle"> </list-item>
   <list-item class="buttonContainerStyle">
-    <input type="button" class="buttonStyle" value="canvas" onclick="changeCanvas" />
+    <input type="button" class="buttonStyle" value="image" onclick="changeImage" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="image-animator" onclick="changeImageAnimator" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="input" onclick="changeInput" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="marquee" onclick="changeMarquee" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="picker-view" onclick="changePickerView" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="progress" onclick="changeProgress" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="qrcode" onclick="changeQrcode" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="slider" onclick="changeSlider" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="switch" onclick="changeSwitch" />
+  </list-item>
+  <list-item class="separatorContainerStyle"> </list-item>
+  <list-item class="buttonContainerStyle">
+    <input type="button" class="buttonStyle" value="text" onclick="changeText" />
   </list-item>
   <list-item style="height: 40px; width: 454px"> </list-item>
 </list>
