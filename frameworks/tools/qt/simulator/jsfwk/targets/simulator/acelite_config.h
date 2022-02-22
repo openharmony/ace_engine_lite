@@ -78,7 +78,7 @@
 /**
  * support battery API for JS
  */
-#define FEATURE_MODULE_BATTERY
+#define FEATURE_MODULE_BATTERY 1
 
 /**
  * support configuration API for JS
