@@ -58,27 +58,27 @@
 /**
  * support geo location API for JS
  */
-#define FEATURE_MODULE_GEO
+#define FEATURE_MODULE_GEO 1
 
 /**
  * support sensor API for JS
  */
-#define FEATURE_MODULE_SENSOR
+#define FEATURE_MODULE_SENSOR 1
 
 /**
  * support brightness API for JS
  */
-#define FEATURE_MODULE_BRIGHTNESS
+#define FEATURE_MODULE_BRIGHTNESS 1
 
 /**
  * support battery API for JS
  */
-#define FEATURE_MODULE_BATTERY
+#define FEATURE_MODULE_BATTERY 1
 
 /**
  * support configuration API for JS
  */
-#define FEATURE_MODULE_CONFIGURATION
+#define FEATURE_MODULE_CONFIGURATION 1
 
 /**
  * timer module
@@ -154,7 +154,7 @@
 #if (ENABLE_ROTATE_INPUT == 1)
 // low layer supports
 #ifndef FEATURE_ROTATION_API
-#define FEATURE_ROTATION_API
+#define FEATURE_ROTATION_API 1
 #endif
 #endif // (ENABLE_ROTATE_INPUT == 1)
 
