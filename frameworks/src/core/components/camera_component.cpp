@@ -291,7 +291,7 @@ void CameraComponent::ReleaseNativeViews()
     if (cameraCallback_ != nullptr) {
         Media::Camera *camera = const_cast<Media::Camera *>(cameraCallback_->GetCameraInstance());
         if (camera != nullptr) {
-            camera->StopLoopingCapture();
+            camera->StopLoopingCapture(-1);
         }
         cameraCallback_.reset();
     }
