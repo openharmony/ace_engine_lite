@@ -146,27 +146,5 @@ void AppTddTest::RunTests()
     AppTddTest::AppTddTest01();
     AppTddTest::AppTddTest02();
 }
-
-#ifdef TDD_ASSERTIONS
-/* *
- * @tc.name: AppTddTest01
- * @tc.desc: test app.getInfo
- * @tc.require: AR000F3PDP
- */
-HWTEST_F(AppTddTest, AppTddTest01, TestSize.Level0)
-{
-    AppTddTest::AppTddTest01();
-}
-
-/* *
- * @tc.name: AppTddTest02
- * @tc.desc: test app.terminate
- * @tc.require: AR000F3PDP
- */
-HWTEST_F(AppTddTest, AppTddTest02, TestSize.Level0)
-{
-    AppTddTest::AppTddTest02();
-}
-#endif
 } // namespace ACELite
 } // namespace OHOS
