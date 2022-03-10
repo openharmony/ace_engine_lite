@@ -85,5 +85,6 @@ QMAKE_POST_LINK += copy $$UI_LIBS\\icu.dll $$COPY_DEST\\..\\libs\\icu.dll &
 QMAKE_POST_LINK += copy $$UI_LIBS\\libjpeg.dll $$COPY_DEST\\..\\libs\\libjpeg.dll &
 QMAKE_POST_LINK += copy $$UI_LIBS\\libpng.dll $$COPY_DEST\\..\\libs\\libpng.dll &
 QMAKE_POST_LINK += copy $$UI_LIBS\\libui.dll $$COPY_DEST\\..\\libs\\libui.dll &
+QMAKE_POST_LINK += copy $$UI_LIBS\\giflib.dll $$COPY_DEST\\..\\libs\\giflib.dll &
 QMAKE_POST_LINK += copy $$UI_LIBS\\qrcodegen.dll $$COPY_DEST\\..\\libs\\qrcodegen.dll &
 QMAKE_POST_LINK += copy $$UI_LIBS\\zlib.dll $$COPY_DEST\\..\\libs\\zlib.dll
