@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -124,8 +124,7 @@ void AceMemProc::JerryMemTracing()
         return;
     }
 
-    FILE *fp = nullptr;
-    fp = fopen(MEM_LOG_FILE_PATH, "a+");
+    FILE *fp = fopen(MEM_LOG_FILE_PATH, "a+");
     if (fp == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Get file error");
         return;
