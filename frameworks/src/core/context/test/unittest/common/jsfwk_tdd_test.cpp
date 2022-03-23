@@ -353,7 +353,6 @@ void JSfwkTddTest::RunTests()
 /**
  * @tc.name: ACELiteFrameworkInitialization001
  * @tc.desc: Verify if the invalid input will lead exception .
- * @tc.require: AR000DSEEU
  */
 HWTEST_F(JSfwkTddTest, init001, TestSize.Level1)
 {
@@ -363,7 +362,6 @@ HWTEST_F(JSfwkTddTest, init001, TestSize.Level1)
 /**
  * @tc.name: ACELiteFrameworkInitialization002
  * @tc.desc: Verify if the invalid input will lead exception .
- * @tc.require: AR000DSEEU
  */
 HWTEST_F(JSfwkTddTest, init002, TestSize.Level1)
 {
@@ -373,7 +371,6 @@ HWTEST_F(JSfwkTddTest, init002, TestSize.Level1)
 /**
  * @tc.name: ACELiteFrameworkInitialization003
  * @tc.desc: Verify if the invalid input will lead exception .
- * @tc.require: AR000DSEEU
  */
 HWTEST_F(JSfwkTddTest, init003, TestSize.Level1)
 {
@@ -383,7 +380,6 @@ HWTEST_F(JSfwkTddTest, init003, TestSize.Level1)
 /**
  * @tc.name: ACELiteFrameworkInitialization009
  * @tc.desc: Verify the version API.
- * @tc.require: AR000DSEEU
  */
 HWTEST_F(JSfwkTddTest, init009, TestSize.Level1)
 {
@@ -393,7 +389,6 @@ HWTEST_F(JSfwkTddTest, init009, TestSize.Level1)
 /**
  * @tc.name: ACELiteFrameworkInitialization011
  * @tc.desc: Verify hide and show.
- * @tc.require: AR000DSEEU
  */
 HWTEST_F(JSfwkTddTest, init011, TestSize.Level1)
 {
@@ -403,7 +398,6 @@ HWTEST_F(JSfwkTddTest, init011, TestSize.Level1)
 /**
  * @tc.name: ACELiteFrameworkInitialization012
  * @tc.desc: Verify hide and show.
- * @tc.require: AR000DSEEU
  */
 HWTEST_F(JSfwkTddTest, init012, TestSize.Level1)
 {
@@ -413,7 +407,6 @@ HWTEST_F(JSfwkTddTest, init012, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkEngineIntegrating01
  * @tc.desc: Verify the configuration of jerry engine.
- * @tc.require: AR000DT7BN
  */
 HWTEST_F(JSfwkTddTest, engineIntegrating001, TestSize.Level1)
 {
@@ -423,7 +416,6 @@ HWTEST_F(JSfwkTddTest, engineIntegrating001, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkEngineIntegrating02
  * @tc.desc: Verify the configuration of jerry engine.
- * @tc.require: AR000DT7BN
  */
 HWTEST_F(JSfwkTddTest, engineIntegrating002, TestSize.Level1)
 {
@@ -433,7 +425,6 @@ HWTEST_F(JSfwkTddTest, engineIntegrating002, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkEngineIntegrating03
  * @tc.desc: Verify the configuration of jerry engine.
- * @tc.require: AR000DT7BN
  */
 HWTEST_F(JSfwkTddTest, engineIntegrating003, TestSize.Level1)
 {
@@ -443,7 +434,6 @@ HWTEST_F(JSfwkTddTest, engineIntegrating003, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkEngineIntegrating04
  * @tc.desc: Verify the configuration of jerry engine.
- * @tc.require: AR000DT7BN
  */
 HWTEST_F(JSfwkTddTest, engineIntegrating004, TestSize.Level1)
 {

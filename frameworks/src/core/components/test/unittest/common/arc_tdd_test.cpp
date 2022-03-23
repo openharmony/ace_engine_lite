@@ -85,7 +85,7 @@ void ArcTddTest::ComponentProgressAttributeSetTest001()
    /**
     * @tc.expected: step2. check percent = 0
     */
-    EXPECT_TRUE(GetPercentage(*circleView) == 0);
+    EXPECT_EQ(GetPercentage(*circleView), 0);
 
     /**
     * @tc.steps: step3. set attribute percent = -1
@@ -95,7 +95,7 @@ void ArcTddTest::ComponentProgressAttributeSetTest001()
     /**
     * @tc.expected: step3. check percent = 0
     */
-    EXPECT_TRUE(GetPercentage(*circleView) == 0);
+    EXPECT_EQ(GetPercentage(*circleView), 0);
     delete(circleComponent);
     circleComponent = nullptr;
     TDD_CASE_END();
@@ -128,7 +128,7 @@ void ArcTddTest::ComponentProgressAttributeSetTest002()
     /**
     * @tc.expected: step4. check percent = 0
     */
-    EXPECT_TRUE(GetPercentage(*circleView) == 0);
+    EXPECT_EQ(GetPercentage(*circleView), 0);
 
     /**
     * @tc.steps: step5. set attribute percent = 100
@@ -196,7 +196,7 @@ void ArcTddTest::ComponentProgressAttributeSetTest003()
     /**
     * @tc.expected: step6. check percent = "abc"
     */
-    EXPECT_TRUE(GetPercentage(*circleView) == 0);
+    EXPECT_EQ(GetPercentage(*circleView), 0);
     delete(circleComponent);
     circleComponent = nullptr;
     TDD_CASE_END();
@@ -313,7 +313,7 @@ void ArcTddTest::ComponentProgressStyleSetTest002()
     /**
     * @tc.expected: step3. check centerX = 0 (use normal value set to check whether system run normally)
     */
-    EXPECT_TRUE(circleView->GetCenterPosition().x == 0);
+    EXPECT_EQ(circleView->GetCenterPosition().x, 0);
     delete(circleComponent);
     circleComponent = nullptr;
     TDD_CASE_END();
@@ -430,7 +430,7 @@ void ArcTddTest::ComponentProgressStyleSetTest004()
     /**
     * @tc.expected: step3. check centerY = 0 (use normal value set to check whether system run normally)
     */
-    EXPECT_TRUE(circleView->GetCenterPosition().y == 0);
+    EXPECT_EQ(circleView->GetCenterPosition().y, 0);
     delete(circleComponent);
     circleComponent = nullptr;
     TDD_CASE_END();
@@ -478,7 +478,7 @@ void ArcTddTest::ComponentProgressStyleSetTest005()
     /**
     * @tc.expected: step2. check radius = 0
     */
-    EXPECT_TRUE(circleView->GetRadius() == 0);
+    EXPECT_EQ(circleView->GetRadius(), 0);
 
     /**
     * @tc.steps: step3. set style radius = 65534
@@ -582,7 +582,7 @@ void ArcTddTest::ComponentProgressStyleSetTest008()
     /**
     * @tc.expected: step1. check startAngle = 0
     */
-    EXPECT_TRUE(circleView->GetStartAngle() == 0);
+    EXPECT_EQ(circleView->GetStartAngle(), 0);
 
     /**
     * @tc.steps: step2. set style startAngle = 360
@@ -614,7 +614,7 @@ void ArcTddTest::ComponentProgressStyleSetTest008()
     /**
     * @tc.expected: step4. check startAngle = 0
     */
-    EXPECT_TRUE(circleView->GetStartAngle() == 0);
+    EXPECT_EQ(circleView->GetStartAngle(), 0);
     delete(circleComponent);
     circleComponent = nullptr;
     TDD_CASE_END();
@@ -1049,7 +1049,6 @@ void ArcTddTest::RunTests()
 /**
 * @tc.name: ComponentProgressAttributeSetTest001
 * @tc.desc: Verify circleprogress percent attribute can set normally.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcAttr001, TestSize.Level0)
 {
@@ -1059,7 +1058,6 @@ HWTEST_F(ArcTddTest, arcAttr001, TestSize.Level0)
 /**
 * @tc.name: ComponentProgressAttributeSetTest002
 * @tc.desc: Verify circleprogress percent attribute can set normally.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcAttr002, TestSize.Level1)
 {
@@ -1069,7 +1067,6 @@ HWTEST_F(ArcTddTest, arcAttr002, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressAttributeSetTest003
 * @tc.desc: Verify circleprogress percent attribute can set normally.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcAttr003, TestSize.Level1)
 {
@@ -1079,7 +1076,6 @@ HWTEST_F(ArcTddTest, arcAttr003, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest001
 * @tc.desc: Verify circleprogress centerX style can set normally.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle001, TestSize.Level1)
 {
@@ -1089,7 +1085,6 @@ HWTEST_F(ArcTddTest, arcStyle001, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest002
 * @tc.desc: Verify circleprogress centerX style can deal unNormally value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle002, TestSize.Level1)
 {
@@ -1099,7 +1094,6 @@ HWTEST_F(ArcTddTest, arcStyle002, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest003
 * @tc.desc: Verify circleprogress centerY style can set normally.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle003, TestSize.Level1)
 {
@@ -1109,7 +1103,6 @@ HWTEST_F(ArcTddTest, arcStyle003, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest004
 * @tc.desc: Verify circleprogress centerY style can deal unNormally value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle004, TestSize.Level1)
 {
@@ -1119,7 +1112,6 @@ HWTEST_F(ArcTddTest, arcStyle004, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest005
 * @tc.desc: Verify circleprogress radius style can set normally.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle005, TestSize.Level1)
 {
@@ -1129,7 +1121,6 @@ HWTEST_F(ArcTddTest, arcStyle005, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest006
 * @tc.desc: Verify circleprogress radius style can deal unNormally value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle006, TestSize.Level1)
 {
@@ -1139,7 +1130,6 @@ HWTEST_F(ArcTddTest, arcStyle006, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest008
 * @tc.desc: Verify circleprogress startAngle style can set normal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle008, TestSize.Level1)
 {
@@ -1149,7 +1139,6 @@ HWTEST_F(ArcTddTest, arcStyle008, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest009
 * @tc.desc: Verify circleprogress startAngle style can deal unNormal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle009, TestSize.Level1)
 {
@@ -1159,7 +1148,6 @@ HWTEST_F(ArcTddTest, arcStyle009, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest010
 * @tc.desc: Verify circleprogress totalAngle style can set normal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle010, TestSize.Level1)
 {
@@ -1169,7 +1157,6 @@ HWTEST_F(ArcTddTest, arcStyle010, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest011
 * @tc.desc: Verify circleprogress totalAngle style can deal unNormal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle011, TestSize.Level1)
 {
@@ -1179,7 +1166,6 @@ HWTEST_F(ArcTddTest, arcStyle011, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest012
 * @tc.desc: Verify circleprogress lineColor style can set normal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle012, TestSize.Level1)
 {
@@ -1189,7 +1175,6 @@ HWTEST_F(ArcTddTest, arcStyle012, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest013
 * @tc.desc: Verify circleprogress lineColor style can deal unNormal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle013, TestSize.Level1)
 {
@@ -1199,7 +1184,6 @@ HWTEST_F(ArcTddTest, arcStyle013, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest014
 * @tc.desc: Verify circleprogress lineWidth style can set normal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle014, TestSize.Level1)
 {
@@ -1209,7 +1193,6 @@ HWTEST_F(ArcTddTest, arcStyle014, TestSize.Level1)
 /**
 * @tc.name: ComponentProgressStyleSetTest015
 * @tc.desc: Verify circleprogress lineWidth style can deal unNormal value.
-* @tc.require: AR000DSEFE
 */
 HWTEST_F(ArcTddTest, arcStyle015, TestSize.Level1)
 {

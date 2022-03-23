@@ -35,7 +35,7 @@ public:
      *
      * @brief Constructor.
      */
-    PresetModule(const char * const name);
+    explicit PresetModule(const char * const name);
 
     /**
      * @fn PresetModule::~PresetModule()

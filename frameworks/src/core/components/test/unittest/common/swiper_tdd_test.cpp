@@ -493,7 +493,6 @@ void SwiperTddTest::RunTests()
 /**
  * @tc.name: ComponentSwiperAttributeSetTest001
  * @tc.desc: Verify attribute index set normal value.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr001, TestSize.Level1)
 {
@@ -503,7 +502,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr001, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest002
  * @tc.desc: Verify attribute index set wrong string value.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr002, TestSize.Level1)
 {
@@ -513,7 +511,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr002, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest003
  * @tc.desc: Verify attribute index set bool value.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr003, TestSize.Level1)
 {
@@ -523,7 +520,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr003, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest004
  * @tc.desc: Verify attribute index out of size.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr004, TestSize.Level1)
 {
@@ -533,7 +529,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr004, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest005
  * @tc.desc: Verify attribute index out of int16.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr005, TestSize.Level1)
 {
@@ -543,7 +538,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr005, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest013
  * @tc.desc: Verify attribute vertical set correct.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr013, TestSize.Level1)
 {
@@ -553,7 +547,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr013, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest014
  * @tc.desc: Verify attribute vertical input wrong type.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr014, TestSize.Level1)
 {
@@ -563,7 +556,6 @@ HWTEST_F(SwiperTddTest, SwiperAttr014, TestSize.Level1)
 /**
  * @tc.name: ComponentSwiperAttributeSetTest019
  * @tc.desc: Verify attribute id,visibility.
- * @tc.require: AR000DSEFG
  */
 HWTEST_F(SwiperTddTest, SwiperAttr019, TestSize.Level1)
 {

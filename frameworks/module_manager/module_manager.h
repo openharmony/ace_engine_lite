@@ -45,45 +45,45 @@ public:
     }
 
     /**
-     * @brief: require javascript module object with given module name.
+     * @brief require javascript module object with given module name.
      *
-     * @param: moduleName name of the module required
-     * @returns: javascript module object
+     * @param moduleName name of the module required
+     * @returns javascript module object
      */
     JSIValue RequireModule(const char * const moduleName);
 
     /**
-     * @brief: Release module object created by RequireModule.
-     *         This Method should be called when current js page is
-     *         going to destroy
+     * @brief Release module object created by RequireModule.
+     *        This Method should be called when current js page is
+     *        going to destroy
      */
     void CleanUpModule();
 
     /**
-     * @brief: Call OnTerminate callbacks of required modules.
-     *         This Method should be called when current application is
-     *         going to terminate
+     * @brief Call OnTerminate callbacks of required modules.
+     *        This Method should be called when current application is
+     *        going to terminate
      */
     void OnTerminate();
 
     /**
-     * @brief: Set product modules getter hook.
+     * @brief Set product modules getter hook.
      *
-     * @param: the hook
+     * @param the hook
      */
     void SetProductModulesGetter(ProductModulesGetter getter);
 
     /**
-     * @brief: Set private modules getter hook.
+     * @brief Set private modules getter hook.
      *
-     * @param: the hook
+     * @param the hook
      */
     void SetPrivateModulesGetter(PrivateModulesGetter getter);
 
     /**
-     * @brief: Set bundle name getter hook.
+     * @brief Set bundle name getter hook.
      *
-     * @param: the hook
+     * @param the hook
      */
     void SetBundleNameGetter(BundleNameGetter getter);
 
@@ -116,7 +116,7 @@ private:
     virtual ~ModuleManager() {}
 
     /**
-     * @brief: get category and name with given moduleName.
+     * @brief get category and name with given moduleName.
      *
      * @param [in] moduleName module name passed from JS, e.g. system.vibrator
      * @param [out] category pointer to category which this module belongs to
@@ -128,7 +128,7 @@ private:
     bool ParseModuleName(const char * const moduleName, char** category, char** name) const;
 
     /**
-     * @brief: get module object with given module name.
+     * @brief obtains the module object with the given module name.
      *
      * @param [in] moduleName module name
      * @param [in] modules array of module infos

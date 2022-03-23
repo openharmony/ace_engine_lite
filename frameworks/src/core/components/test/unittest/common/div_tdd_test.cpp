@@ -73,7 +73,7 @@ void DivTddTest::ComponentDivStyleSetTest008()
     } else {
         printf("ComponentDivStyleSetTest008 fail\n");
     }
-    EXPECT_TRUE(divView->GetWidth() == 0);
+    EXPECT_EQ(divView->GetWidth(), 0);
     delete (component);
     component = nullptr;
 
@@ -116,7 +116,7 @@ void DivTddTest::ComponentDivStyleSetTest009()
     } else {
         printf("ComponentDivStyleSetTest009 fail\n");
     }
-    EXPECT_TRUE(divView->GetWidth() == 1);
+    EXPECT_EQ(divView->GetWidth(), 1);
     delete (component);
     component = nullptr;
 
@@ -204,7 +204,7 @@ void DivTddTest::ComponentDivStyleSetTest011()
     } else {
         printf("ComponentDivStyleSetTest011 fail\n");
     }
-    EXPECT_TRUE(divView->GetHeight() == 0);
+    EXPECT_EQ(divView->GetHeight(), 0);
     delete (component);
     component = nullptr;
 
@@ -294,10 +294,10 @@ void DivTddTest::ComponentDivStyleSetTest013()
     } else {
         printf("ComponentDivStyleSetTest013 fail\n");
     }
-    EXPECT_TRUE(divView->GetStyle(STYLE_MARGIN_LEFT) == 0);
-    EXPECT_TRUE(divView->GetStyle(STYLE_MARGIN_TOP) == 0);
-    EXPECT_TRUE(divView->GetStyle(STYLE_MARGIN_RIGHT) == 0);
-    EXPECT_TRUE(divView->GetStyle(STYLE_MARGIN_BOTTOM) == 0);
+    EXPECT_EQ(divView->GetStyle(STYLE_MARGIN_LEFT), 0);
+    EXPECT_EQ(divView->GetStyle(STYLE_MARGIN_TOP), 0);
+    EXPECT_EQ(divView->GetStyle(STYLE_MARGIN_RIGHT), 0);
+    EXPECT_EQ(divView->GetStyle(STYLE_MARGIN_BOTTOM), 0);
     delete (component);
     component = nullptr;
 
@@ -391,7 +391,7 @@ void DivTddTest::ComponentDivStyleSetTest015()
     } else {
         printf("ComponentDivStyleSetTest015 fail\n");
     }
-    EXPECT_TRUE(divView->GetStyle(STYLE_BORDER_WIDTH) == 0);
+    EXPECT_EQ(divView->GetStyle(STYLE_BORDER_WIDTH), 0);
     delete (component);
     component = nullptr;
 
@@ -477,7 +477,7 @@ void DivTddTest::ComponentDivStyleSetTest017()
     } else {
         printf("ComponentDivStyleSetTest017 fail\n");
     }
-    EXPECT_TRUE(divView->GetStyle(STYLE_BORDER_RADIUS) == 0);
+    EXPECT_EQ(divView->GetStyle(STYLE_BORDER_RADIUS), 0);
     delete (component);
     component = nullptr;
 
@@ -563,7 +563,7 @@ void DivTddTest::ComponentDivStyleSetTest019()
     } else {
         printf("ComponentDivStyleSetTest019 fail\n");
     }
-    EXPECT_TRUE(divView->GetX() == 0);
+    EXPECT_EQ(divView->GetX(), 0);
     delete (component);
     component = nullptr;
 
@@ -649,7 +649,7 @@ void DivTddTest::ComponentDivStyleSetTest021()
     } else {
         printf("ComponentDivStyleSetTest021 fail\n");
     }
-    EXPECT_TRUE(divView->GetY() == 0);
+    EXPECT_EQ(divView->GetY(), 0);
     delete (component);
     component = nullptr;
 
@@ -978,7 +978,6 @@ void DivTddTest::RunTests()
 /* *
  * @tc.name: ComponentDivAttributeSetTest015
  * @tc.desc: Verify attribute(which is not support) will not affect normal attribute set.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, divAttr015, TestSize.Level1)
 {
@@ -988,7 +987,6 @@ HWTEST_F(DivTddTest, divAttr015, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest008
  * @tc.desc: Verify width style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div008, TestSize.Level0)
 {
@@ -998,7 +996,6 @@ HWTEST_F(DivTddTest, div008, TestSize.Level0)
 /* *
  * @tc.name: ComponentDivStyleSetTest009
  * @tc.desc: Verify Common style width set boundary value.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div009, TestSize.Level1)
 {
@@ -1008,7 +1005,6 @@ HWTEST_F(DivTddTest, div009, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest010
  * @tc.desc: Verify Common style width set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div010, TestSize.Level1)
 {
@@ -1018,7 +1014,6 @@ HWTEST_F(DivTddTest, div010, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest011
  * @tc.desc: Verify height style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div011, TestSize.Level1)
 {
@@ -1028,7 +1023,6 @@ HWTEST_F(DivTddTest, div011, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest012
  * @tc.desc: Verify Common style height set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div012, TestSize.Level1)
 {
@@ -1038,7 +1032,6 @@ HWTEST_F(DivTddTest, div012, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest013
  * @tc.desc: Verify margin style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div013, TestSize.Level1)
 {
@@ -1048,7 +1041,6 @@ HWTEST_F(DivTddTest, div013, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest014
  * @tc.desc: Verify Common style margin set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div014, TestSize.Level1)
 {
@@ -1058,7 +1050,6 @@ HWTEST_F(DivTddTest, div014, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest015
  * @tc.desc: Verify borderWidth style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div015, TestSize.Level1)
 {
@@ -1068,7 +1059,6 @@ HWTEST_F(DivTddTest, div015, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest016
  * @tc.desc: Verify Common style borderWidth set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div016, TestSize.Level1)
 {
@@ -1078,7 +1068,6 @@ HWTEST_F(DivTddTest, div016, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest017
  * @tc.desc: Verify borderRadius style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div017, TestSize.Level1)
 {
@@ -1088,7 +1077,6 @@ HWTEST_F(DivTddTest, div017, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest018
  * @tc.desc: Verify Common style borderRadius set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div018, TestSize.Level1)
 {
@@ -1098,7 +1086,6 @@ HWTEST_F(DivTddTest, div018, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest019
  * @tc.desc: Verify left style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div019, TestSize.Level1)
 {
@@ -1108,7 +1095,6 @@ HWTEST_F(DivTddTest, div019, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest020
  * @tc.desc: Verify Common style left set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div020, TestSize.Level1)
 {
@@ -1118,7 +1104,6 @@ HWTEST_F(DivTddTest, div020, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest021
  * @tc.desc: Verify top style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div021, TestSize.Level1)
 {
@@ -1128,7 +1113,6 @@ HWTEST_F(DivTddTest, div021, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest022
  * @tc.desc: Verify Common style top set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div022, TestSize.Level1)
 {
@@ -1138,7 +1122,6 @@ HWTEST_F(DivTddTest, div022, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest023
  * @tc.desc: Verify borderColor style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div023, TestSize.Level1)
 {
@@ -1148,7 +1131,6 @@ HWTEST_F(DivTddTest, div023, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest024
  * @tc.desc: Verify Common style borderColor set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div024, TestSize.Level1)
 {
@@ -1158,7 +1140,6 @@ HWTEST_F(DivTddTest, div024, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest025
  * @tc.desc: Verify backgroundColor style can set nomally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div025, TestSize.Level1)
 {
@@ -1168,7 +1149,6 @@ HWTEST_F(DivTddTest, div025, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest026
  * @tc.desc: Verify Common style backgroundColor set value out of boundary.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div026, TestSize.Level1)
 {
@@ -1178,7 +1158,6 @@ HWTEST_F(DivTddTest, div026, TestSize.Level1)
 /* *
  * @tc.name: ComponentDivStyleSetTest032
  * @tc.desc: Verify set style which is not support, system can run normally.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(DivTddTest, div032, TestSize.Level1)
 {

@@ -22,7 +22,7 @@
 
 namespace OHOS {
 namespace ACELite {
-const char * const BUNDLE1 = 
+const char * const BUNDLE1 =
     "(function () {\n"
     "    return new ViewModel({\n"
     "        render: function render(vm) {\n"
@@ -118,7 +118,7 @@ const char * const BUNDLE2 =
     "    });\n"
     "})();\n";
 
-const char * const BUNDLE3 = 
+const char * const BUNDLE3 =
     "(function () {\n"
     "    return new ViewModel({\n"
     "        render: function render(vm) {\n"

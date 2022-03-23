@@ -298,7 +298,6 @@ void MarqueeTddTest::ComponentMarqueeStyleSetTest011()
 /**
  * @tc.name: ComponentMarqueeStyleSetTest012
  * @tc.desc: Verify Marquee style font size set correct value.
- * @tc.require: SR000DSEF7
  */
 void MarqueeTddTest::ComponentMarqueeStyleSetTest012()
 {
@@ -344,7 +343,6 @@ void MarqueeTddTest::ComponentMarqueeStyleSetTest012()
 /**
  * @tc.name: ComponentMarqueeStyleSetTest013
  * @tc.desc: Verify Marquee style font size set incorrect value.
- * @tc.require: SR000DSEF7
  */
 void MarqueeTddTest::ComponentMarqueeStyleSetTest013()
 {
@@ -409,7 +407,6 @@ void MarqueeTddTest::RunTests()
 /**
  * @tc.name: ComponentMarqueeStyleSetTest006
  * @tc.desc: Verify Marquee style color set boundary value.
- * @tc.require: AR000DSEFH
  */
 HWTEST_F(MarqueeTddTest, marStyle006, TestSize.Level0)
 {
@@ -419,7 +416,6 @@ HWTEST_F(MarqueeTddTest, marStyle006, TestSize.Level0)
 /**
  * @tc.name: ComponentMarqueeStyleSetTest007
  * @tc.desc: Verify Marquee style color set boundary value.
- * @tc.require: AR000DSEFH
  */
 HWTEST_F(MarqueeTddTest, marStyle007, TestSize.Level1)
 {
@@ -429,7 +425,6 @@ HWTEST_F(MarqueeTddTest, marStyle007, TestSize.Level1)
 /**
  * @tc.name: ComponentMarqueeStyleSetTest008
  * @tc.desc: Verify Marquee style color set normal value.
- * @tc.require: AR000DSEFH
  */
 HWTEST_F(MarqueeTddTest, marStyle008, TestSize.Level1)
 {
@@ -439,7 +434,6 @@ HWTEST_F(MarqueeTddTest, marStyle008, TestSize.Level1)
 /**
  * @tc.name: ComponentMarqueeStyleSetTest009
  * @tc.desc: Verify Marquee style color set value out of boundary.
- * @tc.require: AR000DSEFH
  */
 HWTEST_F(MarqueeTddTest, marStyle009, TestSize.Level1)
 {
@@ -449,7 +443,6 @@ HWTEST_F(MarqueeTddTest, marStyle009, TestSize.Level1)
 /**
  * @tc.name: ComponentMarqueeStyleSetTest010
  * @tc.desc: Verify Marquee style color set value out of boundary.
- * @tc.require: AR000DSEFH
  */
 HWTEST_F(MarqueeTddTest, marStyle010, TestSize.Level1)
 {

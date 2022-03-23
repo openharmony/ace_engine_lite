@@ -23,7 +23,6 @@ namespace ACELite {
 /**
  * @tc.name: ImageSrcPrivateDataPathSupport001
  * @tc.desc: Verify the path contact processing
- * @tc.require: AR000F3PE1
  */
 HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport001, TestSize.Level0)
 {
@@ -40,7 +39,6 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport001, TestSize.Level0)
 /**
  * @tc.name: ImageSrcPrivateDataPathSupport002
  * @tc.desc: Verify the path contact processing
- * @tc.require: AR000F3PE1
  */
 HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport002, TestSize.Level0)
 {
@@ -57,7 +55,6 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport002, TestSize.Level0)
 /**
  * @tc.name: ImageSrcPrivateDataPathSupport003
  * @tc.desc: Verify the path contact processing
- * @tc.require: AR000F3PE1
  */
 HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport003, TestSize.Level0)
 {
@@ -76,7 +73,6 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport003, TestSize.Level0)
 /**
  * @tc.name: ImageSrcPrivateDataPathSupport004
  * @tc.desc: Verify the path contact processing
- * @tc.require: AR000F3PE1
  */
 HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport004, TestSize.Level0)
 {
@@ -94,7 +90,6 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport004, TestSize.Level0)
 /**
  * @tc.name: ImageSrcPrivateDataPathSupport005
  * @tc.desc: Verify the path contact processing
- * @tc.require: AR000F3PE1
  */
 HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport005, TestSize.Level0)
 {
@@ -112,7 +107,6 @@ HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport005, TestSize.Level0)
 /**
  * @tc.name: ImageSrcPrivateDataPathSupport006
  * @tc.desc: Verify the path contact processing
- * @tc.require: AR000F3PE1
  */
 HWTEST_F(ImageSrcPathTddTest, PrivateDataPathSupport006, TestSize.Level0)
 {

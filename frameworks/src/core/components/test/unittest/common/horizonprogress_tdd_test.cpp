@@ -87,7 +87,7 @@ void HorizonProgressTddTest::HorizonProgressTest001()
     } else {
         printf("[Test Case] [HorizonProgressTest001] FAILED\n");
     }
-    EXPECT_TRUE(strcmp(className, typeid(*progressView).name()) == 0);
+    EXPECT_EQ(strcmp(className, typeid(*progressView).name()), 0);
     component->Release();
     delete component;
     component = nullptr;
@@ -130,7 +130,7 @@ void HorizonProgressTddTest::HorizonProgressTest002()
     } else {
         printf("[Test Case] [HorizonProgressTest002] FAILED\n");
     }
-    EXPECT_TRUE(strcmp(className, typeid(*progressView).name()) == 0);
+    EXPECT_EQ(strcmp(className, typeid(*progressView).name()), 0);
     component->Release();
     delete component;
     component = nullptr;
@@ -173,7 +173,7 @@ void HorizonProgressTddTest::HorizonProgressTest003()
     } else {
         printf("[Test Case] [HorizonProgressTest003] FAILED\n");
     }
-    EXPECT_TRUE(strcmp(className, typeid(*progressView).name()) == 0);
+    EXPECT_EQ(strcmp(className, typeid(*progressView).name()), 0);
     component->Release();
     delete component;
     component = nullptr;
@@ -692,7 +692,6 @@ void HorizonProgressTddTest::RunTests()
 /**
  * @tc.name: Component_HorizonProgress_Create_Test_001
  * @tc.desc: Verify progress component will restore the default progress type=horizontal if setting not exist type.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon001, TestSize.Level1)
 {
@@ -702,7 +701,6 @@ HWTEST_F(HorizonProgressTddTest, horizon001, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_Create_Test_002
  * @tc.desc: Verify progress component will restore the default progress type=horizontal if setting empty type.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon002, TestSize.Level1)
 {
@@ -712,7 +710,6 @@ HWTEST_F(HorizonProgressTddTest, horizon002, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_Create_Test_003
  * @tc.desc: Verify progress component setting normal progress attribute: type=arc successfully.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon003, TestSize.Level1)
 {
@@ -722,7 +719,6 @@ HWTEST_F(HorizonProgressTddTest, horizon003, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_Atrribute_Test_001
  * @tc.desc: Verify progress component will not crash when setting error attribute: percent=-32768.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon004, TestSize.Level1)
 {
@@ -732,7 +728,6 @@ HWTEST_F(HorizonProgressTddTest, horizon004, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_Atrribute_Test_002
  * @tc.desc: Verify progress component setting normal attribute: percent=100 successfully.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon005, TestSize.Level0)
 {
@@ -742,7 +737,6 @@ HWTEST_F(HorizonProgressTddTest, horizon005, TestSize.Level0)
 /**
  * @tc.name: Component_HorizonProgress_Atrribute_Test_003
  * @tc.desc: Verify progress component will not crash when setting error attribute: percent=32767.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon006, TestSize.Level1)
 {
@@ -752,7 +746,6 @@ HWTEST_F(HorizonProgressTddTest, horizon006, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_Atrribute_Test_004
  * @tc.desc: Verify progress component will not crash when setting error attribute: percent=-32769.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon007, TestSize.Level1)
 {
@@ -762,7 +755,6 @@ HWTEST_F(HorizonProgressTddTest, horizon007, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_Atrribute_Test_005
  * @tc.desc: Verify progress component will not crash when setting error attribute: percent=32768.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon008, TestSize.Level1)
 {
@@ -772,7 +764,6 @@ HWTEST_F(HorizonProgressTddTest, horizon008, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_style_Test_001
  * @tc.desc: Verify progress component setting normal progress style: color=0x000000(0) successfully.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon009, TestSize.Level1)
 {
@@ -782,7 +773,6 @@ HWTEST_F(HorizonProgressTddTest, horizon009, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_style_Test_005
  * @tc.desc: Verify progress component will restore the default color=0x6B9AC7(7051975) if setting error value.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon013, TestSize.Level0)
 {
@@ -792,7 +782,6 @@ HWTEST_F(HorizonProgressTddTest, horizon013, TestSize.Level0)
 /**
  * @tc.name: Component_HorizonProgress_style_Test_006
  * @tc.desc: Verify progress component setting normal progress style: strokeWidth=0 successfully.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon014, TestSize.Level1)
 {
@@ -802,7 +791,6 @@ HWTEST_F(HorizonProgressTddTest, horizon014, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_style_Test_007
  * @tc.desc: Verify progress component setting normal progress style: strokeWidth=32767 successfully.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon015, TestSize.Level0)
 {
@@ -812,7 +800,6 @@ HWTEST_F(HorizonProgressTddTest, horizon015, TestSize.Level0)
 /**
  * @tc.name: Component_HorizonProgress_style_Test_008
  * @tc.desc: Verify progress component will not crash when setting error style: strokeWidth=32768.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon016, TestSize.Level1)
 {
@@ -822,7 +809,6 @@ HWTEST_F(HorizonProgressTddTest, horizon016, TestSize.Level1)
 /**
  * @tc.name: Component_HorizonProgress_style_Test_009
  * @tc.desc: Verify progress component support setting error stroke width.
- * @tc.require: AR000DSEFE
  */
 HWTEST_F(HorizonProgressTddTest, horizon017, TestSize.Level1)
 {

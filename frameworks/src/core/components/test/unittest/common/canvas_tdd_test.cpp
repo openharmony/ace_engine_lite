@@ -22,7 +22,7 @@
 
 namespace OHOS {
 namespace ACELite {
-const char * const BUNDLE1 = 
+const char * const BUNDLE1 =
     "(function () {\n"
     "  return new ViewModel({\n"
     "    render: function render(vm) {\n"
@@ -94,8 +94,8 @@ void CanvasTddTest::ComponentCanvasDefaultValueTest002()
     UICanvas *canvas = reinterpret_cast<UICanvas *>(GetViewByRef(page, "canvas1"));
     EXPECT_TRUE(canvas != nullptr);
     if (canvas != nullptr) {
-        EXPECT_TRUE(canvas->GetStartPosition().x == 0);
-        EXPECT_TRUE(canvas->GetStartPosition().y == 0);
+        EXPECT_EQ(canvas->GetStartPosition().x, 0);
+        EXPECT_EQ(canvas->GetStartPosition().y, 0);
     }
     DestroyPage(page);
     TDD_CASE_END();

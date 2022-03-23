@@ -112,7 +112,7 @@ uint16_t BaseTest::SetCompnentNameId(const char *componentName)
         return K_UNKNOWN;
     }
     uint8_t maxLength = 9;
-    char *tarComponentName = (char *)malloc(maxLength);
+    char *tarComponentName = reinterpret_cast<char *>(malloc(maxLength));
     if (tarComponentName == nullptr) {
         HILOG_WARN(HILOG_MODULE_ACE, "alloc memory fail\n");
         return K_UNKNOWN;

@@ -34,7 +34,7 @@ namespace ACELite {
 class StateChangeListener final : public UICheckBox::OnChangeListener {
 public:
     ACE_DISALLOW_COPY_AND_MOVE(StateChangeListener);
-    StateChangeListener(jerry_value_t fn)
+    explicit StateChangeListener(jerry_value_t fn)
     {
         fn_ = jerry_acquire_value(fn);
         isChanging_ = false;
