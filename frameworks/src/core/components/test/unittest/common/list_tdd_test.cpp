@@ -221,7 +221,6 @@ void ListTddTest::RunTests()
 /**
  * @tc.name: Component_List_Create_Test_001
  * @tc.desc: Verify list component support setting flex-direction style = row.
- * @tc.require: AR000DSEFB
  */
 HWTEST_F(ListTddTest, ListTest001, TestSize.Level1)
 {
@@ -231,7 +230,6 @@ HWTEST_F(ListTddTest, ListTest001, TestSize.Level1)
 /**
  * @tc.name: Component_List_Create_Test_002
  * @tc.desc: Verify list component support setting flex-direction style = column.
- * @tc.require: AR000DSEFB
  */
 HWTEST_F(ListTddTest, ListTest002, TestSize.Level1)
 {
@@ -241,7 +239,6 @@ HWTEST_F(ListTddTest, ListTest002, TestSize.Level1)
 /**
  * @tc.name: Component_List_Create_Test_003
  * @tc.desc: Verify list component support restore the default flex-direction=column if setting not exist type.
- * @tc.require: AR000DSEFB
  */
 HWTEST_F(ListTddTest, ListTest003, TestSize.Level1)
 {
@@ -251,7 +248,6 @@ HWTEST_F(ListTddTest, ListTest003, TestSize.Level1)
 /**
  * @tc.name: Component_List_Create_Test_004
  * @tc.desc: Verify list component support restore the default flex-direction=column if not setting it.
- * @tc.require: AR000DSEFB
  */
 HWTEST_F(ListTddTest, ListTest004, TestSize.Level0)
 {

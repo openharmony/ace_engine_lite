@@ -27,11 +27,11 @@ namespace OHOS {
 namespace ACELite {
 struct TimerInfo {
     bool isPeriodic = false;
-    long delay = 0;
+    int32_t delay = 0;
     void *userCallback = nullptr;
     void *userData = nullptr;
     timerHandle_t *timerHandle = nullptr;
-    long remain = 0;
+    int32_t remain = 0;
 };
 
 class TimerThread : public QThread {

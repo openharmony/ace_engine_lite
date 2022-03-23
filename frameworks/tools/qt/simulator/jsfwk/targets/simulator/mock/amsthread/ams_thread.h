@@ -39,7 +39,7 @@ struct JSAppRecord {
     ~JSAppRecord()
     {
         if (jsApp != nullptr) {
-            const unsigned long waitTime = 20;
+            const uint32_t waitTime = 20;
             while (jsApp->isRunning()) {
                 QThread::msleep(waitTime);
             }

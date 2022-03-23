@@ -78,7 +78,7 @@ void AceMemProc::SysMemTracing()
     }
     HANDLE handle = GetCurrentProcess();
     PROCESS_MEMORY_COUNTERS pmc = {0};
-    if (!GetProcessMemoryInfo(handle, (PROCESS_MEMORY_COUNTERS *)&pmc, sizeof(pmc))) {
+    if (!GetProcessMemoryInfo(handle, reinterpret_cast<PROCESS_MEMORY_COUNTERS *>(&pmc), sizeof(pmc))) {
         HILOG_ERROR(HILOG_MODULE_ACE, "Get process memory error.");
         return;
     }

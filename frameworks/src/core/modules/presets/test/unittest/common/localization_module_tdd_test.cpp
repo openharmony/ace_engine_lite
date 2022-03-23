@@ -66,7 +66,6 @@ void LocalizationModuleTddTest::TearDown()
 /**
  * @tc.name: TestNullValue009
  * @tc.desc: Test null object value in resource file
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(LocalizationModuleTddTest, TestNullValue009, TestSize.Level1)
 {

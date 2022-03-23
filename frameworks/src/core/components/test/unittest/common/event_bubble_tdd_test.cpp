@@ -1461,7 +1461,6 @@ void EventBubbleTddTest::RunTests()
 /* *
  * @tc.name: EventBubbleTest001
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest001, TestSize.Level0)
 {
@@ -1471,7 +1470,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest001, TestSize.Level0)
 /* *
  * @tc.name: EventBubbleTest002
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest002, TestSize.Level0)
 {
@@ -1481,7 +1479,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest002, TestSize.Level0)
 /* *
  * @tc.name: EventBubbleTest003
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest003, TestSize.Level1)
 {
@@ -1491,7 +1488,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest003, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest004
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest004, TestSize.Level1)
 {
@@ -1501,7 +1497,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest004, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest005
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest005, TestSize.Level1)
 {
@@ -1511,7 +1506,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest005, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest006
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest006, TestSize.Level1)
 {
@@ -1521,7 +1515,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest006, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest007
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest007, TestSize.Level1)
 {
@@ -1531,7 +1524,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest007, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest008
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest008, TestSize.Level1)
 {
@@ -1541,7 +1533,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest008, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest009
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest009, TestSize.Level1)
 {
@@ -1551,7 +1542,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest009, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest010
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest010, TestSize.Level1)
 {
@@ -1561,7 +1551,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest010, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest011
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest011, TestSize.Level1)
 {
@@ -1571,7 +1560,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest011, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest012
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest012, TestSize.Level1)
 {
@@ -1581,7 +1569,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest012, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest013
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest013, TestSize.Level1)
 {
@@ -1591,7 +1578,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest013, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest014
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest014, TestSize.Level1)
 {
@@ -1601,7 +1587,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest014, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest015
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest015, TestSize.Level1)
 {
@@ -1611,7 +1596,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest015, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest016
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest016, TestSize.Level1)
 {
@@ -1621,7 +1605,6 @@ HWTEST_F(EventBubbleTddTest, EventBubbleTest016, TestSize.Level1)
 /* *
  * @tc.name: EventBubbleTest017
  * @tc.desc: Verify event bubble.
- * @tc.require: AR000F3PDN
  */
 HWTEST_F(EventBubbleTddTest, EventBubbleTest017, TestSize.Level1)
 {

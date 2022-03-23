@@ -52,7 +52,7 @@ public:
         pre_ = preStyle;
     }
 
-    AppStyle* GetPre()
+    const AppStyle* GetPre() const
     {
         return pre_;
     }

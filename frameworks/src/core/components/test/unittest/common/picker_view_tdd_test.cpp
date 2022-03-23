@@ -419,7 +419,6 @@ void PickerViewTddTest::RunTests()
 /**
  * @tc.name: ComponentPickerviewAttributeSetTest001
  * @tc.desc: Verify picker-view invalid type attribute.
- * @tc.require: AR000DSEFD
  */
 HWTEST_F(PickerViewTddTest, PickerviewAttr001, TestSize.Level1)
 {
@@ -429,7 +428,6 @@ HWTEST_F(PickerViewTddTest, PickerviewAttr001, TestSize.Level1)
 /**
  * @tc.name: ComponentPickerviewAttributeSetTest002
  * @tc.desc: Verify text picker-view valid attributes.
- * @tc.require: AR000DSEFD
  */
 HWTEST_F(PickerViewTddTest, PickerviewAttr002, TestSize.Level0)
 {
@@ -439,7 +437,6 @@ HWTEST_F(PickerViewTddTest, PickerviewAttr002, TestSize.Level0)
 /**
  * @tc.name: ComponentPickerviewAttributeSetTest003
  * @tc.desc: Verify text picker-view invalid range attribute.
- * @tc.require: AR000DSEFD
  */
 HWTEST_F(PickerViewTddTest, PickerviewAttr003, TestSize.Level1)
 {
@@ -449,7 +446,6 @@ HWTEST_F(PickerViewTddTest, PickerviewAttr003, TestSize.Level1)
 /**
  * @tc.name: ComponentPickerviewAttributeSetTest004
  * @tc.desc: Verify text picker-view invalid selected attribute.
- * @tc.require: AR000DSEFD
  */
 HWTEST_F(PickerViewTddTest, PickerviewAttr004, TestSize.Level1)
 {
@@ -459,7 +455,6 @@ HWTEST_F(PickerViewTddTest, PickerviewAttr004, TestSize.Level1)
 /**
  * @tc.name: ComponentPickerviewAttributeSetTest005
  * @tc.desc: Verify text picker-view with out of bound selected attribute.
- * @tc.require: AR000DSEFD
  */
 HWTEST_F(PickerViewTddTest, PickerviewAttr005, TestSize.Level1)
 {

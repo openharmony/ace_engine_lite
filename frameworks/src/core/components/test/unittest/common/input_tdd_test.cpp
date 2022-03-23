@@ -39,7 +39,6 @@ bool InputTddTest::CompareColor(ColorType color, uint32_t colorIntValue) const
 /**
  * @tc.name: ComponentInputAttributeTest01
  * @tc.desc: test the attribute checked in checkbox is correct
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputAttributeTest01, TestSize.Level1)
 {
@@ -91,7 +90,6 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest01, TestSize.Level1)
 /**
  * @tc.name: ComponentInputAttributeTest02
  * @tc.desc: test the attribute value
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputAttributeTest02, TestSize.Level1)
 {
@@ -139,7 +137,6 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest02, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest03
  * @tc.desc: test the button value
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest03, TestSize.Level1)
 {
@@ -201,7 +198,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest03, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest04
  * @tc.desc: test the text-align style in button
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest04, TestSize.Level1)
 {
@@ -254,7 +250,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest04, TestSize.Level1)
 /**
  * @tc.name: ComponentInputAttributeTest05
  * @tc.desc: test the checked attribute in checkbox
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputAttributeTest05, TestSize.Level1)
 {
@@ -305,7 +300,6 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest05, TestSize.Level1)
 /**
  * @tc.name: ComponentInputAttributeTest06
  * @tc.desc: test the width style in button
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputAttributeTest06, TestSize.Level1)
 {
@@ -353,7 +347,6 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest06, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest07
  * @tc.desc: test the margin style
- * @tc.require: AR000DSEFK
  */
 void InputTddTest::ComponentInputStyleTest07()
 {
@@ -440,7 +433,6 @@ void InputTddTest::ComponentInputStyleTest07Extra()
 /**
  * @tc.name: ComponentInputStyleTest08
  * @tc.desc: test the border style in button
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest08, TestSize.Level1)
 {
@@ -506,7 +498,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest08, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest09
  * @tc.desc: test checkbox width, height and id
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest09, TestSize.Level1)
 {
@@ -554,7 +545,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest09, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest10
  * @tc.desc: test the margin style in checkbox
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest10, TestSize.Level1)
 {
@@ -619,7 +609,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest10, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest11
  * @tc.desc: test the border and backgroundColor style in button
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest11, TestSize.Level1)
 {
@@ -685,7 +674,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest11, TestSize.Level1)
 /**
  * @tc.name: ComponentInputStyleTest12
  * @tc.desc: test the value attribute in input component
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputStyleTest12, TestSize.Level1)
 {
@@ -724,7 +712,6 @@ HWTEST_F(InputTddTest, ComponentInputStyleTest12, TestSize.Level1)
 /**
  * @tc.name: ComponentInputAttributeTest13
  * @tc.desc: test the unsupport attribute in checkbox
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputAttributeTest13, TestSize.Level1)
 {
@@ -765,7 +752,6 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest13, TestSize.Level1)
 /**
  * @tc.name: ComponentInputAttributeTest14
  * @tc.desc: test the not support style in checkbox
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentInputAttributeTest14, TestSize.Level1)
 {
@@ -814,7 +800,6 @@ HWTEST_F(InputTddTest, ComponentInputAttributeTest14, TestSize.Level1)
 /**
  * @tc.name: ComponentRadioAttributeTest01
  * @tc.desc: test the checked attribute in radioButton
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentRadioAttributeTest01, TestSize.Level1)
 {
@@ -863,7 +848,6 @@ HWTEST_F(InputTddTest, ComponentRadioAttributeTest01, TestSize.Level1)
 /**
  * @tc.name: ComponentRadioStyleTest03
  * @tc.desc: test the border style in button
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentRadioStyleTest03, TestSize.Level1)
 {
@@ -917,7 +901,6 @@ HWTEST_F(InputTddTest, ComponentRadioStyleTest03, TestSize.Level1)
 /**
  * @tc.name: ComponentRadioStyleTest04
  * @tc.desc: test set radio width, height and id
- * @tc.require: AR000DSEFK
  */
 HWTEST_F(InputTddTest, ComponentRadioStyleTest04, TestSize.Level1)
 {

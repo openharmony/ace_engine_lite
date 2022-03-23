@@ -156,7 +156,6 @@ void JsAsyncWorkTddTest::RunTests()
 /**
  * @tc.name: JsAsyncWorkTest001
  * @tc.desc: Verify DispatchAsyncWork with valid parameters.
- * @tc.require: AR000DSEHQ
  */
 HWTEST_F(JsAsyncWorkTddTest, test001, TestSize.Level1)
 {
@@ -166,7 +165,6 @@ HWTEST_F(JsAsyncWorkTddTest, test001, TestSize.Level1)
 /**
  * @tc.name: JsAsyncWorkTest002
  * @tc.desc: Verify DispatchAsyncWork with invalid parameters.
- * @tc.require: AR000DSEHQ
  */
 HWTEST_F(JsAsyncWorkTddTest, test002, TestSize.Level1)
 {
@@ -176,7 +174,6 @@ HWTEST_F(JsAsyncWorkTddTest, test002, TestSize.Level1)
 /**
  * @tc.name: JsAsyncWorkTest003
  * @tc.desc: Verify ExcuteAsyncWork with valid parameters.
- * @tc.require: AR000DSEHQ
  */
 HWTEST_F(JsAsyncWorkTddTest, test003, TestSize.Level1)
 {
@@ -186,7 +183,6 @@ HWTEST_F(JsAsyncWorkTddTest, test003, TestSize.Level1)
 /**
  * @tc.name: JsAsyncWorkTest004
  * @tc.desc: Verify ExcuteAsyncWork with invalid parameters.
- * @tc.require: AR000DSEHQ
  */
 HWTEST_F(JsAsyncWorkTddTest, test004, TestSize.Level1)
 {
@@ -196,7 +192,6 @@ HWTEST_F(JsAsyncWorkTddTest, test004, TestSize.Level1)
 /**
  * @tc.name: JsAsyncWorkTest005
  * @tc.desc: Verify ExcuteAsyncWork with invalid parameters.
- * @tc.require: AR000DSEHQ
  */
 HWTEST_F(JsAsyncWorkTddTest, test005, TestSize.Level1)
 {

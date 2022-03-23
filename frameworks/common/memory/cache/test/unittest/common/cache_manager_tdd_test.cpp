@@ -32,7 +32,6 @@ void CacheManagerTddTest::SetUp()
 /**
  * @tc.name: CacheDistributeTest001
  * @tc.desc: Verify the cache distribution process
- * @tc.require: AR000F8FOG
  */
 HWTEST_F(CacheManagerTddTest, CacheDistribute001, TestSize.Level1)
 {
@@ -67,7 +66,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute001, TestSize.Level1)
 /**
  * @tc.name: CacheDistributeTest002
  * @tc.desc: Verify the cache distribution process
- * @tc.require: AR000F8FOG
  */
 HWTEST_F(CacheManagerTddTest, CacheDistribute002, TestSize.Level1)
 {
@@ -111,7 +109,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute002, TestSize.Level1)
 /**
  * @tc.name: CacheDistributeTest003
  * @tc.desc: Verify the cache distribution process
- * @tc.require: AR000F8FOG
  */
 HWTEST_F(CacheManagerTddTest, CacheDistribute003, TestSize.Level1)
 {
@@ -143,7 +140,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute003, TestSize.Level1)
 /**
  * @tc.name: CacheDistributeTest004
  * @tc.desc: Verify the cache distribution process
- * @tc.require: AR000F8FOG
  */
 HWTEST_F(CacheManagerTddTest, CacheDistribute004, TestSize.Level1)
 {
@@ -166,9 +162,9 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute004, TestSize.Level1)
      */
     uintptr_t bufStartPos = CacheManager::GetInstance().GetCacheBufAddress(CacheUser::USER_LOCALICATION);
     size_t bufLength = CacheManager::GetInstance().GetCacheBufLength(CacheUser::USER_LOCALICATION);
-    uint32_t headMagicNumber = *(uint32_t *)(bufStartPos - MAGIC_NUMBER_LENGTH);
+    uint32_t headMagicNumber = *reinterpret_cast<uint32_t *>(bufStartPos - MAGIC_NUMBER_LENGTH);
     EXPECT_EQ(headMagicNumber, CACHE_MEM_MAGIC_NUMBER);
-    uint32_t tailMagicNumber = *(uint32_t *)(bufStartPos + bufLength);
+    uint32_t tailMagicNumber = *reinterpret_cast<uint32_t *>(bufStartPos + bufLength);
     EXPECT_EQ(tailMagicNumber, CACHE_MEM_MAGIC_NUMBER);
     ace_free(buffer);
     buffer = nullptr;
@@ -177,7 +173,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute004, TestSize.Level1)
 /**
  * @tc.name: CacheDistributeTest005
  * @tc.desc: Verify the cache distribution process and overflow checking
- * @tc.require: AR000F8FOG
  */
 HWTEST_F(CacheManagerTddTest, CacheDistribute005, TestSize.Level0)
 {
@@ -216,7 +211,6 @@ HWTEST_F(CacheManagerTddTest, CacheDistribute005, TestSize.Level0)
 /**
  * @tc.name: CacheDistributeTest006
  * @tc.desc: Verify the cache distribution process, considering the magic number length
- * @tc.require: AR000F8FOG
  */
 HWTEST_F(CacheManagerTddTest, CacheDistribute006, TestSize.Level1)
 {

@@ -77,7 +77,7 @@ public:
      * The rendered result will be set to the rendered property of descriptor object,
      * like { if: true, rendered: {}, getter, render }.
      * @param descriptor The if directive descriptor object to be rendered.
-     * @return  The rendered result which will be a element.
+     * @return  The rendered result which will be an element.
      */
     static JSValue RenderIfDescriptor(JSValue descriptor);
 
@@ -86,7 +86,7 @@ public:
      * The rendered result will be set to the rendered property of descriptor object,
      * like { for: true, rendered: [...], getter, render }.
      * @param descriptor The for directive descriptor object to be rendered.
-     * @return  The rendered result which will be a element array.
+     * @return  The rendered result which will be an element array.
      */
     static JSValue RenderForDescriptor(JSValue descriptor);
 
@@ -134,7 +134,7 @@ public:
     static void ReleaseIfDescriptor(JSValue descriptor);
 
     /**
-     * @brief Release a element.
+     * @brief Release an element.
      * @param element The element to be released.
      */
     static void ReleaseElement(JSValue element);

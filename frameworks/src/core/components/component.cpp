@@ -180,7 +180,7 @@ void Component::SetViewExtraMsg()
         HILOG_ERROR(HILOG_MODULE_ACE, "Failed to mapping native view with DOM element.");
         return;
     }
-    extraMsg->elementPtr = (void *)&nativeElement_;
+    extraMsg->elementPtr = reinterpret_cast<void *>(&nativeElement_);
     view->SetExtraMsg(extraMsg);
 }
 
@@ -716,7 +716,7 @@ void Component::ParseOptions()
     }
 
     if (!JSObject::Is(options_)) {
-        HILOG_WARN(HILOG_MODULE_ACE, "options is not a object type.");
+        HILOG_WARN(HILOG_MODULE_ACE, "options is not an object type.");
         return;
     }
 
@@ -1040,7 +1040,8 @@ int32_t Component::GetAnimatorValue(char *animatorValue, const int8_t index, boo
         return 0;
     }
 
-    long convertedValue = isOpacity ? (long)((strtod(value, nullptr) * ALPHA_MAX)) : strtol(value, nullptr, DEC);
+    int32_t convertedValue =
+        isOpacity ? (strtod(value, nullptr) * ALPHA_MAX) : static_cast<int32_t>(strtol(value, nullptr, DEC));
     if (TransitionImpl::IsEndWith(value, "rad")) {
         uint8_t degConversionRate = 57;
         convertedValue = convertedValue * degConversionRate;

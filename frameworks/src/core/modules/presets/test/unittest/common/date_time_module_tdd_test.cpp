@@ -66,7 +66,6 @@ char* DateTimeModuleTddTest::FormatDate(const jerry_value_t dateTime,
 /**
  * @tc.name: DateTime_Locale_Test001
  * @tc.desc: Test the effective value of locale
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Locale_Test001, TestSize.Level0)
 {
@@ -109,7 +108,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Locale_Test001, TestSize.Level0)
 /**
  * @tc.name: DateTime_Locale_Test002
  * @tc.desc: Test the effective and invalid value of locale
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Locale_Test002, TestSize.Level1)
 {
@@ -152,7 +150,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Locale_Test002, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour12_Group_Test003
  * @tc.desc: test the hour12 style true, hour style numeric, set different minute and second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_Group_Test003, TestSize.Level1)
 {
@@ -234,7 +231,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_Group_Test003, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour12_Group_Test004
  * @tc.desc: test the hour12 style true, hour style 2-digit, set different minute and second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_Group_Test004, TestSize.Level1)
 {
@@ -317,7 +313,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_Group_Test004, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour12_FALSE_Test005
  * @tc.desc: test the hour12 style true, hour style numeric, set different minute and second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_False_Test_005, TestSize.Level1)
 {
@@ -400,7 +395,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_False_Test_005, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour12_False_Test_006
  * @tc.desc: test the hour12 style true, hour style 2-digit, set different minute and second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_False_Test006, TestSize.Level1)
 {
@@ -483,7 +477,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour12_False_Test006, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour_Minute_Second_Test007
  * @tc.desc: test hour style numeric, set different minute and second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Minute_Second_Test007, TestSize.Level1)
 {
@@ -562,7 +555,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Minute_Second_Test007, TestSize.Le
 /**
  * @tc.name: DateTime_Hour_Minute_Second_Test_008
  * @tc.desc: hour style 2-digit, set different minute and second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Minute_Second_Test008, TestSize.Level1)
 {
@@ -642,7 +634,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Minute_Second_Test008, TestSize.Le
 /**
  * @tc.name: DateTime_Hour_Test003
  * @tc.desc: test the different style group about hour and minute
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Minute_Test009, TestSize.Level1)
 {
@@ -719,7 +710,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Minute_Test009, TestSize.Level1)
 /**
  * @tc.name: DateTime_Time_Invalid_Test010
  * @tc.desc: test the invalid time group
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Time_Invalid_Test010, TestSize.Level1)
 {
@@ -764,7 +754,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Time_Invalid_Test010, TestSize.Level1)
 /**
  * @tc.name: DateTime_Weekday_Test011
  * @tc.desc: Test the different value of weekday
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Weekday_Test011, TestSize.Level1)
 {
@@ -821,7 +810,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Weekday_Test011, TestSize.Level1)
 /**
  * @tc.name: DateTime_Year_Test012
  * @tc.desc: Test the different value of year
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Test012, TestSize.Level1)
 {
@@ -878,7 +866,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Test012, TestSize.Level1)
 /**
  * @tc.name: DateTime_Month_Test013
  * @tc.desc: Test the enum value of month
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Month_Test013, TestSize.Level1)
 {
@@ -935,7 +922,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Month_Test013, TestSize.Level1)
 /**
  * @tc.name: DateTime_Day_Test014
  * @tc.desc: Test the invalid value of day style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Day_Test014, TestSize.Level1)
 {
@@ -993,7 +979,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Day_Test014, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour_Test015
  * @tc.desc: Test the invalid value of month
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Test015, TestSize.Level1)
 {
@@ -1051,7 +1036,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Hour_Test015, TestSize.Level1)
 /**
  * @tc.name: DateTime_Minute_Test016
  * @tc.desc: Test the invalid value of minute
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Minute_Test016, TestSize.Level1)
 {
@@ -1108,7 +1092,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Minute_Test016, TestSize.Level1)
 /**
  * @tc.name: DateTime_Second_Test017
  * @tc.desc: Test the enum and invalid second style
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Second_Test017, TestSize.Level1)
 {
@@ -1165,7 +1148,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Second_Test017, TestSize.Level1)
 /**
  * @tc.name: DateTime_Hour_Test018
  * @tc.desc: Test the special locale info
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Special_Time_Test018, TestSize.Level1)
 {
@@ -1223,7 +1205,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Special_Time_Test018, TestSize.Level1)
 /**
  * @tc.name: DateTime_Year_Month_Day_Test019
  * @tc.desc: Test the different month style when year and day style is numeric
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test019, TestSize.Level1)
 {
@@ -1300,7 +1281,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test019, TestSize.Level1
 /**
  * @tc.name: DateTime_Year_Month_Day_Test020
  * @tc.desc: Test the different month style when year style is numeric and day style is 2-digit
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test020, TestSize.Level1)
 {
@@ -1377,7 +1357,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test020, TestSize.Level1
 /**
  * @tc.name: DateTime_Year_Month_Day_Test021
  * @tc.desc: Test the different month style when year style is 2-digit and the day style is numeric
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test021, TestSize.Level1)
 {
@@ -1454,7 +1433,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test021, TestSize.Level1
 /**
  * @tc.name: DateTime_Year_Month_Day_Test022
  * @tc.desc: Test the different month style when year style is 2-digit and the month style is 2-digit
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test022, TestSize.Level1)
 {
@@ -1532,7 +1510,6 @@ HWTEST_F(DateTimeModuleTddTest, DateTime_Year_Month_Day_Test022, TestSize.Level1
  * @tc.name: Weekday_Year_Month_Day_Test023
  * @tc.desc: Test the different month style when year style is numeric and day style is 2-digit,
  * the weekday style is long
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test023, TestSize.Level1)
 {
@@ -1617,7 +1594,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test023, TestSize.Level1)
  * @tc.name: Weekday_Year_Month_Day_Test024
  * @tc.desc: Test the different month style when year style is 2-digit, the day style is numeric,
  * and the weekday style long
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test024, TestSize.Level1)
 {
@@ -1702,7 +1678,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test024, TestSize.Level1)
  * @tc.name: DateTime_Year_Month_Day_Test022
  * @tc.desc: Test the different month style when year style is 2-digit and the month style is 2-digit,
  * and set the weekday style long
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test025, TestSize.Level1)
 {
@@ -1788,7 +1763,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test025, TestSize.Level1)
  * @tc.name: DateTime_Year_Month_Day_Test020
  * @tc.desc: Test the different month style when year style is numeric and day style is 2-digit,
  * set the weekday style long
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test026, TestSize.Level1)
 {
@@ -1874,7 +1848,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test026, TestSize.Level1)
  * @tc.name: DateTime_Year_Month_Day_Test021
  * @tc.desc: Test the different month style when year style is 2-digit and the day style is numeric,
  * and set the weekday style long
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test027, TestSize.Level1)
 {
@@ -1959,7 +1932,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test027, TestSize.Level1)
 /**
  * @tc.name: DateTime_Year_Month_Day_Test022
  * @tc.desc: Test the different month style when year style is 2-digit and the month style is 2-digit
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test028, TestSize.Level1)
 {
@@ -2043,7 +2015,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test028, TestSize.Level1)
  * @tc.name: DateTime_Year_Month_Day_Test022
  * @tc.desc: Test the different month style when year style is 2-digit and the month style is 2-digit,
  * set the weekday style short
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test029, TestSize.Level1)
 {
@@ -2127,7 +2098,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test029, TestSize.Level1)
  * @tc.name: DateTime_Year_Month_Day_Test022
  * @tc.desc: Test the different month style when year style is 2-digit and the month style is 2-digit
  * and set the weekday style short
- * @tc.require: AR000EUO7G
  */
 HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test030, TestSize.Level1)
 {
@@ -2212,7 +2182,6 @@ HWTEST_F(DateTimeModuleTddTest, Weekday_Year_Month_Day_Test030, TestSize.Level1)
 /**
  * @tc.name: Date_Time_Pattern_Test031
  * @tc.desc: Test different date and time group test
- * @tc.require: SR000ERCD4
  */
 HWTEST_F(DateTimeModuleTddTest, Date_Time_Pattern_Test031, TestSize.Level0)
 {

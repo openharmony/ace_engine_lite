@@ -795,7 +795,6 @@ void DfxTddTest::RunTests()
 /* *
  * @tc.name: DfxTest001
  * @tc.desc: Verify error code.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest001, TestSize.Level0)
 {
@@ -805,7 +804,6 @@ HWTEST_F(DfxTddTest, DfxTest001, TestSize.Level0)
 /* *
  * @tc.name: DfxTest002
  * @tc.desc: Verify error message.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest002, TestSize.Level0)
 {
@@ -815,7 +813,6 @@ HWTEST_F(DfxTddTest, DfxTest002, TestSize.Level0)
 /* *
  * @tc.name: DfxTest003
  * @tc.desc: Verify normal process.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest003, TestSize.Level1)
 {
@@ -825,7 +822,6 @@ HWTEST_F(DfxTddTest, DfxTest003, TestSize.Level1)
 /* *
  * @tc.name: DfxTest004
  * @tc.desc: Verify pressure test.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest004, TestSize.Level1)
 {
@@ -835,7 +831,6 @@ HWTEST_F(DfxTddTest, DfxTest004, TestSize.Level1)
 /* *
  * @tc.name: DfxTest005
  * @tc.desc: Verify dump dom id.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest005, TestSize.Level1)
 {
@@ -845,7 +840,6 @@ HWTEST_F(DfxTddTest, DfxTest005, TestSize.Level1)
 /* *
  * @tc.name: DfxTest006
  * @tc.desc: Verify dump default dom tree.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest006, TestSize.Level1)
 {
@@ -855,7 +849,6 @@ HWTEST_F(DfxTddTest, DfxTest006, TestSize.Level1)
 /* *
  * @tc.name: DfxTest007
  * @tc.desc: Verify dump dom tree by id.
- * @tc.require: AR000F3PDP
  */
 HWTEST_F(DfxTddTest, DfxTest007, TestSize.Level1)
 {
