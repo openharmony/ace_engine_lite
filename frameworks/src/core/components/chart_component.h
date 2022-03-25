@@ -63,14 +63,14 @@ public:
     ChartComponent() = delete;
     ChartComponent(jerry_value_t options, jerry_value_t children, AppStyleManager *styleManager);
     ~ChartComponent() {}
-    virtual bool CreateNativeViews() override;
-    virtual bool SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue) override;
-    virtual void PostUpdate(uint16_t attrKeyId) override;
-    virtual void PostRender() override;
-    virtual void ReleaseNativeViews() override;
+    bool CreateNativeViews() override;
+    bool SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue) override;
+    void PostUpdate(uint16_t attrKeyId) override;
+    void PostRender() override;
+    void ReleaseNativeViews() override;
 
 protected:
-    virtual UIView *GetComponentRootView() const override;
+    UIView *GetComponentRootView() const override;
 
 private:
     bool Init();

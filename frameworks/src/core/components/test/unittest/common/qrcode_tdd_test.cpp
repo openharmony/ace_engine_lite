@@ -22,7 +22,7 @@
 
 namespace OHOS {
 namespace ACELite {
-const char * const BUNDLE_ATTRIBUTE1 = 
+const char * const BUNDLE_ATTRIBUTE1 =
     "(function () {\n"
     "    return new ViewModel({\n"
     "        render: function render(vm) {\n"

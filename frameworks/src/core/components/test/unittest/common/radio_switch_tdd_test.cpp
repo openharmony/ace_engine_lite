@@ -209,7 +209,7 @@ void RadioSwitchTddTest::WidthSwitchValueTest004()
         delete component;
         return;
     }
-    EXPECT_TRUE(toggleButton->GetWidth() == 0);
+    EXPECT_EQ(toggleButton->GetWidth(), 0);
     delete component;
     component = nullptr;
 
@@ -221,7 +221,7 @@ void RadioSwitchTddTest::WidthSwitchValueTest004()
     } else {
         printf("[WidthSwitchValueTest004] set the width of switch testaaa failed\n");
     }
-    EXPECT_TRUE(toggleButton->GetWidth() == 0);
+    EXPECT_EQ(toggleButton->GetWidth(), 0);
     delete component;
     component = nullptr;
     TDD_CASE_END();
@@ -313,7 +313,7 @@ void RadioSwitchTddTest::HeightRadioValueTest006()
         delete component;
         return;
     }
-    EXPECT_TRUE(radioButton->GetWidth() == 0);
+    EXPECT_EQ(radioButton->GetWidth(), 0);
     delete component;
     component = nullptr;
 
@@ -329,7 +329,7 @@ void RadioSwitchTddTest::HeightRadioValueTest006()
     } else {
         printf("[HeightRadioValueTest006] passed\n");
     }
-    EXPECT_TRUE(radioButton->GetWidth() == 0);
+    EXPECT_EQ(radioButton->GetWidth(), 0);
     delete component;
     component = nullptr;
     TDD_CASE_END();
@@ -411,7 +411,7 @@ void RadioSwitchTddTest::HeightSwitchValueTest008()
         delete component;
         return;
     }
-    EXPECT_TRUE(button->GetHeight() == 0);
+    EXPECT_EQ(button->GetHeight(), 0);
     delete component;
     component = nullptr;
 
@@ -427,7 +427,7 @@ void RadioSwitchTddTest::HeightSwitchValueTest008()
     } else {
         printf("[HeightSwitchValueTest008] passed\n");
     }
-    EXPECT_TRUE(button->GetHeight() == 0);
+    EXPECT_EQ(button->GetHeight(), 0);
     delete component;
     component = nullptr;
     TDD_CASE_END();
@@ -449,7 +449,6 @@ void RadioSwitchTddTest::RunTests()
 /**
  * @tc.name: Width_Radio_Value_Test001
  * @tc.desc: test the radio width in different range
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, radioWidthTest001, TestSize.Level1)
 {
@@ -459,7 +458,6 @@ HWTEST_F(RadioSwitchTddTest, radioWidthTest001, TestSize.Level1)
 /**
  * @tc.name: Width_Radio_Value_Test002
  * @tc.desc: test the radio width in invalid value
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, radioWidthTest002, TestSize.Level1)
 {
@@ -469,7 +467,6 @@ HWTEST_F(RadioSwitchTddTest, radioWidthTest002, TestSize.Level1)
 /**
  * @tc.name: Width_Switch_Value_Test003
  * @tc.desc: test the switch width in different range
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, widthSwitchTest003, TestSize.Level0)
 {
@@ -479,7 +476,6 @@ HWTEST_F(RadioSwitchTddTest, widthSwitchTest003, TestSize.Level0)
 /**
  * @tc.name: Width_Switch_Value_Test004
  * @tc.desc: set the width of switch invalid value
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, widthSwitchTest004, TestSize.Level1)
 {
@@ -489,7 +485,6 @@ HWTEST_F(RadioSwitchTddTest, widthSwitchTest004, TestSize.Level1)
 /**
  * @tc.name: Height_Radio_Value_Test005
  * @tc.desc: set the height of radio in different range
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, heightRadioTest005, TestSize.Level1)
 {
@@ -499,7 +494,6 @@ HWTEST_F(RadioSwitchTddTest, heightRadioTest005, TestSize.Level1)
 /**
  * @tc.name: Height_Radio_Value_Test006
  * @tc.desc: set the height of radio invalid value
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, heightRadioTest006, TestSize.Level1)
 {
@@ -509,7 +503,6 @@ HWTEST_F(RadioSwitchTddTest, heightRadioTest006, TestSize.Level1)
 /**
  * @tc.name: Height_Switch_Value_Test007
  * @tc.desc: set the height of radio invalid value
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, heightSwitchTest007, TestSize.Level1)
 {
@@ -519,7 +512,6 @@ HWTEST_F(RadioSwitchTddTest, heightSwitchTest007, TestSize.Level1)
 /**
  * @tc.name: Height_Switch_Value_Test008
  * @tc.desc: set the height of radio invalid value
- * @tc.require: AR000F3PDH
  */
 HWTEST_F(RadioSwitchTddTest, heightSwitchTest008, TestSize.Level1)
 {

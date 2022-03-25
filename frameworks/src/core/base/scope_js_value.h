@@ -23,7 +23,7 @@
 
 namespace OHOS {
 namespace ACELite {
-// Local scope JS value, which can be released (decrease the ref count) automaticly
+// Local scope JS value, which can be released (decrease the ref count) automatically
 // when leaving its scope, do not transfer one ScopeJSValue out of its outtest scope.
 class ScopeJSValue final {
 public:

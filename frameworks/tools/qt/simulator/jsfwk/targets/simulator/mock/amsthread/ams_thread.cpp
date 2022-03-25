@@ -221,7 +221,7 @@ void AMSThread::MoveAppToTargetState(JSAppRecord &appRecord, AbilityMsgId state)
     if (state == AbilityMsgId::ACTIVE) {
         currentTopToken_ = appRecord.token;
     }
-    const unsigned long waitTime = 10;
+    const uint32_t waitTime = 10;
     QThread::msleep(waitTime); // sleep a little while for giving enough time to handle the command
 }
 

@@ -65,7 +65,7 @@ void MarqueeEventTddTest::MarqueeEvent001()
     // first check default speed
     JSValue value = JSObject::Get(page, "speed");
     double speed = JSNumber::Value(value);
-    EXPECT_TRUE((uint8_t)speed == 1);
+    EXPECT_EQ((uint8_t)speed, 1);
     jerry_release_value(value);
 
     // speed value
@@ -133,7 +133,6 @@ void MarqueeEventTddTest::RunTests()
 /**
  * @tc.name: MarqueeEvent001
  * @tc.desc: Verify Marquee scrollamount.
- * @tc.require: AR000DSEFH
  */
 HWTEST_F(MarqueeEventTddTest, MarqueeEvent001, TestSize.Level0)
 {

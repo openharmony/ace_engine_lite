@@ -328,7 +328,6 @@ void StackTddTest::RunTests()
 /* *
  * @tc.name: ComponentStackTest001
  * @tc.desc: Verify no child component set.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(StackTddTest, test001, TestSize.Level1)
 {
@@ -338,7 +337,6 @@ HWTEST_F(StackTddTest, test001, TestSize.Level1)
 /* *
  * @tc.name: ComponentStackTest002
  * @tc.desc: Verify child component can be set.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(StackTddTest, test002, TestSize.Level0)
 {
@@ -348,7 +346,6 @@ HWTEST_F(StackTddTest, test002, TestSize.Level0)
 /* *
  * @tc.name: ComponentStackTest003
  * @tc.desc: Verify multiple children components can be set.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(StackTddTest, test003, TestSize.Level0)
 {
@@ -358,7 +355,6 @@ HWTEST_F(StackTddTest, test003, TestSize.Level0)
 /* *
  * @tc.name: ComponentStackTest004
  * @tc.desc: Verify attribute of child component can be set correctly.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(StackTddTest, test004, TestSize.Level1)
 {
@@ -368,7 +364,6 @@ HWTEST_F(StackTddTest, test004, TestSize.Level1)
 /* *
  * @tc.name: ComponentStackTest005
  * @tc.desc: Verify left and top styles of child component can be set correctly.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(StackTddTest, test005, TestSize.Level1)
 {
@@ -378,7 +373,6 @@ HWTEST_F(StackTddTest, test005, TestSize.Level1)
 /* *
  * @tc.name: ComponentStackTest006
  * @tc.desc: Verify width and height styles of child component can be set correctly.
- * @tc.require: AR000DSEF9
  */
 HWTEST_F(StackTddTest, test006, TestSize.Level1)
 {

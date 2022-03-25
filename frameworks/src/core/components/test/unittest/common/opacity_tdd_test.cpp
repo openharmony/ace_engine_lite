@@ -33,7 +33,6 @@ OpacityTddTest::OpacityTddTest():BaseTest()
  * @tc.name:SetOpacityTest001
  * @tc.desc: Verify div Opacity 0.6 set successful.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest001()
 {
@@ -54,7 +53,6 @@ void OpacityTddTest::SetOpacityTest001()
  * @tc.name:SetOpacityTest002
  * @tc.desc: Set exception div Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest002()
 {
@@ -91,7 +89,6 @@ void OpacityTddTest::SetOpacityTest002()
  * @tc.name:SetOpacityTest003
  * @tc.desc: Set div & children text Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest003()
 {
@@ -127,7 +124,6 @@ void OpacityTddTest::SetOpacityTest003()
  * @tc.name:SetOpacityTest004
  * @tc.desc: Set div & children text Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest004()
 {
@@ -177,7 +173,6 @@ void OpacityTddTest::SetOpacityTest004()
  * @tc.name:SetOpacityTest005
  * @tc.desc: Set text & text color Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest005()
 {
@@ -199,7 +194,6 @@ void OpacityTddTest::SetOpacityTest005()
  * @tc.name:SetOpacityTest006
  * @tc.desc: Set div & border color Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest006()
 {
@@ -225,7 +219,6 @@ void OpacityTddTest::SetOpacityTest006()
  * @tc.name:SetOpacityTest007
  * @tc.desc: Set div & background color Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 void OpacityTddTest::SetOpacityTest007()
 {
@@ -286,7 +279,6 @@ void OpacityTddTest::RunTests()
  * @tc.name:SetOpacityTest001
  * @tc.desc: Verify div Opacity 0.6 set successful.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity001, TestSize.Level1)
 {
@@ -297,7 +289,6 @@ HWTEST_F(OpacityTddTest, textOpacity001, TestSize.Level1)
  * @tc.name:SetOpacityTest002
  * @tc.desc: Set exception div Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity002, TestSize.Level1)
 {
@@ -308,7 +299,6 @@ HWTEST_F(OpacityTddTest, textOpacity002, TestSize.Level1)
  * @tc.name:SetOpacityTest003
  * @tc.desc: Set div & children text Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity003, TestSize.Level0)
 {
@@ -319,7 +309,6 @@ HWTEST_F(OpacityTddTest, textOpacity003, TestSize.Level0)
  * @tc.name:SetOpacityTest004
  * @tc.desc: Set div & children text Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity004, TestSize.Level1)
 {
@@ -330,7 +319,6 @@ HWTEST_F(OpacityTddTest, textOpacity004, TestSize.Level1)
  * @tc.name:SetOpacityTest005
  * @tc.desc: Set text & text color Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity005, TestSize.Level1)
 {
@@ -341,7 +329,6 @@ HWTEST_F(OpacityTddTest, textOpacity005, TestSize.Level1)
  * @tc.name:SetOpacityTest006
  * @tc.desc: Set div & border color Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity006, TestSize.Level1)
 {
@@ -352,7 +339,6 @@ HWTEST_F(OpacityTddTest, textOpacity006, TestSize.Level1)
  * @tc.name:SetOpacityTest007
  * @tc.desc: Set div & background color Opacity.
  * @tc.type FUNC
- * @tc.require: AR000F3PDF
  */
 HWTEST_F(OpacityTddTest, textOpacity007, TestSize.Level0)
 {

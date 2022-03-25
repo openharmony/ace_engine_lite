@@ -81,7 +81,6 @@ void TextTddExceptionTest::RunTests()
 /**
  * @tc.name:Component_Text_StyleSet_Color_Test_002
  * @tc.desc: Verify text color/textOverFlow/textAlign/letterSpace exception value.
- * @tc.require: AR000DSEFN
  */
 HWTEST_F(TextTddExceptionTest, textStyle007, TestSize.Level0)
 {

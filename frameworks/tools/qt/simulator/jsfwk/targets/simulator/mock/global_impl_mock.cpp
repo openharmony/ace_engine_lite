@@ -25,7 +25,7 @@ void GLOBAL_ConfigLanguage(const char *appLanguage)
 
 int32_t GLOBAL_GetLanguage(char *language, uint8_t len)
 {
-    if (language == NULL || len == 0) {
+    if (language == nullptr || len == 0) {
         return -1;
     }
 
@@ -35,7 +35,7 @@ int32_t GLOBAL_GetLanguage(char *language, uint8_t len)
 
 int32_t GLOBAL_GetRegion(char *region, uint8_t len)
 {
-    if (region == NULL || len == 0) {
+    if (region == nullptr || len == 0) {
         return -1;
     }
 

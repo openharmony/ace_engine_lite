@@ -109,7 +109,6 @@ void ConsoleModuleTest::EvalAndVerify(TestObjectWrapper object)
 /**
  * @tc.name: AceliteFrameworkConsoleLog001
  * @tc.desc: Verify the Console module API output
- * @tc.require: AR000DSEHD
  */
 HWTEST_F(ConsoleModuleTest, ConsoleLog001, TestSize.Level1)
 {
@@ -132,7 +131,6 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog001, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkConsoleLog002
  * @tc.desc: Verify the Console module API output
- * @tc.require: AR000DSEHD
  */
 HWTEST_F(ConsoleModuleTest, ConsoleLog002, TestSize.Level1)
 {
@@ -155,7 +153,6 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog002, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkConsoleLog003
  * @tc.desc: Verify the Console module API output
- * @tc.require: AR000DSEHD
  */
 HWTEST_F(ConsoleModuleTest, ConsoleLog003, TestSize.Level1)
 {
@@ -178,7 +175,6 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog003, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkConsoleLog004
  * @tc.desc: Verify the Console module API output
- * @tc.require: AR000DSEHD
  */
 HWTEST_F(ConsoleModuleTest, ConsoleLog004, TestSize.Level1)
 {
@@ -201,7 +197,6 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog004, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkConsoleLog005
  * @tc.desc: Verify the Console module API output
- * @tc.require: AR000DSEHD
  */
 HWTEST_F(ConsoleModuleTest, ConsoleLog005, TestSize.Level0)
 {
@@ -224,7 +219,6 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog005, TestSize.Level0)
 /**
  * @tc.name: AceliteFrameworkConsoleLog006
  * @tc.desc: Verify the Console module API output
- * @tc.require: AR000DSEHD
  */
 HWTEST_F(ConsoleModuleTest, ConsoleLog006, TestSize.Level0)
 {

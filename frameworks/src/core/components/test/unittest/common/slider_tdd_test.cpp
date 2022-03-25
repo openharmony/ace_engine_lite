@@ -300,7 +300,6 @@ void SliderTddTest::RunTests()
 /**
  * @tc.name:ComponentSliderAttributeMinTest001
  * @tc.desc: Verify Slider min value can set normally.
- * @tc.require: AR000DSEFF
  */
 HWTEST_F(SliderTddTest, SliderAttr001, TestSize.Level1)
 {
@@ -310,7 +309,6 @@ HWTEST_F(SliderTddTest, SliderAttr001, TestSize.Level1)
 /**
  * @tc.name:ComponentSliderAttributeMaxTest002
  * @tc.desc: Verify Slider max value can set normally.
- * @tc.require: AR000DSEFF
  */
 HWTEST_F(SliderTddTest, SliderAttr002, TestSize.Level1)
 {
@@ -320,7 +318,6 @@ HWTEST_F(SliderTddTest, SliderAttr002, TestSize.Level1)
 /**
  * @tc.name:ComponentSliderAttributeValueTest003
  * @tc.desc: Verify Slider value value can set normally.
- * @tc.require: AR000DSEFF
  */
 HWTEST_F(SliderTddTest, SliderAttr003, TestSize.Level0)
 {
@@ -330,7 +327,6 @@ HWTEST_F(SliderTddTest, SliderAttr003, TestSize.Level0)
 /**
  * @tc.name:ComponentSliderStyleSetColorTest004
  * @tc.desc: Verify slider color value.
- * @tc.require: AR000DSEFF
  */
 HWTEST_F(SliderTddTest, SliderStyle004, TestSize.Level1)
 {
@@ -340,7 +336,6 @@ HWTEST_F(SliderTddTest, SliderStyle004, TestSize.Level1)
 /**
  * @tc.name:ComponentSliderStyleSetSelectColorTest005
  * @tc.desc: Verify slider color value.
- * @tc.require: AR000DSEFF
  */
 HWTEST_F(SliderTddTest, SliderStyle005, TestSize.Level1)
 {

@@ -893,7 +893,6 @@ void JsiInterfaceTddTest::RunTests()
 /**
  * @tc.name: JSIInterfaceTest001
  * @tc.desc: Verify JSI interface CreateObject.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test001, TestSize.Level1)
 {
@@ -903,7 +902,6 @@ HWTEST_F(JsiInterfaceTddTest, test001, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest002
  * @tc.desc: Verify JSI interface GetGlobalObject.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test002, TestSize.Level1)
 {
@@ -913,7 +911,6 @@ HWTEST_F(JsiInterfaceTddTest, test002, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest003
  * @tc.desc: Verify JSI interface GetJSHeapStatus.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test003, TestSize.Level1)
 {
@@ -923,7 +920,6 @@ HWTEST_F(JsiInterfaceTddTest, test003, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest004
  * @tc.desc: Verify JSI interface related to Array object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test004, TestSize.Level1)
 {
@@ -933,7 +929,6 @@ HWTEST_F(JsiInterfaceTddTest, test004, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest005
  * @tc.desc: Verify JSI interface related to Function object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test005, TestSize.Level1)
 {
@@ -943,7 +938,6 @@ HWTEST_F(JsiInterfaceTddTest, test005, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest006
  * @tc.desc: Verify JSI interface related to Number object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test006, TestSize.Level1)
 {
@@ -953,7 +947,6 @@ HWTEST_F(JsiInterfaceTddTest, test006, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest007
  * @tc.desc: Verify JSI interface related to String object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test007, TestSize.Level1)
 {
@@ -963,7 +956,6 @@ HWTEST_F(JsiInterfaceTddTest, test007, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest008
  * @tc.desc: Verify JSI interface related to Boolean object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test008, TestSize.Level1)
 {
@@ -973,7 +965,6 @@ HWTEST_F(JsiInterfaceTddTest, test008, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest009
  * @tc.desc: Verify JSI interface related to Undefined object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test009, TestSize.Level1)
 {
@@ -983,7 +974,6 @@ HWTEST_F(JsiInterfaceTddTest, test009, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest010
  * @tc.desc: Verify JSI interface related to Null object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test010, TestSize.Level1)
 {
@@ -994,7 +984,6 @@ HWTEST_F(JsiInterfaceTddTest, test010, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest011
  * @tc.desc: Verify JSI interface related to Symbol object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test011, TestSize.Level1)
 {
@@ -1005,7 +994,6 @@ HWTEST_F(JsiInterfaceTddTest, test011, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest012
  * @tc.desc: Verify JSI interface related to JS Object.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test012, TestSize.Level1)
 {
@@ -1015,7 +1003,6 @@ HWTEST_F(JsiInterfaceTddTest, test012, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest013
  * @tc.desc: Verify JSI interface related to JS JSON.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test013, TestSize.Level1)
 {
@@ -1025,7 +1012,6 @@ HWTEST_F(JsiInterfaceTddTest, test013, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest014
  * @tc.desc: Verify JSI interface related to JS Number property.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test014, TestSize.Level1)
 {
@@ -1035,7 +1021,6 @@ HWTEST_F(JsiInterfaceTddTest, test014, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest015
  * @tc.desc: Verify JSI interface related to JS Boolean property.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test015, TestSize.Level1)
 {
@@ -1045,7 +1030,6 @@ HWTEST_F(JsiInterfaceTddTest, test015, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest016
  * @tc.desc: Verify JSI interface related to JS String property.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test016, TestSize.Level1)
 {
@@ -1055,7 +1039,6 @@ HWTEST_F(JsiInterfaceTddTest, test016, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest017
  * @tc.desc: Verify JSI interface related to JS property with index.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test017, TestSize.Level1)
 {
@@ -1066,7 +1049,6 @@ HWTEST_F(JsiInterfaceTddTest, test017, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest018
  * @tc.desc: Verify JSI interface related to JS ArrayBuffer.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test018, TestSize.Level1)
 {
@@ -1076,7 +1058,6 @@ HWTEST_F(JsiInterfaceTddTest, test018, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest019
  * @tc.desc: Verify JSI interface related to JS TypedArray.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test019, TestSize.Level1)
 {
@@ -1087,7 +1068,6 @@ HWTEST_F(JsiInterfaceTddTest, test019, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest020
  * @tc.desc: Verify JSI interface related to JS descriptor.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test020, TestSize.Level1)
 {
@@ -1097,7 +1077,6 @@ HWTEST_F(JsiInterfaceTddTest, test020, TestSize.Level1)
 /**
  * @tc.name: JSIInterfaceTest021
  * @tc.desc: Verify JSI interface GetObjectKeys.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test021, TestSize.Level0)
 {
@@ -1107,7 +1086,6 @@ HWTEST_F(JsiInterfaceTddTest, test021, TestSize.Level0)
 /**
  * @tc.name: JSIInterfaceTest022
  * @tc.desc: Verify JSI interfaces related to OnDestroy callback.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test022, TestSize.Level0)
 {
@@ -1117,7 +1095,6 @@ HWTEST_F(JsiInterfaceTddTest, test022, TestSize.Level0)
 /**
  * @tc.name: JSIInterfaceTest023
  * @tc.desc: Verify JSI interfaces related to OnTerminate callback.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(JsiInterfaceTddTest, test023, TestSize.Level0)
 {
