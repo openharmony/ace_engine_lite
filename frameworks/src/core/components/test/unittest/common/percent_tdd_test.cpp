@@ -144,7 +144,6 @@ void PercentTddTest::VerifyDimension(JSValue element, uint16_t keyID, int16_t ta
 /**
  * @tc.name: AceliteFrameworkPercentParse001
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse001, TestSize.Level1)
 {
@@ -163,7 +162,6 @@ HWTEST_F(PercentTddTest, PercentParse001, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse002
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse002, TestSize.Level1)
 {
@@ -183,7 +181,6 @@ HWTEST_F(PercentTddTest, PercentParse002, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse003
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse003, TestSize.Level1)
 {
@@ -205,7 +202,6 @@ HWTEST_F(PercentTddTest, PercentParse003, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse004
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse004, TestSize.Level1)
 {
@@ -225,7 +221,6 @@ HWTEST_F(PercentTddTest, PercentParse004, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse005
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse005, TestSize.Level1)
 {
@@ -245,7 +240,6 @@ HWTEST_F(PercentTddTest, PercentParse005, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse006
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse006, TestSize.Level1)
 {
@@ -265,7 +259,6 @@ HWTEST_F(PercentTddTest, PercentParse006, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse007
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse007, TestSize.Level1)
 {
@@ -287,7 +280,6 @@ HWTEST_F(PercentTddTest, PercentParse007, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse008
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse008, TestSize.Level1)
 {
@@ -307,7 +299,6 @@ HWTEST_F(PercentTddTest, PercentParse008, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse009
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse009, TestSize.Level1)
 {
@@ -327,7 +318,6 @@ HWTEST_F(PercentTddTest, PercentParse009, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse010
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse010, TestSize.Level1)
 {
@@ -349,7 +339,6 @@ HWTEST_F(PercentTddTest, PercentParse010, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentParse011
  * @tc.desc: Verify the percent converting process
- * @tc.require: AR000F3PDD
  */
 HWTEST_F(PercentTddTest, PercentParse011, TestSize.Level1)
 {
@@ -371,7 +360,6 @@ HWTEST_F(PercentTddTest, PercentParse011, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentSupport001
  * @tc.desc: Verify the percent processing on div.
- * @tc.require: AR000F5LM1
  */
 HWTEST_F(PercentTddTest, PercentSupport001, TestSize.Level1)
 {
@@ -422,7 +410,6 @@ HWTEST_F(PercentTddTest, PercentSupport001, TestSize.Level1)
 /**
  * @tc.name: AceliteFrameworkPercentSupport002
  * @tc.desc: Verify the percent processing on component.
- * @tc.require: AR000F5LM1
  */
 HWTEST_F(PercentTddTest, PercentSupport002, TestSize.Level0)
 {
@@ -474,7 +461,6 @@ HWTEST_F(PercentTddTest, PercentSupport002, TestSize.Level0)
 /**
  * @tc.name: AceliteFrameworkPercentSupport003
  * @tc.desc: Verify the percent processing on component.
- * @tc.require: SR000F3PDC
  */
 HWTEST_F(PercentTddTest, PercentSupport003, TestSize.Level0)
 {

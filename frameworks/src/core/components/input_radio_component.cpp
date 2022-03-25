@@ -37,6 +37,7 @@ void InputRadioComponent::ReleaseNativeViews()
     ACE_FREE(normalBackGroundImg_);
     ACE_FREE(pressedBackGroundImg_);
 }
+
 bool InputRadioComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrValue)
 {
     switch (attrKeyId) {

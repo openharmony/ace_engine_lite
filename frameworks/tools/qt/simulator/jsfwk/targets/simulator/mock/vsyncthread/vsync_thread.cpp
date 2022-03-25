@@ -57,7 +57,7 @@ bool VsyncThread::IsRendring()
 
 void VsyncThread::SimuOneTickBreak() const
 {
-    const unsigned long sleepTime = 16;
+    const uint32_t sleepTime = 16;
     QThread::msleep(sleepTime);
 }
 

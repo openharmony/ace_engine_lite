@@ -47,9 +47,9 @@ public:
 
     static AsyncTaskManager &GetInstance();
 
-    virtual void Init() override;
+    void Init() override;
 
-    virtual void Callback() override;
+    void Callback() override;
 
     uint16_t Dispatch(AsyncTaskHandler handler, void *data, const void *context = nullptr);
 

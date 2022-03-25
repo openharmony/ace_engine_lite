@@ -204,7 +204,6 @@ void SwitchTddTest::RunTests()
 /**
  * @tc.name: ComponentSwitchAttributeSetTest001
  * @tc.desc: Verify attribute checked set normal value.
- * @tc.require: AR000DSEFI
  */
 HWTEST_F(SwitchTddTest, SwitchAttr001, TestSize.Level1)
 {
@@ -214,7 +213,6 @@ HWTEST_F(SwitchTddTest, SwitchAttr001, TestSize.Level1)
 /**
  * @tc.name: ComponentSwitchAttributeSetTest002
  * @tc.desc: Verify attribute checked set abc123.
- * @tc.require: AR000DSEFI
  */
 HWTEST_F(SwitchTddTest, SwitchAttr002, TestSize.Level1)
 {
@@ -224,7 +222,6 @@ HWTEST_F(SwitchTddTest, SwitchAttr002, TestSize.Level1)
 /**
  * @tc.name: ComponentSwitchAttributeSetTest003
  * @tc.desc: Verify attribute id, show.
- * @tc.require: AR000DSEFI
  */
 HWTEST_F(SwitchTddTest, SwitchAttr003, TestSize.Level0)
 {

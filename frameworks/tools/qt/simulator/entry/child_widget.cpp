@@ -115,7 +115,7 @@ void ChildWidget::StartApp(const char *path)
     }
     // start all necessary mock threads
     mockServices_.StartAll();
-    const unsigned long breakTime = 30;
+    const uint32_t breakTime = 30;
     QThread::msleep(breakTime);
     StartAbility(path, "com.app.example");
 }

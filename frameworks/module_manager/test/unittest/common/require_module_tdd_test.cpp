@@ -234,7 +234,6 @@ void RequireModuleTddTest::RunTests()
 /**
  * @tc.name: RequireModuleTest001
  * @tc.desc: Verify require a registered module.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test001, TestSize.Level1)
 {
@@ -244,7 +243,6 @@ HWTEST_F(RequireModuleTddTest, test001, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest002
  * @tc.desc: Verify require an unregistered module.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test002, TestSize.Level1)
 {
@@ -254,7 +252,6 @@ HWTEST_F(RequireModuleTddTest, test002, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest003
  * @tc.desc: Verify require a module with incorrect category.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test003, TestSize.Level1)
 {
@@ -264,7 +261,6 @@ HWTEST_F(RequireModuleTddTest, test003, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest004
  * @tc.desc: Verify require a module with illegal module name.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test004, TestSize.Level1)
 {
@@ -274,7 +270,6 @@ HWTEST_F(RequireModuleTddTest, test004, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest005
  * @tc.desc: Verify require app module, and call it's getInfo().
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test005, TestSize.Level1)
 {
@@ -284,7 +279,6 @@ HWTEST_F(RequireModuleTddTest, test005, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest006
  * @tc.desc: Verify require app module, and call it's terminate().
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test006, TestSize.Level1)
 {
@@ -294,7 +288,6 @@ HWTEST_F(RequireModuleTddTest, test006, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest007
  * @tc.desc: Verify require router module, and call it's replace().
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test007, TestSize.Level1)
 {
@@ -304,7 +297,6 @@ HWTEST_F(RequireModuleTddTest, test007, TestSize.Level1)
 /**
  * @tc.name: RequireModuleTest008
  * @tc.desc: Verify the ohos module importing process.
- * @tc.require: AR000DSEHC
  */
 HWTEST_F(RequireModuleTddTest, test008, TestSize.Level1)
 {

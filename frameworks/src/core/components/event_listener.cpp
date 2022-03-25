@@ -54,6 +54,7 @@ ViewOnTouchCancelListener::~ViewOnTouchCancelListener()
 {
     jerry_release_value(fn_);
 }
+
 bool ViewOnTouchCancelListener::OnCancel(UIView &view, const CancelEvent &event)
 {
     return CallBaseEvent(fn_, event, id_);

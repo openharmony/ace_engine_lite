@@ -91,7 +91,6 @@ void RouterModuleTddTest::ReleaseJSValue(JSValue &value)
 /**
  * @tc.name: RouterModuleTestTest001
  * @tc.desc: router replace with invalid router param
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest001, TestSize.Level1)
 {
@@ -114,7 +113,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest001, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest002
  * @tc.desc: Verify the router replace process with valid uri but invalid path
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest002, TestSize.Level1)
 {
@@ -138,7 +136,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest002, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest003
  * @tc.desc: Verify the params handling
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest003, TestSize.Level1)
 {
@@ -200,7 +197,6 @@ void RouterModuleTddTest::HookViewModel(StateMachine &sm, const char *jsBundle, 
 /**
  * @tc.name: RouterModuleTestTest004
  * @tc.desc: Verify the page statemachie processing
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest004, TestSize.Level1)
 {
@@ -230,7 +226,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest004, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest005
  * @tc.desc: Verify the cache distribution process and overflow checking
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest005, TestSize.Level0)
 {
@@ -260,7 +255,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest005, TestSize.Level0)
 /**
  * @tc.name: RouterModuleTestTest006
  * @tc.desc: Verify the cache distribution process, considering the magic number length
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest006, TestSize.Level1)
 {
@@ -290,7 +284,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest006, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest007
  * @tc.desc: change state without sequence will be refused
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest007, TestSize.Level1)
 {
@@ -319,7 +312,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest007, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest008
  * @tc.desc: change state without sequence will be refused
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest008, TestSize.Level1)
 {
@@ -348,7 +340,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest008, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest009
  * @tc.desc: change state without sequence will be refused
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest009, TestSize.Level1)
 {
@@ -378,7 +369,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest009, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest010
  * @tc.desc: change state without sequence will be refused
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest010, TestSize.Level1)
 {
@@ -408,7 +398,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest010, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest011
  * @tc.desc: pass wrong parameters into router API
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest011, TestSize.Level1)
 {
@@ -432,7 +421,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest011, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest012
  * @tc.desc: pass wrong parameters into router API
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest012, TestSize.Level1)
 {
@@ -455,7 +443,6 @@ HWTEST_F(RouterModuleTddTest, RouterModuleTest012, TestSize.Level1)
 /**
  * @tc.name: RouterModuleTestTest013
  * @tc.desc: the router replace will fail before the js ability is launched
- * @tc.require: AR000DSEGD
  */
 HWTEST_F(RouterModuleTddTest, RouterModuleTest013, TestSize.Level1)
 {

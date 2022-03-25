@@ -73,7 +73,6 @@ char* NumberFormatModuleTddTest::FormatNumber(const jerry_value_t numberFormat,
 /**
  * @tc.name: NumberFormat_Locale_Test001
  * @tc.desc: test the locale info support
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Locale_Test001, TestSize.Level0)
 {
@@ -132,7 +131,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Locale_Test001, TestSize.Level0
 /**
  * @tc.name: NumberFormat_Style_Test002
  * @tc.desc: test the enum style value
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test002, TestSize.Level0)
 {
@@ -192,7 +190,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test002, TestSize.Level0)
 /**
  * @tc.name: NumberFormat_Style_Test003
  * @tc.desc: test the invalid value of style
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test003, TestSize.Level1)
 {
@@ -234,7 +231,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Style_Test003, TestSize.Level1)
 /**
  * @tc.name: NumberFormat_Group_Test004
  * @tc.desc: test the enum value in useGroup
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test004, TestSize.Level0)
 {
@@ -294,7 +290,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test004, TestSize.Level0)
 /**
  * @tc.name: NumberFormat_Group_Test005
  * @tc.desc: test the invalid value of useGroup
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test005, TestSize.Level1)
 {
@@ -339,7 +334,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test005, TestSize.Level1)
 /**
  * @tc.name: NumberFormat_Group_Test006
  * @tc.desc: test the enum value of useGrouping in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test006, TestSize.Level1)
 {
@@ -383,7 +377,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test006, TestSize.Level1)
 /**
  * @tc.name: NumberFormat_Group_Test007
  * @tc.desc: test the invalid value of useGroup in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test007, TestSize.Level1)
 {
@@ -426,7 +419,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_Group_Test007, TestSize.Level1)
 /**
  * @tc.name: NumberFormat_MinimumFractionDigit_Test008
  * @tc.desc: test the correct value of minimumFeactionDigits
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test008, TestSize.Level0)
 {
@@ -467,7 +459,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test008, T
 /**
  * @tc.name: NumberFormat_MinimumFractionDigit_Test009
  * @tc.desc: test the invalid value of minimumFeactionDigits
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test009, TestSize.Level1)
 {
@@ -507,7 +498,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test009, T
 /**
  * @tc.name: NumberFormat_MinimumFractionDigit_Test010
  * @tc.desc: test the value of minimumFeactionDigits in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test010, TestSize.Level1)
 {
@@ -553,7 +543,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test010, T
 /**
  * @tc.name: NumberFormat_MinimumFractionDigit_Test011
  * @tc.desc: test the value of minimumFeactionDigits in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test011, TestSize.Level1)
 {
@@ -594,7 +583,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MinimumFractionDigit_Test011, T
 /**
  * @tc.name: NumberFormat_MaxmumFractionDigit_Test012
  * @tc.desc: test the value of maxmumFractionDigits in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test012, TestSize.Level1)
 {
@@ -638,7 +626,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test012, Te
 /**
  * @tc.name: NumberFormat_MaxmumFractionDigit_Test013
  * @tc.desc: test the value of maxmumFractionDigits in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test013, TestSize.Level1)
 {
@@ -680,7 +667,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test013, Te
 /**
  * @tc.name: NumberFormat_MaxmumFractionDigit_Test014
  * @tc.desc: test the value of maxmumFractionDigits in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test014, TestSize.Level1)
 {
@@ -714,7 +700,7 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test014, Te
      * @tc.steps:step4.get the format attribute and format the number 1.23456
      * @tc.expected: the format result is 1.23456
      */
-    formatRes =FormatNumber(numberFormat, args, 1);
+    formatRes = FormatNumber(numberFormat, args, 1);
     EXPECT_FALSE((formatRes == nullptr) || (strcmp(formatRes, "123%")));
     ACE_FREE(formatRes);
     ReleaseJerryValue(args[0], numberFormat, VA_ARG_END_FLAG);
@@ -724,7 +710,6 @@ HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test014, Te
 /**
  * @tc.name: NumberFormat_MaxmumFractionDigit_Test015
  * @tc.desc: test the value of maxmumFractionDigits in percent
- * @tc.require: AR000EVHAT
  */
 HWTEST_F(NumberFormatModuleTddTest, NumberFormat_MaxmumFractionDigit_Test015, TestSize.Level1)
 {

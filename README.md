@@ -8,7 +8,7 @@
 
 ## Introduction<a name="section11660541593"></a>
 
-The JS UI framework is a set of JS-UI framework provided for you to develop OpenHarmony applications. The following figure shows the framework architecture.
+The JS UI framework is a set of JS-UI frameworks provided for you to develop OpenHarmony applications. The following figure shows the framework architecture.
 
 **Figure  1**  Framework architecture<a name="fig11520531310"></a>
 
@@ -16,7 +16,7 @@ The JS UI framework is a set of JS-UI framework provided for you to develop Open
 
 The JS UI framework consists of the JavaScript data binding framework, JavaScript runtime, and JavaScript framework.
 
--   **JavaScript data binding**
+-   **JavaScript data binding framework**
 
     Provides a set of basic data binding capabilities through JavaScript.
 
