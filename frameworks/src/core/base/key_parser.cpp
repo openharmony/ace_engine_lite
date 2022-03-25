@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -66,6 +66,17 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
     switch (*s++) {
             // clang-format off
         case 'a':
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+            if (!strcmp(s, "bsolutesizespanstart")) {
+                return K_ABSOLUTESIZESPANSTART;
+            }
+            if (!strcmp(s, "bsolutesizespanend")) {
+                return K_ABSOLUTESIZESPANEND;
+            }
+            if (!strcmp(s, "bsolutesizespansize")) {
+                return K_ABSOLUTESIZESPANSIZE;
+            }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             if (!strcmp(s, "lignItems")) {
                 return K_ALIGN_ITEMS;
             }
@@ -105,6 +116,17 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "ackgroundColor")) {
                 return K_BACKGROUND_COLOR;
             }
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+            if (!strcmp(s, "ackgroundcolorspancolor")) {
+                return K_BACKGROUNDCOLORSPANCOLOR;
+            }
+            if (!strcmp(s, "ackgroundcolorspanstart")) {
+                return K_BACKGROUNDCOLORSPANSTART;
+            }
+            if (!strcmp(s, "ackgroundcolorspanend")) {
+                return K_BACKGROUNDCOLORSPANEND;
+            }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             if (!strcmp(s, "ackgroundImage")) {
                 return K_BACKGROUND_IMAGE;
             }
@@ -308,6 +330,17 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "ontFamily")) {
                 return K_FONT_FAMILY;
             }
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+            if (!strcmp(s, "oregroundcolorspancolor")) {
+                return K_FOREGROUNDCOLORSPANCOLOR;
+            }
+            if (!strcmp(s, "oregroundcolorspanstart")) {
+                return K_FOREGROUNDCOLORSPANSTART;
+            }
+            if (!strcmp(s, "oregroundcolorspanend")) {
+                return K_FOREGROUNDCOLORSPANEND;
+            }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             if (!strcmp(s, "orwards")) {
                 return K_FORWARDS;
             }
@@ -378,6 +411,17 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "etterSpacing")) {
                 return K_LETTER_SPACING;
             }
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+            if (!strcmp(s, "inebackgroundcolorspancolor")) {
+                return K_LINEBACKGROUNDCOLORSPANCOLOR;
+            }
+            if (!strcmp(s, "inebackgroundcolorspanstart")) {
+                return K_LINEBACKGROUNDCOLORSPANSTART;
+            }
+            if (!strcmp(s, "inebackgroundcolorspanend")) {
+                return K_LINEBACKGROUNDCOLORSPANEND;
+            }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             if (!strcmp(s, "ineHeight")) {
                 return K_LINE_HEIGHT;
             }
@@ -537,6 +581,17 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "ef")) {
                 return K_REF;
             }
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+            if (!strcmp(s, "elativesizespanstart")) {
+                return K_RELATIVESIZESPANSTART;
+            }
+            if (!strcmp(s, "elativesizespanend")) {
+                return K_RELATIVESIZESPANEND;
+            }
+            if (!strcmp(s, "elativesizespansize")) {
+                return K_RELATIVESIZESPANSIZE;
+            }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             if (!strcmp(s, "everse")) {
                 return K_REVERSE;
             }
@@ -620,6 +675,17 @@ uint16_t KeyParser::ParseKeyId(const char *s, const size_t len)
             if (!strcmp(s, "pace-evenly")) {
                 return K_SPACE_EVENLY;
             }
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+            if (!strcmp(s, "pannablestyle")) {
+                return K_SPANNABLESTYLE;
+            }
+            if (!strcmp(s, "pannablestart")) {
+                return K_SPANNABLESTART;
+            }
+            if (!strcmp(s, "pannableend")) {
+                return K_SPANNABLEEND;
+            }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             if (!strcmp(s, "rc")) {
                 return K_SRC;
             }

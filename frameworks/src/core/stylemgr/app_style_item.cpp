@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -120,7 +120,11 @@ AppStyleItem *AppStyleItem::CreateStyleItem(uint16_t keyId, const jerry_value_t 
     newStyleItem->pseudoClassType_ = pseudoClassType;
 
     if (jerry_value_is_number(stylePropValue)) {
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+        if (keyId == K_OPACITY || keyId == K_RELATIVESIZESPANSIZE) {
+#else
         if (keyId == K_OPACITY) {
+#endif
             newStyleItem->SetFloatingValue(jerry_get_number_value(stylePropValue));
         } else {
             newStyleItem->SetNumValue((int32_t)(jerry_get_number_value(stylePropValue)));

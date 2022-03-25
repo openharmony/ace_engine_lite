@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,6 +37,14 @@ TextComponent::TextComponent(jerry_value_t options, jerry_value_t children, AppS
 {
     SetComponentName(K_TEXT);
     fontSize_ = ProductAdapter::GetDefaultFontSize();
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+    backgroundColorSpan_.start = -1;
+    backgroundColorSpan_.end = -1;
+    foregroundColorSpan_.start = -1;
+    foregroundColorSpan_.end = -1;
+    lineBackgroundColorSpan_.start = -1;
+    lineBackgroundColorSpan_.end = -1;
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
 }
 
 bool TextComponent::CreateNativeViews()
@@ -114,6 +122,101 @@ bool TextComponent::ApplyPrivateStyle(const AppStyleItem *styleItem)
         case K_LINE_HEIGHT:
             SetTextLineHeight(uiLabel_, styleItem);
             break;
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+        case K_BACKGROUNDCOLORSPANCOLOR: {
+            uint32_t color = 0;
+            uint8_t alpha = OPA_OPAQUE;
+            if (GetStyleColorValue(styleItem, color, alpha)) {
+                backgroundColorSpan_.backgroundColor = GetRGBColor(color);
+            }
+            break;
+        }
+        case K_BACKGROUNDCOLORSPANSTART: {
+            backgroundColorSpan_.start = styleItem->GetNumValue();
+            break;
+        }
+        case K_BACKGROUNDCOLORSPANEND: {
+            backgroundColorSpan_.end = styleItem->GetNumValue();
+            break;
+        }
+        case K_FOREGROUNDCOLORSPANCOLOR: {
+            uint32_t color = 0;
+            uint8_t alpha = OPA_OPAQUE;
+            if (GetStyleColorValue(styleItem, color, alpha)) {
+                foregroundColorSpan_.fontColor = GetRGBColor(color);
+            }
+            break;
+        }
+        case K_FOREGROUNDCOLORSPANSTART: {
+            foregroundColorSpan_.start = styleItem->GetNumValue();
+            break;
+        }
+        case K_FOREGROUNDCOLORSPANEND: {
+            foregroundColorSpan_.end = styleItem->GetNumValue();
+            break;
+        }
+        case K_LINEBACKGROUNDCOLORSPANCOLOR: {
+            uint32_t color = 0;
+            uint8_t alpha = OPA_OPAQUE;
+            if (GetStyleColorValue(styleItem, color, alpha)) {
+                lineBackgroundColorSpan_.linebackgroundColor = GetRGBColor(color);
+            }
+            break;
+        }
+        case K_LINEBACKGROUNDCOLORSPANSTART: {
+            lineBackgroundColorSpan_.start = styleItem->GetNumValue();
+            break;
+        }
+        case K_LINEBACKGROUNDCOLORSPANEND: {
+            lineBackgroundColorSpan_.end = styleItem->GetNumValue();
+            break;
+        }
+        case K_ABSOLUTESIZESPANSTART: {
+            absoluteSizeSpan_.start = styleItem->GetNumValue();
+            break;
+        }
+        case K_ABSOLUTESIZESPANEND: {
+            absoluteSizeSpan_.end = styleItem->GetNumValue();
+            break;
+        }
+        case K_ABSOLUTESIZESPANSIZE: {
+            absoluteSizeSpan_.size = GetStylePixelValue(styleItem);
+            break;
+        }
+        case K_RELATIVESIZESPANSTART: {
+            relativeSizeSpan_.start = styleItem->GetNumValue();
+            break;
+        }
+        case K_RELATIVESIZESPANEND: {
+            relativeSizeSpan_.end = styleItem->GetNumValue();
+            break;
+        }
+        case K_RELATIVESIZESPANSIZE: {
+            relativeSizeSpan_.size = styleItem->GetFloatingValue();
+            break;
+        }
+        case K_SPANNABLESTYLE: {
+            TextStyle style = TextStyle::TEXT_STYLE_NORMAL;
+            const char* styleStr = styleItem->GetStrValue();
+            if (!strcmp(styleStr, "bold")) {
+                style = TextStyle::TEXT_STYLE_BOLD;
+            } else if (!strcmp(styleStr, "bold-italic")) {
+                style = TextStyle::TEXT_STYLE_BOLD_ITALIC;
+            } else if (!strcmp(styleStr, "italic")) {
+                style = TextStyle::TEXT_STYLE_ITALIC;
+            }
+            stringStyleSpan_.style = style;
+            break;
+        }
+        case K_SPANNABLESTART: {
+            stringStyleSpan_.start = styleItem->GetNumValue();
+            break;
+        }
+        case K_SPANNABLEEND: {
+            stringStyleSpan_.end = styleItem->GetNumValue();
+            break;
+        }
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
         default:
             return false;
     }
@@ -191,6 +294,9 @@ void TextComponent::OnViewAttached()
         uiLabel_.SetFont(fontFamily_, fontSize_);
         uiLabel_.SetText(textValue_);
         UpdateTextAlignToLabel(uiLabel_);
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+        SetRichTextSpan();
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
     }
 }
 
@@ -206,6 +312,9 @@ void TextComponent::PostUpdate(uint16_t attrKeyId)
             if (textValue_ != nullptr) {
                 uiLabel_.SetText(textValue_);
                 UpdateTextAlignToLabel(uiLabel_);
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+                SetRichTextSpan();
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
             }
             break;
         case K_FONT_SIZE:
@@ -259,5 +368,43 @@ void TextComponent::UpdateTextAlignToLabel(UILabelTypeWrapper& label)
         label.SetAlign(horizontalAlign_, UITextLanguageAlignment::TEXT_ALIGNMENT_CENTER);
     }
 }
+
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+void TextComponent::SetRichTextSpan()
+{
+    if (backgroundColorSpan_.start != -1 && backgroundColorSpan_.end != -1) {
+        uiLabel_.SetBackgroundColorSpan(backgroundColorSpan_.backgroundColor,
+                                        backgroundColorSpan_.start,
+                                        backgroundColorSpan_.end);
+    }
+    if (foregroundColorSpan_.start != -1 && foregroundColorSpan_.end != -1) {
+        uiLabel_.SetForegroundColorSpan(foregroundColorSpan_.fontColor,
+                                        foregroundColorSpan_.start,
+                                        foregroundColorSpan_.end);
+    }
+    if (lineBackgroundColorSpan_.start != -1 && lineBackgroundColorSpan_.end != -1) {
+        uiLabel_.SetLineBackgroundSpan(lineBackgroundColorSpan_.linebackgroundColor,
+                                       lineBackgroundColorSpan_.start,
+                                       lineBackgroundColorSpan_.end);
+    }
+    if (absoluteSizeSpan_.start != -1 && absoluteSizeSpan_.end != -1) {
+        uiLabel_.SetAbsoluteSizeSpan(absoluteSizeSpan_.start,
+                                     absoluteSizeSpan_.end,
+                                     absoluteSizeSpan_.size);
+    }
+    if (relativeSizeSpan_.start != -1 && relativeSizeSpan_.end != -1) {
+        uiLabel_.SetRelativeSizeSpan(relativeSizeSpan_.start,
+                                     relativeSizeSpan_.end,
+                                     relativeSizeSpan_.size);
+    }
+    if (stringStyleSpan_.start != -1 && stringStyleSpan_.end != -1) {
+        SpannableString spanString(textValue_);
+        spanString.SetTextStyle(stringStyleSpan_.style,
+                                stringStyleSpan_.start,
+                                stringStyleSpan_.end);
+        uiLabel_.SetText(&spanString);
+    }
+}
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
 } // namespace ACELite
 } // namespace OHOS
