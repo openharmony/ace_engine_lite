@@ -22,7 +22,7 @@ namespace OHOS {
 namespace ACELite {
 class CanvasTddTest : public BasicTddTest {
 public:
-    CanvasTddTest() : BasicTddTest() {};
+    CanvasTddTest() : BasicTddTest() {}
     ~CanvasTddTest() override {};
     void ComponentCanvasDefaultValueTest001();
     void ComponentCanvasDefaultValueTest002();

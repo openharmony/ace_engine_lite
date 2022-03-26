@@ -231,7 +231,7 @@ HWTEST_F(ConsoleModuleTest, ConsoleLog006, TestSize.Level0)
         "content. This is very long log content. This is very long log content. This is very long log content. This is "
         "very long log content.";
     const size_t targetLogLength = strlen(logContent);
-    const size_t bufferLen = 512;
+    constexpr size_t bufferLen = 512;
     char codeToEval[bufferLen];
     if (EOK != memset_s(codeToEval, bufferLen, 0, bufferLen)) {
         return;

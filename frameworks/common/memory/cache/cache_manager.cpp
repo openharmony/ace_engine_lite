@@ -49,8 +49,9 @@ void CacheManager::ResetDistributedInfo()
 {
     wholeCacheMemInfo_.cacheStartAddr = 0;
     wholeCacheMemInfo_.cacheLength = 0;
-    if (EOK !=
-        memset_s(cacheUnitInfo_, sizeof(CacheMemInfo) * USER_MAX_COUNT, 0, sizeof(CacheMemInfo) * USER_MAX_COUNT)) {
+    auto ret = memset_s(cacheUnitInfo_, sizeof(CacheMemInfo) * USER_MAX_COUNT,
+        0, sizeof(CacheMemInfo) * USER_MAX_COUNT);
+    if (ret != EOK) {
         HILOG_ERROR(HILOG_MODULE_ACE, "reset cache info failed");
     }
 }

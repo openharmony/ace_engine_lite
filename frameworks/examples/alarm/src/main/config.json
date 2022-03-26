@@ -1,7 +1,7 @@
 {
   "app": {
-    "bundleName": "com.huawei.alarm",
-    "vendor": "huawei",
+    "bundleName": "com.test.alarm",
+    "vendor": "ohos",
     "version": {
       "code": 1,
       "name": "1.0"

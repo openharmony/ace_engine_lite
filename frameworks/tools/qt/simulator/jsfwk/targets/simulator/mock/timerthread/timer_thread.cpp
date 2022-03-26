@@ -98,7 +98,11 @@ int TimerThread::StartTimerTaskInner(bool isPeriodic,
                                      timerHandle_t *timerHandle)
 {
     auto info = new TimerInfo();
-    info->delay = info->remain = delay;
+    if (info == nullptr) {
+        return -1;
+    }
+    info->delay = delay;
+    info->remain = delay;
     info->isPeriodic = isPeriodic;
     info->userCallback = userCallback;
     info->userData = userData;
