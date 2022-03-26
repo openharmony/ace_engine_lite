@@ -164,7 +164,7 @@ void SwiperComponent::ChangeListener::OnSwipe(UISwipeView &view)
     if (swipeView == nullptr) {
         return;
     }
-    const uint8_t argsNum = 1;
+    constexpr uint8_t argsNum = 1;
     jerry_value_t args[argsNum];
     args[0] = jerry_create_object();
     jerry_value_t indexValHandler = jerry_create_number(swipeView->GetCurrentPage());

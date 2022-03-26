@@ -88,7 +88,7 @@ void AMSThread::run()
             // error case
             return;
         }
-        // the innerMsg will be freeed out of the scop
+        // the innerMsg will be freed out of the scop
         std::unique_ptr<const AMSMessage> msgGuard(innerMsg);
         switch (innerMsg->command) {
             case COMMAND_START_ABILITY: {
@@ -170,7 +170,7 @@ int AMSThread::StartAbilityInner(const char *path, const char *bundleName)
         return 0;
     }
 
-    // already there is one actived app, move it to background and active the new one
+    // already there is one activated app, move it to background and active the new one
     JSAppRecord *currentTop = GetAppRecord(currentTopToken_);
     if (currentTop == nullptr) {
         currentTopToken_ = INVALID_TOKEN;
@@ -265,48 +265,48 @@ JSAppRecord *AMSThread::CreateNewAppRecord(const char *path, const char *bundleN
 JSAppRecord *AMSThread::GetAppRecord(uint64_t token)
 {
     recordsLock_.lock();
-    JSAppRecord *exsiting = nullptr;
+    JSAppRecord *existing = nullptr;
     for (auto record : appRecords_) {
         if (record->token == token) {
-            exsiting = record;
+            existing = record;
             break;
         }
     }
     recordsLock_.unlock();
-    return exsiting;
+    return existing;
 }
 
 JSAppRecord *AMSThread::PopAppRecord(uint64_t token)
 {
     recordsLock_.lock();
-    JSAppRecord *exsiting = nullptr;
+    JSAppRecord *existing = nullptr;
     for (auto record : appRecords_) {
         if (record->token == token) {
-            exsiting = record;
+            existing = record;
             break;
         }
     }
-    if (exsiting != nullptr) {
-        appRecords_.removeOne(exsiting);
+    if (existing != nullptr) {
+        appRecords_.removeOne(existing);
     }
     recordsLock_.unlock();
-    return exsiting;
+    return existing;
 }
 
 void AMSThread::DeleteAppRecord(uint64_t token)
 {
     recordsLock_.lock();
-    JSAppRecord *exsiting = nullptr;
+    JSAppRecord *existing = nullptr;
     for (auto record : appRecords_) {
         if (record->token == token) {
-            exsiting = record;
+            existing = record;
             break;
         }
     }
-    if (exsiting != nullptr) {
-        appRecords_.removeOne(exsiting);
-        delete exsiting;
-        exsiting = nullptr;
+    if (existing != nullptr) {
+        appRecords_.removeOne(existing);
+        delete existing;
+        existing = nullptr;
     }
     recordsLock_.unlock();
 }
@@ -321,15 +321,15 @@ JSAppRecord *AMSThread::GetAppRecordByInfo(const char *path, const char *bundleN
         return nullptr;
     }
     recordsLock_.lock();
-    JSAppRecord *exsiting = nullptr;
+    JSAppRecord *existing = nullptr;
     for (auto record : appRecords_) {
         if (strcmp(path, record->appPath) == 0 && strcmp(bundleName, record->bundleName) == 0) {
-            exsiting = record;
+            existing = record;
             break;
         }
     }
     recordsLock_.unlock();
-    return exsiting;
+    return existing;
 }
 } // namespace ACELite
 } // namespace OHOS

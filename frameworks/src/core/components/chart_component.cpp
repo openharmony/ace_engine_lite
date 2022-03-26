@@ -129,6 +129,7 @@ bool ChartComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrV
 
 void ChartComponent::PostUpdate(uint16_t attrKeyId)
 {
+    UNUSED(attrKeyId);
     chartView_->ClearDataSerial();
     chartView_->Invalidate();
     ClearAllDataSerials();

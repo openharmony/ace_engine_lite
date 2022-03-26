@@ -71,7 +71,7 @@ struct TransitionParams {
           opacity_from(-1),
           opacity_to(-1),
           background_color_from(RGB_COLOR_VALUE_MAX),
-          background_color_to(RGB_COLOR_VALUE_MAX){};
+          background_color_to(RGB_COLOR_VALUE_MAX){}
 };
 
 struct ViewStatus {
@@ -88,7 +88,7 @@ struct ViewStatus {
 
     ACE_DISALLOW_COPY_AND_MOVE(ViewStatus);
     ViewStatus() : x(0), y(0), height(0), width(0), rectOpacity(0), imageOpacity(0), lineOpacity(0), textOpacity(0),
-                   oriRect(), background_color() {};
+                   oriRect(), background_color() {}
 };
 
 enum TransformType : uint8_t {

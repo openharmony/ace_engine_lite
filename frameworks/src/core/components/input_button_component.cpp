@@ -202,6 +202,7 @@ bool InputButtonComponent::SetFontSize(const AppStyleItem *style)
     fontSize_ = GetStylePixelValue(style);
     return true;
 }
+
 void InputButtonComponent::PostRender()
 {
     if (textValue_ != nullptr && fontFamily_ != nullptr) {

@@ -306,7 +306,7 @@ void TabsComponent::ChangeListener::OnSwipe(UISwipeView& view)
         return;
     }
 
-    const uint8_t argsNum = 1;
+    constexpr uint8_t argsNum = 1;
     jerry_value_t args[argsNum];
     args[0] = jerry_create_object();
     jerry_value_t indexKeyHandler = jerry_create_string((const jerry_char_t*)TABS_ATTR_INDEX);

@@ -135,6 +135,7 @@ void PercentTddTest::VerifyDimension(JSValue element, uint16_t keyID, int16_t ta
     EXPECT_FALSE(component == nullptr);
     if (component == nullptr) {
         HILOG_ERROR(HILOG_MODULE_ACE, "can not fetch component from element");
+        return;
     }
     Dimension dimension = component->GetDimension(keyID);
     EXPECT_EQ(dimension.type, DimensionType::TYPE_PIXEL);
