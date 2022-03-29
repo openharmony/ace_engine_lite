@@ -1094,11 +1094,11 @@ struct JSPageSpecific jsPageSpecific;
 
 uint16_t GetHorizontalResolution()
 {
-    constexpr uint16_t resConst = 454;
 // SCREENSIZE_SPECIFIED is temporarily set, when ui and graphic unifid, this can be removed
 #if ((defined __LITEOS__) || (defined __linux__) || (SCREENSIZE_SPECIFIED == 1))
     return Screen::GetInstance().GetWidth();
 #else
+    constexpr uint16_t resConst = 454;
     uint16_t horizontalResolution = resConst;
     uint16_t verticalResolution = resConst;
     ProductAdapter::GetScreenSize(horizontalResolution, verticalResolution);
