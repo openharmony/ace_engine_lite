@@ -59,6 +59,9 @@ void JSThread::ProcessOneRenderTick()
 void JSThread::PostCommand(AbilityMsgId command)
 {
     AbilityInnerMsg *msg = new AbilityInnerMsg();
+    if (msg == nullptr) {
+        return;
+    }
     msg->msgId = command;
     PostMessage(msg);
 }
@@ -95,7 +98,7 @@ void JSThread::HandleEventLoop()
             // error case
             return;
         }
-        // the innerMsg will be freeed out of the scop
+        // the innerMsg will be freed out of the scop
         std::unique_ptr<const AbilityInnerMsg> msgGuard(innerMsg);
         switch ((uint32_t)innerMsg->msgId) {
             case AbilityMsgId::START: {

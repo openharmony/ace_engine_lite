@@ -43,7 +43,7 @@ char *DftImpl::GetPagePath()
         HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed.");
         return nullptr;
     }
-    if (memcpy_s(path, len, pagePath, len) != 0) {
+    if (memcpy_s(path, len, pagePath, len) != EOK) {
         ace_free(path);
         path = nullptr;
         return nullptr;

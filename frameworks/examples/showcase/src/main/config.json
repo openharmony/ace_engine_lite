@@ -1,7 +1,7 @@
 {
   "app": {
-    "bundleName": "com.huawei.showcase",
-    "vendor": "huawei",
+    "bundleName": "com.test.showcase",
+    "vendor": "ohos",
     "version": {
       "code": 1,
       "name": "1.0"

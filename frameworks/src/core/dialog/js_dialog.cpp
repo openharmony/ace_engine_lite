@@ -119,7 +119,7 @@ bool JSDialog::ParseButton(JSDialog *jsDialog,
     const char * const buttonTextKey = "text";
     const char * const buttonColorKey = "color";
     // support up to 3 buttons
-    for (uint16_t index = 0; index < len; index++) {
+    for (uint32_t index = 0; index < len; index++) {
         if (index >= maxButtonNum) {
             HILOG_WARN(HILOG_MODULE_ACE, "dialog support up to 3 buttons, please check dialog button num");
             break;

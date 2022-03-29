@@ -1,7 +1,7 @@
 {
   "app": {
-    "vendor": "huawei",
-    "bundleName": "com.huawei.music",
+    "vendor": "ohos",
+    "bundleName": "com.test.music",
     "version": {
       "code": 1,
       "name": "1.0"

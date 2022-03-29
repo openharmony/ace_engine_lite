@@ -36,6 +36,8 @@ jerry_value_t ProfilerModule::StartTracing(const jerry_value_t func,
                                            const jerry_value_t *args,
                                            const jerry_length_t argsNum)
 {
+    UNUSED(func);
+    UNUSED(context);
 #if IS_ENABLED(JS_PROFILER)
     if ((args == nullptr) || (argsNum < 1)) {
         return UNDEFINED;
@@ -64,6 +66,10 @@ jerry_value_t ProfilerModule::StopTracing(const jerry_value_t func,
                                           const jerry_value_t *args,
                                           const jerry_length_t argsNum)
 {
+    UNUSED(func);
+    UNUSED(context);
+    UNUSED(args);
+    UNUSED(argsNum);
 #if IS_ENABLED(JS_PROFILER)
     STOP_TRACING();
 #endif

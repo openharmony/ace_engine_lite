@@ -110,7 +110,7 @@ void ChildWidget::RestartApp() const
 
 void ChildWidget::StartApp(const char *path)
 {
-    if (path == nullptr || ((path != nullptr) && (strlen(path) == 0))) {
+    if (path == nullptr || (strlen(path) == 0)) {
         return;
     }
     // start all necessary mock threads

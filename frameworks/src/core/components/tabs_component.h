@@ -57,7 +57,7 @@ private:
     public:
         ACE_DISALLOW_COPY_AND_MOVE(ChangeListener);
         ChangeListener() = delete;
-        explicit ChangeListener(jerry_value_t fn) : fn_(jerry_acquire_value(fn)) {};
+        explicit ChangeListener(jerry_value_t fn) : fn_(jerry_acquire_value(fn)) {}
         ~ChangeListener()
         {
             jerry_release_value(fn_);

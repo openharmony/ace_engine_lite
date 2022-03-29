@@ -97,7 +97,7 @@ void DfxAssist::DumpErrorMessage(const jerry_value_t errorValue)
         return;
     }
     HILOG_ERROR(HILOG_MODULE_ACE, "[Exception backtrace]:");
-    for (uint8_t i = 0; i < length; i++) {
+    for (uint32_t i = 0; i < length; i++) {
         jerry_value_t itemVal = jerry_get_property_by_index(backtraceVal, i);
         jerry_size_t strSize = 0;
         if (!jerry_value_is_error(itemVal) && jerry_value_is_string(itemVal)) {
@@ -105,7 +105,7 @@ void DfxAssist::DumpErrorMessage(const jerry_value_t errorValue)
         }
 
         if (strSize >= stackMsgMaxLength) {
-            HILOG_ERROR(HILOG_MODULE_ACE, "%{public}u: [Backtrace string too long]", i);
+            HILOG_ERROR(HILOG_MODULE_ACE, "%{public}hhu: [Backtrace string too long]", i);
         } else {
             jerry_size_t stringEnd = jerry_string_to_utf8_char_buffer(itemVal, errStrBuffer, strSize);
             errStrBuffer[stringEnd] = '\0';
