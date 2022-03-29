@@ -245,7 +245,7 @@ void JSAbility::HandleRenderTick()
         ProductAdapter::NotifyRenderEnd();
         errorTickCount_++;
         if ((errorTickCount_ % ERR_TICK_COUNT_TRACE_CTRL) == 1) {
-            HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not actived, count[%{public}d]",
+            HILOG_WARN(HILOG_MODULE_ACE, "skip one render tick process since not activated, count[%{public}d]",
                        errorTickCount_);
         }
         if (errorTickCount_ == UINT32_MAX) {

@@ -22,7 +22,7 @@ namespace OHOS {
 namespace ACELite {
 class QRCodeTddTest : public BasicTddTest {
 public:
-    QRCodeTddTest() : BasicTddTest() {};
+    QRCodeTddTest() : BasicTddTest() {}
     ~QRCodeTddTest() override {};
     void ComponentQrcodeStyleValueTest001();
     void ComponentQrcodeStyleValueTest002();

@@ -29,7 +29,7 @@ QueueHandler MessageQueueUtils::CreateMessageQueue(uint32_t capacity, uint32_t m
         return nullptr;
     }
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
-    HILOG_WARN(HILOG_MODULE_ACE, "todo call linux createMessageQueue interface here!");
+    HILOG_WARN(HILOG_MODULE_ACE, "call linux createMessageQueue interface here!");
     return nullptr;
 #else
     osMessageQueueId_t queueId = osMessageQueueNew(capacity, msgSize, nullptr);
@@ -44,7 +44,7 @@ int8_t MessageQueueUtils::DeleteMessageQueue(QueueHandler handler)
         return MSGQ_FAIL;
     }
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
-    HILOG_WARN(HILOG_MODULE_ACE, "todo call linux deleteMessageQueue interface here!");
+    HILOG_WARN(HILOG_MODULE_ACE, "call linux deleteMessageQueue interface here!");
     return MSGQ_FAIL;
 #else
     osMessageQueueId_t queueId = static_cast<osMessageQueueId_t>(handler);
@@ -63,13 +63,13 @@ int8_t MessageQueueUtils::PutMessage(QueueHandler handler, const void* msgPtr, u
         return MSGQ_FAIL;
     }
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
-    HILOG_WARN(HILOG_MODULE_ACE, "todo call linux putmsg interface here!");
+    HILOG_WARN(HILOG_MODULE_ACE, "call linux putmsg interface here!");
     return MSGQ_FAIL;
 #else
     osMessageQueueId_t queueId = static_cast<osMessageQueueId_t>(handler);
     if (osMessageQueuePut(queueId, msgPtr, 0, timeOut) != osOK) {
         uint32_t msgCount = osMessageQueueGetCount(queueId);
-        HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:PutMessage failed! msg count[%{public}d]", msgCount);
+        HILOG_ERROR(HILOG_MODULE_ACE, "MessageQueueUtils:PutMessage failed! msg count[%{public}u]", msgCount);
         return MSGQ_FAIL;
     }
     return MSGQ_OK;
@@ -83,7 +83,7 @@ int8_t MessageQueueUtils::GetMessage(QueueHandler handler, void* msgPtr, uint32_
         return MSGQ_FAIL;
     }
 #if (defined(__LINUX__) || defined(__LITEOS_A__))
-    HILOG_WARN(HILOG_MODULE_ACE, "todo call linux getmsg interface here!");
+    HILOG_WARN(HILOG_MODULE_ACE, "call linux getmsg interface here!");
     return MSGQ_FAIL;
 #else
     osMessageQueueId_t queueId = static_cast<osMessageQueueId_t>(handler);

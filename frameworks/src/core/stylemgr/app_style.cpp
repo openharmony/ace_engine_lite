@@ -29,7 +29,7 @@ void AppStyle::SetStyleName(const char * const name, size_t nameLen)
         HILOG_ERROR(HILOG_MODULE_ACE, "create style_name failed.");
         return;
     }
-    if (memcpy_s(styleName_, nameLen, name, nameLen) != 0) {
+    if (memcpy_s(styleName_, nameLen, name, nameLen) != EOK) {
         HILOG_ERROR(HILOG_MODULE_ACE, "style_name set string value error");
         ace_free(styleName_);
         styleName_ = nullptr;

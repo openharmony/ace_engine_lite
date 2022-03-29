@@ -30,7 +30,7 @@
 #endif
 
 /**
- * The macro is used to distingush the real device and simulator.
+ * The macro is used to distinguish the real device and simulator.
  */
 #ifndef TARGET_SIMULATOR
 #define TARGET_SIMULATOR 1

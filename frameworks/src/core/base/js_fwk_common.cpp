@@ -416,7 +416,7 @@ static size_t AppendTwoPath(char * const first, uint8_t startIndex, const char *
             if (memcpy_s(first + startIndex, (destSize - startIndex), (sec + 1), (secLength - 1)) != 0) {
                 HILOG_ERROR(HILOG_MODULE_ACE, "append path error");
                 return 0;
-            };
+            }
 
             copiedLength = copiedLength + (secLength - 1);
             startIndex = startIndex + (secLength - 1);
@@ -1094,12 +1094,13 @@ struct JSPageSpecific jsPageSpecific;
 
 uint16_t GetHorizontalResolution()
 {
+    constexpr uint16_t resConst = 454;
 // SCREENSIZE_SPECIFIED is temporarily set, when ui and graphic unifid, this can be removed
 #if ((defined __LITEOS__) || (defined __linux__) || (SCREENSIZE_SPECIFIED == 1))
     return Screen::GetInstance().GetWidth();
 #else
-    uint16_t horizontalResolution = 454;
-    uint16_t verticalResolution = 454;
+    uint16_t horizontalResolution = resConst;
+    uint16_t verticalResolution = resConst;
     ProductAdapter::GetScreenSize(horizontalResolution, verticalResolution);
     return horizontalResolution;
 #endif // OHOS_ACELITE_PRODUCT_WATCH
@@ -1110,8 +1111,8 @@ uint16_t GetVerticalResolution()
 #if ((defined __LITEOS__) || (defined __linux__) || (SCREENSIZE_SPECIFIED == 1))
     return Screen::GetInstance().GetHeight();
 #else
-    uint16_t horizontalResolution = 454;
-    uint16_t verticalResolution = 454;
+    uint16_t horizontalResolution = resConst;
+    uint16_t verticalResolution = resConst;
     ProductAdapter::GetScreenSize(horizontalResolution, verticalResolution);
     return verticalResolution;
 #endif // OHOS_ACELITE_PRODUCT_WATCH
@@ -1165,7 +1166,7 @@ void ExpandImagePathMem(char *&imagePath, const int16_t dotPos, const int16_t su
 
     errno_t err = strcpy_s(newImagePath, len, imagePath);
     if (err != 0) {
-        HILOG_ERROR(HILOG_MODULE_ACE, "use strcpy_s secure function errro(%{public}d)", err);
+        HILOG_ERROR(HILOG_MODULE_ACE, "use strcpy_s secure function [errro:%{public}d]", err);
         ace_free(newImagePath);
         newImagePath = nullptr;
         ACE_FREE(imagePath);
@@ -1211,10 +1212,10 @@ void CureImagePath(char *&imagePath)
     // else means the file name is wrong.
     if ((dotPos - lastPathPos) > 1) {
         // if suffix length < 3, need expand memory first.
-        if (imagePathLen < (suffixLen + dotPos + 1)) {
+        if (static_cast<int16_t>(imagePathLen) < (suffixLen + dotPos + 1)) {
             ExpandImagePathMem(imagePath, dotPos, suffixLen, imagePathLen);
             if (imagePath == nullptr) {
-                HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%{public}u]",
+                HILOG_ERROR(HILOG_MODULE_ACE, "malloc buffer for path failed, needed length[%{public}d]",
                             (dotPos + 1 + suffixLen + 1));
                 return;
             }

@@ -22,7 +22,7 @@ namespace OHOS {
 namespace ACELite {
 class ChartTddTest : public BasicTddTest {
 public:
-    ChartTddTest() : BasicTddTest() {};
+    ChartTddTest() : BasicTddTest() {}
     ~ChartTddTest() override {};
     void ComponentChartStyleValueTest001();
     void ComponentChartStyleValueTest002();

@@ -148,7 +148,7 @@ char *JsAppContext::EvaluateFile(bool &isSnapshotMode,
         // read successfully
         return jsCode;
     }
-    // make sure the memory is freeed
+    // make sure the memory is freed
     ACE_FREE(jsCode);
 
     const char * const anotherSuffx = isSnapshotMode ? ".js" : ".bc";
