@@ -20,6 +20,7 @@
 #include "root_view.h"
 #include "text_component.h"
 #include "ui_label.h"
+#include "ui_font.h"
 
 namespace OHOS {
 namespace ACELite {
