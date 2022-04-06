@@ -60,6 +60,10 @@ bool ConditionArbitrator::Decide(const char *conditions) const
         }
         char *condition = StringUtil::Trim(singleCondition);
         if (condition == nullptr) {
+            if (singleCondition != nullptr) {
+                ace_free(singleCondition);
+                singleCondition = nullptr;
+            }
             continue;
         }
         result = JudgeCondition(condition);
