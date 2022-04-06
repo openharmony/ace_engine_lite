@@ -23,7 +23,6 @@
 #include "js_fwk_common.h"
 #include "memory_heap.h"
 #include "non_copyable.h"
-#include "ui_font.h"
 #include "ui_image_view.h"
 #include "ui_label.h"
 #include "ui_slider.h"
