@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -95,6 +95,13 @@
  */
 #ifndef FEATURE_MODULE_DEVICE
 #define FEATURE_MODULE_DEVICE 1
+#endif
+
+/**
+ * syscap module
+ */
+#ifndef FEATURE_SYSCAP_MODULE
+#define FEATURE_SYSCAP_MODULE 1
 #endif
 
 /**
