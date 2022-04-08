@@ -23,7 +23,6 @@
 #include "jerryscript.h"
 #include "modules/presets/image_module.h"
 #include "image_component.h"
-#include <sstream>
 
 namespace OHOS {
 namespace ACELite {
@@ -264,7 +263,6 @@ jerry_value_t CanvasComponent::FillStyleSetter(const jerry_value_t func,
 
     uint32_t color = 0;
     uint8_t alpha = OPA_OPAQUE;
-    uint16_t fillStyleId = KeyParser::ParseKeyId(component->fillStyleValue_, fillStyleLength);
     if (ParseColor(component->fillStyleValue_, color, alpha)) {
         component->paint_.SetFillColor(component->GetRGBColor(color));
         component->paint_.SetOpacity(alpha);
@@ -326,7 +324,6 @@ jerry_value_t CanvasComponent::StrokeStyleSetter(const jerry_value_t func,
 
     uint32_t color = 0;
     uint8_t alpha = OPA_OPAQUE;
-    uint16_t strokeStyleId = KeyParser::ParseKeyId(component->strokeStyleValue_, strokeStyleLength);
     if (ParseColor(component->strokeStyleValue_, color, alpha)) {
         component->paint_.SetStrokeColor(component->GetRGBColor(color));
         component->paint_.SetOpacity(alpha);
