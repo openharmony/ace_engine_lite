@@ -142,6 +142,7 @@ SOURCES += \
         $${ACELITE_CORE_PATH}/modules/presets/render_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/require_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/timer_module.cpp \
+        $${ACELITE_CORE_PATH}/modules/presets/syscap_module.cpp \
         $${ACELITE_CORE_PATH}/modules/presets/version_module.cpp \
         $${ACELITE_CORE_PATH}/modules/router_module.cpp \
         $${ACELITE_CORE_PATH}/modules/sample_module.cpp \
