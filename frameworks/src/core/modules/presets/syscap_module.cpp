@@ -63,6 +63,10 @@ jerry_value_t SyscapModule::CheckSyscap(const jerry_value_t func,
 
     jerry_char_t buffer[SYSCAP_BUFFER_SIZE] = {0};
     jerry_size_t syscapStrSize = jerry_string_to_utf8_char_buffer(strVal, buffer, length);
+    if (syscapStrSize == 0) {
+        jerry_release_value(strVal);
+        return jerry_create_boolean(false);
+    }
     const char *syscapString = (char *)buffer;
     bool ret = HasSystemCapability(syscapString);
 
