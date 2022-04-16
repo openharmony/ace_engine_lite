@@ -26,6 +26,7 @@ constexpr char ATTR_TIMESTAMP[] = "timestamp";
 constexpr char ATTR_GLOBAL_X[] = "globalX";
 constexpr char ATTR_GLOBAL_Y[] = "globalY";
 constexpr char ATTR_DIRECTION[] = "direction";
+constexpr char ATTR_DISTANCE[] = "distance";
 constexpr char ATTR_DIRECTION_RIGHT[] = "right";
 constexpr char ATTR_DIRECTION_LEFT[] = "left";
 constexpr char ATTR_DIRECTION_UP[] = "up";
@@ -85,22 +86,27 @@ JSValue EventUtil::CreateSwipeEvent(UIView &view, const DragEvent &event)
     // create a JAVASCRIPT plain object that is used as the input parameter of
     // the event callback function.
     JSValue arg = EventUtil::CreateEvent(EVENT_SWIPE, view, event);
+    int32_t distance = 0;
     // set the 'direction' attribute for the input parameter of the swipe event callback function.
     switch (event.GetDragDirection()) {
         case DragEvent::DIRECTION_LEFT_TO_RIGHT: {
             JSObject::SetString(arg, ATTR_DIRECTION, ATTR_DIRECTION_RIGHT);
+            distance = event.GetLastPoint().x - event.GetStartPoint().x;
             break;
         }
         case DragEvent::DIRECTION_RIGHT_TO_LEFT: {
             JSObject::SetString(arg, ATTR_DIRECTION, ATTR_DIRECTION_LEFT);
+            distance = event.GetStartPoint().x - event.GetLastPoint().x;
             break;
         }
         case DragEvent::DIRECTION_TOP_TO_BOTTOM: {
             JSObject::SetString(arg, ATTR_DIRECTION, ATTR_DIRECTION_DOWN);
+            distance = event.GetLastPoint().y - event.GetStartPoint().y;
             break;
         }
         case DragEvent::DIRECTION_BOTTOM_TO_TOP: {
             JSObject::SetString(arg, ATTR_DIRECTION, ATTR_DIRECTION_UP);
+            distance = event.GetStartPoint().y - event.GetLastPoint().y;
             break;
         }
         default: {
@@ -108,6 +114,7 @@ JSValue EventUtil::CreateSwipeEvent(UIView &view, const DragEvent &event)
             break;
         }
     }
+    JSObject::SetNumber(arg, ATTR_DISTANCE, distance);
     return arg;
 }
 JSValue EventUtil::CreateTouchEvent(UIView &view, const DragEvent &event)
