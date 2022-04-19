@@ -20,7 +20,7 @@
 #include "js_debugger_config.h"
 #include "js_router.h"
 #include "js_timer_list.h"
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
 #include "js_profiler.h"
 #endif
 #include "non_copyable.h"
@@ -43,7 +43,7 @@ public:
           isEnvInit_(false),
           router_(nullptr)
     {
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
         // Call GetInstance() to prepare data
         JSProfiler::GetInstance()->PrepareDataBuffer();
 #endif
@@ -58,7 +58,7 @@ public:
      */
     virtual ~JSAbilityImpl()
     {
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
         // Call release() to free all performance data
         JSProfiler::GetInstance()->Release();
 #endif
@@ -111,7 +111,7 @@ public:
      *
      * @brief call this function when replace new page
      */
-    const Router* GetRouter() const
+    const Router *GetRouter() const
     {
         return router_;
     }
@@ -122,12 +122,12 @@ private:
     void InvokeOnBackPressed() const;
     void InvokeMethodWithoutParameter(const char * const name) const;
 
-    JsAppContext* appContext_;
+    JsAppContext *appContext_;
     jerry_value_t abilityModel_;  // the object evaled from user JS code
     jerry_value_t nativeElement_; // the object returned from render function
     bool rendered_;
     bool isEnvInit_;
-    Router* router_;
+    Router *router_;
 };
 } // namespace ACELite
 } // namespace OHOS

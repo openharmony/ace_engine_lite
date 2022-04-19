@@ -18,9 +18,9 @@
 namespace OHOS {
 namespace ACELite {
 HorizonProgressComponent::HorizonProgressComponent(jerry_value_t options,
-                                                   jerry_value_t children, AppStyleManager *styleManager)
-    : Component(options, children, styleManager),
-    hStrokeWidth_(0)
+                                                   jerry_value_t children,
+                                                   AppStyleManager *styleManager)
+    : Component(options, children, styleManager), hStrokeWidth_(0)
 {
 }
 
@@ -54,14 +54,13 @@ bool HorizonProgressComponent::CreateNativeViews()
     progressView_.SetForegroundStyle(STYLE_BORDER_WIDTH, 0);
     progressView_.SetBackgroundStyle(STYLE_BORDER_WIDTH, 0);
     const double alpha = 0.15;
-    progressView_.SetBackgroundStyle(STYLE_BACKGROUND_COLOR,
-                                     Color::GetColorFromRGBA(0xFF, 0xFF, 0xFF, alpha * 0xFF).full);
+    progressView_.SetBackgroundStyle(
+        STYLE_BACKGROUND_COLOR, Color::GetColorFromRGBA(0xFF, 0xFF, 0xFF, static_cast<uint8_t>(alpha * 0xFF)).full);
     // set defaut progress stroke width & canvas width & canvas height & border width
     const int16_t width = 4;
     hStrokeWidth_ = width;
     return true;
 }
-
 
 UIView *HorizonProgressComponent::GetComponentRootView() const
 {
