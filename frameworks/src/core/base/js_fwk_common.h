@@ -70,7 +70,7 @@ struct Watcher : public MemoryHeap {
 
 void ThrowError();
 
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
 #ifndef LOG_PROFILER_TRACE
 #define LOG_PROFILER(format, ...) printf(format "\n", ##__VA_ARGS__)
 #define LOG_PROFILER_TRACE(format, ...) printf("[PERFORMANCE]:" format "\n", ##__VA_ARGS__)

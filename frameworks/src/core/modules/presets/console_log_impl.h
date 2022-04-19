@@ -19,7 +19,7 @@
 #include "acelite_config.h"
 #include "js_config.h"
 
-#if ENABLED(CONSOLE_LOG_OUTPUT)
+#if IS_ENABLED(CONSOLE_LOG_OUTPUT)
 
 #include "jerryscript.h"
 
@@ -29,13 +29,13 @@ namespace ACELite {
  * The log level definations.
  */
 enum LogLevel : uint8_t {
-    LOG_LEVEL_NONE = 0,    // console.log
-    LOG_LEVEL_DEBUG = 1,   // console.debug
-    LOG_LEVEL_INFO = 2,    // console.info
-    LOG_LEVEL_WARN = 3,    // console.warn
-    LOG_LEVEL_ERR = 4,     // console.error
-    LOG_LEVEL_FATAL = 5,   // fatal, no console.fatal
-    LOG_LEVEL_TRACE = 6,   // console.trace
+    LOG_LEVEL_NONE = 0,  // console.log
+    LOG_LEVEL_DEBUG = 1, // console.debug
+    LOG_LEVEL_INFO = 2,  // console.info
+    LOG_LEVEL_WARN = 3,  // console.warn
+    LOG_LEVEL_ERR = 4,   // console.error
+    LOG_LEVEL_FATAL = 5, // fatal, no console.fatal
+    LOG_LEVEL_TRACE = 6, // console.trace
 };
 
 #ifdef TDD_ASSERTIONS
@@ -80,7 +80,7 @@ void FlushOutput();
 jerry_value_t LogNative(const LogLevel logLevel,
                         const jerry_value_t func,
                         const jerry_value_t context,
-                        const jerry_value_t* args,
+                        const jerry_value_t *args,
                         const jerry_length_t length);
 
 /**

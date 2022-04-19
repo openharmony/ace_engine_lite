@@ -15,7 +15,7 @@
 
 #include "js_profiler.h"
 // invoked into compiling only if performance measurement enabled
-#if ENABLED(JS_PROFILER)
+#if IS_ENABLED(JS_PROFILER)
 #include "ace_log.h"
 #include "ace_mem_base.h"
 #include "js_async_work.h"
@@ -25,7 +25,9 @@
 #include <fcntl.h>
 #include "los_tick.h"
 #include "unistd.h"
+
 #elif defined(FEATURE_ACELITE_JS_PROFILER)
+
 #include <sys/time.h>
 #else
 #include <time.h>
@@ -163,9 +165,7 @@ JSProfiler::JSProfiler() : data_(nullptr), dataCount_(0), traceIdSlot_(0), enabl
 JSProfiler::JSProfiler() : data_(nullptr), dataCount_(0), traceIdSlot_(0), enabled_(false) {}
 #endif
 
-JSProfiler::~JSProfiler()
-{
-}
+JSProfiler::~JSProfiler() {}
 
 JSProfiler *JSProfiler::GetInstance()
 {
@@ -264,7 +264,7 @@ void JSProfiler::ResetData()
 {
     if (data_) {
         if (memset_s(data_, (maxTracingDataCount * sizeof(PerformanceData)), 0,
-            (maxTracingDataCount * sizeof(PerformanceData))) != 0) {
+                     (maxTracingDataCount * sizeof(PerformanceData))) != 0) {
             HILOG_ERROR(HILOG_MODULE_ACE, "ace js profiler memset_s failed");
             return;
         }
@@ -273,7 +273,7 @@ void JSProfiler::ResetData()
 #ifdef FEATURE_ACELITE_MC_JS_PROFILER
     if (msg_) {
         if (memset_s(msg_, (PROFILER_MSG_LENGTH * sizeof(ProfilerMsg)), 0,
-            (PROFILER_MSG_LENGTH * sizeof(ProfilerMsg))) != 0) {
+                     (PROFILER_MSG_LENGTH * sizeof(ProfilerMsg))) != 0) {
             HILOG_ERROR(HILOG_MODULE_ACE, "ace js profiler memset_s failed");
             return;
         }
@@ -364,7 +364,7 @@ void JSProfiler::Output()
 
         char buf[MSG_LENGTH] = {'\0'};
         if (sprintf_s(buf, MSG_LENGTH, "%d %d %llu %d %d\n", data.component, data.label,
-            CalculateElapsedTime(data.start, data.end), data.description, data.label) < 0) {
+                      CalculateElapsedTime(data.start, data.end), data.description, data.label) < 0) {
             HILOG_ERROR(HILOG_MODULE_ACE, "ace js profiler memset_s msg failed");
             return;
         }
