@@ -35,7 +35,7 @@ public:
 
     void Init() override;
 
-    const int GetInitState()
+    int GetInitState()
     {
         return initRes_;
     }

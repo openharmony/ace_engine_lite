@@ -176,11 +176,11 @@ public:
     ACE_DISALLOW_COPY_AND_MOVE(ViewOnTouchListener);
     ViewOnTouchListener(jerry_value_t vm, bool isStopPropagation)
         : vm_(jerry_acquire_value(vm)),
-          isStopPropagation_(isStopPropagation),
           bindTouchStartFunc_(UNDEFINED),
           bindTouchMoveFunc_(UNDEFINED),
           bindTouchEndFunc_(UNDEFINED),
-          bindSwipeFunc_(UNDEFINED)
+          bindSwipeFunc_(UNDEFINED),
+          isStopPropagation_(isStopPropagation)
     {
     }
 

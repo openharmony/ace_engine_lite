@@ -208,9 +208,6 @@ bool ImageAnimatorComponent::ParseToFrames(jerry_value_t value)
         HILOG_ERROR(HILOG_MODULE_ACE, "images is empty.");
         return false;
     }
-    if (framesSize_ > UINT8_MAX) {
-        framesSize_ = UINT8_MAX;
-    }
 
     frames_ = static_cast<ImageAnimatorInfo *>(ace_malloc(sizeof(ImageAnimatorInfo) * framesSize_));
     if (frames_ == nullptr) {
