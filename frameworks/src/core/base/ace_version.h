@@ -20,23 +20,23 @@
 
 #include "js_config.h"
 
-#if ENABLED(ACE_LITE_VERSION_JS_API)
+#if IS_ENABLED(ACE_LITE_VERSION_JS_API)
 
 namespace OHOS {
 namespace ACELite {
 class ACEVersion final {
 public:
-    static const char* GetStr()
+    static const char *GetStr()
     {
         return "1.0.16";
     }
 
-    static const char* GetCommit()
+    static const char *GetCommit()
     {
         return "1e53ee81c";
     }
 
-    static const char* GetTimeStamp()
+    static const char *GetTimeStamp()
     {
         return "2020-08-13 17:25:20";
     }
