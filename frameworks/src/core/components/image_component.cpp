@@ -32,6 +32,11 @@ ImageComponent::ImageComponent(jerry_value_t options, jerry_value_t children, Ap
     SetComponentName(K_IMAGE);
 }
 
+const char *ImageComponent::GetSrc()
+{
+    return imageView_.GetPath();
+}
+
 bool ImageComponent::CreateNativeViews()
 {
     // set default value
@@ -55,6 +60,16 @@ bool ImageComponent::SetPrivateAttribute(uint16_t attrKeyId, jerry_value_t attrV
             char *src = const_cast<char *>(ParseImageSrc(attrValue));
             imageView_.SetSrc(src);
             ACE_FREE(src);
+            break;
+        }
+        case K_WIDTH: {
+            int16_t width = IntegerOf(attrValue);
+            imageView_.SetWidth(width);
+            break;
+        }
+        case K_HEIGHT: {
+            int16_t height = IntegerOf(attrValue);
+            imageView_.SetWidth(height);
             break;
         }
         default:
@@ -95,11 +110,15 @@ bool ImageComponent::ApplyPrivateStyle(const AppStyleItem *style)
             break;
         }
         case K_HEIGHT: {
+            int16_t value = GetStyleNumValue(style);
+            imageView_.SetHeight(value);
             hasSetHeight_ = true;
             setResult = false;
             break;
         }
         case K_WIDTH: {
+            int16_t value = GetStyleNumValue(style);
+            imageView_.SetWidth(value);
             hasSetWidth_ = true;
             setResult = false;
             break;

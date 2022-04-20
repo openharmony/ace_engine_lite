@@ -72,6 +72,8 @@ enum {
 #if (FEATURE_COMPONENT_CANVAS == 1)
     KEYWORD(CANVAS, canvas) // tag name
 #endif // FEATURE_COMPONENT_CANVAS
+    KEYWORD(CANVASGRADIENT, canvasGradient) // gradient fillstyle or strokestyle
+    KEYWORD(CANVASPATTERN, canvasPattern) // pattern fillstyle or strokestyle
     KEYWORD(CENTER, center) // text align type
     KEYWORD(CENTER_X, centerX) // circle progress x
     KEYWORD(CENTER_Y, centerY) // circle progress y
@@ -180,6 +182,7 @@ enum {
 #endif // FEATURE_COMPONENT_VIDEO
     KEYWORD(NAME, name) // the attribute name
     KEYWORD(NONE, none) // animation fill value
+    KEYWORD(NO_REPEAT, no-repeat) // no-repeat pattern type
 #if (FEATURE_DATE_FORMAT == 1)
     KEYWORD(NUMERIC, numeric)
 #endif
@@ -212,6 +215,9 @@ enum {
     KEYWORD(PAUSE, pause) // video component pause event tag
 #endif // FEATURE_COMPONENT_VIDEO
     KEYWORD(REVERSE, reverse) // image-animator attribute
+    KEYWORD(REPEAT, repeat) // repeat pattern type
+    KEYWORD(REPEAT_X, repeat-x) // repeat-x pattern type
+    KEYWORD(REPEAT_Y, repeat-y) // repeat-y pattern type
     KEYWORD(RIGHT, right) // text align type
     KEYWORD(ROTATE, rotate) // animation rotate
     KEYWORD(ROW, row) // layout style
@@ -246,6 +252,8 @@ enum {
     KEYWORD(SPACE_BETWEEN, space-between) // layout style
     KEYWORD(SPACE_EVENLY, space-evenly) // layout style
     KEYWORD(SRC, src) // common attributes, use for image view, video compnent
+    KEYWORD(IMAGE_WIDTH, width) // common attributes, use for image view, video compnent
+    KEYWORD(IMAGE_HEIGHT, height) // common attributes, use for image view, video compnent
     KEYWORD(STACK, stack) // tag name
     KEYWORD(STANDARD, standard) // text font size type
     KEYWORD(STOP, stop) // image-animator stop event, video component end event tag

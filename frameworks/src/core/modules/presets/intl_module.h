@@ -45,7 +45,6 @@ private:
 }
 }
 #endif // FEATURE_INTL_MODULE
-#include "image_module.h"
 namespace OHOS {
 namespace ACELite {
 class IntlControlModule final {
