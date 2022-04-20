@@ -20,6 +20,7 @@
 #include "global.h"
 #include "string.h"
 #include "number_format_module.h"
+#include "image_module.h"
 #include "js_fwk_common.h"
 namespace OHOS {
 namespace ACELite {
@@ -33,6 +34,7 @@ void IntlModule::Init()
 #if (FEATURE_DATE_FORMAT == 1)
     DateTimeFormatModule::Init(baseObj);
 #endif
+    ImageModule::Init(baseObj);
     JerrySetNamedProperty(globalObj, "Intl", baseObj);
     jerry_release_value(globalObj);
 }

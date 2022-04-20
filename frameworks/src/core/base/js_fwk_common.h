@@ -188,6 +188,7 @@ char *MallocStringOf(jerry_value_t source);
 // convert one jerry string value to char*, and return the string length
 char *MallocStringOf(jerry_value_t source, uint16_t *strLength);
 int16_t IntegerOf(jerry_value_t source);
+float FloatOf(jerry_value_t source);
 bool BoolOf(jerry_value_t source);
 
 // relocate file name to full path of the current app path
@@ -297,6 +298,12 @@ constexpr char PATH_DEFAULT[] = "/";
 constexpr char PREFIX_HEX_COLOR[] = "#";
 constexpr char PREFIX_RGB_COLOR[] = "rgb";
 constexpr char PREFIX_RGBA_COLOR[] = "rgba";
+constexpr char LINEJOIN_MITER[] = "miter";
+constexpr char LINEJOIN_ROUND[] = "round";
+constexpr char LINEJOIN_BEVEL[] = "bevel";
+constexpr char LINECAP_BUTT[] = "butt";
+constexpr char LINECAP_SQUARE[] = "square";
+constexpr char LINECAP_ROUND[] = "round";
 constexpr uint8_t ALPHA_MAX = 255;
 constexpr char BRACE_OPEN = '(';
 constexpr char BRACE_CLOSE = ')';
@@ -311,6 +318,8 @@ bool ParseHexColor(const char * const source, uint32_t &color, uint8_t &alpha);
 bool ParseRgbaColor(const char * const source, uint32_t &color, uint8_t &alpha);
 bool ParseColor(const char * const source, uint32_t &color, uint8_t &alpha);
 bool CopyFontFamily(char *&destination, const char * const fontFamily, uint32_t fontFamilyNameLen = 0);
+int8_t ParseLineCap(const char* lineCap);
+int8_t ParseLineJoin(const char* lineJoin);
 
 constexpr int16_t BUTT_VALUE = 0;
 constexpr int16_t SQUARE_VALUE = 1;

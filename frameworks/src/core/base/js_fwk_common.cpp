@@ -215,6 +215,19 @@ int16_t IntegerOf(jerry_value_t source)
     return static_cast<int16_t>(number);
 }
 
+float FloatOf(jerry_value_t source)
+{
+    float value = 0;
+    if (jerry_value_is_number(source)) {
+        value = static_cast<float>(jerry_get_number_value(source));
+    } else {
+        char* cstr = MallocStringOf(source);
+        value = static_cast<float>(atof(cstr));
+        ACE_FREE(cstr);
+    }
+    return value;
+}
+
 jerry_value_t WatcherCallbackFunc(const jerry_value_t func,
                                   const jerry_value_t context,
                                   const jerry_value_t *args,
@@ -1311,6 +1324,39 @@ uint16_t ParseKeyIdFromJSString(const jerry_value_t str)
         keyStr = nullptr;
     }
     return keyId;
+}
+int8_t ParseLineCap(const char *lineCap)
+{
+    if (lineCap == nullptr) {
+        return -1;
+    }
+    if (strcasecmp(lineCap, LINECAP_BUTT) == 0) {
+        return BUTT_VALUE;
+    }
+    if (strcasecmp(lineCap, LINECAP_SQUARE) == 0) {
+        return SQUARE_VALUE;
+    }
+    if (strcasecmp(lineCap, LINECAP_ROUND) == 0) {
+        return ROUND_VALUE;
+    }
+    return -1;
+}
+
+int8_t ParseLineJoin(const char *lineJoin)
+{
+    if (lineJoin == nullptr) {
+        return -1;
+    }
+    if (strcasecmp(lineJoin, LINEJOIN_MITER) == 0) {
+        return LINEJOIN_MITER_VALUE;
+    }
+    if (strcasecmp(lineJoin, LINEJOIN_ROUND) == 0) {
+        return LINEJOIN_ROUND_VALUE;
+    }
+    if (strcasecmp(lineJoin, LINEJOIN_BEVEL) == 0) {
+        return LINEJOIN_BEVEL_VALUE;
+    }
+    return -1;
 }
 } // namespace ACELite
 } // namespace OHOS
