@@ -14,11 +14,11 @@
 import("//build/lite/config/component/lite_component.gni")
 import("//build/lite/config/subsystem/aafwk/config.gni")
 import("//build/lite/config/test.gni")
-import("//foundation/ace/ace_engine_lite/ace_lite.gni")
+import("//foundation/arkui/ace_engine_lite/ace_lite.gni")
 
-ace_lite_root = "//foundation/ace/ace_engine_lite"
+ace_lite_root = "//foundation/arkui/ace_engine_lite"
 ace_lite_builtin_root =
-    "//foundation/ace/ace_engine_lite/interfaces/innerkits/builtin"
+    "//foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin"
 graphic_ui_root = "//foundation/graphic/ui"
 test_output_root = "$root_out_dir/test/unittest/jsfwk"
 
@@ -79,8 +79,8 @@ ace_test_deps = [
   "${aafwk_lite_path}/frameworks/ability_lite:aafwk_abilitykit_lite",
   "${appexecfwk_lite_path}/frameworks/bundle_lite:bundle",
   "//base/powermgr/battery_lite/frameworks/js:ace_battery_kits",
-  "//foundation/ace/ace_engine_lite/frameworks:ace_lite",
-  "//foundation/ace/ace_engine_lite/frameworks/targets",
+  "//foundation/arkui/ace_engine_lite/frameworks:ace_lite",
+  "//foundation/arkui/ace_engine_lite/frameworks/targets",
   "//foundation/communication/ipc_lite:liteipc_adapter",
   "//foundation/distributedschedule/samgr_lite/communication/broadcast",
   "//foundation/distributedschedule/samgr_lite/samgr:samgr",
@@ -114,7 +114,7 @@ extra_deps = [
 ]
 
 all_external_deps = ace_test_deps + extra_deps
-all_external_deps -= [ "//foundation/ace/ace_engine_lite/frameworks:ace_lite" ]
+all_external_deps -= [ "//foundation/arkui/ace_engine_lite/frameworks:ace_lite" ]
 all_external_includes = ace_lite_include_dirs + ace_test_includes
 
 # add specific defines for test case only here

@@ -15,10 +15,7 @@
 
 #ifndef OHOS_ACELITE_MEMORY_HEAP_H
 #define OHOS_ACELITE_MEMORY_HEAP_H
-#include <cstddef>
 #include <cstdio>
-
-#include "ace_mem_base.h"
 
 namespace OHOS {
 namespace ACELite {

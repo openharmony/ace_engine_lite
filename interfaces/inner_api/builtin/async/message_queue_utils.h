@@ -37,7 +37,7 @@ typedef void* QueueHandler;
  * Failed message queue operation
  */
 #ifndef MSGQ_FAIL
-#define MSGQ_FAIL -1
+#define MSGQ_FAIL (-1)
 #endif
 
 /**

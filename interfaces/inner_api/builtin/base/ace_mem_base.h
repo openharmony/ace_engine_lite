@@ -16,9 +16,6 @@
 #ifndef OHOS_ACELITE_ACE_MEM_BASE_H
 #define OHOS_ACELITE_ACE_MEM_BASE_H
 
-#include <cstddef>
-#include <cstdint>
-
 namespace OHOS {
 namespace ACELite {
 /**
