@@ -13,10 +13,10 @@
 
 import("//build/lite/config/component/lite_component.gni")
 
-ace_frameworks_root = "//foundation/ace/ace_engine_lite/frameworks"
+ace_frameworks_root = "//foundation/arkui/ace_engine_lite/frameworks"
 ace_interface_root =
-    "//foundation/ace/ace_engine_lite/interfaces/innerkits/builtin"
-ace_target_root = "//foundation/ace/ace_engine_lite/frameworks/targets"
+    "//foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin"
+ace_target_root = "//foundation/arkui/ace_engine_lite/frameworks/targets"
 
 lite_component("ace_module_manager_lite") {
   features = [ ":ace_module_manager" ]

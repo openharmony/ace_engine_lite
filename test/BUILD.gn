@@ -13,7 +13,7 @@
 
 if (ohos_kernel_type != "liteos_m") {
   import("//build/lite/config/test.gni")
-  import("//foundation/ace/ace_engine_lite/test/ace_test_config.gni")
+  import("//foundation/arkui/ace_engine_lite/test/ace_test_config.gni")
 
   cache_manager_unittest_root =
       "$ACE_LITE_COMMON_PATH/memory/cache/test/unittest"

@@ -13,11 +13,11 @@
 
 import("//build/lite/config/component/lite_component.gni")
 
-ace_common_root = "//foundation/ace/ace_engine_lite/frameworks/common"
+ace_common_root = "//foundation/arkui/ace_engine_lite/frameworks/common"
 ace_interface_root =
-    "//foundation/ace/ace_engine_lite/interfaces/innerkits/builtin"
-ace_target_root = "//foundation/ace/ace_engine_lite/frameworks/targets"
-native_engine_root = "//foundation/ace/ace_engine_lite/frameworks/native_engine"
+    "//foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin"
+ace_target_root = "//foundation/arkui/ace_engine_lite/frameworks/targets"
+native_engine_root = "//foundation/arkui/ace_engine_lite/frameworks/native_engine"
 
 lite_component("ace_native_engine_lite") {
   features = [ ":ace_native_engine" ]

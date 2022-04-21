@@ -201,9 +201,9 @@ INCLUDEPATH += \
             $${ROOT_PATH}/foundation/aafwk/aafwk_lite/interfaces/innerkits/abilitymgr_lite \
             $${ROOT_PATH}/foundation/communication/ipc_lite/liteipc/include \
             $${ROOT_PATH}/third_party/bounds_checking_function/include \
-            $${ROOT_PATH}/foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/async \
-            $${ROOT_PATH}/foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/base \
-            $${ROOT_PATH}/foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/jsi \
+            $${ROOT_PATH}/foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin/async \
+            $${ROOT_PATH}/foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin/base \
+            $${ROOT_PATH}/foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin/jsi \
             $${ACELITE_FRAMEWORK_PATH}/include/context \
             $${ACELITE_FRAMEWORK_PATH}/include/base \
             $${ACELITE_FRAMEWORK_PATH}/include/modules \
