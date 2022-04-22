@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2020-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -309,6 +309,26 @@ enum {
     KEYWORD(MINIMUMFRACTIONDIGITS, minimumFractionDigits)
     KEYWORD(MAXIMUMFRACTIONDIGITS, maximumFractionDigits)
 #endif
+#if FEATURE_COMPONENT_TEXT_SPANNABLE
+    KEYWORD(BACKGROUNDCOLORSPANCOLOR, backgroundcolorspancolor)
+    KEYWORD(BACKGROUNDCOLORSPANSTART, backgroundcolorspanstart)
+    KEYWORD(BACKGROUNDCOLORSPANEND, backgroundcolorspanend)
+    KEYWORD(FOREGROUNDCOLORSPANCOLOR, foregroundcolorspancolor)
+    KEYWORD(FOREGROUNDCOLORSPANSTART, foregroundcolorspanstart)
+    KEYWORD(FOREGROUNDCOLORSPANEND, foregroundcolorspanend)
+    KEYWORD(LINEBACKGROUNDCOLORSPANCOLOR, linebackgroundcolorspancolor)
+    KEYWORD(LINEBACKGROUNDCOLORSPANSTART, linebackgroundcolorspanstart)
+    KEYWORD(LINEBACKGROUNDCOLORSPANEND, linebackgroundcolorspanend)
+    KEYWORD(ABSOLUTESIZESPANSTART, absolutesizespanstart)
+    KEYWORD(ABSOLUTESIZESPANEND, absolutesizespanend)
+    KEYWORD(ABSOLUTESIZESPANSIZE, absolutesizespansize)
+    KEYWORD(RELATIVESIZESPANSTART, relativesizespanstart)
+    KEYWORD(RELATIVESIZESPANEND, relativesizespanend)
+    KEYWORD(RELATIVESIZESPANSIZE, relativesizespansize)
+    KEYWORD(SPANNABLESTYLE, spannablestyle)
+    KEYWORD(SPANNABLESTART, spannablestart)
+    KEYWORD(SPANNABLEEND, spannableend)
+#endif // FEATURE_COMPONENT_TEXT_SPANNABLE
     // Reused by the struct end
 // clang-format on
 #ifdef KEYWORDS_ENUM_DEFINE
