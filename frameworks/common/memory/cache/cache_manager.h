@@ -80,7 +80,7 @@ private:
      * will return false as failure
      */
     CacheSetupState DistributeCacheRange(uintptr_t startAddr, size_t totalBytes);
-    CacheSetupState PrecheckStatus(uintptr_t startAddr, size_t length) const;
+    CacheSetupState PrecheckStatus(uintptr_t startAddr, size_t totalBytes) const;
     bool IsEnvReady(CacheUser user) const;
     CacheMemInfo wholeCacheMemInfo_;
     CacheMemInfo cacheUnitInfo_[USER_MAX_COUNT]; // count in bytes
