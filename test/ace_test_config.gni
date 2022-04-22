@@ -114,7 +114,8 @@ extra_deps = [
 ]
 
 all_external_deps = ace_test_deps + extra_deps
-all_external_deps -= [ "//foundation/arkui/ace_engine_lite/frameworks:ace_lite" ]
+all_external_deps -=
+    [ "//foundation/arkui/ace_engine_lite/frameworks:ace_lite" ]
 all_external_includes = ace_lite_include_dirs + ace_test_includes
 
 # add specific defines for test case only here

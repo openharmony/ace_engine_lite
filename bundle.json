@@ -11,7 +11,7 @@
   "scripts": {},
   "component": {
     "name": "ace_engine_lite",
-    "subsystem": "ace",
+    "subsystem": "arkui",
     "syscap": [ "SystemCapability.Ace.AceEngineLite" ],
     "feature": [],
     "adapted_system_type": [ "mini","small" ],

@@ -15,7 +15,8 @@ import("//build/lite/config/subsystem/aafwk/path.gni")
 
 ACE_LITE_PATH = "//foundation/arkui/ace_engine_lite/frameworks"
 ACE_LITE_COMMON_PATH = "//foundation/arkui/ace_engine_lite/frameworks/common"
-NATIVE_ENGINE_PATH = "//foundation/arkui/ace_engine_lite/frameworks/native_engine"
+NATIVE_ENGINE_PATH =
+    "//foundation/arkui/ace_engine_lite/frameworks/native_engine"
 MODULE_MANAGER_PATH =
     "//foundation/arkui/ace_engine_lite/frameworks/module_manager"
 GRAPHIC_LITE_PATH = "//foundation/graphic/ui"
