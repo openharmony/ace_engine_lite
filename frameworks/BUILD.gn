@@ -13,7 +13,7 @@
 
 import("//build/lite/config/component/lite_component.gni")
 import("//build/lite/config/subsystem/aafwk/config.gni")
-import("//foundation/ace/ace_engine_lite/ace_lite.gni")
+import("//foundation/arkui/ace_engine_lite/ace_lite.gni")
 
 defines = []
 

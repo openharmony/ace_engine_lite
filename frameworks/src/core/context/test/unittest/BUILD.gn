@@ -12,7 +12,7 @@
 #limitations under the License.
 
 import("//build/lite/config/test.gni")
-import("//foundation/ace/ace_engine_lite/test/ace_test_config.gni")
+import("//foundation/arkui/ace_engine_lite/test/ace_test_config.gni")
 
 unittest("js_frameworks_test_jsfwk") {
   output_extension = "bin"
