@@ -13,11 +13,12 @@
 
 import("//build/lite/config/subsystem/aafwk/path.gni")
 
-ACE_LITE_PATH = "//foundation/ace/ace_engine_lite/frameworks"
-ACE_LITE_COMMON_PATH = "//foundation/ace/ace_engine_lite/frameworks/common"
-NATIVE_ENGINE_PATH = "//foundation/ace/ace_engine_lite/frameworks/native_engine"
+ACE_LITE_PATH = "//foundation/arkui/ace_engine_lite/frameworks"
+ACE_LITE_COMMON_PATH = "//foundation/arkui/ace_engine_lite/frameworks/common"
+NATIVE_ENGINE_PATH =
+    "//foundation/arkui/ace_engine_lite/frameworks/native_engine"
 MODULE_MANAGER_PATH =
-    "//foundation/ace/ace_engine_lite/frameworks/module_manager"
+    "//foundation/arkui/ace_engine_lite/frameworks/module_manager"
 GRAPHIC_LITE_PATH = "//foundation/graphic/ui"
 
 ace_lite_include_dirs = [
@@ -43,9 +44,9 @@ ace_lite_include_dirs = [
 
 ace_lite_include_dirs += [
   "//third_party/bounds_checking_function/include",
-  "//foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/async",
-  "//foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/base",
-  "//foundation/ace/ace_engine_lite/interfaces/innerkits/builtin/jsi",
+  "//foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin/async",
+  "//foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin/base",
+  "//foundation/arkui/ace_engine_lite/interfaces/inner_api/builtin/jsi",
   "$ACE_LITE_PATH/include/context",
   "$ACE_LITE_PATH/include/base",
   "$ACE_LITE_PATH/include/modules",

@@ -5,13 +5,13 @@
   "license": "Apache License 2.0",
   "pubiishAs": "code-segment",
   "segment": {
-    "destPath": "foundation/ace/ace_engine_lite"
+    "destPath": "foundation/arkui/ace_engine_lite"
   },
   "dirs": {},
   "scripts": {},
   "component": {
     "name": "ace_engine_lite",
-    "subsystem": "ace",
+    "subsystem": "arkui",
     "syscap": [ "SystemCapability.Ace.AceEngineLite" ],
     "feature": [],
     "adapted_system_type": [ "mini","small" ],
@@ -45,8 +45,8 @@
     },
     "build": {
       "sub_component": [ 
-      "//foundation/ace/ace_engine_lite/test:unittest",
-      "//foundation/ace/ace_engine_lite/frameworks:jsfwk" 
+      "//foundation/arkui/ace_engine_lite/test:unittest",
+      "//foundation/arkui/ace_engine_lite/frameworks:jsfwk"
       ],
       "inner_kits": [],
       "test": []

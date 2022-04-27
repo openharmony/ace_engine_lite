@@ -56,7 +56,7 @@
 
    - 参考源码路径（请下载到windows本地，不要使用"\\\wsl$"路径映射）：
 
-     [源码工程目录]\foundation\ace\ace_engine_lite\frameworks\tools\qt\simulator\simulator.pro。
+     [源码工程目录]\foundation\arkui\ace_engine_lite\frameworks\tools\qt\simulator\simulator.pro。
 
      注意：第一次打开项目时，需要在Configure Project界面，kits列表中勾选minGW（仅勾选minGW）。
 
