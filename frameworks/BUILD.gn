@@ -63,7 +63,7 @@ lite_library("ace_lite") {
     "$MODULE_MANAGER_PATH:ace_module_manager_lite",
     "$NATIVE_ENGINE_PATH:ace_native_engine_lite",
     "//base/global/i18n_lite/frameworks/i18n:global_i18n",
-    "//base/global/resmgr_lite/frameworks/resmgr_lite:global_resmgr",
+    "//base/global/resource_management_lite/frameworks/resmgr_lite:global_resmgr",
     "//foundation/graphic/ui:lite_ui",
     "//utils/native/lite/timer_task:ace_kit_timer",
   ]
